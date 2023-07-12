@@ -20,5 +20,12 @@ public abstract class Heroes extends DungeonCharacter {
     public abstract void specialSkill(DungeonCharacter opponent);
 
 
-
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(super.toString()); // Include common properties from DungeonCharacter
+        // Add hero-specific properties
+        sb.append("Chance to Block: ").append(getBlockChance()).append("\n");
+        return sb.toString();
+    }
 }

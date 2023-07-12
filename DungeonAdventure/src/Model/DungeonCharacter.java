@@ -66,4 +66,15 @@ public abstract class DungeonCharacter {
         return (int) (Math.random() * ((theMin - theMax + 1))) + getMinDamage();
     }
 
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Name: ").append(getChName()).append("\n");
+        sb.append("Hit Points: ").append(getHp()).append("\n");
+        sb.append("Min Damage: ").append(getMinDamage()).append("\n");
+        sb.append("Max Damage: ").append(getMaxDamage()).append("\n");
+        sb.append("Attack Speed: ").append(getAttackSpeed()).append("\n");
+        sb.append("Chance to Hit: ").append(getHitChance()).append("\n");
+        return sb.toString();
+    }
 }
