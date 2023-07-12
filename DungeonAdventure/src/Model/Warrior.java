@@ -4,8 +4,8 @@ public class Warrior extends Heroes{
 
     // tester to make sure all values match up delete later
     public static void main(String[] args) {
-        Warrior warrior = new Warrior("Warrior");
-        System.out.print(warrior.toString());
+        Warrior warrior = new Warrior();
+        System.out.print(warrior);
     }
 
     //======================================================
@@ -14,8 +14,8 @@ public class Warrior extends Heroes{
     private static final int CRUSHING_BLOW_MIN_DAMAGE = 75;
     private static final int CRUSHING_BLOW_MAX_DAMAGE = 175;
 
-    protected Warrior(String theChName) {
-        super(125, theChName, 4, 35, 60, 0.8, 0.2);
+    protected Warrior() {
+        super(125, "Warrior", 4, 35, 60, 0.8, 0.2);
     }
 
 
@@ -37,13 +37,15 @@ public class Warrior extends Heroes{
             System.out.println("Crushing blow failed!");
         }
     }
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(super.toString()); // Include properties from Hero and DungeonCharacter
-        // Add warrior-specific properties if any
-        return sb.toString();
-    }
+
+    // dont need at least not for now
+//    @Override
+//    public String toString() {
+//        StringBuilder sb = new StringBuilder();
+//        sb.append(super.toString()); // Include properties from Hero and DungeonCharacter
+//        // Add warrior-specific properties if any
+//        return sb.toString();
+//    }
 
 
 }

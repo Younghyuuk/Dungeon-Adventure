@@ -15,9 +15,9 @@ public abstract class Heroes extends DungeonCharacter {
     public void setBlockChance(double theBlockChance) {
         myBlockChance = theBlockChance;
     }
-    public abstract void regularAttack(DungeonCharacter opponent);
+    public abstract void regularAttack(DungeonCharacter theOpp);
 
-    public abstract void specialSkill(DungeonCharacter opponent);
+    public abstract void specialSkill(DungeonCharacter theOpp);
 
 
     @Override
