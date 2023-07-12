@@ -48,7 +48,7 @@ public abstract class DungeonCharacter {
     }
 
     public void attackBehavior(DungeonCharacter theOpp) {
-        if (Math.random() <= myHitChance) {
+        if (Math.random() <= getHitChance()) {
             int damage = genDamage();
             theOpp.subtractHp(damage);
             System.out.println(getChName() + " hits " + theOpp.getChName() +
@@ -63,10 +63,10 @@ public abstract class DungeonCharacter {
     }
 
     private int genDamage() {
-        return (int) (Math.random() * (damageRange())) + myMinDamage;
+        return (int) (Math.random() * (damageRange())) + getMinDamage();
     }
 
     private int damageRange() {
-        return (myMaxDamage - myMinDamage + 1);
+        return (getMaxDamage() - getMinDamage() + 1);
     }
 }
