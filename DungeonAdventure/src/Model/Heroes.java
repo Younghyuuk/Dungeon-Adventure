@@ -19,4 +19,6 @@ public abstract class Heroes extends DungeonCharacter {
 
     public abstract void specialSkill(DungeonCharacter opponent);
 
+
+
 }
