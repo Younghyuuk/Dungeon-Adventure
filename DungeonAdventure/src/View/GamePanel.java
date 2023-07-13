@@ -1,6 +1,10 @@
 package View;
 
 import Control.Keyboard;
+import Model.DungeonCharacter;
+import Model.Heroes;
+import Model.Priestess;
+import Model.Thief;
 
 import javax.swing.*;
 import javax.swing.plaf.basic.BasicTreeUI;
@@ -10,7 +14,7 @@ public class GamePanel extends JPanel implements Runnable{
 
     private final static int ORIGINAL_SPRITE_SIZE = 16;
     private final static int SCALE = 3;
-    private final static int GAME_SPRITE_SIZE = ORIGINAL_SPRITE_SIZE * SCALE;
+    public final static int GAME_SPRITE_SIZE = ORIGINAL_SPRITE_SIZE * SCALE;
 
     private final static int MAX_SCREEN_COL = 16;
     private final static int MAX_SCREEN_ROW = 12;
@@ -20,9 +24,8 @@ public class GamePanel extends JPanel implements Runnable{
     public Keyboard keyInputs = new Keyboard();
     private Thread gameThread;
 
-    private int character_x_position = 100;
-    private int character_y_position = 100;
-    private int character_speed = 4;
+    // This is for testing
+    Priestess myPriestess = new Priestess(this, keyInputs);
 
     public GamePanel(){
         setBackground(Color.BLACK);
@@ -58,18 +61,7 @@ public class GamePanel extends JPanel implements Runnable{
     }
 
     public void update() {
-        if (keyInputs.up ){
-            character_y_position -= character_speed;
-        }
-        if (keyInputs.down){
-            character_y_position += character_speed;
-        }
-        if (keyInputs.left){
-            character_x_position -= character_speed;
-        }
-        if (keyInputs.right){
-            character_x_position += character_speed;
-        }
+        myPriestess.update();
     }
 
     @Override
@@ -78,8 +70,8 @@ public class GamePanel extends JPanel implements Runnable{
         Graphics2D pen = (Graphics2D) theGraphics;
 
         // Placeholder for the character.
-        pen.setColor(Color.white);
-        pen.fillRect(character_x_position,character_y_position,GAME_SPRITE_SIZE,GAME_SPRITE_SIZE);
+        myPriestess.draw(pen);
+
         pen.dispose();
     }
 }
