@@ -1,21 +1,20 @@
 package Model;
 
+import Control.Keyboard;
+import View.GamePanel;
+
+import java.awt.*;
+
 public class Warrior extends Heroes{
-
-    // tester to make sure all values match up delete later
-    public static void main(String[] args) {
-        Warrior warrior = new Warrior();
-        System.out.print(warrior);
-    }
-
-    //======================================================
 
     private static final double CRUSHING_BLOW_CHANCE = 0.4; // Chance of a successful crushing blow
     private static final int CRUSHING_BLOW_MIN_DAMAGE = 75;
     private static final int CRUSHING_BLOW_MAX_DAMAGE = 175;
 
-    protected Warrior() {
-        super(125, "Warrior", 4, 35, 60, 0.8, 0.2);
+    protected Warrior(GamePanel theGamePanel, Keyboard theKeyboard) {
+        super(125, "Warrior", 4,
+                35, 60,
+                0.8, 0.2, theGamePanel, theKeyboard);
     }
 
 
@@ -36,6 +35,16 @@ public class Warrior extends Heroes{
         } else {
             System.out.println("Crushing blow failed!");
         }
+    }
+
+    @Override
+    public void update() {
+
+    }
+
+    @Override
+    public void draw(Graphics2D theGraphics) {
+
     }
 
     // dont need at least not for now
