@@ -36,15 +36,10 @@ public class Warrior extends Heroes{
             System.out.println("Crushing blow failed!");
         }
     }
-
-    @Override
-    public void update() {
-
-    }
-
     @Override
     public void draw(Graphics2D theGraphics) {
-
+        theGraphics.setColor(Color.white);
+        theGraphics.fillRect(super.x,super.y,myGamePanel.GAME_SPRITE_SIZE, myGamePanel.GAME_SPRITE_SIZE);
     }
 
     // dont need at least not for now
