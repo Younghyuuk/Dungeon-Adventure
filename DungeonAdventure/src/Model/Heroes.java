@@ -4,6 +4,7 @@ import Control.Keyboard;
 import View.GamePanel;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 public abstract class Heroes extends DungeonCharacter {
 
@@ -13,6 +14,8 @@ public abstract class Heroes extends DungeonCharacter {
 
     GamePanel myGamePanel;
     Keyboard myKeyInputs;
+    public BufferedImage up1, up2, down1, down2, left1, left2, right1, right2;
+    public String direction = "up";
 
     protected Heroes(int theHp, String theChName, int theAttackSpeed, int theMinDamage, int theMaxDamage,
                      double theHitChance, double theBlockChance, GamePanel theGamePanel, Keyboard theKeyBoard) {
@@ -27,24 +30,29 @@ public abstract class Heroes extends DungeonCharacter {
         y = 100;
         speed = 4;
     }
-    public abstract void regularAttack(DungeonCharacter theOpp);
-    public abstract void specialSkill(DungeonCharacter theOpp);
 
     public void update() {
         if (myKeyInputs.up ){
+            direction = "up";
             y -= speed;
         }
-        if (myKeyInputs.down){
+        else if (myKeyInputs.down){
+            direction = "down";
             y += speed;
         }
-        if (myKeyInputs.left){
+        else if (myKeyInputs.left){
+            direction = "left";
             x -= speed;
         }
-        if (myKeyInputs.right){
+        else if (myKeyInputs.right){
+            direction = "right";
             x += speed;
         }
     }
     public abstract void draw(Graphics2D theGraphics);
+    public abstract void regularAttack(DungeonCharacter theOpp);
+    public abstract void specialSkill(DungeonCharacter theOpp);
+
 
 
     public double getBlockChance() {

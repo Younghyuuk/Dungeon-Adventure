@@ -25,10 +25,10 @@ public class GamePanel extends JPanel implements Runnable{
     private Thread gameThread;
 
     // This is for testing
-    Priestess myPriestess = new Priestess(this, keyInputs);
+    Thief myThief = new Thief(this, keyInputs);
 
     public GamePanel(){
-        setBackground(Color.BLACK);
+        setBackground(Color.green.darker());
         setDoubleBuffered(true);
         addKeyListener(keyInputs);
         setFocusable(true);
@@ -61,7 +61,7 @@ public class GamePanel extends JPanel implements Runnable{
     }
 
     public void update() {
-        myPriestess.update();
+        myThief.update();
     }
 
     @Override
@@ -70,7 +70,7 @@ public class GamePanel extends JPanel implements Runnable{
         Graphics2D pen = (Graphics2D) theGraphics;
 
         // Placeholder for the character.
-        myPriestess.draw(pen);
+        myThief.draw(pen);
 
         pen.dispose();
     }
