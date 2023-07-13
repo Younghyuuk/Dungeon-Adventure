@@ -19,6 +19,7 @@ public class MainFrame extends JFrame {
 
         GamePanel gamePanel = new GamePanel();
         add(gamePanel);
+        pack();
         gamePanel.startGame();
 
     }

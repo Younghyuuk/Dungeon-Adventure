@@ -17,12 +17,10 @@ public class Warrior extends Heroes{
                 0.8, 0.2, theGamePanel, theKeyboard);
     }
 
-
     @Override
     public void regularAttack(DungeonCharacter theOpp) {
         attackBehavior(theOpp);
     }
-
 
     // Crushing Blow that does 75 to 175 points of damage but only has a 40% chance of succeeding
     @Override
@@ -36,10 +34,10 @@ public class Warrior extends Heroes{
             System.out.println("Crushing blow failed!");
         }
     }
+
     @Override
-    public void draw(Graphics2D theGraphics) {
-        theGraphics.setColor(Color.white);
-        theGraphics.fillRect(super.x,super.y,myGamePanel.GAME_SPRITE_SIZE, myGamePanel.GAME_SPRITE_SIZE);
+    public void getHeroesImage() {
+
     }
 
     // dont need at least not for now

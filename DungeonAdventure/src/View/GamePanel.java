@@ -14,20 +14,22 @@ public class GamePanel extends JPanel implements Runnable{
 
     private final static int ORIGINAL_SPRITE_SIZE = 16;
     private final static int SCALE = 3;
-    public final static int GAME_SPRITE_SIZE = ORIGINAL_SPRITE_SIZE * SCALE;
+    private final int mySpriteSize = ORIGINAL_SPRITE_SIZE * SCALE;
 
-    private final static int MAX_SCREEN_COL = 16;
-    private final static int MAX_SCREEN_ROW = 12;
 
+    private final int myMaxScreenRow = 12;
+    private final int myMaxScreenCol = 16;
+    private final int myScreenWidth = myMaxScreenCol * mySpriteSize;
+    private final int myScreenHeight = myMaxScreenRow * mySpriteSize;
     private final static int FPS = 60;
 
-    public Keyboard keyInputs = new Keyboard();
+    private TileManager tileM = new TileManager(this);
+    private Keyboard keyInputs = new Keyboard();
     private Thread gameThread;
-
-    // This is for testing
-    Thief myThief = new Thief(this, keyInputs);
+    private Thief myThief = new Thief(this, keyInputs);
 
     public GamePanel(){
+        setPreferredSize(new Dimension(myScreenWidth, myScreenHeight));
         setBackground(Color.green.darker());
         setDoubleBuffered(true);
         addKeyListener(keyInputs);
@@ -38,6 +40,16 @@ public class GamePanel extends JPanel implements Runnable{
         gameThread = new Thread(this);
         gameThread.start();
     }
+    public int getSpriteSize() {
+         return mySpriteSize;
+    }
+    public int getMyMaxScreenCol() {
+        return myMaxScreenCol;
+    }
+    public int getMyMaxScreenRow() {
+        return myMaxScreenRow;
+    }
+
     @Override
     public void run() {
         // Game Loop. Repainting the screen 60 FPS. Credit given to ryisnow.
@@ -60,18 +72,20 @@ public class GamePanel extends JPanel implements Runnable{
         }
     }
 
+    // This method will update our model.
     public void update() {
+
         myThief.update();
     }
 
+    // This method updates our view.
     @Override
     public void paintComponent(Graphics theGraphics){
         super.paintComponent(theGraphics);
         Graphics2D pen = (Graphics2D) theGraphics;
 
-        // Placeholder for the character.
-        myThief.draw(pen);
-
+        tileM.draw(pen);
+        myThief.draw(pen); // We are going to need to figure out a way to draw the correct character.
         pen.dispose();
     }
 }
