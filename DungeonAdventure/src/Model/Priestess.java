@@ -14,7 +14,11 @@ public class Priestess extends Heroes{
     }
 
     @Override
-    public void specialSkill(DungeonCharacter opponent) {
-        
+    public void specialSkill(DungeonCharacter theAlly) {
+        theAlly.setHp(getHp() + genHeal());
+    }
+
+    private int genHeal() {
+        return (int) (Math.random() * ((MIN_HEAL - MAX_HEAL + 1))) + MIN_HEAL;
     }
 }
