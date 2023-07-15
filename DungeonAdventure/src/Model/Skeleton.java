@@ -56,11 +56,24 @@ public class Skeleton extends Monster{
      * minimum damage, maximum damage, and the hitchance of the character.
      *
      */
-    protected Skeleton() {
+    public Skeleton() {
         super(HP, NAME, ATTACK_SPEED, MIN_DAMAGE, MAX_DAMAGE, HIT_CHANCE);
 
     }
 
+    /**
+     * Skeletons normal attack.
+     *
+     * @param theOpp which the monster will target
+     */
+    @Override
+    public void regularAttack(DungeonCharacter theOpp) {
+        attackBehavior(theOpp);
+    }
+
+    /**
+     * Heal potential for skeleton.
+     */
     @Override
     public void heal() {
 

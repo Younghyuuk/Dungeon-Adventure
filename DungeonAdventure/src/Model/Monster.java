@@ -22,6 +22,13 @@ public abstract class Monster extends DungeonCharacter {
     }
 
     /**
+     * Monster attack.
+     *
+     * @param theOpp which the monster will target
+     */
+    public abstract void regularAttack(DungeonCharacter theOpp);
+
+    /**
      * Abstract method for monster child classes to heal.
      */
     public abstract void heal();
