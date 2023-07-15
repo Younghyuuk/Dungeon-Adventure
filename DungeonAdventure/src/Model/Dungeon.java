@@ -49,7 +49,7 @@ public class Dungeon {
                 // to get a random item
                 RoomItem randomItem = getRandomItem(random);
                 // We then create a new 'Room' with that item
-                Room newRoom = new Room(randomItem);
+                Room newRoom = new Room(randomItem, i, j);
                 // And finally add that to 'myRooms'
                 myRooms[i][j] = newRoom;
             }

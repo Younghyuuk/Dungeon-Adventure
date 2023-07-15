@@ -1,6 +1,7 @@
 package Model;
 
 import java.lang.reflect.Type;
+import java.util.Random;
 
 /**
  * This class represents a single, randomly generated, room.
@@ -21,25 +22,40 @@ public class Room {
      */
     private int myPitDamage;
     /**
+     * Represents the minimum amount of health obtainable from a health potion.
+     */
+    private static final int HEALTH_MIN = 5;
+    /**
+     * Represents the maximum amount of health obtainable from a health potion.
+     */
+    private static final int HEALTH_MAX = 15;
+    /**
      * The height of a room.
      */
-    private static final int ROOM_HEIGHT = 16;
+    private static final int ROOM_HEIGHT = 17;
     /**
      * The width of a room.
      */
-    private static final int ROOM_WIDTH = 12;
+    private static final int ROOM_WIDTH = 13;
 
     /**
      * Constructs a randomly generated room. <br>
      * Takes in what will be in the room.
      *
      * @param theRandomRoomItem The random item(s) that the room will contain.
+     * @param theX The X position this room is being added to in 'myRooms' in 'Dungeon'.
+     * @param theY The Y position this room is being added to in 'myRooms' in 'Dungeon'.
      */
-    public Room(final RoomItem theRandomRoomItem) {
+    public Room(final RoomItem theRandomRoomItem, final int theX, final int theY) {
         // Set up the size of the room
         myRoom = new String[ROOM_HEIGHT][ROOM_WIDTH];
         // Next, we will pass in the random item generated from 'Dungeon'
-        createRoom(theRandomRoomItem);
+        createRoom(theRandomRoomItem, theX, theY);
+        // We also want to generate the health obtainable from this room's health potion
+        if (theRandomRoomItem.getValue().equals("H")) {
+            Random random = new Random();
+            myHealth = random.nextInt(HEALTH_MAX - HEALTH_MIN + 1) + HEALTH_MIN;
+        }
     }
 
     /**
@@ -47,15 +63,39 @@ public class Room {
      *
      * @param theItem The random item(s) that could be in the room.
      */
-    protected void createRoom(final RoomItem theItem) {
+    protected void createRoom(final RoomItem theItem, final int theX, final int theY) {
+        // First, we will create a random generator to randomly decide where doors are
+        Random random = new Random();
+        // We need to check if the room is in a corner or on a wall of the dungeon
+        if (theX == 0 && theY == 0) { // Upper left corner
 
+        } else if (theX == 8 && theY == 0) { // Upper right corner
+
+        } else if (theX == 0 && theY == 8) { // Lower left corner
+
+        } else if (theX == 8 && theY == 8) { // Lower right corner
+
+        } else if (theX == 0 && (1 <= theY && theY <= 7)) { // Left wall
+
+        } else if (theX == 8 && (1 <= theY && theY <= 7)) { // Right wall
+
+        } else if (theY == 0 && (1 <= theX && theX <= 7)) { // Top wall
+
+        } else if (theY == 8 && (1 <= theX && theX <= 7)) { // Bottom wall
+
+        } else { // Finally, if the room is not in a corner or on a wall we go here
+
+        }
     }
 
     /**
      * Get method to get the amount of health the health potion will give.
+     *
+     * @return Returns the amount of health obtainable from this room's health potion
+     * (if it has one).
      */
-    public void getHealth() {
-
+    public int getHealth() {
+        return myHealth;
     }
 
     /**
