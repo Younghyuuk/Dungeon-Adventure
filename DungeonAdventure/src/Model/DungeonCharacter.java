@@ -165,7 +165,7 @@ public abstract class DungeonCharacter {
     /**
      * Tester toString method to see if all character values
      * show up right.
-     * 
+     *
      * @return StringBuilder sb
      */
     @Override

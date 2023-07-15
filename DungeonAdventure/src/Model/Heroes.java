@@ -6,10 +6,20 @@ import View.GamePanel;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
+/**
+ * Heroes class which extends from DungeonCharacter
+ * we will be creating 3 other subclasses which extends
+ * off of Heroes which will be Priestess, Thief, and Warrior.
+ */
 public abstract class Heroes extends DungeonCharacter {
 
+    /**
+     * The double that gives the chance that the Hero will block.
+     */
     private double myBlockChance;
+
     public int speed;
+
     public int x, y;
 
     GamePanel myGamePanel;
@@ -19,6 +29,21 @@ public abstract class Heroes extends DungeonCharacter {
     public int spriteCounter = 0;
     public int spriteNum = 1;
 
+
+    /**
+     * Heroes constructor that initializes the hp, name, attack speed, min damage, max damage,
+     * hit chance, block chance, gamepanel, and keyboard of the Hero.
+     *
+     * @param theHp given hp to hero.
+     * @param theChName given name to the hero.
+     * @param theAttackSpeed the speed at which the hero attacks.
+     * @param theMinDamage the minimum amount of damage hero can do.
+     * @param theMaxDamage the maximum amount of damage a hero can do.
+     * @param theHitChance the chance at which the hero attacks land.
+     * @param theBlockChance the chance the hero has to blocking an attack.
+     * @param theGamePanel the gamepanel of the hero.
+     * @param theKeyBoard the keyboard input of the hero.
+     */
     protected Heroes(int theHp, String theChName, int theAttackSpeed, int theMinDamage, int theMaxDamage,
                      double theHitChance, double theBlockChance, GamePanel theGamePanel, Keyboard theKeyBoard) {
 
@@ -95,15 +120,45 @@ public abstract class Heroes extends DungeonCharacter {
     public abstract void getHeroesImage();
 
 
-
+    /**
+     * Abstract method in which we implement so that the hero classes
+     * do a normal attack.
+     *
+     * @param theOpp opponent in which the attack will be targeted towards.
+     */
     public abstract void regularAttack(DungeonCharacter theOpp);
-    public abstract void specialSkill(DungeonCharacter theOpp);
+
+    /**
+     * The special skill which each class will have unique to be their own
+     * whether they do a special attack or skill is dependent on the class.
+     *
+     * @param theTarget which the special skill will be aimed towards.
+     */
+    public abstract void specialSkill(DungeonCharacter theTarget);
+
+    /**
+     * Gets the block chance of the hero.
+     *
+     * @return double block chance
+     */
     public double getBlockChance() {
         return myBlockChance;
     }
+
+    /**
+     * Sets the block chance of said hero.
+     *
+     * @param theBlockChance the amount of chance they have to block.
+     */
     public void setBlockChance(double theBlockChance) {
         myBlockChance = theBlockChance;
     }
+
+    /**
+     * toString method of Heroes to test values.
+     *
+     * @return StringBuilder sb
+     */
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
