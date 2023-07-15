@@ -74,7 +74,6 @@ public class GamePanel extends JPanel implements Runnable{
 
     // This method will update our model.
     public void update() {
-
         myThief.update();
     }
 
