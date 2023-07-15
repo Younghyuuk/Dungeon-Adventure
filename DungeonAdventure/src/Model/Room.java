@@ -21,22 +21,6 @@ public class Room {
      */
     private int myPitDamage;
     /**
-     * The randomly generated pillar chosen from A, E, I, P. That could be in the room.
-     */
-    private String myPillar;
-    /**
-     * The String representation of a pit.
-     */
-    private static final String PIT = "X";
-    /**
-     * The String representation of an entrance.
-     */
-    private static final String ENTRANCE = "i";
-    /**
-     * The String representation of an exit.
-     */
-    private static final String EXIT = "O";
-    /**
      * The height of a room.
      */
     private static final int ROOM_HEIGHT = 16;
@@ -49,25 +33,21 @@ public class Room {
      * Constructs a randomly generated room. <br>
      * Takes in what will be in the room.
      *
-     * @param theHealth Boolean to determine if the room will contain a health potion.
-     * @param thePit Boolean to determine if the room will contain a pit.
-     * @param theEntrance Boolean to determine if the room will contain an entrance.
-     * @param theExit Boolean to determine if the room will contain an exit.
-     * @param thePillar Boolean to determine if the room will contain a pillar.
-     * @param theMultiple Boolean to determine if the room will contain a health potion, vision potion, and pit.
+     * @param theRandomRoomItem The random item(s) that the room will contain.
      */
-    public Room(final boolean theHealth, final boolean thePit, final boolean theEntrance,
-                final boolean theExit, final boolean thePillar, final boolean theMultiple) {
+    public Room(final RoomItem theRandomRoomItem) {
         // Set up the size of the room
         myRoom = new String[ROOM_HEIGHT][ROOM_WIDTH];
+        // Next, we will pass in the random item generated from 'Dungeon'
+        createRoom(theRandomRoomItem);
     }
 
     /**
-     * Creates the randomly generated room based on what will be inside of it.
+     * Creates a randomly generated room that will only contain one item
      *
-     * @param theItem The random thing that could be in the room.
+     * @param theItem The random item(s) that could be in the room.
      */
-    protected void createRoom(final Type theItem) {
+    protected void createRoom(final RoomItem theItem) {
 
     }
 
