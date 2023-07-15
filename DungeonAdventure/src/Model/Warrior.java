@@ -5,24 +5,91 @@ import View.GamePanel;
 
 import java.awt.*;
 
+/**
+ * Warrior class that extends Heroes.
+ */
 public class Warrior extends Heroes{
 
-    private static final double CRUSHING_BLOW_CHANCE = 0.4; // Chance of a successful crushing blow
+    /**
+     * The chance at which Warriors special hits.
+     */
+    private static final double CRUSHING_BLOW_CHANCE = 0.4;
+
+    /**
+     * The minimum damage of the crushing blow.
+     */
     private static final int CRUSHING_BLOW_MIN_DAMAGE = 75;
+
+    /**
+     * The maximum damage of crushing blow.
+     */
     private static final int CRUSHING_BLOW_MAX_DAMAGE = 175;
 
+    /**
+     * Hp of Warrior.
+     */
+    private static final int HP = 125;
+
+    /**
+     * The name of the character.
+     */
+    private static final String NAME = "Warrior";
+
+    /**
+     * Setting this characters attack speed.
+     */
+    private static final int ATTACK_SPEED = 4;
+
+    /**
+     * Minimum damage of warrior.
+     */
+    private static final int MIN_DAMAGE = 35;
+
+    /**
+     * Maximum damage of warrior.
+     */
+    private static final int MAX_DAMAGE = 60;
+
+    /**
+     * Hit chance of warrior.
+     */
+    private static final double HIT_CHANCE = 0.8;
+
+    /**
+     * Block chance of warrior.
+     */
+    private static final double BLOCK_CHANCE = 0.2;
+
+    /**
+     * Warrior constructor that sets all the stats for
+     * the character along with some background gui.
+     *
+     * @param theGamePanel game panel of character
+     * @param theKeyboard keyboard input of character
+     */
     protected Warrior(GamePanel theGamePanel, Keyboard theKeyboard) {
-        super(125, "Warrior", 4,
-                35, 60,
-                0.8, 0.2, theGamePanel, theKeyboard);
+        super(HP, NAME, ATTACK_SPEED,
+                MIN_DAMAGE, MAX_DAMAGE,
+                HIT_CHANCE, BLOCK_CHANCE, theGamePanel, theKeyboard);
     }
 
+    /**
+     * Regular attack of warrior with his stats.
+     *
+     * @param theOpp opponent in which the attack will be targeted towards.
+     */
     @Override
     public void regularAttack(DungeonCharacter theOpp) {
         attackBehavior(theOpp);
     }
+    
 
-    // Crushing Blow that does 75 to 175 points of damage but only has a 40% chance of succeeding
+    /**
+     * Crushing blow method that does 75 to 175 points of damage
+     * but has a 40% chance of hitting.
+     *
+     * @param theOpp which the special skill will be aimed towards.
+     */
     @Override
     public void specialSkill(DungeonCharacter theOpp) {
         if (Math.random() <= CRUSHING_BLOW_CHANCE) {
