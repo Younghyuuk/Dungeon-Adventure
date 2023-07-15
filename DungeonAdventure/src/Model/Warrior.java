@@ -82,7 +82,7 @@ public class Warrior extends Heroes{
     public void regularAttack(DungeonCharacter theOpp) {
         attackBehavior(theOpp);
     }
-    
+
 
     /**
      * Crushing blow method that does 75 to 175 points of damage
