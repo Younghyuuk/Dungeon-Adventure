@@ -1,6 +1,8 @@
 package Model;
 
+import java.util.Arrays;
 import java.util.Random;
+import java.util.Stack;
 
 /**
  * This class represents the randomly generated dungeon.
@@ -11,28 +13,24 @@ public class Dungeon {
      */
     private Room[][] myRooms;
     /**
+     * A 2D array of all the visited rooms in the dungeon. <br>
+     * A cell in the array that is true means that we have visited that room.
+     */
+    private Boolean[][] myVisited;
+    /**
      * A 2D array that contains the doors for each room.
      */
     private int[][] myDoors;
-    /**
-     * Integer representation of what doors are assigned to the previous room. <br>
-     * 0 - All four doors. <br>
-     * 1 - A North door. <br>
-     * 2 - An East door. <br>
-     * 3 - A South door. <br>
-     * 4 - A West door. <br>
-     */
-    private int myPrev;
     /**
      * The file to output the text version of the dungeon to.
      */
     private static final String TEXT_DUNGEON = "dungeon.txt";
     /**
-     * The height, in rooms, of the dungeon.
+     * The height, in rooms, of the dungeon (the Y).
      */
     private static final int DUNGEON_HEIGHT = 3;
     /**
-     * The width, in rooms, of the dungeon.
+     * The width, in rooms, of the dungeon (the X).
      */
     private static final int DUNGEON_WIDTH = 3;
     /**
@@ -51,49 +49,114 @@ public class Dungeon {
      * The index of the last room in the dungeon in the y direction.
      */
     private static final int LAST_ROOM_Y = 3;
+    /**
+     * A direction vector for the X direction (the columns). <br>
+     * Used to traverse in DFS to adjacent cells.
+     */
+    private static final int[] DIRECTION_VECTOR_X = {-1, 0, 1, 0};
+    /**
+     * A direction vector for the Y direction (the rows). <br>
+     * Used to traverse in DFS to adjacent cells.
+     */
+    private static final int[] DIRECTION_VECTOR_Y = {0, 1, 0, -1};
 
     /**
      * Constructs the randomly generated dungeon.
      */
     public Dungeon() {
         // Set up the size of the dungeon
-        myRooms = new Room[DUNGEON_HEIGHT][DUNGEON_WIDTH];
+        myRooms = new Room[DUNGEON_WIDTH][DUNGEON_HEIGHT];
+        // And the array of the visited rooms
+        myVisited = new Boolean[DUNGEON_WIDTH][DUNGEON_HEIGHT];
+        // Then we need to initially populate 'myVisited'
+        for (int i = 0; i < DUNGEON_WIDTH; i++) {
+            Arrays.fill(myVisited[i], false); // TODO: might be wrong
+        }
         // Next, we need to create every room
-        createRooms(myRooms);
+        createRooms();
     }
 
     /**
      * Goes through the 'myRooms' 2D array and creates each room. <br>
      * Randomly generates which item will be in a room, or no items at all.
-     *
-     * @param theRooms A 2D array of rooms.
      */
-    protected void createRooms(final Room[][] theRooms) {
+    protected void createRooms() {
         // We want to create the random generator
         Random random = new Random();
         // Then we pass in the random generator to our 'getRandomItem' method
         // to get a random item
         RoomItem randomItem = getRandomItem(random);
         // We start off by creating the first room
-        int firstRoomX = random.nextInt(LAST_ROOM_X - FIRST_ROOM_X + 1) + FIRST_ROOM_X;
-        int firstRoomY = random.nextInt(LAST_ROOM_Y - FIRST_ROOM_Y + 1) + FIRST_ROOM_Y;
-        // Next, we need to figure out what doors the first room will have
-        int doorType = getRandomDoor(firstRoomX, firstRoomY);
-        Room firstRoom = new Room(randomItem, firstRoomX, firstRoomY, doorType);
-        // Then we add that to 'myRooms'
-        myRooms[firstRoomX][firstRoomY] = firstRoom;
-        // We need to iterate and create each room, so we will create a loop
-        int rooms = 1;
-        while (rooms <= 9) {
+        int firstX = random.nextInt(LAST_ROOM_X - FIRST_ROOM_X + 1) + FIRST_ROOM_X;
+        int firstY = random.nextInt(LAST_ROOM_Y - FIRST_ROOM_Y + 1) + FIRST_ROOM_Y;
+        // We then want to add this to a stack as an 'XYPair'
+        Stack<XYPair> rooms = new Stack<XYPair>();
+        rooms.add(new XYPair(firstX, firstY));
 
-            rooms++;
+        // Then, we will use this to start looping and create every room with DFS
+        while (!rooms.empty()) {
+            // We want to grab the top pair
+            XYPair pair = rooms.pop();
+            // Then we will grab the x and y
+            int x = pair.x;
+            int y = pair.y;
+            // Then we will check if this is a valid cell
+            if (!isValid(x, y)) {
+                // If the room is not valid, we will skip this iteration of the loop
+                // and move on to the next room in the stack
+                continue;
+            }
+            // If we got here, the room is valid, so we will add it to our visited rooms
+            myVisited[x][y] = true;
+            // Next, we need to figure out what doors the first room will have
+            int doorType = getRandomDoor(firstX, firstY);
+            Room newRoom = new Room(randomItem, firstX, firstY, doorType);
+            // Then we add that to 'myRooms'
+            myRooms[firstX][firstY] = newRoom;
+            // Finally, we will push all the adjacent cells into the stack
+            // to continue looping through and add all the rooms.
+            for (int i = 0; i < 4; i++) {
+                int adjacentX = x + DIRECTION_VECTOR_X[i];
+                int adjacentY = y + DIRECTION_VECTOR_Y[i];
+                rooms.push(new XYPair(adjacentX, adjacentY));
+            }
         }
     }
 
+    /**
+     * Helper method to use in DFS to determine if an index is valid. <br>
+     * So, if we have not visited the room yet, or it is not out of bounds it is valid.
+     *
+     * @param theX The X value of the room we are checking.
+     * @param theY The Y value of the room we are checking
+     * @return True if the room is valid. False if the room isn't.
+     */
+    private boolean isValid(final int theX, final int theY) {
+        boolean valid = true;
+        // Base Case: the room is out of bounds
+        if (theX < 0 || theX > DUNGEON_WIDTH || theY < 0 || theY > DUNGEON_HEIGHT) {
+            valid = false;
+        }
+
+        // Next, we want to check if we have already created this room
+        if (myVisited[theX][theY]) {
+            valid = false;
+        }
+
+        return valid;
+    }
+
+    /**
+     * Helper method that decides what doors the room will have based on its X and Y.
+     *
+     * @param theX The X value of the room we want to add doors to.
+     * @param theY The Y value of the room we want to add doors to.
+     * @return Returns the number associated with what doors the room will have.
+     */
     private int getRandomDoor(final int theX, final int theY) {
         // Create the random object
         Random random = new Random();
-        int randomDoor = 0;
+        int randomDoor;
         // All 4 - 0, North - 1, East - 2, South - 3, West - 4, NS - 5, NE - 6, NW - 7, SE - 8, SW - 9,
         // EW - 10, NSE - 11, NSW - 12, NEW - 13, SEW - 14
         // We need to check if the room is in a corner or on a wall of the dungeon
@@ -154,7 +217,7 @@ public class Dungeon {
             int randomIndex = random.nextInt(directions.length);
             // Finally, we store the value for what doors there will be
             randomDoor = directions[randomIndex];
-        } else { // Finally, if the room is not in a corner or on a wall we go here
+        } else { // Finally, if the room is not in a corner or a wall we go here
             int[] directions = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14};
             // Next, we get a random index from the array
             int randomIndex = random.nextInt(directions.length);
@@ -190,5 +253,30 @@ public class Dungeon {
     @Override
     public String toString() {
         return null;
+    }
+
+    /**
+     * Inner class to represent an xy pair to be used in a stack for DFS.
+     */
+    private class XYPair {
+        /**
+         * The x value in the xy pair.
+         */
+        private int x;
+        /**
+         * The y value in the xy pair.
+         */
+        private int y;
+
+        /**
+         * Constructs an xy pair.
+         *
+         * @param theX The X value for the xy pair.
+         * @param theY The Y value for the xy pair.
+         */
+        public XYPair(final int theX, final int theY) {
+            x = theX;
+            y = theY;
+        }
     }
 }

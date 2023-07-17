@@ -63,7 +63,7 @@ public class Room {
     }
 
     /**
-     * Creates a randomly generated room that will only contain one item
+     * Creates a randomly generated room that will contain a random item (or items).
      *
      * @param theItem The random item(s) that could be in the room.
      */
