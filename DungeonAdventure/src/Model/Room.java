@@ -1,6 +1,5 @@
 package Model;
 
-import java.lang.reflect.Type;
 import java.util.Random;
 
 /**
@@ -11,6 +10,10 @@ public class Room {
      * A 2D array of Strings that will represent the room.
      */
     private String[][] myRoom;
+    /**
+     * A 2D array of integers that stores the door types of every room that is added to the dungeon. <br>
+     */
+    private int[][] doors;
     /**
      * The amount of health the health pot (if in the room) will give. <br>
      * Ranges from 5-15 hit points.
@@ -45,12 +48,13 @@ public class Room {
      * @param theRandomRoomItem The random item(s) that the room will contain.
      * @param theX The X position this room is being added to in 'myRooms' in 'Dungeon'.
      * @param theY The Y position this room is being added to in 'myRooms' in 'Dungeon'.
+     * @param theDoorType The previous location of the door in the previous room.
      */
-    public Room(final RoomItem theRandomRoomItem, final int theX, final int theY) {
+    public Room(final RoomItem theRandomRoomItem, final int theX, final int theY, final int theDoorType) {
         // Set up the size of the room
         myRoom = new String[ROOM_HEIGHT][ROOM_WIDTH];
         // Next, we will pass in the random item generated from 'Dungeon'
-        createRoom(theRandomRoomItem, theX, theY);
+        createRoom(theRandomRoomItem, theX, theY, theDoorType);
         // We also want to generate the health obtainable from this room's health potion
         if (theRandomRoomItem.getValue().equals("H")) {
             Random random = new Random();
@@ -63,11 +67,15 @@ public class Room {
      *
      * @param theItem The random item(s) that could be in the room.
      */
-    protected void createRoom(final RoomItem theItem, final int theX, final int theY) {
+    protected void createRoom(final RoomItem theItem, final int theX, final int theY, final int theDoorType) {
+        // All 4 - 0, North - 1, East - 2, South - 3, West - 4, NS - 5, NE - 6, NW - 7, ES - 8, EW - 9,
+        // SW - 10, NSE - 11, NSW - 12, NEW - 13, SEW - 14
         // First, we will create a random generator to randomly decide where doors are
         Random random = new Random();
         // We need to check if the room is in a corner or on a wall of the dungeon
         if (theX == 0 && theY == 0) { // Upper left corner
+            // Since we are boxed in by two walls, we can only choose from
+            // an east or south door or both
 
         } else if (theX == 8 && theY == 0) { // Upper right corner
 
@@ -96,6 +104,17 @@ public class Room {
      */
     public int getHealth() {
         return myHealth;
+    }
+
+    /**
+     * Get method to get the door types of a certain room in the dungeon.
+     *
+     * @param theX The X position of this room in 'Dungeon'.
+     * @param theY The Y position of this room in 'Dungeon'.
+     * @return The door type associated with the specified room in 'Dungeon'.
+     */
+    public int getDoors(final int theX, final int theY) {
+        return doors[theX][theY];
     }
 
     /**
