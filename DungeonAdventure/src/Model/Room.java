@@ -45,21 +45,21 @@ public class Room {
      * Constructs a randomly generated room. <br>
      * Takes in what will be in the room.
      *
-     * @param theRandomRoomItem The random item(s) that the room will contain.
-     * @param theX The X position this room is being added to in 'myRooms' in 'Dungeon'.
-     * @param theY The Y position this room is being added to in 'myRooms' in 'Dungeon'.
-     * @param theDoorType The previous location of the door in the previous room.
+     * @param theRandomItem The random item(s) that the room will contain.
+     * @param theRow The row this room is being added to in 'myRooms' in 'Dungeon'.
+     * @param theCol The column this room is being added to in 'myRooms' in 'Dungeon'.
+     * @param theDoorType The door(s) that the room will contain.
      */
-    public Room(final RoomItem theRandomRoomItem, final int theX, final int theY, final int theDoorType) {
+    public Room(final RoomItem theRandomItem, final int theRow, final int theCol, final int theDoorType) {
         // Set up the size of the room
         myRoom = new String[ROOM_HEIGHT][ROOM_WIDTH];
         // Next, we will pass in the random item generated from 'Dungeon'
-        createRoom(theRandomRoomItem, theX, theY, theDoorType);
+        createRoom(theRandomItem, theRow, theCol, theDoorType);
         // We also want to generate the health obtainable from this room's health potion
-        if (theRandomRoomItem.getValue().equals("H")) {
-            Random random = new Random();
-            myHealth = random.nextInt(HEALTH_MAX - HEALTH_MIN + 1) + HEALTH_MIN;
-        }
+//        if (theRandomItem.getValue().equals("H")) {
+//            Random random = new Random();
+//            myHealth = random.nextInt(HEALTH_MAX - HEALTH_MIN + 1) + HEALTH_MIN;
+//        }
     }
 
     /**
@@ -67,32 +67,69 @@ public class Room {
      *
      * @param theItem The random item(s) that could be in the room.
      */
-    protected void createRoom(final RoomItem theItem, final int theX, final int theY, final int theDoorType) {
+    protected void createRoom(final RoomItem theItem, final int theRow, final int theCol, final int theDoorType) {
         // All 4 - 0, North - 1, East - 2, South - 3, West - 4, NS - 5, NE - 6, NW - 7, ES - 8, EW - 9,
         // SW - 10, NSE - 11, NSW - 12, NEW - 13, SEW - 14
-        // First, we will create a random generator to randomly decide where doors are
-        Random random = new Random();
-        // We need to check if the room is in a corner or on a wall of the dungeon
-        if (theX == 0 && theY == 0) { // Upper left corner
-            // Since we are boxed in by two walls, we can only choose from
-            // an east or south door or both
 
-        } else if (theX == 8 && theY == 0) { // Upper right corner
-
-        } else if (theX == 0 && theY == 8) { // Lower left corner
-
-        } else if (theX == 8 && theY == 8) { // Lower right corner
-
-        } else if (theX == 0 && (1 <= theY && theY <= 7)) { // Left wall
-
-        } else if (theX == 8 && (1 <= theY && theY <= 7)) { // Right wall
-
-        } else if (theY == 0 && (1 <= theX && theX <= 7)) { // Top wall
-
-        } else if (theY == 8 && (1 <= theX && theX <= 7)) { // Bottom wall
-
-        } else { // Finally, if the room is not in a corner or on a wall we go here
-
+        // First, we will create the base room with just walls and a floor
+        for (int i = 0; i < ROOM_HEIGHT; i++) {
+            for (int j = 0; j < ROOM_WIDTH; j++) {
+                if (i == 0 || j == 0 || j == ROOM_WIDTH - 1 || i == ROOM_HEIGHT - 1) {
+                    myRoom[i][j] = "1";
+                } else {
+                    myRoom[i][j] = "0";
+                }
+            }
+        }
+        // Then we add the doors
+        // If we are adding all 4 doors, we do not have to figure out additional doors
+        if (theDoorType == 0) {
+            myRoom[ROOM_HEIGHT / 2][0] = "3"; // West
+            myRoom[0][ROOM_WIDTH / 2] = "3"; // North
+            myRoom[ROOM_HEIGHT / 2][ROOM_WIDTH - 1] = "3"; // East
+            myRoom[ROOM_HEIGHT - 1][ROOM_WIDTH / 2] = "3"; // South
+        } else if (theDoorType == 1) {
+            myRoom[0][ROOM_WIDTH / 2] = "3";
+        } else if (theDoorType == 2) {
+            myRoom[ROOM_HEIGHT / 2][ROOM_WIDTH - 1] = "3";
+        } else if (theDoorType == 3) {
+            myRoom[ROOM_HEIGHT - 1][ROOM_WIDTH / 2] = "3";
+        } else if (theDoorType == 4) {
+            myRoom[ROOM_HEIGHT / 2][0] = "3";
+        } else if (theDoorType == 5) {
+            myRoom[0][ROOM_WIDTH / 2] = "3"; // North
+            myRoom[ROOM_HEIGHT - 1][ROOM_WIDTH / 2] = "3"; // South
+        } else if (theDoorType == 6) {
+            myRoom[0][ROOM_WIDTH / 2] = "3"; // North
+            myRoom[ROOM_HEIGHT / 2][ROOM_WIDTH - 1] = "3"; // East
+        } else if (theDoorType == 7) {
+            myRoom[0][ROOM_WIDTH / 2] = "3"; // North
+            myRoom[ROOM_HEIGHT / 2][0] = "3"; // West
+        } else if (theDoorType == 8) {
+            myRoom[ROOM_HEIGHT - 1][ROOM_WIDTH / 2] = "3"; // South
+            myRoom[ROOM_HEIGHT / 2][ROOM_WIDTH - 1] = "3"; // East
+        } else if (theDoorType == 9) {
+            myRoom[ROOM_HEIGHT / 2][ROOM_WIDTH - 1] = "3"; // East
+            myRoom[ROOM_HEIGHT / 2][0] = "3"; // West
+        } else if (theDoorType == 10) {
+            myRoom[ROOM_HEIGHT - 1][ROOM_WIDTH / 2] = "3"; // South
+            myRoom[ROOM_HEIGHT / 2][0] = "3"; // West
+        } else if (theDoorType == 11) {
+            myRoom[0][ROOM_WIDTH / 2] = "3"; // North
+            myRoom[ROOM_HEIGHT - 1][ROOM_WIDTH / 2] = "3"; // South
+            myRoom[ROOM_HEIGHT / 2][ROOM_WIDTH - 1] = "3"; // East
+        } else if (theDoorType == 12) {
+            myRoom[0][ROOM_WIDTH / 2] = "3"; // North
+            myRoom[ROOM_HEIGHT - 1][ROOM_WIDTH / 2] = "3"; // South
+            myRoom[ROOM_HEIGHT / 2][0] = "3"; // West
+        } else if (theDoorType == 13) {
+            myRoom[0][ROOM_WIDTH / 2] = "3"; // North
+            myRoom[ROOM_HEIGHT / 2][ROOM_WIDTH - 1] = "3"; // East
+            myRoom[ROOM_HEIGHT / 2][0] = "3"; // West
+        } else if (theDoorType == 14) {
+            myRoom[ROOM_HEIGHT - 1][ROOM_WIDTH / 2] = "3"; // South
+            myRoom[ROOM_HEIGHT / 2][ROOM_WIDTH - 1] = "3"; // East
+            myRoom[ROOM_HEIGHT / 2][0] = "3"; // West
         }
     }
 
@@ -109,12 +146,12 @@ public class Room {
     /**
      * Get method to get the door types of a certain room in the dungeon.
      *
-     * @param theX The X position of this room in 'Dungeon'.
-     * @param theY The Y position of this room in 'Dungeon'.
+     * @param theRow The row of this room in 'Dungeon'.
+     * @param theCol The column of this room in 'Dungeon'.
      * @return The door type associated with the specified room in 'Dungeon'.
      */
-    public int getDoors(final int theX, final int theY) {
-        return doors[theX][theY];
+    public int getDoors(final int theRow, final int theCol) {
+        return doors[theRow][theCol];
     }
 
     /**
@@ -122,7 +159,15 @@ public class Room {
      */
     @Override
     public String toString() {
-        return null;
-    }
+        StringBuilder sb = new StringBuilder();
 
+        for (int i = 0; i < ROOM_HEIGHT; i++) {
+            for (int j = 0; j < ROOM_WIDTH; j++) {
+                sb.append(myRoom[i][j]).append(" ");
+            }
+            sb.append("\n"); // Move to the next line after each row
+        }
+
+        return sb.toString();
+    }
 }
