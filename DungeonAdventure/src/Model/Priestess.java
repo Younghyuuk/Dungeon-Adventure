@@ -4,6 +4,10 @@ import View.GamePanel;
 import Control.Keyboard;
 
 import java.awt.*;
+import java.io.IOException;
+import java.util.Objects;
+
+import static javax.imageio.ImageIO.read;
 
 /**
  * Priestess class which has the ability to heal and
@@ -66,11 +70,26 @@ public class Priestess extends Heroes{
      */
     public Priestess(GamePanel theGamePanel, Keyboard theKeyboard) {
         super(HP, NAME, ATTACK_SPEED, MIN_DAMAGE, MAX_DAMAGE, HIT_CHANCE, BLOCK_CHANCE, theGamePanel,theKeyboard);
+        getHeroesImage();
     }
-    @Override
-    public void getHeroesImage() {
 
+    @Override
+    public void getHeroesImage(){
+        try {
+            up1 = read(Objects.requireNonNull(getClass().getResourceAsStream("/priest/priest_up1.png")));
+            up2 = read(Objects.requireNonNull(getClass().getResourceAsStream("/priest/priest_up2.png")));
+            down1 = read(Objects.requireNonNull(getClass().getResourceAsStream("/priest/priest_down1.png")));
+            down2 = read(Objects.requireNonNull(getClass().getResourceAsStream("/priest/priest_down2.png")));
+            left1 = read(Objects.requireNonNull(getClass().getResourceAsStream("/priest/priest_left1.png")));
+            left2 = read(Objects.requireNonNull(getClass().getResourceAsStream("/priest/priest_left2.png")));
+            right1 = read(Objects.requireNonNull(getClass().getResourceAsStream("/priest/priest_right1.png")));
+            right2 = read(Objects.requireNonNull(getClass().getResourceAsStream("/priest/priest_right2.png")));
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
+
     @Override
     public double getBlockChance() {
         return super.getBlockChance();

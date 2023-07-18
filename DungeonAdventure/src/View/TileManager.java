@@ -26,12 +26,15 @@ public class TileManager {
 
     public void getTileImage() {
 
-        try {
-            myTile[0] = new Tile();
-            myTile[0].myImage = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Tiles/sandBrickFloor.png")));
-            myTile[1] = new Tile();
-            myTile[1].myImage = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Tiles/stoneWall.png")));
-        } catch (IOException e) {
+                   try {
+                myTile[0] = new Tile();
+                myTile[0].myImage = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Tiles/sandBrickFloor.png")));
+                myTile[1] = new Tile();
+                myTile[1].myImage = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Tiles/stoneWall.png")));
+
+
+
+            } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }

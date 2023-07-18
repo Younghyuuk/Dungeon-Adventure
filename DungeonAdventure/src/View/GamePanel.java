@@ -26,7 +26,7 @@ public class GamePanel extends JPanel implements Runnable{
     private TileManager tileM = new TileManager(this);
     private Keyboard keyInputs = new Keyboard();
     private Thread gameThread;
-    private Thief myThief = new Thief(this, keyInputs);
+    private Priestess myThief = new Priestess(this, keyInputs);
 
     public GamePanel(){
         setPreferredSize(new Dimension(myScreenWidth, myScreenHeight));
@@ -74,6 +74,7 @@ public class GamePanel extends JPanel implements Runnable{
 
     // This method will update our model.
     public void update() {
+
         myThief.update();
     }
 

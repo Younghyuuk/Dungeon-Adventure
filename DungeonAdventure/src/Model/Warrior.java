@@ -107,14 +107,4 @@ public class Warrior extends Heroes{
 
     }
 
-    // dont need at least not for now
-//    @Override
-//    public String toString() {
-//        StringBuilder sb = new StringBuilder();
-//        sb.append(super.toString()); // Include properties from Hero and DungeonCharacter
-//        // Add warrior-specific properties if any
-//        return sb.toString();
-//    }
-
-
 }

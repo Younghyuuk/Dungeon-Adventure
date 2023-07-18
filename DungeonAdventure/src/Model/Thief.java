@@ -111,6 +111,7 @@ public class Thief extends Heroes{
             System.out.println(getChName() + " fails to execute the surprise attack.");
         }
     }
+    @Override
     public void getHeroesImage(){
         try {
             up1 = read(Objects.requireNonNull(getClass().getResourceAsStream("/thief/thief_up1.png")));
