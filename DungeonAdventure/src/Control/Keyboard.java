@@ -9,25 +9,26 @@ public class Keyboard implements KeyListener {
     public boolean down;
     public boolean left;
     public boolean right;
+
     @Override
-    public void keyTyped(KeyEvent e) {
+    public void keyTyped(final KeyEvent e) {
 
     }
 
     @Override
-    public void keyPressed(KeyEvent e) {
+    public void keyPressed(final KeyEvent e) {
         int code = e.getKeyCode();
         switch (code) {
-            case KeyEvent.VK_W :
+            case KeyEvent.VK_W:
                 up = true;
                 break;
-            case KeyEvent.VK_S :
+            case KeyEvent.VK_S:
                 down = true;
                 break;
-            case KeyEvent.VK_A :
+            case KeyEvent.VK_A:
                 left = true;
                 break;
-            case KeyEvent.VK_D :
+            case KeyEvent.VK_D:
                 right = true;
                 break;
             default:
@@ -36,19 +37,19 @@ public class Keyboard implements KeyListener {
     }
 
     @Override
-    public void keyReleased(KeyEvent e) {
+    public void keyReleased(final KeyEvent e) {
         int code = e.getKeyCode();
         switch (code) {
-            case KeyEvent.VK_W :
+            case KeyEvent.VK_W:
                 up = false;
                 break;
-            case KeyEvent.VK_S :
+            case KeyEvent.VK_S:
                 down = false;
                 break;
-            case KeyEvent.VK_A :
+            case KeyEvent.VK_A:
                 left = false;
                 break;
-            case KeyEvent.VK_D :
+            case KeyEvent.VK_D:
                 right = false;
                 break;
             default:

@@ -1,4 +1,5 @@
 package Model;
+
 /**
  * Creates the abstract class DungeonCharacter which other
  * classes extends from like Hero and Monster.
@@ -42,12 +43,12 @@ public abstract class DungeonCharacter {
      * The constructor of DungeonCharacter that initializes the hp, name, attack speed,
      * minimum damage, maximum damage, and the hitchance of the character.
      *
-     * @param theHp amount of hp for character.
-     * @param theChName name of the character.
+     * @param theHp          amount of hp for character.
+     * @param theChName      name of the character.
      * @param theAttackSpeed the attack speed character has.
-     * @param theMinDamage minimum amount of damage they can do.
-     * @param theMaxDamage maximum amount of damage they can do.
-     * @param theHitChance chance the character has to landing attack.
+     * @param theMinDamage   minimum amount of damage they can do.
+     * @param theMaxDamage   maximum amount of damage they can do.
+     * @param theHitChance   chance the character has to landing attack.
      */
     protected DungeonCharacter(int theHp, String theChName, int theAttackSpeed,
                                int theMinDamage, int theMaxDamage,

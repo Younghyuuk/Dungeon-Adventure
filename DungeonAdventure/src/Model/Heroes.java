@@ -18,37 +18,41 @@ public abstract class Heroes extends DungeonCharacter {
      */
     private double myBlockChance;
 
+    public final static int HEROES_MOVE_SPEED = 4;
+
     GamePanel myGamePanel;
     Keyboard myKeyInputs;
 
     public BufferedImage up1, up2, down1, down2, left1, left2, right1, right2;
-    public String direction = "down";
-    public int spriteCounter = 0;
-    public int spriteNum = 1;
-    public int myX, myY;
-    public int speed;
-    public Rectangle mySolidArea;
-    public boolean myCollision = false;
+    private String myDirection = "down";
 
-    public final int myMiddleX;
-    public final int myMiddleY;
+    private int mySpriteCounter = 0;
+    private int mySpriteNum = 1;
+
+    private final Rectangle mySolidArea;
+    private boolean myCollision = false;
+
+    private int myWorldXCoordinate;
+    private int myWorldYCoordinate;
+    private final int myScreensMiddleX;
+    private final int myScreensMiddleY;
 
     /**
      * Heroes constructor that initializes the hp, name, attack speed, min damage, max damage,
      * hit chance, block chance, gamepanel, and keyboard of the Hero.
      *
-     * @param theHp given hp to hero.
-     * @param theChName given name to the hero.
+     * @param theHp          given hp to hero.
+     * @param theChName      given name to the hero.
      * @param theAttackSpeed the speed at which the hero attacks.
-     * @param theMinDamage the minimum amount of damage hero can do.
-     * @param theMaxDamage the maximum amount of damage a hero can do.
-     * @param theHitChance the chance at which the hero attacks land.
+     * @param theMinDamage   the minimum amount of damage hero can do.
+     * @param theMaxDamage   the maximum amount of damage a hero can do.
+     * @param theHitChance   the chance at which the hero attacks land.
      * @param theBlockChance the chance the hero has to blocking an attack.
-     * @param theGamePanel the gamepanel of the hero.
-     * @param theKeyBoard the keyboard input of the hero.
+     * @param theGamePanel   the gamepanel of the hero.
+     * @param theKeyBoard    the keyboard input of the hero.
      */
-    protected Heroes(int theHp, String theChName, int theAttackSpeed, int theMinDamage, int theMaxDamage,
-                     double theHitChance, double theBlockChance, GamePanel theGamePanel, Keyboard theKeyBoard) {
+    protected Heroes(final int theHp, final String theChName, final int theAttackSpeed, final int theMinDamage, final int theMaxDamage,
+                     final double theHitChance, final double theBlockChance, final GamePanel theGamePanel, final Keyboard theKeyBoard) {
 
         super(theHp, theChName, theAttackSpeed, theMinDamage, theMaxDamage, theHitChance);
 
@@ -56,41 +60,63 @@ public abstract class Heroes extends DungeonCharacter {
         myKeyInputs = theKeyBoard;
         myBlockChance = theBlockChance;
 
-
         //testing
-        myMiddleX = myGamePanel.getMyScreenWidth()/2 - (myGamePanel.getSpriteSize()/2);
-        myMiddleY = myGamePanel.getMyScreenHeight()/2 - (myGamePanel.getSpriteSize()/2);
+        myScreensMiddleX = myGamePanel.getMyScreenWidth() / 2 - (myGamePanel.getSpriteSize() / 2);
+        myScreensMiddleY = myGamePanel.getMyScreenHeight() / 2 - (myGamePanel.getSpriteSize() / 2);
 
-        myX = 7 * myGamePanel.getSpriteSize();
-        myY = 6 * myGamePanel.getSpriteSize();
-        speed = 4;
-        mySolidArea = new Rectangle(8,8,myGamePanel.getSpriteSize()-16,myGamePanel.getSpriteSize()-16);
+        myWorldXCoordinate = 7 * myGamePanel.getSpriteSize();
+        myWorldYCoordinate = 6 * myGamePanel.getSpriteSize();
+        mySolidArea = new Rectangle(8, 8, myGamePanel.getSpriteSize() - 16, myGamePanel.getSpriteSize() - 16);
+    }
+
+    public int getMyWorldXCoordinate() {
+        return myWorldXCoordinate;
+    }
+
+    public int getMyWorldYCoordinate() {
+        return myWorldYCoordinate;
+    }
+
+    public int getMyScreensMiddleX() {
+        return myScreensMiddleX;
+    }
+
+    public int getMyScreensMiddleY() {
+        return myScreensMiddleY;
+    }
+
+    public Rectangle getMySolidArea() {
+        return mySolidArea;
+    }
+
+    public void setMyCollision(final boolean theBool) {
+        myCollision = theBool;
+    }
+    public String getMyDirection() {
+        return myDirection;
     }
 
     public void update() {
-        if (myKeyInputs.up ){
-            direction = "up";
-        }
-        else if (myKeyInputs.down){
-            direction = "down";
-        }
-        else if (myKeyInputs.left){
-            direction = "left";
-        }
-        else if (myKeyInputs.right){
-            direction = "right";
+        if (myKeyInputs.up) {
+            myDirection = "up";
+        } else if (myKeyInputs.down) {
+            myDirection = "down";
+        } else if (myKeyInputs.left) {
+            myDirection = "left";
+        } else if (myKeyInputs.right) {
+            myDirection = "right";
         }
 
         myCollision = false;
-        myGamePanel.myCollision.checkTile(this);
+        myGamePanel.getMyCollision().checkTile(this);
 
-        if(myKeyInputs.up || myKeyInputs.down || myKeyInputs.left ||myKeyInputs.right){
+        if (myKeyInputs.up || myKeyInputs.down || myKeyInputs.left || myKeyInputs.right) {
             if (!myCollision) {
-                switch (direction) {
-                    case "up" -> myY -= speed;
-                    case "down" -> myY += speed;
-                    case "left" -> myX -= speed;
-                    case "right" -> myX += speed;
+                switch (myDirection) {
+                    case "up" -> myWorldYCoordinate -= HEROES_MOVE_SPEED;
+                    case "down" -> myWorldYCoordinate += HEROES_MOVE_SPEED;
+                    case "left" -> myWorldXCoordinate -= HEROES_MOVE_SPEED;
+                    case "right" -> myWorldXCoordinate += HEROES_MOVE_SPEED;
                 }
             }
 //            else { Maybe for bounce visuals
@@ -103,47 +129,50 @@ public abstract class Heroes extends DungeonCharacter {
 //            }
         }
 
-        spriteCounter++;
-        if (spriteCounter > 12) {
-            spriteNum = spriteNum == 1 ? 2 : 1;
-            spriteCounter = 0;
+        mySpriteCounter++;
+        if (mySpriteCounter > 12) {
+            mySpriteNum = mySpriteNum == 1 ? 2 : 1;
+            mySpriteCounter = 0;
         }
     }
-    public void draw(Graphics2D theGraphics) {
+
+    public void draw(final Graphics2D theGraphics) {
         BufferedImage image = null;
 
-        switch (direction) {
+        switch (myDirection) {
             case "up":
-                if(spriteNum == 1) {
+                if (mySpriteNum == 1) {
                     image = up1;
                 } else {
                     image = up2;
                 }
                 break;
             case "down":
-                if(spriteNum == 1) {
+                if (mySpriteNum == 1) {
                     image = down1;
                 } else {
                     image = down2;
                 }
                 break;
             case "left":
-                if(spriteNum == 1) {
+                if (mySpriteNum == 1) {
                     image = left1;
                 } else {
                     image = left2;
                 }
                 break;
             case "right":
-                if(spriteNum == 1) {
+                if (mySpriteNum == 1) {
                     image = right1;
                 } else {
                     image = right2;
                 }
                 break;
         }
-        theGraphics.drawImage(image, myMiddleX, myMiddleY, myGamePanel.getSpriteSize(),myGamePanel.getSpriteSize(),null);
+        // Draw my hero in the middle of the viewable screen.
+        theGraphics.drawImage(image, myScreensMiddleX, myScreensMiddleY, myGamePanel.getSpriteSize(), myGamePanel.getSpriteSize(), null);
     }
+
     public abstract void getHeroesImage();
 
 
@@ -194,4 +223,5 @@ public abstract class Heroes extends DungeonCharacter {
         sb.append("Chance to Block: ").append(getBlockChance()).append("\n");
         return sb.toString();
     }
+
 }

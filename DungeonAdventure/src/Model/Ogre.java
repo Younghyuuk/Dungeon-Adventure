@@ -60,7 +60,7 @@ public class Ogre extends Monster {
      * @param theOpp which the monster will target
      */
     @Override
-    public void regularAttack(DungeonCharacter theOpp) {
+    public void regularAttack(final DungeonCharacter theOpp) {
         attackBehavior(theOpp);
     }
 

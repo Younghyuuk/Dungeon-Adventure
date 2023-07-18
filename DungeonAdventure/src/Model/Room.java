@@ -46,9 +46,9 @@ public class Room {
      * Takes in what will be in the room.
      *
      * @param theRandomItem The random item(s) that the room will contain.
-     * @param theRow The row this room is being added to in 'myRooms' in 'Dungeon'.
-     * @param theCol The column this room is being added to in 'myRooms' in 'Dungeon'.
-     * @param theDoorType The door(s) that the room will contain.
+     * @param theRow        The row this room is being added to in 'myRooms' in 'Dungeon'.
+     * @param theCol        The column this room is being added to in 'myRooms' in 'Dungeon'.
+     * @param theDoorType   The door(s) that the room will contain.
      */
     public Room(final RoomItem theRandomItem, final int theRow, final int theCol, final int theDoorType) {
         // Set up the size of the room

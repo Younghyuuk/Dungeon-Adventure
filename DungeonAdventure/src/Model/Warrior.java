@@ -8,7 +8,7 @@ import java.awt.*;
 /**
  * Warrior class that extends Heroes.
  */
-public class Warrior extends Heroes{
+public class Warrior extends Heroes {
 
     /**
      * The chance at which Warriors special hits.
@@ -65,9 +65,9 @@ public class Warrior extends Heroes{
      * the character along with some background gui.
      *
      * @param theGamePanel game panel of character
-     * @param theKeyboard keyboard input of character
+     * @param theKeyboard  keyboard input of character
      */
-    public Warrior(GamePanel theGamePanel, Keyboard theKeyboard) {
+    public Warrior(final GamePanel theGamePanel, final Keyboard theKeyboard) {
         super(HP, NAME, ATTACK_SPEED,
                 MIN_DAMAGE, MAX_DAMAGE,
                 HIT_CHANCE, BLOCK_CHANCE, theGamePanel, theKeyboard);
@@ -79,7 +79,7 @@ public class Warrior extends Heroes{
      * @param theOpp opponent in which the attack will be targeted towards.
      */
     @Override
-    public void regularAttack(DungeonCharacter theOpp) {
+    public void regularAttack(final DungeonCharacter theOpp) {
         attackBehavior(theOpp);
     }
 
@@ -91,11 +91,11 @@ public class Warrior extends Heroes{
      * @param theOpp which the special skill will be aimed towards.
      */
     @Override
-    public void specialSkill(DungeonCharacter theOpp) {
+    public void specialSkill(final DungeonCharacter theOpp) {
         if (Math.random() <= CRUSHING_BLOW_CHANCE) {
             int damage = genDamage(CRUSHING_BLOW_MIN_DAMAGE, CRUSHING_BLOW_MAX_DAMAGE);
             theOpp.subtractHp(damage);
-            System.out.println("Warrior delivers crushing blow to " + theOpp.getChName()+
+            System.out.println("Warrior delivers crushing blow to " + theOpp.getChName() +
                     " for " + damage + "damage.");
         } else {
             System.out.println("Crushing blow failed!");

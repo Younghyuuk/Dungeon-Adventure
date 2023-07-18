@@ -12,7 +12,7 @@ import static javax.imageio.ImageIO.read;
 /**
  * Thief class which extends from Heroes.
  */
-public class Thief extends Heroes{
+public class Thief extends Heroes {
 
     /**
      * The chance at which the surprise attack succeeds.
@@ -65,10 +65,10 @@ public class Thief extends Heroes{
      * some background gui.
      *
      * @param theGamePanel gamepanel of character
-     * @param theKeyboard keyboard input of character
+     * @param theKeyboard  keyboard input of character
      */
-    public Thief(GamePanel theGamePanel, Keyboard theKeyboard) {
-        super(HP, NAME, ATTACK_SPEED, MIN_DAMAGE, MAX_DAMAGE, HIT_CHANCE, BLOCK_CHANCE, theGamePanel,theKeyboard);
+    public Thief(final GamePanel theGamePanel, final Keyboard theKeyboard) {
+        super(HP, NAME, ATTACK_SPEED, MIN_DAMAGE, MAX_DAMAGE, HIT_CHANCE, BLOCK_CHANCE, theGamePanel, theKeyboard);
         getHeroesImage();
     }
 
@@ -78,7 +78,7 @@ public class Thief extends Heroes{
      * @param theOpp opponent in which the attack will be targeted towards.
      */
     @Override
-    public void regularAttack(DungeonCharacter theOpp) {
+    public void regularAttack(final DungeonCharacter theOpp) {
         attackBehavior(theOpp);
     }
 
@@ -88,7 +88,7 @@ public class Thief extends Heroes{
      * @param theOpp which the special skill will be aimed towards.
      */
     @Override
-    public void specialSkill(DungeonCharacter theOpp) {
+    public void specialSkill(final DungeonCharacter theOpp) {
 
         double random = Math.random();
 
@@ -111,8 +111,9 @@ public class Thief extends Heroes{
             System.out.println(getChName() + " fails to execute the surprise attack.");
         }
     }
+
     @Override
-    public void getHeroesImage(){
+    public void getHeroesImage() {
         try {
             up1 = read(Objects.requireNonNull(getClass().getResourceAsStream("/thief/thief_up1.png")));
             up2 = read(Objects.requireNonNull(getClass().getResourceAsStream("/thief/thief_up2.png")));
