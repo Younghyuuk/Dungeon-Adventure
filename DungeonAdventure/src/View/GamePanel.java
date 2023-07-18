@@ -1,10 +1,7 @@
 package View;
 
 import Control.Keyboard;
-import Model.DungeonCharacter;
-import Model.Heroes;
-import Model.Priestess;
-import Model.Thief;
+import Model.*;
 
 import javax.swing.*;
 import javax.swing.plaf.basic.BasicTreeUI;
@@ -15,7 +12,6 @@ public class GamePanel extends JPanel implements Runnable {
     private final static int ORIGINAL_SPRITE_SIZE = 16;
     private final static int SCALE = 3;
     private final int mySpriteSize = ORIGINAL_SPRITE_SIZE * SCALE;
-
 
     private final int myMaxScreenRow = 12;
     private final int myMaxScreenCol = 16;
@@ -42,17 +38,19 @@ public class GamePanel extends JPanel implements Runnable {
      */
     public final int myWorldHeight = mySpriteSize * myWorldRow;
 
-    private TileManager tileM = new TileManager(this);
-    private Keyboard keyInputs = new Keyboard();
+    public TileManager myTileM = new TileManager(this);
+    private Keyboard myKeyInputs = new Keyboard();
     private Thread gameThread;
-    public Priestess myThief = new Priestess(this, keyInputs);
+    public Collision myCollision = new Collision(this);
+    public Heroes myHero;
 
     public GamePanel() {
         setPreferredSize(new Dimension(myScreenWidth, myScreenHeight));
         setBackground(Color.BLACK);
         setDoubleBuffered(true);
-        addKeyListener(keyInputs);
+        addKeyListener(myKeyInputs);
         setFocusable(true);
+        setMyHero(1);
     }
 
     public void startGame() {
@@ -96,6 +94,18 @@ public class GamePanel extends JPanel implements Runnable {
         return myWorldHeight;
     }
 
+    // For now, 1 is thief, 2 is Priestess, and 3 is Warrior.
+    public void setMyHero(int number){
+        if (number == 1){
+            myHero = new Thief(this,myKeyInputs);
+        }
+        if (number == 2){
+            myHero = new Priestess(this,myKeyInputs);
+        }
+        if (number == 3) {
+            myHero = new Warrior(this, myKeyInputs);
+        }
+    }
     @Override
     public void run() {
         // Game Loop. Repainting the screen 60 FPS. Credit given to ryisnow.
@@ -121,7 +131,7 @@ public class GamePanel extends JPanel implements Runnable {
     // This method will update our model.
     public void update() {
 
-        myThief.update();
+        myHero.update();
     }
 
     // This method updates our view.
@@ -130,8 +140,8 @@ public class GamePanel extends JPanel implements Runnable {
         super.paintComponent(theGraphics);
         Graphics2D pen = (Graphics2D) theGraphics;
 
-        tileM.draw(pen);
-        myThief.draw(pen); // We are going to need to figure out a way to draw the correct character.
+        myTileM.draw(pen);
+        myHero.draw(pen); // We are going to need to figure out a way to draw the correct character.
         pen.dispose();
     }
 }

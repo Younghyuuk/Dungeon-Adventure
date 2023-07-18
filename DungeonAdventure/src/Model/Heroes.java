@@ -18,20 +18,21 @@ public abstract class Heroes extends DungeonCharacter {
      */
     private double myBlockChance;
 
-    public int speed;
-
-
-
     GamePanel myGamePanel;
     Keyboard myKeyInputs;
+
     public BufferedImage up1, up2, down1, down2, left1, left2, right1, right2;
     public String direction = "down";
     public int spriteCounter = 0;
     public int spriteNum = 1;
+    public int myX, myY;
+    public int speed;
+    public Rectangle mySolidArea;
+    public boolean myCollision = false;
 
     public final int myMiddleX;
     public final int myMiddleY;
-    public int myX, myY;
+
     /**
      * Heroes constructor that initializes the hp, name, attack speed, min damage, max damage,
      * hit chance, block chance, gamepanel, and keyboard of the Hero.
@@ -63,25 +64,45 @@ public abstract class Heroes extends DungeonCharacter {
         myX = 7 * myGamePanel.getSpriteSize();
         myY = 6 * myGamePanel.getSpriteSize();
         speed = 4;
+        mySolidArea = new Rectangle(8,8,myGamePanel.getSpriteSize()-16,myGamePanel.getSpriteSize()-16);
     }
 
     public void update() {
         if (myKeyInputs.up ){
             direction = "up";
-            myY -= speed;
         }
         else if (myKeyInputs.down){
             direction = "down";
-            myY += speed;
         }
         else if (myKeyInputs.left){
             direction = "left";
-            myX -= speed;
         }
         else if (myKeyInputs.right){
             direction = "right";
-            myX += speed;
         }
+
+        myCollision = false;
+        myGamePanel.myCollision.checkTile(this);
+
+        if(myKeyInputs.up || myKeyInputs.down || myKeyInputs.left ||myKeyInputs.right){
+            if (!myCollision) {
+                switch (direction) {
+                    case "up" -> myY -= speed;
+                    case "down" -> myY += speed;
+                    case "left" -> myX -= speed;
+                    case "right" -> myX += speed;
+                }
+            }
+//            else { Maybe for bounce visuals
+//                switch (direction) {
+//                    case "up" -> myY += 30;
+//                    case "down" -> myY -= 30;
+//                    case "left" -> myX += 30;
+//                    case "right" -> myX -= 30;
+//                }
+//            }
+        }
+
         spriteCounter++;
         if (spriteCounter > 12) {
             spriteNum = spriteNum == 1 ? 2 : 1;
