@@ -4,15 +4,14 @@ import Control.Keyboard;
 import Model.*;
 
 import javax.swing.*;
-import javax.swing.plaf.basic.BasicTreeUI;
 import java.awt.*;
 
 public class GamePanel extends JPanel implements Runnable {
 
+    // Actual GUI screen size.
     private final static int ORIGINAL_SPRITE_SIZE = 16;
     private final static int SCALE = 3;
     private final int mySpriteSize = ORIGINAL_SPRITE_SIZE * SCALE;
-
     private final int myMaxScreenRow = 12;
     private final int myMaxScreenCol = 16;
     private final int myScreenWidth = myMaxScreenCol * mySpriteSize;
@@ -20,28 +19,22 @@ public class GamePanel extends JPanel implements Runnable {
     private final static int FPS = 60;
 
     // these values will be dependent on Dungeon Maze array size.
-    /**
-     * The width of the world map as a 2d array
-     */
-    public final int myWorldCol = 16;
-    /**
-     * The height of the world map as a 2d array
-     */
-    public final int myWorldRow = 12;
+    /** The width of the world map as a 2d array */
+    private final int myWorldCol = 16;
 
-    /**
-     * The width of the world map in pixels
-     */
-    public final int myWorldWidth = mySpriteSize * myWorldCol;
-    /**
-     * The height of the world map in pixels
-     */
-    public final int myWorldHeight = mySpriteSize * myWorldRow;
+    /** The height of the world map as a 2d array */
+    private final int myWorldRow = 12;
+
+    /** The width of the world map in pixels */
+    private final int myWorldWidth = mySpriteSize * myWorldCol;
+
+    /** The height of the world map in pixels */
+    private final int myWorldHeight = mySpriteSize * myWorldRow;
 
     private final TileManager myTileM = new TileManager(this);
-    private final Keyboard myKeyInputs = new Keyboard();
     private final Thread gameThread = new Thread(this);
     private final Collision myCollision = new Collision(this);
+    private final Keyboard myKeyInputs = new Keyboard();
     private Heroes myHero;
 
     public GamePanel() {
@@ -50,7 +43,7 @@ public class GamePanel extends JPanel implements Runnable {
         setDoubleBuffered(true);
         addKeyListener(myKeyInputs);
         setFocusable(true);
-        setMyHero(1);
+        setMyHero(2);
     }
 
     public void startGame() {
@@ -89,23 +82,6 @@ public class GamePanel extends JPanel implements Runnable {
         return myTileM;
     }
 
-    public int getMyWorldWidth() {
-        return myWorldWidth;
-    }
-
-    public int getMyWorldHeight() {
-        return myWorldHeight;
-    }
-
-    public int getMyMaxScreenCol() {
-        return myMaxScreenCol;
-    }
-
-    public int getMyMaxScreenRow() {
-        return myMaxScreenRow;
-    }
-
-
     // For now, 1 is thief, 2 is Priestess, and 3 is Warrior.
     public void setMyHero(int number) {
         if (number == 1) {
@@ -143,7 +119,6 @@ public class GamePanel extends JPanel implements Runnable {
 
     // This method will update our model.
     public void update() {
-
         myHero.update();
     }
 
@@ -154,7 +129,7 @@ public class GamePanel extends JPanel implements Runnable {
         Graphics2D pen = (Graphics2D) theGraphics;
 
         myTileM.draw(pen);
-        myHero.draw(pen); // We are going to need to figure out a way to draw the correct character.
+        myHero.draw(pen);
         pen.dispose();
     }
 }
