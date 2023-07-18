@@ -20,16 +20,18 @@ public abstract class Heroes extends DungeonCharacter {
 
     public int speed;
 
-    public int x, y;
+
 
     GamePanel myGamePanel;
     Keyboard myKeyInputs;
     public BufferedImage up1, up2, down1, down2, left1, left2, right1, right2;
-    public String direction = "up";
+    public String direction = "down";
     public int spriteCounter = 0;
     public int spriteNum = 1;
 
-
+    public final int myMiddleX;
+    public final int myMiddleY;
+    public int myX, myY;
     /**
      * Heroes constructor that initializes the hp, name, attack speed, min damage, max damage,
      * hit chance, block chance, gamepanel, and keyboard of the Hero.
@@ -53,28 +55,32 @@ public abstract class Heroes extends DungeonCharacter {
         myKeyInputs = theKeyBoard;
         myBlockChance = theBlockChance;
 
+
         //testing
-        x = 100;
-        y = 100;
+        myMiddleX = myGamePanel.getMyScreenWidth()/2 - (myGamePanel.getSpriteSize()/2);
+        myMiddleY = myGamePanel.getMyScreenHeight()/2 - (myGamePanel.getSpriteSize()/2);
+
+        myX = 7 * myGamePanel.getSpriteSize();
+        myY = 6 * myGamePanel.getSpriteSize();
         speed = 4;
     }
 
     public void update() {
         if (myKeyInputs.up ){
             direction = "up";
-            y -= speed;
+            myY -= speed;
         }
         else if (myKeyInputs.down){
             direction = "down";
-            y += speed;
+            myY += speed;
         }
         else if (myKeyInputs.left){
             direction = "left";
-            x -= speed;
+            myX -= speed;
         }
         else if (myKeyInputs.right){
             direction = "right";
-            x += speed;
+            myX += speed;
         }
         spriteCounter++;
         if (spriteCounter > 12) {
@@ -115,7 +121,7 @@ public abstract class Heroes extends DungeonCharacter {
                 }
                 break;
         }
-        theGraphics.drawImage(image, x, y, myGamePanel.getSpriteSize(),myGamePanel.getSpriteSize(),null);
+        theGraphics.drawImage(image, myMiddleX, myMiddleY, myGamePanel.getSpriteSize(),myGamePanel.getSpriteSize(),null);
     }
     public abstract void getHeroesImage();
 

@@ -19,7 +19,7 @@ public class TileManager {
     public TileManager(GamePanel theGamePanel) {
         myGamePanel = theGamePanel;
         myTile = new Tile[10];
-        myMapArr = new int[myGamePanel.getMyMaxScreenRow()][myGamePanel.getMyMaxScreenCol()];
+        myMapArr = new int[myGamePanel.getMyWorldRow()][myGamePanel.getMyWorldCol()];
         getTileImage();
         loadMap("/map/roomExample.txt");
     }
@@ -46,11 +46,11 @@ public class TileManager {
         try {
             InputStream input = getClass().getResourceAsStream(theMap);
             Scanner scan = new Scanner(Objects.requireNonNull(input));
-            while (col < myGamePanel.getMyMaxScreenCol() && row < myGamePanel.getMyMaxScreenRow()) {
+            while (col < myGamePanel.getMyWorldCol() && row < myGamePanel.getMyWorldRow()) {
                 int number = scan.nextInt();
                 myMapArr[row][col] = number;
                 col++;
-                if (col == myGamePanel.getMyMaxScreenCol()) {
+                if (col == myGamePanel.getMyWorldCol()) {
                     col = 0;
                     row++;
                 }
@@ -62,22 +62,31 @@ public class TileManager {
 
     public void draw(Graphics2D theGraphics) {
 
-        int row = 0;
-        int col = 0;
+        int worldRow = 0;
+        int worldCol = 0;
 
-        int x = 0;
-        int y = 0;
-        while (col < myGamePanel.getMyMaxScreenCol() && row < myGamePanel.getMyMaxScreenRow()) {
-            int tileTexture = myMapArr[row][col];
-            theGraphics.drawImage(myTile[tileTexture].myImage, x, y,
-                    myGamePanel.getSpriteSize(), myGamePanel.getSpriteSize(), null);
-            col++;
-            x += myGamePanel.getSpriteSize();
-            if (col == myGamePanel.getMyMaxScreenCol()) {
-                col = 0;
-                x = 0;
-                row++;
-                y += myGamePanel.getSpriteSize();
+        while (worldCol < myGamePanel.getMyWorldCol() && worldRow < myGamePanel.getMyWorldRow()) {
+            int tileTexture = myMapArr[worldRow][worldCol];
+
+            int worldX = worldCol * myGamePanel.getSpriteSize();
+            int worldY = worldRow * myGamePanel.getSpriteSize();
+            // myThief may need to change.
+            int screenX = worldX - myGamePanel.myThief.myX + myGamePanel.myThief.myMiddleX;
+            int screenY = worldY - myGamePanel.myThief.myY + myGamePanel.myThief.myMiddleY;
+
+            // draw only the tiles that are width a certain screen size.
+            if (worldX +  myGamePanel.getSpriteSize() > myGamePanel.myThief.myX - myGamePanel.myThief.myMiddleX &&
+                    worldX - myGamePanel.getSpriteSize() < myGamePanel.myThief.myX + myGamePanel.myThief.myMiddleX &&
+                    worldY + myGamePanel.getSpriteSize() > myGamePanel.myThief.myY - myGamePanel.myThief.myMiddleY &&
+                    worldY - myGamePanel.getSpriteSize() < myGamePanel.myThief.myY + myGamePanel.myThief.myMiddleY){
+                theGraphics.drawImage(myTile[tileTexture].myImage, screenX, screenY, myGamePanel.getSpriteSize(), myGamePanel.getSpriteSize(), null);
+            }
+
+            worldCol++;
+
+            if (worldCol == myGamePanel.getMyWorldCol()) {
+                worldCol= 0;
+                worldRow++;
             }
         }
     }
