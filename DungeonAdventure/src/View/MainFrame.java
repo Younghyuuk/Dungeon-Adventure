@@ -18,6 +18,7 @@ public class MainFrame extends JFrame {
         setJMenuBar(menuBar);
 
         GamePanel gamePanel = new GamePanel();
+
         add(gamePanel);
         pack();
         gamePanel.startGame();
