@@ -16,8 +16,8 @@ public abstract class Monster extends DungeonCharacter {
      * @param theMaxDamage   maximum amount of damage they can do.
      * @param theHitChance   chance the character has to landing attack.
      */
-    protected Monster(int theHp, String theChName, int theAttackSpeed,
-                      int theMinDamage, int theMaxDamage, double theHitChance) {
+    protected Monster(final int theHp, final String theChName, final int theAttackSpeed,
+                      final int theMinDamage, final int theMaxDamage, final double theHitChance) {
         super(theHp, theChName, theAttackSpeed, theMinDamage, theMaxDamage, theHitChance);
     }
 
@@ -26,7 +26,7 @@ public abstract class Monster extends DungeonCharacter {
      *
      * @param theOpp which the monster will target
      */
-    public abstract void regularAttack(DungeonCharacter theOpp);
+    public abstract void regularAttack(final DungeonCharacter theOpp);
 
     /**
      * Abstract method for monster child classes to heal.

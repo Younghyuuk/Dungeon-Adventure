@@ -13,7 +13,7 @@ import static javax.imageio.ImageIO.read;
  * Priestess class which has the ability to heal and
  * extends from the Heroes class.
  */
-public class Priestess extends Heroes{
+public class Priestess extends Heroes {
 
     /**
      * Min heal that priestess can heal for.
@@ -66,15 +66,15 @@ public class Priestess extends Heroes{
      * Also sets up background for the characters for the view.
      *
      * @param theGamePanel gamepanel of character
-     * @param theKeyboard keyboard input of character
+     * @param theKeyboard  keyboard input of character
      */
-    public Priestess(GamePanel theGamePanel, Keyboard theKeyboard) {
-        super(HP, NAME, ATTACK_SPEED, MIN_DAMAGE, MAX_DAMAGE, HIT_CHANCE, BLOCK_CHANCE, theGamePanel,theKeyboard);
+    public Priestess(final GamePanel theGamePanel, final Keyboard theKeyboard) {
+        super(HP, NAME, ATTACK_SPEED, MIN_DAMAGE, MAX_DAMAGE, HIT_CHANCE, BLOCK_CHANCE, theGamePanel, theKeyboard);
         getHeroesImage();
     }
 
     @Override
-    public void getHeroesImage(){
+    public void getHeroesImage() {
         try {
             up1 = read(Objects.requireNonNull(getClass().getResourceAsStream("/priest/priest_up1.png")));
             up2 = read(Objects.requireNonNull(getClass().getResourceAsStream("/priest/priest_up2.png")));
@@ -102,7 +102,7 @@ public class Priestess extends Heroes{
      * @param theOpp opponent in which the attack will be targeted towards.
      */
     @Override
-    public void regularAttack(DungeonCharacter theOpp) {
+    public void regularAttack(final DungeonCharacter theOpp) {
         attackBehavior(theOpp);
     }
 
@@ -112,7 +112,7 @@ public class Priestess extends Heroes{
      * @param theAlly which the special skill will be aimed towards.
      */
     @Override
-    public void specialSkill(DungeonCharacter theAlly) {
+    public void specialSkill(final DungeonCharacter theAlly) {
         theAlly.setHp(getHp() + genHeal());
     }
 

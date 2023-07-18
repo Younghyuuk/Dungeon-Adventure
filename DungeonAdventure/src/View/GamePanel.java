@@ -38,11 +38,11 @@ public class GamePanel extends JPanel implements Runnable {
      */
     public final int myWorldHeight = mySpriteSize * myWorldRow;
 
-    public TileManager myTileM = new TileManager(this);
-    private Keyboard myKeyInputs = new Keyboard();
-    private Thread gameThread;
-    public Collision myCollision = new Collision(this);
-    public Heroes myHero;
+    private final TileManager myTileM = new TileManager(this);
+    private final Keyboard myKeyInputs = new Keyboard();
+    private final Thread gameThread = new Thread(this);
+    private final Collision myCollision = new Collision(this);
+    private Heroes myHero;
 
     public GamePanel() {
         setPreferredSize(new Dimension(myScreenWidth, myScreenHeight));
@@ -54,20 +54,11 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void startGame() {
-        gameThread = new Thread(this);
         gameThread.start();
     }
 
     public int getSpriteSize() {
         return mySpriteSize;
-    }
-
-    public int getMyMaxScreenCol() {
-        return myMaxScreenCol;
-    }
-
-    public int getMyMaxScreenRow() {
-        return myMaxScreenRow;
     }
 
     public int getMyScreenWidth() {
@@ -86,6 +77,18 @@ public class GamePanel extends JPanel implements Runnable {
         return myWorldRow;
     }
 
+    public Heroes getMyHero() {
+        return myHero;
+    }
+
+    public Collision getMyCollision() {
+        return myCollision;
+    }
+
+    public TileManager getMyTileM() {
+        return myTileM;
+    }
+
     public int getMyWorldWidth() {
         return myWorldWidth;
     }
@@ -94,18 +97,28 @@ public class GamePanel extends JPanel implements Runnable {
         return myWorldHeight;
     }
 
+    public int getMyMaxScreenCol() {
+        return myMaxScreenCol;
+    }
+
+    public int getMyMaxScreenRow() {
+        return myMaxScreenRow;
+    }
+
+
     // For now, 1 is thief, 2 is Priestess, and 3 is Warrior.
-    public void setMyHero(int number){
-        if (number == 1){
-            myHero = new Thief(this,myKeyInputs);
+    public void setMyHero(int number) {
+        if (number == 1) {
+            myHero = new Thief(this, myKeyInputs);
         }
-        if (number == 2){
-            myHero = new Priestess(this,myKeyInputs);
+        if (number == 2) {
+            myHero = new Priestess(this, myKeyInputs);
         }
         if (number == 3) {
             myHero = new Warrior(this, myKeyInputs);
         }
     }
+
     @Override
     public void run() {
         // Game Loop. Repainting the screen 60 FPS. Credit given to ryisnow.
