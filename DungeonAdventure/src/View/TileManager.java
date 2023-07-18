@@ -13,8 +13,8 @@ import java.util.Scanner;
 public class TileManager {
 
     final GamePanel myGamePanel;
-    final Tile[] myTile;
-    final int myMapArr[][];
+    public Tile[] myTile;
+    public int myMapArr[][];
 
     public TileManager(GamePanel theGamePanel) {
         myGamePanel = theGamePanel;
@@ -31,7 +31,7 @@ public class TileManager {
                 myTile[0].myImage = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Tiles/sandBrickFloor.png")));
                 myTile[1] = new Tile();
                 myTile[1].myImage = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Tiles/stoneWall.png")));
-
+                myTile[1].myCollision = true;
 
 
             } catch (IOException e) {
@@ -71,14 +71,14 @@ public class TileManager {
             int worldX = worldCol * myGamePanel.getSpriteSize();
             int worldY = worldRow * myGamePanel.getSpriteSize();
             // myThief may need to change.
-            int screenX = worldX - myGamePanel.myThief.myX + myGamePanel.myThief.myMiddleX;
-            int screenY = worldY - myGamePanel.myThief.myY + myGamePanel.myThief.myMiddleY;
+            int screenX = worldX - myGamePanel.myHero.myX + myGamePanel.myHero.myMiddleX;
+            int screenY = worldY - myGamePanel.myHero.myY + myGamePanel.myHero.myMiddleY;
 
             // draw only the tiles that are width a certain screen size.
-            if (worldX +  myGamePanel.getSpriteSize() > myGamePanel.myThief.myX - myGamePanel.myThief.myMiddleX &&
-                    worldX - myGamePanel.getSpriteSize() < myGamePanel.myThief.myX + myGamePanel.myThief.myMiddleX &&
-                    worldY + myGamePanel.getSpriteSize() > myGamePanel.myThief.myY - myGamePanel.myThief.myMiddleY &&
-                    worldY - myGamePanel.getSpriteSize() < myGamePanel.myThief.myY + myGamePanel.myThief.myMiddleY){
+            if (worldX +  myGamePanel.getSpriteSize() > myGamePanel.myHero.myX - myGamePanel.myHero.myMiddleX &&
+                    worldX - myGamePanel.getSpriteSize() < myGamePanel.myHero.myX + myGamePanel.myHero.myMiddleX &&
+                    worldY + myGamePanel.getSpriteSize() > myGamePanel.myHero.myY - myGamePanel.myHero.myMiddleY &&
+                    worldY - myGamePanel.getSpriteSize() < myGamePanel.myHero.myY + myGamePanel.myHero.myMiddleY){
                 theGraphics.drawImage(myTile[tileTexture].myImage, screenX, screenY, myGamePanel.getSpriteSize(), myGamePanel.getSpriteSize(), null);
             }
 

@@ -67,7 +67,7 @@ public class Warrior extends Heroes{
      * @param theGamePanel game panel of character
      * @param theKeyboard keyboard input of character
      */
-    protected Warrior(GamePanel theGamePanel, Keyboard theKeyboard) {
+    public Warrior(GamePanel theGamePanel, Keyboard theKeyboard) {
         super(HP, NAME, ATTACK_SPEED,
                 MIN_DAMAGE, MAX_DAMAGE,
                 HIT_CHANCE, BLOCK_CHANCE, theGamePanel, theKeyboard);
