@@ -155,6 +155,24 @@ public class Room {
     }
 
     /**
+     * Get method to get the room height.
+     *
+     * @return Returns the height of the room.
+     */
+    public int getRoomHeight() {
+        return ROOM_HEIGHT;
+    }
+
+    /**
+     * Get method to get the room width.
+     *
+     * @return Returns the width of the room.
+     */
+    public int getRoomWidth() {
+        return ROOM_WIDTH;
+    }
+
+    /**
      * @return The String representation of the room.
      */
     @Override
@@ -163,7 +181,7 @@ public class Room {
 
         for (int i = 0; i < ROOM_HEIGHT; i++) {
             for (int j = 0; j < ROOM_WIDTH; j++) {
-                sb.append(myRoom[i][j]).append(" ");
+                sb.append(myRoom[i][j]);
             }
             sb.append("\n"); // Move to the next line after each row
         }
