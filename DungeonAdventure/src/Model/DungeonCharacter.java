@@ -163,6 +163,10 @@ public abstract class DungeonCharacter {
         return (int) (Math.random() * ((theMin - theMax + 1))) + getMinDamage();
     }
 
+    public boolean isAlive() {
+        return getHp() > 0;
+    }
+
     /**
      * Tester toString method to see if all character values
      * show up right.
