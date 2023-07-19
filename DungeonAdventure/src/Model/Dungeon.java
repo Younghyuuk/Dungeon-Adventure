@@ -1,5 +1,7 @@
 package Model;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Random;
 import java.util.Stack;
@@ -28,11 +30,11 @@ public class Dungeon {
     /**
      * The height, in rooms, of the dungeon (the Y).
      */
-    private static final int DUNGEON_HEIGHT = 8;
+    private static final int DUNGEON_HEIGHT = 3;
     /**
      * The width, in rooms, of the dungeon (the X).
      */
-    private static final int DUNGEON_WIDTH = 8;
+    private static final int DUNGEON_WIDTH = 3;
     /**
      * The index of the first column in the dungeon.
      */
@@ -40,7 +42,7 @@ public class Dungeon {
     /**
      * The index of the last column in the dungeon.
      */
-    private static final int LAST_ROOM_COL = 7;
+    private static final int LAST_ROOM_COL = DUNGEON_WIDTH - 1;
     /**
      * The index of the first row in the dungeon.
      */
@@ -48,7 +50,7 @@ public class Dungeon {
     /**
      * The index of the last row in the dungeon.
      */
-    private static final int LAST_ROOM_ROW = 7;
+    private static final int LAST_ROOM_ROW = DUNGEON_HEIGHT - 1;
     /**
      * A direction vector for the columns. <br>
      * Used to traverse in DFS to adjacent cells.
@@ -74,6 +76,8 @@ public class Dungeon {
         }
         // Next, we need to create every room
         createRooms();
+        // Finally, we will output the dungeon to a text file to use with the GUI
+        textDungeon(TEXT_DUNGEON);
     }
 
     /**
@@ -232,13 +236,20 @@ public class Dungeon {
     }
 
     /**
-     * Converts the 2D array into text to be used in 'toString()' and
-     * output to a text file so that the Dungeon can be drawn on the GUI.
+     * Uses 'toString' to create a text representation of the dungeon
+     * and then outputs that to a text file.
      *
-     * @param theRooms A 2D array of rooms.
+     * @param theFileName The name of the file to output to.
      */
-    protected void textDungeon(final Room theRooms) {
-
+    protected void textDungeon(final String theFileName) {
+        try {
+            String dungeon = this.toString();
+            FileWriter fileWriter = new FileWriter(theFileName);
+            fileWriter.write(dungeon);
+            fileWriter.close();
+        } catch (IOException e) {
+            System.err.println("An error occurred when printing to output file: " + e.getMessage());
+        }
     }
 
     /**
@@ -259,18 +270,41 @@ public class Dungeon {
     public String toString() {
         StringBuilder sb = new StringBuilder();
 
-        for (int i = 0; i < DUNGEON_HEIGHT; i++) {
-            for (int j = 0; j < DUNGEON_WIDTH; j++) {
-                sb.append(myRooms[i][j].toString());
+        // First, we will loop through every row in the dungeon
+        for (int row = 0; row < DUNGEON_HEIGHT; row++) {
+            // Then we will create an ARRAY of StringBuilders to store every room
+            StringBuilder[] roomStrings = new StringBuilder[17];
+            for (int i = 0; i < 17; i++) {
+                // Here we are just populating the array with StringBuilders
+                roomStrings[i] = new StringBuilder();
             }
-            sb.append("\n");
+
+            // Next, we loop through every column in the dungeon
+            for (int col = 0; col < DUNGEON_WIDTH; col++) {
+                if (myRooms[row][col] != null) {
+                    // We get the text representation of the current room
+                    String[] roomText = myRooms[row][col].toString().split("\n");
+
+                    // And then append every line of the current room to the StringBuilder
+                    // in the current spot in the ARRAY of StringBuilders
+                    for (int i = 0; i < 17; i++) {
+                        roomStrings[i].append(roomText[i]).append(" ");
+                    }
+                }
+            }
+
+            // Finally, before returning, we will append each StringBuilder
+            // to the main StringBuilder
+            for (StringBuilder roomString : roomStrings) {
+                sb.append(roomString).append("\n");
+            }
         }
 
         return sb.toString();
     }
 
     /**
-     * Inner class to represent an row-column pair to be used in a stack for DFS.
+     * Inner class to represent a row-column pair to be used in a stack for DFS.
      */
     private class RowColPair {
         /**
