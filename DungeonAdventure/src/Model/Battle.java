@@ -99,19 +99,17 @@ public class Battle {
         if (theHero.getAttackSpeed() > theMon.getAttackSpeed()) {
             attackLog.append(theHero.getChName()).append(" attacks ").append(theMon.getChName()).append("\n");
 
-            if (Math.random() <= theHero.getHitChance()) {
                 theHero.regularAttack(theMon);
                 theHero.specialSkill(theMon);
                 attackLog.append(theHero.getChName()).append(" hits ").append(theMon.getChName()).append("\n");
                 attackLog.append(theMon.getChName()).append(" has ").append(theMon.getHp()).append(" hit points remaining.\n");
-            } else {
-                attackLog.append(theHero.getChName()).append(" misses the attack!\n");
-            }
+
+                //Have regularAttack and special skill return strings instead.
+
             // Monster attack
         } else {
             attackLog.append(theMon.getChName()).append(" attacks ").append(theHero.getChName()).append("\n");
 
-            if (Math.random() <= theMon.getHitChance()) {
                 theMon.regularAttack(theHero);
                 theMon.heal();
 
@@ -120,9 +118,8 @@ public class Battle {
 
                 //add a heal chance attackLog
 
-            } else {
-                attackLog.append(theMon.getChName()).append(" misses the attack!\n");
-            }
+//                attackLog.append(theMon.getChName()).append(" misses the attack!\n");
+            
         }
 
 
