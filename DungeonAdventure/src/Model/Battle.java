@@ -116,21 +116,16 @@ public class Battle {
                 theMon.heal();
 
                 attackLog.append(theMon.getChName()).append(" hits ").append(theHero.getChName()).append("\n");
+                attackLog.append(theHero.getChName()).append(" has ").append(theHero.getHp()).append(" hit points remaining.\n");
+
+                //add a heal chance attackLog
+
             } else {
-                
+                attackLog.append(theMon.getChName()).append(" misses the attack!\n");
             }
         }
 
-//        if (Math.random() <= theAttacker.getHitChance()) {
-//            int damage = theAttacker.genDamage(theAttacker.getMinDamage(), theAttacker.getMaxDamage());
-//            theDefender.subtractHp(damage);
-//            attackLog.append(theAttacker.getChName()).append(" hits ").append(theDefender.getChName()).append(" for ")
-//                    .append(damage).append(" damage!\n");
-//            attackLog.append(theDefender.getChName()).append(" has ").append(theDefender.getHp())
-//                    .append(" hit points remaining.\n");
-//        } else {
-//            attackLog.append(theAttacker.getChName()).append(" misses the attack!\n");
-//        }
+
 
         return attackLog.toString();
     }
