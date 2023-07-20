@@ -135,9 +135,7 @@ public class Battle {
         myBattleLog[myIndex++] = theMessage;
     }
 
-    public void gameOver() {
 
-    }
 
 }
 
