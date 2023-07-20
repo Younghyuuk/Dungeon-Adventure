@@ -291,11 +291,10 @@ public class Dungeon {
                     // And then append every line of the current room to the StringBuilder
                     // in the current spot in the ARRAY of StringBuilders
                     for (int i = 0; i < 17; i++) {
-                        roomStrings[i].append(roomText[i]).append(" ");
+                        roomStrings[i].append(roomText[i]).append("");
                     }
                 }
             }
-
             // Finally, before returning, we will append each StringBuilder
             // to the main StringBuilder
             for (StringBuilder roomString : roomStrings) {
@@ -306,6 +305,12 @@ public class Dungeon {
         return sb.toString();
     }
 
+    public int getDungeonHeight(){
+        return DUNGEON_HEIGHT;
+    }
+    public int getDungeonWidth() {
+        return DUNGEON_WIDTH;
+    }
     /**
      * Inner class to represent a row-column pair to be used in a stack for DFS.
      */

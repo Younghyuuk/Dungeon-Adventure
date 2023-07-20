@@ -18,25 +18,21 @@ public class GamePanel extends JPanel implements Runnable {
     private final int myScreenHeight = myMaxScreenRow * mySpriteSize;
     private final static int FPS = 60;
 
+    //We may need to pass this from mainframe and play with the gamestate to load new dungeons.dddddddds
+    final Dungeon myDungeon = new Dungeon();
     // these values will be dependent on Dungeon Maze array size.
     /** The width of the world map as a 2d array */
-    private int myWorldCol;
+    private final int myWorldCol = myDungeon.getDungeonWidth() * myDungeon.getRooms()[0][0].getRoomWidth();
 
     /** The height of the world map as a 2d array */
-    private int myWorldRow;
-
-    /** The width of the world map in pixels */
-    private int myWorldWidth;
-
-    /** The height of the world map in pixels */
-    private int myWorldHeight;
+    private final int myWorldRow = myDungeon.getDungeonWidth() * myDungeon.getRooms()[0][0].getRoomHeight();
 
     private final TileManager myTileM = new TileManager(this);
     private final Thread gameThread = new Thread(this);
     private final Collision myCollision = new Collision(this);
     private final Keyboard myKeyInputs = new Keyboard();
     private Heroes myHero;
-    private Dungeon myDungeon;
+
 
     public GamePanel() {
         setPreferredSize(new Dimension(myScreenWidth, myScreenHeight));
@@ -45,18 +41,8 @@ public class GamePanel extends JPanel implements Runnable {
         addKeyListener(myKeyInputs);
         setFocusable(true);
         setMyHero(2);
-        myDungeon = new Dungeon();
-        setUpWorld();
     }
-    public void setUpWorld(){
-        myWorldCol = myDungeon.getRooms()[0].length * myDungeon.getRooms()[0][0].getRoomWidth();
-        System.out.println(myWorldCol);
-        myWorldRow = myDungeon.getRooms().length * myDungeon.getRooms()[0][0].getRoomHeight();
-        System.out.println(myWorldRow);
-        myWorldWidth = mySpriteSize * myWorldCol;
-        myWorldHeight = mySpriteSize * myWorldRow;
 
-    }
 
     public void startGame() {
         gameThread.start();

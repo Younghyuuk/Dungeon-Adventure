@@ -9,7 +9,5 @@ public class Main {
         frame.setVisible(true);
         frame.setResizable(false);
         frame.setLocationRelativeTo(null);
-        Dungeon dung = new Dungeon();
-        System.out.println(dung.toString());
     }
 }
