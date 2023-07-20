@@ -24,7 +24,16 @@ public class Battle {
      */
     private String[] myBattleLog;
 
-    // Empty constructor so others can't change
+    /**
+     * Index of the myBattleLog array.
+     */
+    private int myIndex;
+
+
+    /**
+     * Private constructor so Battle class can't be
+     * changed of what it has.
+     */
     private Battle() {
 
     }
@@ -40,92 +49,93 @@ public class Battle {
         myHero = theHero;
         myMonster = theMonster;
         myBattleLog = new String[100];
+        myIndex = 0;
         startBattle();
     }
 
 
     /**
-     * @return
+     * Starts the battle of hero vs monster taking into account of attackspeed
+     * and damage.
+     *
+     * @return myBattleLog array of logs of the battle
      */
 
-    // change to String[] return later
-    public String startBattle() {
-        StringBuilder battleLog = new StringBuilder();
+    public String[] startBattle() {
 
-        battleLog.append(myHero.getChName()).append(" engages in battle with ").append(myMonster.getChName()).append("!\n");
-        battleLog.append("=============================================\n");
+        addToLog(myHero.getChName() + " engages in battle with " + myMonster.getChName());
+        addToLog("=============================================");
 
         while (myHero.isAlive() && myMonster.isAlive()) {
-            battleLog.append(performAttack(myHero, myMonster));
-            if (myMonster.isAlive()) {
-                battleLog.append(performAttack(myHero, myMonster));
+            if (myHero.getAttackSpeed() > myMonster.getAttackSpeed()) {
+                heroAttack();
             }
+            if (myMonster.isAlive()) {
+                monsterAttack();
+            }
+
+
         }
 
-        battleLog.append("=============================================\n");
+
+        addToLog("=============================================");
 
         if (myHero.isAlive()) {
-            battleLog.append(myHero.getChName()).append(" defeats ").append(myMonster.getChName()).append("!\n");
+            addToLog(myHero.getChName() + " defeats " + myMonster.getChName());
         } else {
-            battleLog.append(myHero.getChName()).append(" has been defeated by ").append(myMonster.getChName()).append("!\n");
+            addToLog(myHero.getChName() + " has been defeated by " + myMonster.getChName());
         }
 
-        return battleLog.toString();
+        return myBattleLog;
     }
 
-//    private String performAttack(DungeonCharacter theAttacker, DungeonCharacter theDefender) {
-//        StringBuilder attackLog = new StringBuilder();
-//
-//        attackLog.append(theAttacker.getChName()).append(" attacks ").append(theDefender.getChName()).append("\n");
-//
-//        if (Math.random() <= theAttacker.getHitChance()) {
-//            int damage = theAttacker.genDamage(theAttacker.getMinDamage(), theAttacker.getMaxDamage());
-//            theDefender.subtractHp(damage);
-//            attackLog.append(theAttacker.getChName()).append(" hits ").append(theDefender.getChName()).append(" for ")
-//                    .append(damage).append(" damage!\n");
-//            attackLog.append(theDefender.getChName()).append(" has ").append(theDefender.getHp())
-//                    .append(" hit points remaining.\n");
-//        } else {
-//            attackLog.append(theAttacker.getChName()).append(" misses the attack!\n");
-//        }
-//
-//        return attackLog.toString();
-//    }
 
-    private String performAttack(Heroes theHero, Monster theMon) {
+    /**
+     * Gives sequence of attacks and possible special skills used by the hero to
+     * attack monster while adding to myBattleLog.
+     */
+    private void heroAttack() {
         StringBuilder attackLog = new StringBuilder();
+        attackLog.append(myHero.getChName()).append(" attacks ").append(myMonster.getChName()).append("\n");
 
-        // Heroes attack
-        if (theHero.getAttackSpeed() > theMon.getAttackSpeed()) {
-            attackLog.append(theHero.getChName()).append(" attacks ").append(theMon.getChName()).append("\n");
+        myHero.regularAttack(myMonster);
+        myHero.specialSkill(myMonster);
+        attackLog.append(myHero.getChName()).append(" hits ").append(myMonster.getChName()).append("\n");
+        attackLog.append(myMonster.getChName()).append(" has ").append(myMonster.getHp()).append(" hit points remaining.\n");
 
-                theHero.regularAttack(theMon);
-                theHero.specialSkill(theMon);
-                attackLog.append(theHero.getChName()).append(" hits ").append(theMon.getChName()).append("\n");
-                attackLog.append(theMon.getChName()).append(" has ").append(theMon.getHp()).append(" hit points remaining.\n");
-
-                //Have regularAttack and special skill return strings instead.
-
-            // Monster attack
-        } else {
-            attackLog.append(theMon.getChName()).append(" attacks ").append(theHero.getChName()).append("\n");
-
-                theMon.regularAttack(theHero);
-                theMon.heal();
-
-                attackLog.append(theMon.getChName()).append(" hits ").append(theHero.getChName()).append("\n");
-                attackLog.append(theHero.getChName()).append(" has ").append(theHero.getHp()).append(" hit points remaining.\n");
-
-                //add a heal chance attackLog
-
-//                attackLog.append(theMon.getChName()).append(" misses the attack!\n");
-            
-        }
-
-
-
-        return attackLog.toString();
+        addToLog(attackLog.toString());
     }
+
+    /**
+     * Gives the sequence of attacks and heals monster uses while also
+     * adding to myBattleLog.
+     */
+    private void monsterAttack() {
+        StringBuilder attackLog = new StringBuilder();
+        attackLog.append(myMonster.getChName()).append(" attacks ").append(myHero.getChName()).append("\n");
+
+        myMonster.regularAttack(myHero);
+        attackLog.append(myMonster.getChName()).append(" hits ").append(myHero.getChName()).append("\n");
+        attackLog.append(myHero.getChName()).append(" has ").append(myHero.getHp()).append(" hit points remaining.\n");
+
+        attackLog.append(myMonster.getChName()).append(" tries to heal, original health is ").
+                append(myMonster.getHp()).append("\n");
+        myMonster.heal();
+        attackLog.append(myMonster.getChName()).append(" new hp is ").append(myMonster.getHp());
+
+        addToLog(attackLog.toString());
+    }
+
+    /**
+     * Adds String messages to myBattleLog array.
+     *
+     * @param theMessage to add String into battle log
+     */
+    private void addToLog(String theMessage) {
+        myBattleLog[myIndex++] = theMessage;
+    }
+
+
 
 }
 
