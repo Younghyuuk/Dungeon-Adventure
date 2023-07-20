@@ -18,7 +18,7 @@ public abstract class Heroes extends DungeonCharacter {
      */
     private double myBlockChance;
 
-    public final static int HEROES_MOVE_SPEED = 4;
+    public final static int HEROES_MOVE_SPEED = 6;
 
     GamePanel myGamePanel;
     Keyboard myKeyInputs;
@@ -66,7 +66,7 @@ public abstract class Heroes extends DungeonCharacter {
 
         myWorldXCoordinate = 7 * myGamePanel.getSpriteSize();
         myWorldYCoordinate = 6 * myGamePanel.getSpriteSize();
-        mySolidArea = new Rectangle(8, 8, myGamePanel.getSpriteSize() - 16, myGamePanel.getSpriteSize() - 16);
+        mySolidArea = new Rectangle(12, 12, myGamePanel.getSpriteSize() - 24, myGamePanel.getSpriteSize() - 24);
     }
 
     public int getMyWorldXCoordinate() {
@@ -171,6 +171,9 @@ public abstract class Heroes extends DungeonCharacter {
         }
         // Draw my hero in the middle of the viewable screen.
         theGraphics.drawImage(image, myScreensMiddleX, myScreensMiddleY, myGamePanel.getSpriteSize(), myGamePanel.getSpriteSize(), null);
+
+        // draw the rectangle that acts as the collision indicator.
+        theGraphics.drawRect(myScreensMiddleX + getMySolidArea().x,myScreensMiddleY + mySolidArea.y, mySolidArea.width,  mySolidArea.height);
     }
 
     public abstract void getHeroesImage();

@@ -25,7 +25,7 @@ public class GamePanel extends JPanel implements Runnable {
     private final int myWorldCol = myDungeon.getDungeonWidth() * myDungeon.getRooms()[0][0].getRoomWidth();
 
     /** The height of the world map as a 2d array */
-    private final int myWorldRow = myDungeon.getDungeonWidth() * myDungeon.getRooms()[0][0].getRoomHeight();
+    private final int myWorldRow = myDungeon.getDungeonHeight() * myDungeon.getRooms()[0][0].getRoomHeight();
 
     private final TileManager myTileM = new TileManager(this);
     private final Thread gameThread = new Thread(this);
