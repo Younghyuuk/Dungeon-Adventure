@@ -20,22 +20,23 @@ public class GamePanel extends JPanel implements Runnable {
 
     // these values will be dependent on Dungeon Maze array size.
     /** The width of the world map as a 2d array */
-    private final int myWorldCol = 16;
+    private int myWorldCol;
 
     /** The height of the world map as a 2d array */
-    private final int myWorldRow = 12;
+    private int myWorldRow;
 
     /** The width of the world map in pixels */
-    private final int myWorldWidth = mySpriteSize * myWorldCol;
+    private int myWorldWidth;
 
     /** The height of the world map in pixels */
-    private final int myWorldHeight = mySpriteSize * myWorldRow;
+    private int myWorldHeight;
 
     private final TileManager myTileM = new TileManager(this);
     private final Thread gameThread = new Thread(this);
     private final Collision myCollision = new Collision(this);
     private final Keyboard myKeyInputs = new Keyboard();
     private Heroes myHero;
+    private Dungeon myDungeon;
 
     public GamePanel() {
         setPreferredSize(new Dimension(myScreenWidth, myScreenHeight));
@@ -44,6 +45,17 @@ public class GamePanel extends JPanel implements Runnable {
         addKeyListener(myKeyInputs);
         setFocusable(true);
         setMyHero(2);
+        myDungeon = new Dungeon();
+        setUpWorld();
+    }
+    public void setUpWorld(){
+        myWorldCol = myDungeon.getRooms()[0].length * myDungeon.getRooms()[0][0].getRoomWidth();
+        System.out.println(myWorldCol);
+        myWorldRow = myDungeon.getRooms().length * myDungeon.getRooms()[0][0].getRoomHeight();
+        System.out.println(myWorldRow);
+        myWorldWidth = mySpriteSize * myWorldCol;
+        myWorldHeight = mySpriteSize * myWorldRow;
+
     }
 
     public void startGame() {

@@ -18,7 +18,7 @@ public class TileManager {
         myTile = new Tile[10];
         myMapArr = new int[myGamePanel.getMyWorldRow()][myGamePanel.getMyWorldCol()];
         getTileImage();
-        loadMap("/map/roomExample.txt");
+        loadMap("/map/dungeon.txt");
     }
 
     public void getTileImage() {
