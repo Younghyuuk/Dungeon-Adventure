@@ -18,7 +18,7 @@ public class TileManager {
         myTile = new Tile[10];
         myMapArr = new int[myGamePanel.getMyWorldRow()][myGamePanel.getMyWorldCol()];
         getTileImage();
-        loadMap("/map/roomExample.txt");
+        loadMap("/map/dungeon.txt");
     }
 
     public void getTileImage() {
@@ -29,6 +29,8 @@ public class TileManager {
             myTile[1] = new Tile();
             myTile[1].setMyImage(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Tiles/stoneWall.png"))));
             myTile[1].setMyCollision(true);
+            myTile[3] = new Tile();
+            myTile[3].setMyImage(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Tiles/door.png"))));
 
 
         } catch (IOException e) {

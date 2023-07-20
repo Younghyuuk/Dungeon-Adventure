@@ -1,5 +1,7 @@
 package View;
 
+import Model.Dungeon;
+
 import javax.swing.*;
 /** This Class is the main JFrame that will hold all the other JPanels*/
 public class MainFrame extends JFrame {
@@ -16,9 +18,7 @@ public class MainFrame extends JFrame {
 
         MenuBar menuBar = new MenuBar();
         setJMenuBar(menuBar);
-
         GamePanel gamePanel = new GamePanel();
-
         add(gamePanel);
         pack();
         gamePanel.startGame();

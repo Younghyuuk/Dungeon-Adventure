@@ -182,6 +182,7 @@ public class Room {
         for (int i = 0; i < ROOM_HEIGHT; i++) {
             for (int j = 0; j < ROOM_WIDTH; j++) {
                 sb.append(myRoom[i][j]);
+                sb.append(" ");
             }
             sb.append("\n"); // Move to the next line after each row
         }

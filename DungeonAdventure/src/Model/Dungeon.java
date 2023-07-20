@@ -26,7 +26,7 @@ public class Dungeon {
     /**
      * The file to output the text version of the dungeon to.
      */
-    private static final String TEXT_DUNGEON = "dungeon.txt";
+    private static final String TEXT_DUNGEON = "Resources/map/dungeon.txt";
     /**
      * The height, in rooms, of the dungeon (the Y).
      */
@@ -80,6 +80,9 @@ public class Dungeon {
         textDungeon(TEXT_DUNGEON);
     }
 
+    public Room[][] getRooms(){
+        return myRooms;
+    }
     /**
      * Goes through the 'myRooms' 2D array and creates each room. <br>
      * Randomly generates which item will be in a room, or no items at all.
@@ -288,11 +291,10 @@ public class Dungeon {
                     // And then append every line of the current room to the StringBuilder
                     // in the current spot in the ARRAY of StringBuilders
                     for (int i = 0; i < 17; i++) {
-                        roomStrings[i].append(roomText[i]).append(" ");
+                        roomStrings[i].append(roomText[i]).append("");
                     }
                 }
             }
-
             // Finally, before returning, we will append each StringBuilder
             // to the main StringBuilder
             for (StringBuilder roomString : roomStrings) {
@@ -303,6 +305,12 @@ public class Dungeon {
         return sb.toString();
     }
 
+    public int getDungeonHeight(){
+        return DUNGEON_HEIGHT;
+    }
+    public int getDungeonWidth() {
+        return DUNGEON_WIDTH;
+    }
     /**
      * Inner class to represent a row-column pair to be used in a stack for DFS.
      */
