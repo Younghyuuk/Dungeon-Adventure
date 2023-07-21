@@ -136,6 +136,24 @@ public class Room {
     }
 
     /**
+     * Adds a door based on the input direction.
+     *
+     * @param theDirection The direction to add a door to.
+     */
+    protected void addDoor(final int theDirection) {
+        // theDirection: 0 - W, 1 - S, 2 - E, 3 - N
+        if (theDirection == 0) { // West
+            myRoom[ROOM_HEIGHT / 2][0] = "3";
+        } else if (theDirection == 1) { // South
+            myRoom[ROOM_HEIGHT - 1][ROOM_WIDTH / 2] = "3";
+        } else if (theDirection == 2) { // East
+            myRoom[ROOM_HEIGHT / 2][ROOM_WIDTH - 1] = "3";
+        } else if (theDirection == 3) { // North
+            myRoom[0][ROOM_WIDTH / 2] = "3";
+        }
+    }
+
+    /**
      * Get method to get the amount of health the health potion will give.
      *
      * @return Returns the amount of health obtainable from this room's health potion

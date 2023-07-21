@@ -71,17 +71,15 @@ public class Dungeon {
         // And the array of the visited rooms
         myVisited = new Boolean[DUNGEON_HEIGHT][DUNGEON_WIDTH];
         // Then we need to initially populate 'myVisited'
-        for (int i = 0; i < DUNGEON_HEIGHT; i++) {
-            Arrays.fill(myVisited[i], false); // TODO: might be wrong
-        }
+        setMyVisited();
+        // Then we need to populate the array of door types for each room
+        myDoors = new int[DUNGEON_HEIGHT][DUNGEON_WIDTH];
+        // And we need to populate it with a value that can't be a door type
+        setMyDoors();
         // Next, we need to create every room
         createRooms();
         // Finally, we will output the dungeon to a text file to use with the GUI
         textDungeon(TEXT_DUNGEON);
-    }
-
-    public Room[][] getRooms(){
-        return myRooms;
     }
 
     /**
@@ -98,7 +96,7 @@ public class Dungeon {
         int firstCol = random.nextInt(LAST_ROOM_COL - FIRST_ROOM_COL + 1) + FIRST_ROOM_COL;
         int firstRow = random.nextInt(LAST_ROOM_ROW - FIRST_ROOM_ROW + 1) + FIRST_ROOM_ROW;
         // We then want to add this to a stack as an 'XYPair'
-        Stack<RowColPair> rooms = new Stack<RowColPair>();
+        Stack<RowColPair> rooms = new Stack<>();
         rooms.add(new RowColPair(firstRow, firstCol));
 
         // Then, we will use this to start looping and create every room with DFS
@@ -123,12 +121,15 @@ public class Dungeon {
             myRooms[row][col] = newRoom;
             // Finally, we will push all the adjacent cells into the stack
             // to continue looping through and add all the rooms.
-            for (int i = 0; i < 4; i++) {
-                int adjacentRow = row + DIRECTION_VECTOR_ROWS[i];
-                int adjacentCol = col + DIRECTION_VECTOR_COLUMNS[i];
+            for (int direction = 0; direction < 4; direction++) {
+                int adjacentRow = row + DIRECTION_VECTOR_ROWS[direction];
+                int adjacentCol = col + DIRECTION_VECTOR_COLUMNS[direction];
                 rooms.push(new RowColPair(adjacentRow, adjacentCol));
             }
         }
+
+        // After creating every room, we then need to go back and connect the rooms
+        connectRooms(firstRow, firstCol);
     }
 
     /**
@@ -146,6 +147,131 @@ public class Dungeon {
         }
 
         return !myVisited[theRow][theCol];
+    }
+
+    /**
+     * Helper method used by 'createRooms' to connect the doors in all the rooms.
+     *
+     * @param theFirstRow The row of the starting room used in the DFS by 'createRooms'.
+     * @param theFirstCol The column of the starting room used in the DFS by 'createRooms'.
+     */
+    private void connectRooms(final int theFirstRow, final int theFirstCol) {
+        // Since we need to go back and re-check every room, we will perform another DFS
+        Stack<RowColPair> rooms = new Stack<>();
+        // And since we are re-checking every room, we will reset myVisited
+        setMyVisited();
+        // And mark this first room as visited
+        myVisited[theFirstRow][theFirstCol] = true;
+        // Then we will add the first room to the stack
+        rooms.add(new RowColPair(theFirstRow, theFirstCol));
+        // And finally, we enter the DFS loop
+        while (!rooms.empty()) {
+            // We will grab the top pair
+            RowColPair pair = rooms.pop();
+            // Then we grab the row and column
+            int row = pair.row;
+            int col = pair.column;
+            // Next, we grab the popped room's door type
+            int doorType = myDoors[row][col];
+
+            // Now, we loop through the rooms
+            for (int direction = 0; direction < 4; direction++) {
+                int adjRow = row + DIRECTION_VECTOR_ROWS[direction];
+                int adjCol = col + DIRECTION_VECTOR_COLUMNS[direction];
+                // Since we are checking adjacent rooms door types, we need to
+                // see if the adjacent room is valid, and it hasn't been visited
+                if (isValid(adjRow, adjCol) && !myVisited[adjRow][adjCol]) {
+                    // We grab the adjacent room's door type
+                    int adjDoorType = myDoors[adjRow][adjCol];
+                    // Now, we will check if the rooms are connected by a door
+                    if (isConnected(doorType, adjDoorType, direction)) {
+                        // If they are connected, we will add doors to both rooms
+                        myRooms[row][col].addDoor(direction);
+                        myRooms[adjRow][adjCol].addDoor(getOppositeDirection(direction));
+                        // Finally, we will mark it as visited and add it to the stack
+                        myVisited[adjRow][adjCol] = true;
+                        rooms.add(new RowColPair(adjRow, adjCol));
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * Helper method to initialize (or reset) 'myVisited'.
+     */
+    private void setMyVisited() {
+        for (int i = 0; i < DUNGEON_HEIGHT; i++) {
+            Arrays.fill(myVisited[i], false);
+        }
+    }
+
+    /**
+     * Helper method to initialize 'myDoors'.
+     */
+    private void setMyDoors() {
+        for (int i = 0; i < DUNGEON_HEIGHT; i++) {
+            Arrays.fill(myDoors[i], -1);
+        }
+    }
+
+    /**
+     * Helper method used by 'connectRooms' to check if two rooms are connected or not.
+     *
+     * @param theDoorType       The door type of the main room.
+     * @param theAdjDoorType    The door type of the adjacent room.
+     * @param theDirection      The direction used to go from the main room to the adj room.
+     * @return Returns true if they are connected, false otherwise.
+     */
+    private boolean isConnected(final int theDoorType, final int theAdjDoorType, final int theDirection) {
+        // All 4 - 0, North - 1, East - 2, South - 3, West - 4, NS - 5, NE - 6, NW - 7, ES - 8, EW - 9,
+        // SW - 10, NSE - 11, NSW - 12, NEW - 13, SEW - 14
+        // theDirection: 0 - W, 1 - S, 2 - E, 3 - N
+        boolean connected = false;
+        // We have the door types for both rooms, so we can simply check them against each other
+        if (theDirection == 0 && (theDoorType == 4 || theDoorType == 7 || theDoorType == 9 || theDoorType == 0 ||
+                theDoorType == 10 || theDoorType == 12 || theDoorType == 13 || theDoorType == 14)
+                || (theAdjDoorType == 2 || theAdjDoorType == 6 || theAdjDoorType == 8 || theAdjDoorType == 9 ||
+                theAdjDoorType == 11 || theAdjDoorType == 13 || theAdjDoorType == 14)) {
+            // If we went WEST from the main room, we need to check if the main room
+            // contains any WEST doors and/or if the adjacent room contains any EAST ones
+            connected = true;
+        } else if (theDirection == 1 && (theDoorType == 3 || theDoorType == 5 || theDoorType == 8 ||
+                theDoorType == 0 || theDoorType == 10 || theDoorType == 11 || theDoorType == 12 || theDoorType == 14)
+                || (theAdjDoorType == 1 || theAdjDoorType == 5 || theAdjDoorType == 6 || theAdjDoorType == 7 ||
+                theAdjDoorType == 11 || theAdjDoorType == 12 || theAdjDoorType == 13)) {
+            // If we went SOUTH from the main room, we need to check if the main room
+            // contains any SOUTH doors and/or if the adjacent room contains any NORTH ones
+            connected = true;
+        } else if (theDirection == 2 && (theDoorType == 2 || theDoorType == 6 || theDoorType == 8 ||
+                theDoorType == 0 || theDoorType == 9 || theDoorType == 11 || theDoorType == 13 || theDoorType == 14)
+                || (theAdjDoorType == 4 || theAdjDoorType == 7 || theAdjDoorType == 9 || theAdjDoorType == 10 ||
+                theAdjDoorType == 12 || theAdjDoorType == 13 || theAdjDoorType == 14)) {
+            // If we went EAST from the main room, we need to check if the main room
+            // contains any EAST doors and/or if the adjacent room contains any WEST ones
+            connected = true;
+        } else if (theDirection == 3 && (theDoorType == 1 || theDoorType == 5 || theDoorType == 6 ||
+                theDoorType == 0 || theDoorType == 7 || theDoorType == 11 || theDoorType == 12 || theDoorType == 13)
+                || (theAdjDoorType == 3 || theAdjDoorType == 5 || theAdjDoorType == 8 || theAdjDoorType == 10 ||
+                theAdjDoorType == 11 || theAdjDoorType == 12 || theAdjDoorType == 14)) {
+            // If we went NORTH from the main room, we need to check if the main room
+            // contains any NORTH doors and/or if the adjacent room contains any SOUTH ones
+            connected = true;
+        }
+        return connected;
+    }
+
+    /**
+     * Helper method used by 'connectRooms' to get the opposite direction
+     * based on the direction passed in.
+     *
+     * @param theDirection The direction we want to get the opposite of.
+     * @return Returns the opposite direction of 'theDirection'.
+     */
+    private int getOppositeDirection(final int theDirection) {
+        // Since theDirection: 0 - W, 1 - S, 2 - E, 3 - N, adding 2 gets the opposite direction
+        // % 4 ensures we stay within the range of directions
+        return (theDirection + 2) % 4;
     }
 
     /**
@@ -226,6 +352,9 @@ public class Dungeon {
             // Finally, we store the value for what doors there will be
             randomDoor = directions[randomIndex];
         }
+        // We want to add this door type to the 'myDoors' array, so we can connect them later
+        myDoors[theRow][theCol] = randomDoor;
+        // Finally, we return the door type.
         return randomDoor;
     }
 
@@ -237,6 +366,15 @@ public class Dungeon {
      */
     private RoomItem getRandomItem(final Random theRandom) {
         return null;
+    }
+
+    /**
+     * Get method to get the array that represents the dungeon.
+     *
+     * @return Returns the 'myRooms' 2D Room array.
+     */
+    public Room[][] getRooms(){
+        return myRooms;
     }
 
     /**
