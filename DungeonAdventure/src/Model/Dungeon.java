@@ -83,6 +83,7 @@ public class Dungeon {
     public Room[][] getRooms(){
         return myRooms;
     }
+
     /**
      * Goes through the 'myRooms' 2D array and creates each room. <br>
      * Randomly generates which item will be in a room, or no items at all.
@@ -158,8 +159,8 @@ public class Dungeon {
         // Create the random object
         Random random = new Random();
         int randomDoor;
-        // All 4 - 0, North - 1, East - 2, South - 3, West - 4, NS - 5, NE - 6, NW - 7, SE - 8, SW - 9,
-        // EW - 10, NSE - 11, NSW - 12, NEW - 13, SEW - 14
+        // All 4 - 0, North - 1, East - 2, South - 3, West - 4, NS - 5, NE - 6, NW - 7, ES - 8, EW - 9,
+        // SW - 10, NSE - 11, NSW - 12, NEW - 13, SEW - 14
         // We need to check if the room is in a corner or on a wall of the dungeon
         if (theRow == 0 && theCol == 0) { // Upper left corner
             // Since we are boxed in by two walls, we can only choose from
@@ -169,51 +170,51 @@ public class Dungeon {
             int randomIndex = random.nextInt(directions.length);
             // Finally, we store the value for what doors there will be
             randomDoor = directions[randomIndex];
-        } else if (theRow == 0 && theCol == 7) { // Upper right corner
-            // We can only have West or South or both
-            int[] directions = {4, 3, 9};
+        } else if (theRow == 0 && theCol == LAST_ROOM_COL) { // Upper right corner
+            // We can only have S, W, SW
+            int[] directions = {3, 4, 10};
             // Next, we get a random index from the array
             int randomIndex = random.nextInt(directions.length);
             // Finally, we store the value for what doors there will be
             randomDoor = directions[randomIndex];
-        } else if (theRow == 7 && theCol == 0) { // Lower left corner
+        } else if (theRow == LAST_ROOM_ROW && theCol == 0) { // Lower left corner
             // We can only have North or East or both
             int[] directions = {1, 2, 6};
             // Next, we get a random index from the array
             int randomIndex = random.nextInt(directions.length);
             // Finally, we store the value for what doors there will be
             randomDoor = directions[randomIndex];
-        } else if (theRow == 7 && theCol == 7) { // Lower right corner
+        } else if (theRow == LAST_ROOM_ROW && theCol == LAST_ROOM_COL) { // Lower right corner
             // We can only have North or West or both
             int[] directions = {1, 4, 7};
             // Next, we get a random index from the array
             int randomIndex = random.nextInt(directions.length);
             // Finally, we store the value for what doors there will be
             randomDoor = directions[randomIndex];
-        } else if ((1 <= theRow && theRow <= 6) && theCol == 0) { // Left wall
+        } else if ((0 < theRow && theRow < LAST_ROOM_ROW) && theCol == 0) { // Left wall
             // We can only have N, E, S, NE, NS, SE, or NSE
             int[] directions = {1, 2, 3, 5, 6, 8, 11};
             // Next, we get a random index from the array
             int randomIndex = random.nextInt(directions.length);
             // Finally, we store the value for what doors there will be
             randomDoor = directions[randomIndex];
-        } else if ((1 <= theRow && theRow <= 6) && theCol == 7) { // Right wall
-            // We can only have N, W, S, NW, NS, SW, NSW
-            int[] directions = {1, 3, 4, 7, 5, 9, 12};
+        } else if ((0 < theRow && theRow < LAST_ROOM_ROW) && theCol == LAST_ROOM_COL) { // Right wall
+            // We can only have N, S, W, NS, NW, SW, NSW
+            int[] directions = {1, 3, 4, 5, 7, 10, 12};
             // Next, we get a random index from the array
             int randomIndex = random.nextInt(directions.length);
             // Finally, we store the value for what doors there will be
             randomDoor = directions[randomIndex];
-        } else if (theRow == 0 && (1 <= theCol && theCol <= 6)) { // Top wall
-            // We can only have W, S, E, SW, SE, EW, SEW
-            int[] directions = {4, 3, 2, 9, 8, 10, 14};
+        } else if (theRow == 0 && (0 < theCol && theCol < LAST_ROOM_COL)) { // Top wall
+            // We can only have E, S, W, SE, EW, SW, SEW
+            int[] directions = {2, 3, 4, 8, 9, 10, 14};
             // Next, we get a random index from the array
             int randomIndex = random.nextInt(directions.length);
             // Finally, we store the value for what doors there will be
             randomDoor = directions[randomIndex];
-        } else if (theRow == 7 && (1 <= theCol && theCol <= 6)) { // Bottom wall
-            // We can only have N, W, E, NW, NE, EW, NEW
-            int[] directions = {1, 4, 2, 7, 6, 10, 13};
+        } else if (theRow == LAST_ROOM_ROW && (0 < theCol && theCol < LAST_ROOM_COL)) { // Bottom wall
+            // We can only have N, W, E, NE, NW, EW, NEW
+            int[] directions = {1, 4, 2, 6, 7, 9, 13};
             // Next, we get a random index from the array
             int randomIndex = random.nextInt(directions.length);
             // Finally, we store the value for what doors there will be
