@@ -4,6 +4,10 @@ import Control.Keyboard;
 import View.GamePanel;
 
 import java.awt.*;
+import java.io.IOException;
+import java.util.Objects;
+
+import static javax.imageio.ImageIO.read;
 
 /**
  * Warrior class that extends Heroes.
@@ -71,6 +75,7 @@ public class Warrior extends Heroes {
         super(HP, NAME, ATTACK_SPEED,
                 MIN_DAMAGE, MAX_DAMAGE,
                 HIT_CHANCE, BLOCK_CHANCE, theGamePanel, theKeyboard);
+        getHeroesImage();
     }
 
     /**
@@ -104,7 +109,19 @@ public class Warrior extends Heroes {
 
     @Override
     public void getHeroesImage() {
+        try {
+            up1 = read(Objects.requireNonNull(getClass().getResourceAsStream("/warrior/warrior_up1.png")));
+            up2 = read(Objects.requireNonNull(getClass().getResourceAsStream("/warrior/warrior_up2.png")));
+            down1 = read(Objects.requireNonNull(getClass().getResourceAsStream("/warrior/warrior_down1.png")));
+            down2 = read(Objects.requireNonNull(getClass().getResourceAsStream("/warrior/warrior_down2.png")));
+            left1 = read(Objects.requireNonNull(getClass().getResourceAsStream("/warrior/warrior_left1.png")));
+            left2 = read(Objects.requireNonNull(getClass().getResourceAsStream("/warrior/warrior_left2.png")));
+            right1 = read(Objects.requireNonNull(getClass().getResourceAsStream("/warrior/warrior_right1.png")));
+            right2 = read(Objects.requireNonNull(getClass().getResourceAsStream("/warrior/warrior_right2.png")));
 
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }
