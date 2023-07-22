@@ -570,9 +570,20 @@ public class Dungeon {
         return sb.toString();
     }
 
+    /**
+     * Get method to get the height of the dungeon.
+     *
+     * @return Returns the dungeon height.
+     */
     public int getDungeonHeight(){
         return DUNGEON_HEIGHT;
     }
+
+    /**
+     * Get method to get the width of the dungeon.
+     *
+     * @return Returns the dungeon width.
+     */
     public int getDungeonWidth() {
         return DUNGEON_WIDTH;
     }
