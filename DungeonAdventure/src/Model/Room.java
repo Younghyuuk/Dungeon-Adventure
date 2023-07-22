@@ -54,7 +54,7 @@ public class Room {
         // Set up the size of the room
         myRoom = new String[ROOM_HEIGHT][ROOM_WIDTH];
         // Next, we will pass in the random item generated from 'Dungeon'
-        createRoom(theRandomItem, theRow, theCol, theDoorType);
+        createRoom(theRow, theCol, theDoorType);
         // We also want to generate the health obtainable from this room's health potion
 //        if (theRandomItem.getValue().equals("H")) {
 //            Random random = new Random();
@@ -65,9 +65,11 @@ public class Room {
     /**
      * Creates a randomly generated room that will contain a random item (or items).
      *
-     * @param theItem The random item(s) that could be in the room.
+     * @param theRow        The row in the dungeon this room is being added to.
+     * @param theCol        The column in the dungeon this room is being added to.
+     * @param theDoorType   The door(s) that are being added to this room.
      */
-    protected void createRoom(final RoomItem theItem, final int theRow, final int theCol, final int theDoorType) {
+    protected void createRoom(final int theRow, final int theCol, final int theDoorType) {
         // All 4 - 0, North - 1, East - 2, South - 3, West - 4, NS - 5, NE - 6, NW - 7, ES - 8, EW - 9,
         // SW - 10, NSE - 11, NSW - 12, NEW - 13, SEW - 14
 
@@ -88,48 +90,66 @@ public class Room {
             myRoom[0][ROOM_WIDTH / 2] = "3"; // North
             myRoom[ROOM_HEIGHT / 2][ROOM_WIDTH - 1] = "3"; // East
             myRoom[ROOM_HEIGHT - 1][ROOM_WIDTH / 2] = "3"; // South
-        } else if (theDoorType == 1) {
+        } else if (theDoorType == 1) { // North
             myRoom[0][ROOM_WIDTH / 2] = "3";
-        } else if (theDoorType == 2) {
+        } else if (theDoorType == 2) { // East
             myRoom[ROOM_HEIGHT / 2][ROOM_WIDTH - 1] = "3";
-        } else if (theDoorType == 3) {
+        } else if (theDoorType == 3) { // South
             myRoom[ROOM_HEIGHT - 1][ROOM_WIDTH / 2] = "3";
-        } else if (theDoorType == 4) {
+        } else if (theDoorType == 4) { // West
             myRoom[ROOM_HEIGHT / 2][0] = "3";
-        } else if (theDoorType == 5) {
+        } else if (theDoorType == 5) { // NS
             myRoom[0][ROOM_WIDTH / 2] = "3"; // North
             myRoom[ROOM_HEIGHT - 1][ROOM_WIDTH / 2] = "3"; // South
-        } else if (theDoorType == 6) {
+        } else if (theDoorType == 6) { // NE
             myRoom[0][ROOM_WIDTH / 2] = "3"; // North
             myRoom[ROOM_HEIGHT / 2][ROOM_WIDTH - 1] = "3"; // East
-        } else if (theDoorType == 7) {
+        } else if (theDoorType == 7) { // NW
             myRoom[0][ROOM_WIDTH / 2] = "3"; // North
             myRoom[ROOM_HEIGHT / 2][0] = "3"; // West
-        } else if (theDoorType == 8) {
+        } else if (theDoorType == 8) { // SE
             myRoom[ROOM_HEIGHT - 1][ROOM_WIDTH / 2] = "3"; // South
             myRoom[ROOM_HEIGHT / 2][ROOM_WIDTH - 1] = "3"; // East
-        } else if (theDoorType == 9) {
+        } else if (theDoorType == 9) { // EW
             myRoom[ROOM_HEIGHT / 2][ROOM_WIDTH - 1] = "3"; // East
             myRoom[ROOM_HEIGHT / 2][0] = "3"; // West
-        } else if (theDoorType == 10) {
+        } else if (theDoorType == 10) { // SW
             myRoom[ROOM_HEIGHT - 1][ROOM_WIDTH / 2] = "3"; // South
             myRoom[ROOM_HEIGHT / 2][0] = "3"; // West
-        } else if (theDoorType == 11) {
+        } else if (theDoorType == 11) { // NSE
             myRoom[0][ROOM_WIDTH / 2] = "3"; // North
             myRoom[ROOM_HEIGHT - 1][ROOM_WIDTH / 2] = "3"; // South
             myRoom[ROOM_HEIGHT / 2][ROOM_WIDTH - 1] = "3"; // East
-        } else if (theDoorType == 12) {
+        } else if (theDoorType == 12) { // NSW
             myRoom[0][ROOM_WIDTH / 2] = "3"; // North
             myRoom[ROOM_HEIGHT - 1][ROOM_WIDTH / 2] = "3"; // South
             myRoom[ROOM_HEIGHT / 2][0] = "3"; // West
-        } else if (theDoorType == 13) {
+        } else if (theDoorType == 13) { // NEW
             myRoom[0][ROOM_WIDTH / 2] = "3"; // North
             myRoom[ROOM_HEIGHT / 2][ROOM_WIDTH - 1] = "3"; // East
             myRoom[ROOM_HEIGHT / 2][0] = "3"; // West
-        } else if (theDoorType == 14) {
+        } else if (theDoorType == 14) { // SEW
             myRoom[ROOM_HEIGHT - 1][ROOM_WIDTH / 2] = "3"; // South
             myRoom[ROOM_HEIGHT / 2][ROOM_WIDTH - 1] = "3"; // East
             myRoom[ROOM_HEIGHT / 2][0] = "3"; // West
+        }
+    }
+
+    /**
+     * Adds a door based on the input direction.
+     *
+     * @param theDirection The direction to add a door to.
+     */
+    protected void addDoor(final int theDirection) {
+        // theDirection: 0 - W, 1 - S, 2 - E, 3 - N
+        if (theDirection == 0) { // West
+            myRoom[ROOM_HEIGHT / 2][0] = "3";
+        } else if (theDirection == 1) { // South
+            myRoom[ROOM_HEIGHT - 1][ROOM_WIDTH / 2] = "3";
+        } else if (theDirection == 2) { // East
+            myRoom[ROOM_HEIGHT / 2][ROOM_WIDTH - 1] = "3";
+        } else if (theDirection == 3) { // North
+            myRoom[0][ROOM_WIDTH / 2] = "3";
         }
     }
 
