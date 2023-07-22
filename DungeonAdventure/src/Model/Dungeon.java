@@ -180,14 +180,19 @@ public class Dungeon {
                 int adjCol = col + DIRECTION_VECTOR_COLUMNS[direction];
                 // Since we are checking adjacent rooms door types, we need to
                 // see if the adjacent room is valid, and it hasn't been visited
-                if (isValid(adjRow, adjCol) && !myVisited[adjRow][adjCol]) {
+                if (isValid(adjRow, adjCol) && myRooms[adjRow][adjCol] != null && !myVisited[adjRow][adjCol]) {
                     // We grab the adjacent room's door type
                     int adjDoorType = myDoors[adjRow][adjCol];
                     // Now, we will check if the rooms are connected by a door
                     if (isConnected(doorType, adjDoorType, direction)) {
+                        int oppositeDirection = getOppositeDirection(direction);
                         // If they are connected, we will add doors to both rooms
                         myRooms[row][col].addDoor(direction);
-                        myRooms[adjRow][adjCol].addDoor(getOppositeDirection(direction));
+                        myRooms[adjRow][adjCol].addDoor(oppositeDirection);
+                        // We then need to change the door type for both rooms to reflect
+                        // the addition of a new door
+                        changeDoorType(row, col, direction, doorType); // main room
+                        changeDoorType(adjRow, adjCol, oppositeDirection, adjDoorType); // adj room
                         // Finally, we will mark it as visited and add it to the stack
                         myVisited[adjRow][adjCol] = true;
                         rooms.add(new RowColPair(adjRow, adjCol));
@@ -272,6 +277,127 @@ public class Dungeon {
         // Since theDirection: 0 - W, 1 - S, 2 - E, 3 - N, adding 2 gets the opposite direction
         // % 4 ensures we stay within the range of directions
         return (theDirection + 2) % 4;
+    }
+
+    /**
+     * Helper method used by 'connectRooms' to change the given door type of a room.
+     *
+     * @param theRow        The row the room is in.
+     * @param theCol        The column the room is in.
+     * @param theDirection  The direction a new door was added in.
+     * @param theDoorType   The door type the room currently has.
+     */
+    private void changeDoorType(final int theRow, final int theCol, final int theDirection, final int theDoorType) {
+        // All 4 - 0, North - 1, East - 2, South - 3, West - 4, NS - 5, NE - 6, NW - 7, SE - 8, EW - 9,
+        // SW - 10, NSE - 11, NSW - 12, NEW - 13, SEW - 14
+        // theDirection: 0 - W, 1 - S, 2 - E, 3 - N
+
+        // We need to figure out what door type to change a room to
+        if (theDirection == 0) { // West
+            switch(theDoorType) {
+                case 0, 4, 7, 9, 10, 12, 13, 14:
+                    break;
+                case 1:
+                    myDoors[theRow][theCol] = 7;
+                    break;
+                case 2:
+                    myDoors[theRow][theCol] = 9;
+                    break;
+                case 3:
+                    myDoors[theRow][theCol] = 10;
+                    break;
+                case 5:
+                    myDoors[theRow][theCol] = 12;
+                    break;
+                case 6:
+                    myDoors[theRow][theCol] = 13;
+                    break;
+                case 8:
+                    myDoors[theRow][theCol] = 14;
+                    break;
+                case 11:
+                    myDoors[theRow][theCol] = 0;
+                    break;
+            }
+        } else if (theDirection == 1) { // South
+            switch (theDoorType) {
+                case 0, 3, 5, 8, 10, 11, 12, 14:
+                    break;
+                case 1:
+                    myDoors[theRow][theCol] = 5;
+                    break;
+                case 2:
+                    myDoors[theRow][theCol] = 8;
+                    break;
+                case 4:
+                    myDoors[theRow][theCol] = 10;
+                    break;
+                case 6:
+                    myDoors[theRow][theCol] = 11;
+                    break;
+                case 7:
+                    myDoors[theRow][theCol] = 12;
+                    break;
+                case 9:
+                    myDoors[theRow][theCol] = 14;
+                    break;
+                case 13:
+                    myDoors[theRow][theCol] = 0;
+                    break;
+            }
+        } else if (theDirection == 2) { // East
+            switch (theDoorType) {
+                case 0, 2, 6, 8, 9, 11, 13, 14:
+                    break;
+                case 1:
+                    myDoors[theRow][theCol] = 6;
+                    break;
+                case 3:
+                    myDoors[theRow][theCol] = 8;
+                    break;
+                case 4:
+                    myDoors[theRow][theCol] = 9;
+                    break;
+                case 5:
+                    myDoors[theRow][theCol] = 11;
+                    break;
+                case 7:
+                    myDoors[theRow][theCol] = 13;
+                    break;
+                case 10:
+                    myDoors[theRow][theCol] = 14;
+                    break;
+                case 12:
+                    myDoors[theRow][theCol] = 0;
+                    break;
+            }
+        } else if (theDirection == 3) { // North
+            switch (theDoorType) {
+                case 0, 1, 5, 6, 7, 11, 12, 13:
+                    break;
+                case 2:
+                    myDoors[theRow][theCol] = 6;
+                    break;
+                case 3:
+                    myDoors[theRow][theCol] = 5;
+                    break;
+                case 4:
+                    myDoors[theRow][theCol] = 7;
+                    break;
+                case 8:
+                    myDoors[theRow][theCol] = 11;
+                    break;
+                case 9:
+                    myDoors[theRow][theCol] = 13;
+                    break;
+                case 10:
+                    myDoors[theRow][theCol] = 12;
+                    break;
+                case 14:
+                    myDoors[theRow][theCol] = 0;
+                    break;
+            }
+        }
     }
 
     /**
