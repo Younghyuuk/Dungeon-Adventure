@@ -123,6 +123,10 @@ public class Battle {
         addToLog(attackLog.toString());
     }
 
+    public String[] getMyBattleLog() {
+        return myBattleLog;
+    }
+    
     /**
      * Adds String messages to myBattleLog array.
      *

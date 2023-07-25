@@ -64,6 +64,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     public TitlePage getMyTitlePage() {
         return myTitlePage;
+
     }
 
     public void setMyGameState(int theGameState) {
