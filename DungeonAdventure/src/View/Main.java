@@ -13,8 +13,8 @@ public class Main {
 
         GamePanel gp = new GamePanel();
         Keyboard kb = new Keyboard(gp);
-        Heroes myHero = new Priestess(gp, kb);
-        Monster myMonster = new Skeleton();
+        Heroes myHero = new Warrior(gp, kb);
+        Monster myMonster = new Ogre();
 
         Battle newBattle = new Battle(myHero, myMonster);
         String[] array = newBattle.getMyBattleLog();

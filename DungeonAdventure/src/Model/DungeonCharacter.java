@@ -137,7 +137,7 @@ public abstract class DungeonCharacter {
             System.out.println(getChName() + " hits " + theOpp.getChName() +
                     " for " + damage + " damage.");
         } else {
-            System.out.println("Aw " + getChName() + "misses horribly!");
+            System.out.println("Aw " + getChName() + " misses horribly!");
         }
     }
 
