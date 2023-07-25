@@ -74,12 +74,9 @@ public class Battle {
                 monsterAttack();
             }
 
-
         }
 
-
         addToLog("=============================================");
-
         if (myHero.isAlive()) {
             addToLog(myHero.getChName() + " defeats " + myMonster.getChName());
         } else {
@@ -126,6 +123,10 @@ public class Battle {
         addToLog(attackLog.toString());
     }
 
+    public String[] getMyBattleLog() {
+        return myBattleLog;
+    }
+    
     /**
      * Adds String messages to myBattleLog array.
      *
@@ -134,8 +135,6 @@ public class Battle {
     private void addToLog(String theMessage) {
         myBattleLog[myIndex++] = theMessage;
     }
-
-
 
 }
 

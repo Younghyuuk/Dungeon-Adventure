@@ -64,8 +64,8 @@ public abstract class Heroes extends DungeonCharacter {
         myScreensMiddleX = myGamePanel.getMyScreenWidth() / 2 - (myGamePanel.getSpriteSize() / 2);
         myScreensMiddleY = myGamePanel.getMyScreenHeight() / 2 - (myGamePanel.getSpriteSize() / 2);
 
-        myWorldXCoordinate = 7 * myGamePanel.getSpriteSize();
-        myWorldYCoordinate = 6 * myGamePanel.getSpriteSize();
+        myWorldXCoordinate = (myGamePanel.getMyWorldCol() * myGamePanel.getSpriteSize())/2;
+        myWorldYCoordinate = (myGamePanel.getMyWorldRow() * myGamePanel.getSpriteSize())/2;
         mySolidArea = new Rectangle(12, 12, myGamePanel.getSpriteSize() - 24, myGamePanel.getSpriteSize() - 24);
     }
 
@@ -109,7 +109,6 @@ public abstract class Heroes extends DungeonCharacter {
 
         myCollision = false;
         myGamePanel.getMyCollision().checkTile(this);
-
         if (myKeyInputs.up || myKeyInputs.down || myKeyInputs.left || myKeyInputs.right) {
             if (!myCollision) {
                 switch (myDirection) {
@@ -119,16 +118,7 @@ public abstract class Heroes extends DungeonCharacter {
                     case "right" -> myWorldXCoordinate += HEROES_MOVE_SPEED;
                 }
             }
-//            else { Maybe for bounce visuals
-//                switch (direction) {
-//                    case "up" -> myY += 30;
-//                    case "down" -> myY -= 30;
-//                    case "left" -> myX += 30;
-//                    case "right" -> myX -= 30;
-//                }
-//            }
         }
-
         mySpriteCounter++;
         if (mySpriteCounter > 12) {
             mySpriteNum = mySpriteNum == 1 ? 2 : 1;
