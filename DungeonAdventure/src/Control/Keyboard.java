@@ -48,7 +48,7 @@ public class Keyboard implements KeyListener {
                         myGamePanel.getMyCharacterSelectionPage().setMyCommandNum(0);
                     }
                     break;
-                case KeyEvent.VK_S:
+                case KeyEvent.VK_A:
                     myGamePanel.getMyCharacterSelectionPage().decMyCommandNum();
                     if(myGamePanel.getMyCharacterSelectionPage().getMyCommandNum() < 0){
                         myGamePanel.getMyCharacterSelectionPage().setMyCommandNum(2);
