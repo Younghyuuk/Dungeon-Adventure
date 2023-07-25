@@ -40,7 +40,7 @@ public class GamePanel extends JPanel implements Runnable {
         setDoubleBuffered(true);
         addKeyListener(myKeyInputs);
         setFocusable(true);
-        setMyHero(2);
+        setMyHero(3);
     }
 
 
