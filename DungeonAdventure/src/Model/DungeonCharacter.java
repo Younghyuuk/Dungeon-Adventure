@@ -160,7 +160,8 @@ public abstract class DungeonCharacter {
      * @return the value that damage will be done between min and max.
      */
     public int genDamage(int theMin, int theMax) {
-        return (int) (Math.random() * ((theMin - theMax + 1))) + getMinDamage();
+        return (int) Math.floor(Math.random() * (theMax-theMin) + theMin);
+//        return (int) (Math.random() * (theMin - theMax)+ getMinDamage());
     }
 
     public boolean isAlive() {
