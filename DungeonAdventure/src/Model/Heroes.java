@@ -64,8 +64,8 @@ public abstract class Heroes extends DungeonCharacter {
         myScreensMiddleX = myGamePanel.getMyScreenWidth() / 2 - (myGamePanel.getSpriteSize() / 2);
         myScreensMiddleY = myGamePanel.getMyScreenHeight() / 2 - (myGamePanel.getSpriteSize() / 2);
 
-        myWorldXCoordinate = 7 * myGamePanel.getSpriteSize();
-        myWorldYCoordinate = 6 * myGamePanel.getSpriteSize();
+        myWorldXCoordinate = (myGamePanel.getMyWorldCol() * myGamePanel.getSpriteSize())/2;
+        myWorldYCoordinate = (myGamePanel.getMyWorldRow() * myGamePanel.getSpriteSize())/2;
         mySolidArea = new Rectangle(12, 12, myGamePanel.getSpriteSize() - 24, myGamePanel.getSpriteSize() - 24);
     }
 
