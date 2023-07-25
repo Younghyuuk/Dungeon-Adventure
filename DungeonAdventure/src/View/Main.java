@@ -1,6 +1,7 @@
 package View;
 
-import Model.Dungeon;
+import Control.Keyboard;
+import Model.*;
 
 public class Main {
 
