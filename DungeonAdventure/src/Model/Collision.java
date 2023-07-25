@@ -30,6 +30,7 @@ public class Collision {
                 tileNum2 = myGamePanel.getMyTileM().getMyMapArray()[heroTopRow][heroRightCol];
                 if (myGamePanel.getMyTileM().getMyTile()[tileNum1].getMyCollision() || myGamePanel.getMyTileM().getMyTile()[tileNum2].getMyCollision()) {
                     theHeroes.setMyCollision(true);
+                    // if the heroes collison is true and tile is monster , thennwe call battle.
                 }
                 break;
             case "down":
