@@ -32,7 +32,7 @@ public class MonsterDataBase {
         String insertSQL = "INSERT INTO " + MONSTERS_TABLE + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(insertSQL)) {
-//            preparedStatement.setString(1, monster.getId().toString());
+            preparedStatement.setString(1, monster.getId().toString());
             preparedStatement.setString(2, monster.getChName());
             preparedStatement.setInt(3, monster.getHp());
             preparedStatement.setInt(4, monster.getAttackSpeed());
