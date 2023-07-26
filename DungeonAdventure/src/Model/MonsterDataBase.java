@@ -9,6 +9,7 @@ public class MonsterDataBase {
     private static final String DATABASE_NAME = "monsters.db";
     private static final String MONSTERS_TABLE = "monsters";
 
+    private static MonsterDataBase myInstance;
     private Connection connection;
 
     public MonsterDataBase() {
@@ -46,6 +47,13 @@ public class MonsterDataBase {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public static MonsterDataBase getInstance() {
+        if (myInstance == null) {
+            myInstance = new MonsterDataBase();
+        }
+        return myInstance;
     }
 
     public Monster getMonsterFromDatabase(UUID id) {
