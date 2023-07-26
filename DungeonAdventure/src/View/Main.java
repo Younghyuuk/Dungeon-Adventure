@@ -6,10 +6,10 @@ import Model.*;
 public class Main {
 
     public static void main(String[] args){
-//        MainFrame frame = new MainFrame();
-//        frame.setVisible(true);
-//        frame.setResizable(false);
-//        frame.setLocationRelativeTo(null);
+        MainFrame frame = new MainFrame();
+        frame.setVisible(true);
+        frame.setResizable(false);
+        frame.setLocationRelativeTo(null);
 
         GamePanel gp = new GamePanel();
         Keyboard kb = new Keyboard(gp);
