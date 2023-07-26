@@ -71,7 +71,7 @@ public class Gremlin extends Monster {
     public void heal() {
         double random = Math.random();
         if (random <= CHANCE_HEAL) {
-            int healPoints = (int) (Math.random() * (MAX_HEAL - MIN_HEAL + 1)) + MIN_HEAL;
+            int healPoints = (int) Math.floor(Math.random() * (MAX_HEAL - MIN_HEAL) + MIN_HEAL);
             setHp(getHp() + healPoints);
             System.out.println(getChName() + " heals itself for " + healPoints + " hit points.");
         }
