@@ -37,12 +37,14 @@ public class GamePanel extends JPanel implements Runnable {
     private final Keyboard myKeyInputs = new Keyboard(this);
     private final TitlePage myTitlePage = new TitlePage(this);
     private final CharacterSelectionPage myCharacterSelectionPage = new CharacterSelectionPage(this);
+    private final AboutPage myAboutPage = new AboutPage(this);
     private Heroes myHero;
 
     private int myGameState;
     private final static int TITLE_STATE = 0;
     private final static int CHARACTER_STATE = 1;
     private final static int PLAY_STATE = 2;
+    private boolean myAboutState = false;
 
 
     public GamePanel() {
@@ -107,6 +109,13 @@ public class GamePanel extends JPanel implements Runnable {
         return myTileM;
     }
 
+    public void setMyAboutState(boolean theAboutState) {
+        myAboutState = theAboutState;
+    }
+    public boolean getMyAboutState(){
+        return myAboutState;
+    }
+
     // For now, 1 is thief, 2 is Priestess, and 3 is Warrior.
     public void setMyHero(int number) {
         if (number == 1) {
@@ -155,11 +164,16 @@ public class GamePanel extends JPanel implements Runnable {
 
         if (myGameState == TITLE_STATE) {
             myTitlePage.draw(pen);
+            pen.dispose();
         } else if (myGameState == CHARACTER_STATE) {
             myCharacterSelectionPage.draw(pen);
-        } else {
+            pen.dispose();
+        } else if (myGameState == PLAY_STATE) {
             myTileM.draw(pen);
             myHero.draw(pen);
+            if (myAboutState) {
+                myAboutPage.draw(pen);
+            }
             pen.dispose();
         }
     }
