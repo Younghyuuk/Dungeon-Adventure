@@ -100,7 +100,7 @@ public class MonsterDataBase {
      */
     public void insertMonster(Monster monster) {
         String query = "INSERT INTO monsters (hp, name, attackSpeed, minDamage, maxDamage, " +
-                "hitChance, minHeal, maxHeal, chanceHeal) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                "hitChance, minHeal, maxHeal, chanceHeal) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = getConnection();
              PreparedStatement pstmt = conn.prepareStatement(query)) {

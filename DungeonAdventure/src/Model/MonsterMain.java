@@ -1,5 +1,7 @@
 package Model;
 
+import Control.Keyboard;
+import View.GamePanel;
 import org.sqlite.SQLiteDataSource;
 
 import java.sql.Connection;
@@ -15,9 +17,22 @@ public class MonsterMain {
 
     public static void main(String[] args) {
         MonsterDataBase tester = new MonsterDataBase();
-        Monster myOgre = new Ogre(200, 2, 30, 60, 0.6,
-                0.1, 30, 60);
-        tester.saveMonster(myOgre);
+
+
+        GamePanel gp = new GamePanel();
+        Keyboard kb = new Keyboard(gp);
+        Heroes myHero = new Priestess(gp, kb);
+
+        Battle newBattle = new Battle(myHero, tester.getRandomMonster());
+        String[] array = newBattle.getMyBattleLog();
+
+        for(String s: array) {
+            System.out.println(s);
+        }
+
+//        Monster myOgre = new Ogre(200, 2, 30, 60, 0.6,
+//                0.1, 30, 60);
+//        tester.saveMonster(myOgre);
 
 //        UUID monsterId = UUID.randomUUID();
 //        System.out.println(tester.getMonster(monsterId));
