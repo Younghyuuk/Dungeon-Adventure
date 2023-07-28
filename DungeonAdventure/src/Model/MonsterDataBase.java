@@ -11,7 +11,8 @@ public class MonsterDataBase {
 
 
     public MonsterDataBase() {
-        initializeDatabase();
+
+//        initializeDatabase();
     }
 
     /**
