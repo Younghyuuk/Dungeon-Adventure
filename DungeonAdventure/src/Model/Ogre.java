@@ -1,5 +1,7 @@
 package Model;
 
+import java.util.UUID;
+
 public class Ogre extends Monster {
     /**
      * Min heal that Ogre can heal for.
@@ -50,8 +52,8 @@ public class Ogre extends Monster {
     /**
      * The constructor of Monster that sets up the stats for Ogre class.
      */
-    public Ogre() {
-        super(HP, NAME, ATTACK_SPEED, MIN_DAMAGE, MAX_DAMAGE, HIT_CHANCE);
+    public Ogre(UUID theId) {
+        super(theId, HP, NAME, ATTACK_SPEED, MIN_DAMAGE, MAX_DAMAGE, HIT_CHANCE, CHANCE_HEAL, MIN_HEAL, MAX_HEAL);
     }
 
     /**

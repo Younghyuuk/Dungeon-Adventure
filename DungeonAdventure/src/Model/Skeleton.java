@@ -1,5 +1,7 @@
 package Model;
 
+import java.util.UUID;
+
 /**
  * Skeleton class that extends monster one of the mobs
  * for the game.
@@ -56,8 +58,8 @@ public class Skeleton extends Monster{
      * minimum damage, maximum damage, and the hitchance of the character.
      *
      */
-    public Skeleton() {
-        super(HP, NAME, ATTACK_SPEED, MIN_DAMAGE, MAX_DAMAGE, HIT_CHANCE);
+    public Skeleton(UUID theId) {
+        super(theId, HP, NAME, ATTACK_SPEED, MIN_DAMAGE, MAX_DAMAGE, HIT_CHANCE, CHANCE_HEAL, MIN_HEAL, MAX_HEAL);
 
     }
 

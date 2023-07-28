@@ -14,14 +14,14 @@ public class Main {
         GamePanel gp = new GamePanel();
         Keyboard kb = new Keyboard(gp);
         Heroes myHero = new Warrior(gp, kb);
-        Monster myMonster = new Ogre();
-
-        Battle newBattle = new Battle(myHero, myMonster);
-        String[] array = newBattle.getMyBattleLog();
-
-        for(String s: array) {
-            System.out.println(s);
-        }
+//        Monster myMonster = new Ogre(UUID id);
+//
+//        Battle newBattle = new Battle(myHero, myMonster);
+//        String[] array = newBattle.getMyBattleLog();
+//
+//        for(String s: array) {
+//            System.out.println(s);
+//        }
 
     }
 }

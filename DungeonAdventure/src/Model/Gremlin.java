@@ -1,5 +1,7 @@
 package Model;
 
+import java.util.UUID;
+
 public class Gremlin extends Monster {
     /**
      * Min heal that Gremlin can heal for.
@@ -46,12 +48,14 @@ public class Gremlin extends Monster {
      */
     private static final double HIT_CHANCE = 0.8;
 
+
+
     /**
      * The constructor of Monster that initializes the hp, name, attack speed,
      * minimum damage, maximum damage, and the hitchance of the character.
      */
-    protected Gremlin() {
-        super(HP, NAME, ATTACK_SPEED, MIN_DAMAGE, MAX_DAMAGE, HIT_CHANCE);
+    protected Gremlin(UUID theId) {
+        super(theId, HP, NAME, ATTACK_SPEED, MIN_DAMAGE, MAX_DAMAGE, HIT_CHANCE, CHANCE_HEAL, MIN_HEAL, MAX_HEAL);
     }
 
     /**

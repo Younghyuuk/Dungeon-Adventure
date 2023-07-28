@@ -8,6 +8,11 @@ import java.util.UUID;
  */
 public abstract class Monster extends DungeonCharacter {
     private final UUID myId;
+
+    private final double myChanceHeal;
+    private final int myMinHeal;
+    private final int myMaxHeal;
+
     /**
      * The constructor of DungeonCharacter that initializes the hp, name, attack speed,
      * minimum damage, maximum damage, and the hitchance of the character.
@@ -19,10 +24,14 @@ public abstract class Monster extends DungeonCharacter {
      * @param theMaxDamage   maximum amount of damage they can do.
      * @param theHitChance   chance the character has to landing attack.
      */
-    protected Monster(final int theHp, final String theChName, final int theAttackSpeed,
-                      final int theMinDamage, final int theMaxDamage, final double theHitChance, final UUID theId) {
+    protected Monster(final UUID theId, final int theHp, final String theChName, final int theAttackSpeed,
+                      final int theMinDamage, final int theMaxDamage, final double theHitChance,
+                      final double theChanceHeal, final int theMinHeal, final int theMaxHeal) {
         super(theHp, theChName, theAttackSpeed, theMinDamage, theMaxDamage, theHitChance);
         myId = theId;
+        myChanceHeal = theChanceHeal;
+        myMinHeal = theMinHeal;
+        myMaxHeal = theMaxHeal;
     }
 
     public UUID getId() {
@@ -34,9 +43,9 @@ public abstract class Monster extends DungeonCharacter {
     }
 
     // Factory method to get a monster by its ID from the database
-    public static Monster getMonsterFromDatabase(UUID id) {
-        return MonsterDataBase.getInstance().getMonsterFromDatabase(id);
-    }
+//    public static Monster getMonsterFromDatabase() {
+//        return MonsterDataBase.getInstance().getMonsterFromDatabase();
+//    }
 
     /**
      * Monster attack.
@@ -49,4 +58,16 @@ public abstract class Monster extends DungeonCharacter {
      * Abstract method for monster child classes to heal.
      */
     public abstract void heal();
+
+    public double getChanceHeal() {
+        return myChanceHeal;
+    }
+
+    public int getMinHeal() {
+        return myMinHeal;
+    }
+
+    public int getMaxHeal() {
+        return myMaxHeal;
+    }
 }
