@@ -58,9 +58,9 @@ public class Skeleton extends Monster{
      * minimum damage, maximum damage, and the hitchance of the character.
      *
      */
-    protected Skeleton(UUID theId, int theHp, int theAttackSpeed, int theMinDamage, int theMaxDamage, double theHitChance,
+    protected Skeleton(int theHp, int theAttackSpeed, int theMinDamage, int theMaxDamage, double theHitChance,
                       double theChanceHeal, int theMinHeal, int theMaxHeal) {
-        super(theId, theHp, "Skeleton", theAttackSpeed, theMinDamage, theMaxDamage, theHitChance, theChanceHeal, theMinHeal, theMaxHeal);
+        super(theHp, "Skeleton", theAttackSpeed, theMinDamage, theMaxDamage, theHitChance, theChanceHeal, theMinHeal, theMaxHeal);
     }
 
     /**

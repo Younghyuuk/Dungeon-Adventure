@@ -56,9 +56,9 @@ public class Gremlin extends Monster {
      */
 
     //Testing out a new Sqlite database implemented way
-    protected Gremlin(UUID theId, int theHp, int theAttackSpeed, int theMinDamage, int theMaxDamage, double theHitChance,
+    protected Gremlin(int theHp, int theAttackSpeed, int theMinDamage, int theMaxDamage, double theHitChance,
                       double theChanceHeal, int theMinHeal, int theMaxHeal) {
-        super(theId, theHp, "Gremlin", theAttackSpeed, theMinDamage, theMaxDamage, theHitChance, theChanceHeal, theMinHeal, theMaxHeal);
+        super(theHp, "Gremlin", theAttackSpeed, theMinDamage, theMaxDamage, theHitChance, theChanceHeal, theMinHeal, theMaxHeal);
     }
 
 

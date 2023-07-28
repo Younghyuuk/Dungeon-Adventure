@@ -15,6 +15,10 @@ public class MonsterMain {
 
     public static void main(String[] args) {
         MonsterDataBase tester = new MonsterDataBase();
+        Monster myOgre = new Ogre(200, 2, 30, 60, 0.6,
+                0.1, 30, 60);
+        tester.saveMonster(myOgre);
+
 //        UUID monsterId = UUID.randomUUID();
 //        System.out.println(tester.getMonster(monsterId));
 
@@ -91,8 +95,8 @@ public class MonsterMain {
 //        System.out.println("press enter to close program/window");
 //        Scanner input = new Scanner(System.in);
 //        input.nextLine();
+//    }
     }
-
 }
 
 

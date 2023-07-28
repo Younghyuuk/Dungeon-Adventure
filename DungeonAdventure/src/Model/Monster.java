@@ -7,7 +7,7 @@ import java.util.UUID;
  * Monster abstract class that extends DungeonCharacter
  */
 public abstract class Monster extends DungeonCharacter {
-    private final UUID myId;
+//    private final UUID myId;
 
     private final double myChanceHeal;
     private final int myMinHeal;
@@ -24,23 +24,23 @@ public abstract class Monster extends DungeonCharacter {
      * @param theMaxDamage   maximum amount of damage they can do.
      * @param theHitChance   chance the character has to landing attack.
      */
-    protected Monster(final UUID theId, final int theHp, final String theChName, final int theAttackSpeed,
+    protected Monster(final int theHp, final String theChName, final int theAttackSpeed,
                       final int theMinDamage, final int theMaxDamage, final double theHitChance,
                       final double theChanceHeal, final int theMinHeal, final int theMaxHeal) {
         super(theHp, theChName, theAttackSpeed, theMinDamage, theMaxDamage, theHitChance);
-        myId = theId;
+//        myId = theId;
         myChanceHeal = theChanceHeal;
         myMinHeal = theMinHeal;
         myMaxHeal = theMaxHeal;
     }
 
-    public UUID getId() {
-        return myId;
-    }
+//    public UUID getId() {
+//        return myId;
+//    }
 
-    public void saveToDatabase() {
-        MonsterDataBase.getInstance().saveMonsterToDatabase(this);
-    }
+//    public void saveToDatabase() {
+//        MonsterDataBase.getInstance().saveMonsterToDatabase(this);
+//    }
 
     // Factory method to get a monster by its ID from the database
 //    public static Monster getMonsterFromDatabase() {
