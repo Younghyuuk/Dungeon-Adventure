@@ -5,16 +5,16 @@ import Model.*;
 
 public class Main {
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         MainFrame frame = new MainFrame();
         frame.setVisible(true);
         frame.setResizable(false);
         frame.setLocationRelativeTo(null);
 
-        GamePanel gp = new GamePanel();
-        Keyboard kb = new Keyboard(gp);
-        Heroes myHero = new Warrior(gp, kb);
-//        Monster myMonster = new Ogre(UUID id);
+//        GamePanel gp = new GamePanel();
+//        Keyboard kb = new Keyboard(gp);
+//        Heroes myHero = new Warrior(gp, kb);
+//        Monster myMonster = new Ogre();
 //
 //        Battle newBattle = new Battle(myHero, myMonster);
 //        String[] array = newBattle.getMyBattleLog();
@@ -22,6 +22,5 @@ public class Main {
 //        for(String s: array) {
 //            System.out.println(s);
 //        }
-
     }
 }
