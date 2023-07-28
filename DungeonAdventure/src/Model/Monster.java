@@ -57,7 +57,18 @@ public abstract class Monster extends DungeonCharacter {
     /**
      * Abstract method for monster child classes to heal.
      */
-    public abstract void heal();
+//    public abstract void heal();
+
+
+    // new tester heal for all monster since all stats are from sqlite database
+    public void heal() {
+        double random = Math.random();
+        if (random <= getChanceHeal()) {
+            int healPoints = (int) Math.floor(Math.random() * (getMaxHeal() - getMinHeal()) + getMinHeal());
+            setHp(getHp() + healPoints);
+            System.out.println(getChName() + " heals itself for " + healPoints + " hit points.");
+        }
+    }
 
     public double getChanceHeal() {
         return myChanceHeal;
