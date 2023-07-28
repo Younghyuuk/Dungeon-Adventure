@@ -1,38 +1,24 @@
 package Model;
 
+
 import org.sqlite.SQLiteDataSource;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.UUID;
 
 public class MonsterDataBase {
 
-
     private static final String DB_URL = "jdbc:sqlite:monsters.db";
 
-    //    private static final String MONSTERS_TABLE = "monsters";
-
-    private static MonsterDataBase myInstance;
-//    private Connection connection;
 
     public MonsterDataBase() {
-        createMonstersTable();
+        initializeDatabase();
     }
 
-    public static MonsterDataBase getInstance() {
-        if (myInstance == null) {
-            myInstance = new MonsterDataBase();
-        }
-        return myInstance;
-    }
-
-    private void createMonstersTable() {
-        // ... (Same as before, create the monsters table if it doesn't exist)
+    /**
+     * Create the monsters table if it doesn't exist.
+     */
+    public void createTable() {
         String query = "CREATE TABLE IF NOT EXISTS monsters ( " +
-                "id TEXT PRIMARY KEY, " +
                 "name TEXT NOT NULL, " +
                 "hp INTEGER NOT NULL, " +
                 "attackSpeed INTEGER NOT NULL, " +
@@ -49,58 +35,117 @@ public class MonsterDataBase {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
     }
 
-    public void saveMonster(Monster monster) {
-        String query = "INSERT INTO monsters (name, hp, attackSpeed, minDamage, maxDamage, " +
-                "hitChance, , chanceHeal, minHeal, maxHeal) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    /**
+     * Initialize the monsters table with some default values.
+     * This method is for demonstration purposes only.
+     */
+    public void initializeDatabase() {
+        createTable();
+
+        String[] monsterNames = {"Ogre", "Skeleton", "Gremlin"};
+        int[] hpValues = {200, 100, 70};
+        int[] attackSpeedValues = {2, 3, 5};
+        int[] minDamageValues = {30, 30, 15};
+        int[] maxDamageValues = {60, 50, 30};
+        double[] hitChanceValues = {0.6, 0.8, 0.8};
+        int[] minHealValues = {30, 30, 20};
+        int[] maxHealValues = {60, 50, 40};
+        double[] chanceHealValues = {0.1, 0.3, 0.4};
+
+        for (int i = 0; i < monsterNames.length; i++) {
+            String name = monsterNames[i];
+            int hp = hpValues[i];
+            int attackSpeed = attackSpeedValues[i];
+            int minDamage = minDamageValues[i];
+            int maxDamage = maxDamageValues[i];
+            double hitChance = hitChanceValues[i];
+            int minHeal = minHealValues[i];
+            int maxHeal = maxHealValues[i];
+            double chanceHeal = chanceHealValues[i];
+
+            Monster monster = null;
+            switch (name) {
+                case "Ogre" -> monster = new Ogre(hp, attackSpeed, minDamage, maxDamage, hitChance,
+                        chanceHeal, minHeal, maxHeal);
+                case "Skeleton" -> monster = new Skeleton(hp, attackSpeed, minDamage, maxDamage, hitChance,
+                        chanceHeal, minHeal, maxHeal);
+                case "Gremlin" -> monster = new Gremlin(hp, attackSpeed, minDamage, maxDamage, hitChance,
+                        chanceHeal, minHeal, maxHeal);
+            }
+
+            if (monster != null) {
+                insertMonster(monster);
+            }
+        }
+    }
+
+    /**
+     * Get a connection to the database.
+     *
+     * @return The database connection.
+     * @throws SQLException if a database access error occurs.
+     */
+    private Connection getConnection() throws SQLException {
+        SQLiteDataSource ds = new SQLiteDataSource();
+        ds.setUrl(DB_URL);
+        return ds.getConnection();
+    }
+
+    /**
+     * Insert a monster into the database.
+     *
+     * @param monster The monster to insert.
+     */
+    public void insertMonster(Monster monster) {
+        String query = "INSERT INTO monsters (hp, name, attackSpeed, minDamage, maxDamage, " +
+                "hitChance, minHeal, maxHeal, chanceHeal) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = getConnection();
-             PreparedStatement statement = conn.prepareStatement(query)) {
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
 
-//            statement.setString(1, monster.getId().toString());
-            statement.setString(1, monster.getChName());
-            statement.setInt(2, monster.getHp());
-            statement.setInt(3, monster.getAttackSpeed());
-            statement.setInt(4, monster.getMinDamage());
-            statement.setInt(5, monster.getMaxDamage());
-            statement.setDouble(6, monster.getHitChance());
-            statement.setDouble(7, monster.getChanceHeal());
-            statement.setInt(8, monster.getMinHeal());
-            statement.setInt(9, monster.getMaxHeal());
+            pstmt.setInt(1, monster.getHp());
+            pstmt.setString(2, monster.getChName());
 
+            pstmt.setInt(3, monster.getAttackSpeed());
+            pstmt.setInt(4, monster.getMinDamage());
+            pstmt.setInt(5, monster.getMaxDamage());
+            pstmt.setDouble(6, monster.getHitChance());
+            pstmt.setInt(7, monster.getMinHeal());
+            pstmt.setInt(8, monster.getMaxHeal());
+            pstmt.setDouble(9, monster.getChanceHeal());
 
-            statement.executeUpdate();
+            pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
     /**
-     * Retrieve a monster from the database based on its ID.
+     * Retrieve a monster from the database based on its name.
      *
+     * @param name The name of the monster to retrieve.
      * @return The retrieved monster.
      */
-    public Monster getMonster() {
+    public Monster getMonster(String name) {
         String query = "SELECT * FROM monsters WHERE name = ?";
 
         try (Connection conn = getConnection();
-             PreparedStatement statement = conn.prepareStatement(query)) {
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
 
-//            statement.setString(1, theId.toString());
+            pstmt.setString(1, name);
 
-            try (ResultSet rs = statement.executeQuery()) {
+            try (ResultSet rs = pstmt.executeQuery()) {
                 if (rs.next()) {
-                    String name = rs.getString("name");
                     int hp = rs.getInt("hp");
                     int attackSpeed = rs.getInt("attackSpeed");
                     int minDamage = rs.getInt("minDamage");
                     int maxDamage = rs.getInt("maxDamage");
                     double hitChance = rs.getDouble("hitChance");
-                    double chanceHeal = rs.getDouble("chanceHeal");
                     int minHeal = rs.getInt("minHeal");
                     int maxHeal = rs.getInt("maxHeal");
+                    double chanceHeal = rs.getDouble("chanceHeal");
 
                     // Create the appropriate monster based on the name retrieved from the database
                     switch (name) {
@@ -126,50 +171,21 @@ public class MonsterDataBase {
         return null;
     }
 
-
     /**
-     * Retrieve a random monster from the database.
+     * Get a random monster from the database.
      *
-     * @return A random Monster object, or null if no monsters are found in the database.
+     * @return The random monster.
      */
-    public Monster randomMonster() {
-        String query = "SELECT * FROM monsters ORDER BY RANDOM() LIMIT 1";
+    public Monster getRandomMonster() {
+        String query = "SELECT name FROM monsters ORDER BY RANDOM() LIMIT 1";
 
         try (Connection conn = getConnection();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(query)) {
 
             if (rs.next()) {
-//                UUID id = UUID.fromString(rs.getString("id"));
                 String name = rs.getString("name");
-                int hp = rs.getInt("hp");
-                int attackSpeed = rs.getInt("attackSpeed");
-                int minDamage = rs.getInt("minDamage");
-                int maxDamage = rs.getInt("maxDamage");
-                double hitChance = rs.getDouble("hitChance");
-                double chanceHeal = rs.getDouble("chanceHeal");
-                int minHeal = rs.getInt("minHeal");
-                int maxHeal = rs.getInt("maxHeal");
-
-                // Create the appropriate monster based on the name retrieved from the database
-                switch (name) {
-                    case "Ogre" -> {
-                        return new Ogre(hp, attackSpeed, minDamage, maxDamage, hitChance,
-                                chanceHeal, minHeal, maxHeal);
-                    }
-                    case "Skeleton" -> {
-                        return new Skeleton(hp, attackSpeed, minDamage, maxDamage, hitChance,
-                                chanceHeal, minHeal, maxHeal);
-                    }
-                    case "Gremlin" -> {
-                        return new Gremlin(hp, attackSpeed, minDamage, maxDamage, hitChance,
-                                chanceHeal, minHeal, maxHeal);
-                    }
-                    default -> {
-                        System.out.println("Invalid monster name: " + name);
-                        return null;
-                    }
-                }
+                return getMonster(name);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -178,29 +194,6 @@ public class MonsterDataBase {
         return null;
     }
 
-
-
-//    public void closeConnection() {
-//        try {
-//            if (connection != null) {
-//                connection.close();
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//    }
-
-    /**
-     * Get a connection to the database.
-     *
-     * @return The database connection.
-     * @throws SQLException if a database access error occurs.
-     */
-    private Connection getConnection() throws SQLException {
-        SQLiteDataSource ds = new SQLiteDataSource();
-        ds.setUrl(DB_URL);
-        return ds.getConnection();
-    }
 }
 
 
