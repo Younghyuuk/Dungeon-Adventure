@@ -101,15 +101,19 @@ public class MonsterDataBase {
                     double chanceHeal = rs.getDouble("chanceHeal");
 
                     // Create the appropriate monster based on the name retrieved from the database
-                    if (name.equals("Ogre")) {
-                        return new Ogre(id, hp, attackSpeed, minDamage, maxDamage, hitChance,
-                                chanceHeal, minHeal, maxHeal);
-                    } else if (name.equals("Skeleton")) {
-                        return new Skeleton(id, hp, attackSpeed, minDamage, maxDamage, hitChance,
-                                chanceHeal, minHeal, maxHeal);
-                    } else if (name.equals("Gremlin")) {
-                        return new Gremlin(id, hp, attackSpeed, minDamage, maxDamage, hitChance,
-                                chanceHeal, minHeal, maxHeal);
+                    switch (name) {
+                        case "Ogre" -> {
+                            return new Ogre(id, hp, attackSpeed, minDamage, maxDamage, hitChance,
+                                    chanceHeal, minHeal, maxHeal);
+                        }
+                        case "Skeleton" -> {
+                            return new Skeleton(id, hp, attackSpeed, minDamage, maxDamage, hitChance,
+                                    chanceHeal, minHeal, maxHeal);
+                        }
+                        case "Gremlin" -> {
+                            return new Gremlin(id, hp, attackSpeed, minDamage, maxDamage, hitChance,
+                                    chanceHeal, minHeal, maxHeal);
+                        }
                     }
                 }
             }
@@ -119,6 +123,8 @@ public class MonsterDataBase {
 
         return null;
     }
+
+
 
 //    public void closeConnection() {
 //        try {
