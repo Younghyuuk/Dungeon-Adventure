@@ -35,11 +35,11 @@ public class Room {
     /**
      * The height of a room.
      */
-    private static final int ROOM_HEIGHT = 17;
+    private static final int ROOM_HEIGHT = 5;
     /**
      * The width of a room.
      */
-    private static final int ROOM_WIDTH = 13;
+    private static final int ROOM_WIDTH = 5;
 
     /**
      * Constructs a randomly generated room. <br>

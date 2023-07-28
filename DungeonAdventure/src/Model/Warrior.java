@@ -101,7 +101,7 @@ public class Warrior extends Heroes {
             int damage = genDamage(CRUSHING_BLOW_MIN_DAMAGE, CRUSHING_BLOW_MAX_DAMAGE);
             theOpp.subtractHp(damage);
             System.out.println("Warrior delivers crushing blow to " + theOpp.getChName() +
-                    " for " + damage + "damage.");
+                    " for " + damage + " damage.");
         } else {
             System.out.println("Crushing blow failed!");
         }

@@ -30,11 +30,11 @@ public class Dungeon {
     /**
      * The height, in rooms, of the dungeon (the Y).
      */
-    private static final int DUNGEON_HEIGHT = 3;
+    private static final int DUNGEON_HEIGHT = 5;
     /**
      * The width, in rooms, of the dungeon (the X).
      */
-    private static final int DUNGEON_WIDTH = 3;
+    private static final int DUNGEON_WIDTH = 5;
     /**
      * The index of the first column in the dungeon.
      */
@@ -541,8 +541,8 @@ public class Dungeon {
         // First, we will loop through every row in the dungeon
         for (int row = 0; row < DUNGEON_HEIGHT; row++) {
             // Then we will create an ARRAY of StringBuilders to store every room
-            StringBuilder[] roomStrings = new StringBuilder[17];
-            for (int i = 0; i < 17; i++) {
+            StringBuilder[] roomStrings = new StringBuilder[5];
+            for (int i = 0; i < 5; i++) {
                 // Here we are just populating the array with StringBuilders
                 roomStrings[i] = new StringBuilder();
             }
@@ -555,7 +555,7 @@ public class Dungeon {
 
                     // And then append every line of the current room to the StringBuilder
                     // in the current spot in the ARRAY of StringBuilders
-                    for (int i = 0; i < 17; i++) {
+                    for (int i = 0; i < 5; i++) {
                         roomStrings[i].append(roomText[i]).append("");
                     }
                 }

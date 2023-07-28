@@ -14,16 +14,11 @@ public class MainFrame extends JFrame {
         super("Dungeon Adventure");
         setSize(SCREEN_WIDTH,SCREEN_HEIGHT);
         setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE);
-
-
-        MenuBar menuBar = new MenuBar();
-        setJMenuBar(menuBar);
         GamePanel gamePanel = new GamePanel();
+        MenuBar menuBar = new MenuBar(gamePanel);
+        setJMenuBar(menuBar);
         add(gamePanel);
         pack();
         gamePanel.startGame();
-
     }
-
-
 }
