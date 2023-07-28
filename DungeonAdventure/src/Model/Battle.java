@@ -69,10 +69,14 @@ public class Battle {
         while (myHero.isAlive() && myMonster.isAlive()) {
             if (myHero.getAttackSpeed() > myMonster.getAttackSpeed()) {
                 heroAttack();
-            }
-            if (myMonster.isAlive()) {
                 monsterAttack();
+            } else {
+                monsterAttack();
+                heroAttack();
             }
+//            if (myMonster.isAlive()) {
+//                monsterAttack();
+//            }
 
         }
 
