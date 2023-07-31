@@ -55,7 +55,7 @@ public class Battle {
 
 
     /**
-     * Starts the battle of hero vs monster taking into account of attackspeed
+     * Starts the battle of hero vs monster taking into account of attackspeed, block chance
      * and damage.
      */
 
@@ -74,7 +74,7 @@ public class Battle {
                 if (Math.random() <= myHero.getBlockChance()) {
                     sb.append(monsterAttack());
                 } else {
-                    sb.append("Hero blocks attack hp is still ").append(myHero.getHp()).append(("\n"));
+                    sb.append("Hero blocks attack, hp is still ").append(myHero.getHp()).append(("\n"));
 //                    addToLog("Hero blocks attack");
                 }
 
@@ -114,9 +114,13 @@ public class Battle {
     private String heroAttack() {
         StringBuilder attackLog = new StringBuilder();
         attackLog.append("Players turn: ").append(myHero.getChName()).append("\n");
+        attackLog.append(myHero.getChName()).append(" original hp is ").append(myHero.getHp()).append("\n");
+        attackLog.append(myMonster.getChName()).append(" original hp is ").append(myMonster.getHp()).append("\n");
         if (Math.random() <= 0.7) {
+
             myHero.regularAttack(myMonster);
             attackLog.append(myHero.getChName()).append(" tries to hit ").append(myMonster.getChName()).append("\n");
+
             attackLog.append(myMonster.getChName()).append(" has ").append(myMonster.getHp()).append(" hit points remaining.\n");
         } else {
             myHero.specialSkill(myMonster);
@@ -148,9 +152,10 @@ public class Battle {
     private String monsterAttack() {
         StringBuilder attackLog = new StringBuilder();
 
-
+        attackLog.append(myHero.getChName()).append(" original hp ").append(myHero.getHp()).append("\n");
         myMonster.regularAttack(myHero);
         attackLog.append(myMonster.getChName()).append(" tries to hit ").append(myHero.getChName()).append("\n");
+
         attackLog.append(myHero.getChName()).append(" has ").append(myHero.getHp()).append(" hit points remaining.\n");
 
         attackLog.append(myMonster.getChName()).append(" tries to heal, original health is ").
