@@ -13,6 +13,8 @@ public abstract class Monster extends DungeonCharacter {
     private final int myMinHeal;
     private final int myMaxHeal;
 
+    private final int myMaxHealth;
+
     /**
      * The constructor of DungeonCharacter that initializes the hp, name, attack speed,
      * minimum damage, maximum damage, and the hitchance of the character.
@@ -32,6 +34,7 @@ public abstract class Monster extends DungeonCharacter {
         myChanceHeal = theChanceHeal;
         myMinHeal = theMinHeal;
         myMaxHeal = theMaxHeal;
+        myMaxHealth = theHp;
     }
 
 //    public UUID getId() {
@@ -63,7 +66,8 @@ public abstract class Monster extends DungeonCharacter {
     // new tester heal for all monster since all stats are from sqlite database
     public void heal() {
         double random = Math.random();
-        if (random <= getChanceHeal()) {
+
+        if (random <= getChanceHeal() && getHp() < myMaxHealth) {
             int healPoints = (int) Math.floor(Math.random() * (getMaxHeal() - getMinHeal()) + getMinHeal());
             setHp(getHp() + healPoints);
             System.out.println(getChName() + " heals itself for " + healPoints + " hit points.");

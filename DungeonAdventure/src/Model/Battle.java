@@ -67,18 +67,25 @@ public class Battle {
 //        addToLog("=============================================");
 
         while (myHero.isAlive() && myMonster.isAlive()) {
+
+            //If hero is faster this sequence happens
             if (myHero.getAttackSpeed() > myMonster.getAttackSpeed()) {
                 sb.append(heroAttack());
-                sb.append(myMonster.getChName()).append("s turn").append("\n");
+
+                if(myMonster.isAlive()) {
+                    sb.append(myMonster.getChName()).append("s turn").append("\n");
 //                addToLog((myMonster.getChName() + " attacks " + myHero.getChName()));
-                if (Math.random() <= myHero.getBlockChance()) {
-                    sb.append(monsterAttack());
-                } else {
-                    sb.append("Hero blocks attack, hp is still ").append(myHero.getHp()).append(("\n"));
+                    if (Math.random() <= myHero.getBlockChance()) {
+                        sb.append(monsterAttack());
+                    } else {
+                        sb.append("Hero blocks attack, hp is still ").append(myHero.getHp()).append(("\n"));
 //                    addToLog("Hero blocks attack");
+                    }
                 }
 
+                //If Monster is faster this sequence happens
             } else {
+
                 sb.append(myMonster.getChName()).append("s turn").append("\n");
 //                addToLog((myMonster.getChName() + " attacks " + myHero.getChName()));
                 if (Math.random() < myHero.getBlockChance()) {
@@ -88,7 +95,9 @@ public class Battle {
                     sb.append("Hero blocks attack, hp is still ").append(myHero.getHp()).append(("\n"));
 
                 }
-                sb.append(heroAttack());
+                if(myHero.isAlive()) {
+                    sb.append(heroAttack());
+                }
             }
 
 
