@@ -114,17 +114,10 @@ public class Priestess extends Heroes {
     @Override
     public void specialSkill(final DungeonCharacter theAlly) {
         // set hp of Priestess and not the monster
-<<<<<<< HEAD
-
-        setHp(getHp() + genHeal());
-        System.out.println(getChName() + " heals itself for " + genHeal() + " hit points.");
-
-=======
         if (HP < 75) {
             setHp(getHp() + genHeal());
             System.out.println(getChName() + " heals itself for " + genHeal() + " hit points.");
         }
->>>>>>> 02c22fb96173392066e33b626944a814f30dcb69
     }
 
     /**
