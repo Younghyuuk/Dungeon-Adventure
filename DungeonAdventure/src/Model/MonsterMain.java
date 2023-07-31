@@ -24,7 +24,7 @@ public class MonsterMain {
         Keyboard kb = new Keyboard(gp);
         Heroes myHero = new Priestess(gp, kb);
 
-        Battle newBattle = new Battle(myHero, tester.getMonster("Gremlin"));
+        Battle newBattle = new Battle(myHero, tester.getRandomMonster());
         String[] array = newBattle.getMyBattleLog();
 
         for(String s: array) {

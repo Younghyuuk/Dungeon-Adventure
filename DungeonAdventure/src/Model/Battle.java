@@ -75,7 +75,7 @@ public class Battle {
                 if(myMonster.isAlive()) {
                     sb.append(myMonster.getChName()).append("s turn").append("\n");
 //                addToLog((myMonster.getChName() + " attacks " + myHero.getChName()));
-                    if (Math.random() <= myHero.getBlockChance()) {
+                    if (Math.random() > myHero.getBlockChance()) {
                         sb.append(monsterAttack());
                     } else {
                         sb.append("Hero blocks attack, hp is still ").append(myHero.getHp()).append(("\n"));
@@ -88,7 +88,7 @@ public class Battle {
 
                 sb.append(myMonster.getChName()).append("s turn").append("\n");
 //                addToLog((myMonster.getChName() + " attacks " + myHero.getChName()));
-                if (Math.random() < myHero.getBlockChance()) {
+                if (Math.random() > myHero.getBlockChance()) {
                     sb.append(monsterAttack());
 
                 } else {
