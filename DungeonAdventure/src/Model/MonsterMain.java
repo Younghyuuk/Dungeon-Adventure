@@ -2,15 +2,6 @@ package Model;
 
 import Control.Keyboard;
 import View.GamePanel;
-import org.sqlite.SQLiteDataSource;
-
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.List;
-import java.util.Scanner;
-import java.util.UUID;
 
 // TESTER class for how monsterDatabase will work with Battle logic
 public class MonsterMain {
