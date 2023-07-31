@@ -578,6 +578,50 @@ public class Dungeon {
         return sb.toString();
     }
 
+    private char[][] convertSBTo2D(final StringBuilder theSB) {
+        // First, we want to instantiate our rows and columns
+        // We use the dungeon height/width and room height/width
+        // since the dungeon is a 2D array of rooms, and we multiply by 2
+        // to account for the spaces
+        int rows = (DUNGEON_HEIGHT * ROOM.getRoomHeight() * 2); // TODO: add a -1?
+        int cols = (DUNGEON_WIDTH * ROOM.getRoomWidth() * 2);
+        // Now, we create our char array
+        char[][] charArray = new char[rows][cols];
+        // Then we iterate through the StringBuilder and add everything
+        int row = 0;
+        int col = 0;
+        for (int i = 0; i < theSB.length(); i++) {
+            char c = theSB.charAt(i);
+            // If we are not going to a new line, we increase the col and place c into the array
+            // Otherwise, we increase row and reset col since we are on a new line
+            if (c != '\n') {
+                charArray[row][col] = c;
+                col++;
+            } else {
+                row++;
+                col = 0;
+            }
+        }
+
+        return charArray;
+    }
+
+    private StringBuilder convert2DToSB(final char[][] theArray) {
+        // We will create the StringBuilder
+        StringBuilder sb = new StringBuilder();
+        for (char[] row : theArray) {
+            for (char c : row) {
+                // For every character in each row, we will add it to sb
+                sb.append(c);
+            }
+            // After getting through a row, we will add the new line
+            sb.append('\n');
+        }
+
+        // Then we simply return the StringBuilder
+        return sb;
+    }
+
     /**
      * Helper method used by 'toString' to connect all the doors in the Dungeon. <br>
      * If a door is alone, this method will add a door next to it depending on where it is.
@@ -586,44 +630,34 @@ public class Dungeon {
      * @return Returns the new modified StringBuilder where all doors are connected.
      */
     private StringBuilder connectDoors(final StringBuilder theSB) {
-        // Since theSB is final, we will create a copy of it to return
-        StringBuilder sb = new StringBuilder(theSB);
+        // First, we want to convert the StringBuilder into a 2D array
+        char[][] charArray = convertSBTo2D(theSB);
+        // We then get the rows and columns
+        int rows = charArray.length;
+        int cols = charArray[0].length;
         // Then we need to loop through and connect all the 3s that are alone
-        for (int i = 0; i < sb.length(); i++) {
-            // We grab the current character at 'i'
-            char currentChar = sb.charAt(i);
-            // Then we check if it is a 3
-            if (currentChar == '3') {
-                // We want to get the "row" and "column" of the current character
-                int row = getRow(i, theSB);
-                int col = getCol(i, theSB);
-                System.out.println(sb.charAt(convertRowCol(row, col)));
-                System.out.println(currentChar);
-                // If it is equal to 3, we need to check if the door is alone
-                // and modify the StringBuilder if so
-                boolean hasNoLeftDoor = hasOneInDirection(sb, row, col - 1) && sb.charAt(i + 1) == '0';
-                boolean hasNoRightDoor = hasOneInDirection(sb, row, col + 1) && sb.charAt(i - 1) == '0';
-                boolean hasNoUpDoor = hasOneInDirection(sb, row - 1, col) && sb.charAt(convertRowCol(row + 1, col)) == '0';
-                boolean hasNoDownDoor = hasOneInDirection(sb, row + 1, col) && sb.charAt(convertRowCol(row - 1, col)) == '0';
-
-                // Now, we will check each boolean statement and adjust the StringBuilder if one is true
-                if (hasNoLeftDoor) {
-                    // We will grab the index of the "1" next to the current "3"
-                    int index = convertRowCol(row, col - 1);
-                    sb.replace(index, index + 1, "3");
-                } else if (hasNoRightDoor) {
-                    int index = convertRowCol(row, col + 1);
-                    sb.replace(index, index + 1, "3");
-                } else if (hasNoUpDoor) {
-                    int index = convertRowCol(row - 1, col);
-                    sb.replace(index, index + 1, "3");
-                } else if (hasNoDownDoor) {
-                    int index = convertRowCol(row + 1, col);
-                    sb.replace(index, index + 1, "3");
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                if (charArray[i][j] == '3') {
+                    if (hasOneInDirection(charArray, i, j - 1) && charArray[i][j + 1] == '0') {
+                        // No Left Door
+                        charArray[i][j - 1] = '3';
+                    } else if (hasOneInDirection(charArray, i, j + 1) && charArray[i][j - 1] == '0') {
+                        // No Right Door
+                        charArray[i][j + 1] = '3';
+                    } else if (hasOneInDirection(charArray, i - 1, j) && charArray[i + 1][j] == '0') {
+                        // No Up Door
+                        charArray[i - 1][j] = '3';
+                    } else if (hasOneInDirection(charArray, i + 1, j) && charArray[i - 1][j] == '0') {
+                        // No Down Door
+                        charArray[i + 1][j] = '3';
+                    }
                 }
             }
         }
 
+        // Now, we will convert the char array back to a StringBuilder
+        StringBuilder sb = convert2DToSB(charArray);
         // Finally, we will return the updated StringBuilder
         return sb;
     }
@@ -631,62 +665,13 @@ public class Dungeon {
     /**
      * Helper method used by 'connectDoors' to check if a given "3" has a "1" near it.
      *
-     * @param theSB     The StringBuilder to look in.
+     * @param theArray  The array of chars that represents the StringBuilder.
      * @param theRow    The row we are checking for a "1" in.
      * @param theCol    The column we are checking for a "1" in.
      * @return Returns whether there is a "1" in the input direction.
      */
-    private boolean hasOneInDirection(final StringBuilder theSB, final int theRow, final int theCol) {
-        int index = convertRowCol(theRow, theCol);
-        return index >= 0 && index < theSB.length() && theSB.charAt(index) == '1';
-    }
-
-    /**
-     * Helper method used by 'hasOneInDirection' to convert a row-column pair
-     * into an index usable in a StringBuilder.
-     *
-     * @param theRow The row to use to convert to an index.
-     * @param theCol The column to use to convert to an index.
-     * @return Returns the index based on the row and column.
-     */
-    private int convertRowCol(final int theRow, final int theCol) {
-        return theRow * (DUNGEON_WIDTH + 1) + theCol;
-    }
-
-    /**
-     * Helper method used by 'toString' to get the row of an index in a StringBuilder.
-     *
-     * @param theIndex  The index to get the row of.
-     * @param theSB     The StringBuilder we are looking at.
-     * @return Returns the row of the index.
-     */
-    private int getRow(final int theIndex, final StringBuilder theSB) {
-        int row = 0;
-        for (int i = 0; i < theIndex; i++) {
-            if (theSB.charAt(i) == '\n') {
-                row++;
-            }
-        }
-//        return (theIndex / (DUNGEON_WIDTH * ROOM.getRoomWidth() + 1));
-        return row;
-    }
-
-    /**
-     * Helper method used by 'toString' to get the column of an index in a StringBuilder.
-     *
-     * @param theIndex  The index to get the column of.
-     * @param theSB     The StringBuilder we are looking at.
-     * @return Returns the column of the index.
-     */
-    private int getCol(final int theIndex, final StringBuilder theSB) {
-        int col = 0;
-        for (int i = 0; i < theIndex; i++) {
-            if (theSB.charAt(i) != '\n') {
-                col++;
-            }
-        }
-        return col;
-//        return (theIndex % (DUNGEON_WIDTH * ROOM.getRoomWidth() + 1));
+    private boolean hasOneInDirection(final char[][] theArray, final int theRow, final int theCol) {
+        return theRow >= 0 && theRow < theArray.length && theCol >= 0 && theCol < theArray[0].length && theArray[theRow][theCol] == '1';
     }
 
     /**
