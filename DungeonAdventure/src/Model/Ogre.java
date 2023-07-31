@@ -1,7 +1,5 @@
 package Model;
 
-import java.util.UUID;
-
 public class Ogre extends Monster {
 //    /**
 //     * Min heal that Ogre can heal for.
@@ -66,6 +64,11 @@ public class Ogre extends Monster {
     @Override
     public void regularAttack(final DungeonCharacter theOpp) {
         attackBehavior(theOpp);
+    }
+
+    @Override
+    public void getMonsterImage() {
+
     }
 
 //    /**

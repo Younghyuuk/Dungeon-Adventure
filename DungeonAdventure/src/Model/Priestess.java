@@ -1,9 +1,8 @@
 package Model;
 
-import View.GamePanel;
 import Control.Keyboard;
+import View.GamePanel;
 
-import java.awt.*;
 import java.io.IOException;
 import java.util.Objects;
 
@@ -114,9 +113,10 @@ public class Priestess extends Heroes {
     @Override
     public void specialSkill(final DungeonCharacter theAlly) {
         // set hp of Priestess and not the monster
-
-        setHp(getHp() + genHeal());
-        System.out.println(getChName() + " heals itself for " + genHeal() + " hit points.");
+        if (HP < 75) {
+            setHp(getHp() + genHeal());
+            System.out.println(getChName() + " heals itself for " + genHeal() + " hit points.");
+        }
     }
 
     /**

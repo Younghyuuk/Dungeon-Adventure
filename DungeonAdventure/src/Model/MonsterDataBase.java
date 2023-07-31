@@ -45,7 +45,7 @@ public class MonsterDataBase {
     public void initializeDatabase() {
         createTable();
 
-        String[] monsterNames = {"Ogre", "Skeleton", "Gremlin"};
+        String[] monsterNames = {"Ogre", "skeleton", "Gremlin"};
         int[] hpValues = {200, 100, 70};
         int[] attackSpeedValues = {2, 3, 5};
         int[] minDamageValues = {30, 30, 15};
@@ -70,7 +70,7 @@ public class MonsterDataBase {
             switch (name) {
                 case "Ogre" -> monster = new Ogre(hp, attackSpeed, minDamage, maxDamage, hitChance,
                         chanceHeal, minHeal, maxHeal);
-                case "Skeleton" -> monster = new Skeleton(hp, attackSpeed, minDamage, maxDamage, hitChance,
+                case "skeleton" -> monster = new Skeleton(hp, attackSpeed, minDamage, maxDamage, hitChance,
                         chanceHeal, minHeal, maxHeal);
                 case "Gremlin" -> monster = new Gremlin(hp, attackSpeed, minDamage, maxDamage, hitChance,
                         chanceHeal, minHeal, maxHeal);
@@ -154,7 +154,7 @@ public class MonsterDataBase {
                             return new Ogre(hp, attackSpeed, minDamage, maxDamage, hitChance,
                                     chanceHeal, minHeal, maxHeal);
                         }
-                        case "Skeleton" -> {
+                        case "skeleton" -> {
                             return new Skeleton(hp, attackSpeed, minDamage, maxDamage, hitChance,
                                     chanceHeal, minHeal, maxHeal);
                         }

@@ -1,7 +1,5 @@
 package Model;
 
-import java.util.UUID;
-
 /**
  * Skeleton class that extends monster one of the mobs
  * for the game.
@@ -60,7 +58,7 @@ public class Skeleton extends Monster{
      */
     protected Skeleton(int theHp, int theAttackSpeed, int theMinDamage, int theMaxDamage, double theHitChance,
                       double theChanceHeal, int theMinHeal, int theMaxHeal) {
-        super(theHp, "Skeleton", theAttackSpeed, theMinDamage, theMaxDamage, theHitChance, theChanceHeal, theMinHeal, theMaxHeal);
+        super(theHp, "skeleton", theAttackSpeed, theMinDamage, theMaxDamage, theHitChance, theChanceHeal, theMinHeal, theMaxHeal);
     }
 
     /**
@@ -71,6 +69,11 @@ public class Skeleton extends Monster{
     @Override
     public void regularAttack(DungeonCharacter theOpp) {
         attackBehavior(theOpp);
+    }
+
+    @Override
+    public void getMonsterImage() {
+
     }
 
 //    /**
