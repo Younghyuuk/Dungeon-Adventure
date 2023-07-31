@@ -22,7 +22,7 @@ public class MonsterMain {
 
         GamePanel gp = new GamePanel();
         Keyboard kb = new Keyboard(gp);
-        Heroes myHero = new Thief(gp, kb);
+        Heroes myHero = new Priestess(gp, kb);
 
         Battle newBattle = new Battle(myHero, tester.getMonster("Gremlin"));
         String[] array = newBattle.getMyBattleLog();
