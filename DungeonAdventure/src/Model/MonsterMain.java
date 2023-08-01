@@ -19,7 +19,6 @@ public class MonsterMain {
     public static void main(String[] args) {
         MonsterDataBase tester = new MonsterDataBase();
 
-
         GamePanel gp = new GamePanel();
         Keyboard kb = new Keyboard(gp);
         Heroes myHero = new Priestess(gp, kb);
@@ -30,8 +29,6 @@ public class MonsterMain {
         for(String s: array) {
             System.out.println(s);
         }
-
-
     }
 }
 
