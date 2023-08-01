@@ -63,8 +63,6 @@ public class Battle {
         StringBuilder sb = new StringBuilder();
         sb.append(myHero.getChName()).append(" engages in battle with ").append(myMonster.getChName()).append("\n");
         sb.append("==============================================").append("\n");
-//        addToLog(myHero.getChName() + " engages in battle with " + myMonster.getChName());
-//        addToLog("=============================================");
 
         while (myHero.isAlive() && myMonster.isAlive()) {
 
@@ -74,12 +72,10 @@ public class Battle {
 
                 if(myMonster.isAlive()) {
                     sb.append(myMonster.getChName()).append("s turn").append("\n");
-//                addToLog((myMonster.getChName() + " attacks " + myHero.getChName()));
                     if (Math.random() > myHero.getBlockChance()) {
                         sb.append(monsterAttack());
                     } else {
                         sb.append("Hero blocks attack, hp is still ").append(myHero.getHp()).append(("\n"));
-//                    addToLog("Hero blocks attack");
                     }
                 }
 
@@ -87,7 +83,7 @@ public class Battle {
             } else {
 
                 sb.append(myMonster.getChName()).append("s turn").append("\n");
-//                addToLog((myMonster.getChName() + " attacks " + myHero.getChName()));
+
                 if (Math.random() > myHero.getBlockChance()) {
                     sb.append(monsterAttack());
 
@@ -147,7 +143,7 @@ public class Battle {
         }
 
 
-//        addToLog(attackLog.toString());
+
         return attackLog.toString();
     }
 
