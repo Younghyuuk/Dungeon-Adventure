@@ -73,18 +73,5 @@ public class Skeleton extends Monster{
         attackBehavior(theOpp);
     }
 
-//    /**
-//     * Heal potential for skeleton.
-//     */
-//    @Override
-//    public void heal() {
-//
-//        double random = Math.random();
-//        if (random <= CHANCE_HEAL) {
-//            int healPoints = (int) Math.floor(Math.random() * (MAX_HEAL - MIN_HEAL) + MIN_HEAL);
-//            setHp(getHp() + healPoints);
-//            System.out.println(getChName() + " heals itself for " + healPoints + " hit points.");
-//        }
-//    }
 
 }

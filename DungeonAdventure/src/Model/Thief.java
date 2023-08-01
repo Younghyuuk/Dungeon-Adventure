@@ -92,23 +92,23 @@ public class Thief extends Heroes {
 
         double random = Math.random();
 
-        System.out.println(getChName() + " launches special skill surprise attack!");
+//        System.out.println(getChName() + " launches special skill surprise attack!");
         if (random <= SURPRISE_ATTACK_CHANCE) {
             if (random <= SURPRISE_FAIL_CHANCE) {
-                System.out.println("Oh no! " + getChName() + " got caught in the surprise attack and misses the attack.");
+//                System.out.println("Oh no! " + getChName() + " got caught in the surprise attack and misses the attack.");
             } else {
                 System.out.println(getChName() + " successfully performs the surprise attack!");
 
                 // Perform the extra attack
-                System.out.println(getChName() + " launches the first attack");
+//                System.out.println(getChName() + " launches the first attack");
                 attackBehavior(theOpp);
 
                 // Perform the second attack
-                System.out.println(getChName() + " strikes again for the second attack");
+//                System.out.println(getChName() + " strikes again for the second attack");
                 attackBehavior(theOpp);
             }
         } else {
-            System.out.println(getChName() + " fails to execute the surprise attack.");
+//            System.out.println(getChName() + " fails to execute the surprise attack.");
         }
     }
 

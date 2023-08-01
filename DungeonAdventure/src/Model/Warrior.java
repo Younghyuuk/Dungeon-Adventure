@@ -100,10 +100,10 @@ public class Warrior extends Heroes {
         if (Math.random() <= CRUSHING_BLOW_CHANCE) {
             int damage = genDamage(CRUSHING_BLOW_MIN_DAMAGE, CRUSHING_BLOW_MAX_DAMAGE);
             theOpp.subtractHp(damage);
-            System.out.println("Warrior delivers crushing blow to " + theOpp.getChName() +
-                    " for " + damage + " damage.");
+//            System.out.println("Warrior delivers crushing blow to " + theOpp.getChName() +
+//                    " for " + damage + " damage.");
         } else {
-            System.out.println("Crushing blow failed!");
+//            System.out.println("Crushing blow failed!");
         }
     }
 
