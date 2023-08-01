@@ -116,7 +116,7 @@ public class Priestess extends Heroes {
         // set hp of Priestess and not the monster
         if (getHp() < 100) {
             setHp(getHp() + genHeal());
-            System.out.println(getChName() + " heals itself for " + genHeal() + " hit points.");
+//            System.out.println(getChName() + " heals itself for " + genHeal() + " hit points.");
         }
     }
 
