@@ -20,15 +20,14 @@ public abstract class Item {
      * @param theRow The row the item will spawn in.
      * @param theCol The column the item will spawn in.
      */
-    public Item(final int theItem, final double theSpawnChance, final int theRow, final int theCol,
-                                                                final Dungeon theDungeon) {
+    public Item(final int theItem, final double theSpawnChance, final Dungeon theDungeon) {
         // First set up the spawnLocation array
         int height = theDungeon.getDungeonHeight() * theDungeon.getDungeonHeight();
         int width = theDungeon.getDungeonWidth() * theDungeon.getDungeonWidth();
         spawnLocation = new int[height][width];
         // Then set up everything else
         spawnChance = theSpawnChance;
-        spawnLocation[theRow][theCol] = theItem;
+//        spawnLocation[theRow][theCol] = theItem;
     }
 
     /**
@@ -38,8 +37,14 @@ public abstract class Item {
 
     /**
      * Sets the spawn location of an item in the world.
+     *
+     * @param theItem The item to put in the dungeon.
+     * @param theRow The row to put the item in.
+     * @param theCol The column to put the item in.
      */
-    public void setSpawnLocation(final int theRow, final int theCol) {}
+    public void setSpawnLocation(final int theItem, final int theRow, final int theCol) {
+        spawnLocation[theRow][theCol]  = theItem;
+    }
 
     /**
      * Gets the 2D array of all spawn locations of every item.
