@@ -30,8 +30,8 @@ public class InitiateEntites {
     public void createMonster(){
 
         Monster aMonster1 = myMonsterDataBase.getMonster("Skeleton");
-        aMonster1.setMyXCords(3 * myGamePanel.getSpriteSize());
-        aMonster1.setMyYCords(3 * myGamePanel.getSpriteSize());
+        aMonster1.setMyXCords(2 * myGamePanel.getSpriteSize());
+        aMonster1.setMyYCords(2 * myGamePanel.getSpriteSize());
         myMonsterArray.add(aMonster1);
 
     }

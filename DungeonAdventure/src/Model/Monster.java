@@ -20,6 +20,7 @@ public abstract class Monster extends DungeonCharacter {
     public BufferedImage img1, img2;
     private int myXCords;
     private int myYCords;
+    private Rectangle mySolidArea;
     /**
      * The constructor of DungeonCharacter that initializes the hp, name, attack speed,
      * minimum damage, maximum damage, and the hitchance of the character.
@@ -40,6 +41,7 @@ public abstract class Monster extends DungeonCharacter {
         myMinHeal = theMinHeal;
         myMaxHeal = theMaxHeal;
         myMaxHealth = theHp;
+        mySolidArea = new Rectangle(12, 12, myGamePanel.getSpriteSize() - 24, myGamePanel.getSpriteSize() - 24);
     }
     public void setMyXCords(final int theXCords){
         myXCords = theXCords;

@@ -43,6 +43,7 @@ public class TileManager {
     public Tile[] getMyTile() {
         return myTile;
     }
+
     // This method reads a txt file.
     public void loadMap(final String theMap) {
         int col = 0;

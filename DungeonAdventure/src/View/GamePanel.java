@@ -162,6 +162,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     // This method will update our model.
     public void update() {
+
         myHero.update();
     }
 
@@ -180,9 +181,11 @@ public class GamePanel extends JPanel implements Runnable {
         } else if (myGameState == PLAY_STATE) {
             myTileM.draw(pen);
             myHero.draw(pen);
+
             for (Monster list : myMonsterArray){
                 list.draw(pen);
             }
+
             if (myAboutState) {
                 myAboutPage.draw(pen);
             }
