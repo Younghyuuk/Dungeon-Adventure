@@ -29,8 +29,9 @@ public class Gremlin extends Monster {
      * @param theOpp which the monster will target
      */
     @Override
-    public void regularAttack(final DungeonCharacter theOpp) {
-        attackBehavior(theOpp);
+    public String regularAttack(final DungeonCharacter theOpp) {
+
+        return attackBehavior(theOpp);
     }
     @Override
     public void getMonsterImage() {
@@ -43,17 +44,6 @@ public class Gremlin extends Monster {
         }
     }
 
-//    /**
-//     * The heal method specific to the gremlin with his heal stats.
-//     */
-//    @Override
-//    public void heal() {
-//        double random = Math.random();
-//        if (random <= CHANCE_HEAL) {
-//            int healPoints = (int) Math.floor(Math.random() * (MAX_HEAL - MIN_HEAL) + MIN_HEAL);
-//            setHp(getHp() + healPoints);
-//            System.out.println(getChName() + " heals itself for " + healPoints + " hit points.");
-//        }
-//    }
+
 
 }

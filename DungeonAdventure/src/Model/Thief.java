@@ -17,12 +17,12 @@ public class Thief extends Heroes {
     /**
      * The chance at which the surprise attack succeeds.
      */
-    private static final double SURPRISE_ATTACK_CHANCE = 0.4;
+    private static final double SURPRISE_ATTACK_CHANCE = 0.9;
 
     /**
      * The chance at which it fails and thief gets caught.
      */
-    private static final double SURPRISE_FAIL_CHANCE = 0.2;
+    private static final double SURPRISE_FAIL_CHANCE = 0.1;
 
     /**
      * Hp of thief.
@@ -78,8 +78,9 @@ public class Thief extends Heroes {
      * @param theOpp opponent in which the attack will be targeted towards.
      */
     @Override
-    public void regularAttack(final DungeonCharacter theOpp) {
-        attackBehavior(theOpp);
+    public String regularAttack(final DungeonCharacter theOpp) {
+
+        return attackBehavior(theOpp);
     }
 
     /**
@@ -88,28 +89,35 @@ public class Thief extends Heroes {
      * @param theOpp which the special skill will be aimed towards.
      */
     @Override
-    public void specialSkill(final DungeonCharacter theOpp) {
+    public String specialSkill(final DungeonCharacter theOpp) {
 
         double random = Math.random();
-
+        StringBuilder special = new StringBuilder();
+        special.append("Thief launches special skill surprise attack!\n");
 //        System.out.println(getChName() + " launches special skill surprise attack!");
         if (random <= SURPRISE_ATTACK_CHANCE) {
             if (random <= SURPRISE_FAIL_CHANCE) {
+                special.append("Oh no! Thief got caught in the surprise attack and misses!\n");
 //                System.out.println("Oh no! " + getChName() + " got caught in the surprise attack and misses the attack.");
             } else {
-                System.out.println(getChName() + " successfully performs the surprise attack!");
+                special.append("Thief successfully performs the surprise attack!\n");
+//                System.out.println(getChName() + " successfully performs the surprise attack!");
 
                 // Perform the extra attack
+                special.append("Thief launches the first attack.\n");
 //                System.out.println(getChName() + " launches the first attack");
-                attackBehavior(theOpp);
+                special.append(attackBehavior(theOpp)).append("\n");
 
                 // Perform the second attack
+                special.append("Thief strikes again for the second attack\n");
 //                System.out.println(getChName() + " strikes again for the second attack");
-                attackBehavior(theOpp);
+                special.append(attackBehavior(theOpp)).append("\n");
             }
         } else {
+            special.append("Thief fails to execute the surprise attack!\n");
 //            System.out.println(getChName() + " fails to execute the surprise attack.");
         }
+        return special.toString();
     }
 
     @Override

@@ -175,7 +175,7 @@ public abstract class Heroes extends DungeonCharacter {
      *
      * @param theOpp opponent in which the attack will be targeted towards.
      */
-    public abstract void regularAttack(DungeonCharacter theOpp);
+    public abstract String regularAttack(DungeonCharacter theOpp);
 
     /**
      * The special skill which each class will have unique to be their own
@@ -183,7 +183,7 @@ public abstract class Heroes extends DungeonCharacter {
      *
      * @param theTarget which the special skill will be aimed towards.
      */
-    public abstract void specialSkill(DungeonCharacter theTarget);
+    public abstract String specialSkill(DungeonCharacter theTarget);
 
     /**
      * Gets the block chance of the hero.
