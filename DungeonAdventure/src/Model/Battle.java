@@ -123,7 +123,7 @@ public class Battle {
         attackLog.append(myMonster.getChName()).append(" original hp is ").append(myMonster.getHp()).append("\n");
         if (Math.random() <= 0.7) {
 
-            myHero.regularAttack(myMonster);
+            attackLog.append(myHero.regularAttack(myMonster));
             attackLog.append(myHero.getChName()).append(" tries to hit ").append(myMonster.getChName()).append("\n");
 
             attackLog.append(myMonster.getChName()).append(" has ").append(myMonster.getHp()).append(" hit points remaining.\n");

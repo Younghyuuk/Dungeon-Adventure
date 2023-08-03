@@ -135,15 +135,21 @@ public abstract class DungeonCharacter {
      *
      * @param theOpp the opponent in which we are attacking
      */
-    public void attackBehavior(DungeonCharacter theOpp) {
+    public String attackBehavior(DungeonCharacter theOpp) {
+        StringBuilder attack = new StringBuilder();
         if (Math.random() <= getHitChance()) {
             int damage = genDamage(getMinDamage(), getMaxDamage());
             theOpp.subtractHp(damage);
+            attack.append(getChName()).append(" hits ").append(theOpp.getChName()).append(" for ")
+                            .append(damage).append(" damage!").append("\n");
 //            System.out.println(getChName() + " hits " + theOpp.getChName() +
 //                    " for " + damage + " damage.");
         } else {
+            attack.append(" hits ").append(getChName()).append(theOpp.getChName()).
+                    append(" misses horribly!").append("\n");
 //            System.out.println("Aw " + getChName() + " misses horribly!");
         }
+        return attack.toString();
     }
 
     /**

@@ -101,8 +101,8 @@ public class Priestess extends Heroes {
      * @param theOpp opponent in which the attack will be targeted towards.
      */
     @Override
-    public void regularAttack(final DungeonCharacter theOpp) {
-        attackBehavior(theOpp);
+    public String regularAttack(final DungeonCharacter theOpp) {
+        return attackBehavior(theOpp);
     }
 
     /**
