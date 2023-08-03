@@ -139,10 +139,10 @@ public abstract class DungeonCharacter {
         if (Math.random() <= getHitChance()) {
             int damage = genDamage(getMinDamage(), getMaxDamage());
             theOpp.subtractHp(damage);
-            System.out.println(getChName() + " hits " + theOpp.getChName() +
-                    " for " + damage + " damage.");
+//            System.out.println(getChName() + " hits " + theOpp.getChName() +
+//                    " for " + damage + " damage.");
         } else {
-            System.out.println("Aw " + getChName() + " misses horribly!");
+//            System.out.println("Aw " + getChName() + " misses horribly!");
         }
     }
 
@@ -166,7 +166,6 @@ public abstract class DungeonCharacter {
      */
     public int genDamage(int theMin, int theMax) {
         return (int) Math.floor(Math.random() * (theMax-theMin) + theMin);
-//        return (int) (Math.random() * (theMin - theMax)+ getMinDamage());
     }
 
     public boolean isAlive() {

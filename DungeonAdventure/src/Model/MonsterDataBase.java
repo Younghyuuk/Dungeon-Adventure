@@ -39,6 +39,7 @@ public class MonsterDataBase {
         }
     }
 
+
     /**
      * Initialize the monsters table with some default values.
      * This method is for demonstration purposes only.
@@ -83,6 +84,8 @@ public class MonsterDataBase {
         }
     }
 
+
+
     /**
      * Get a connection to the database.
      *
@@ -93,35 +96,6 @@ public class MonsterDataBase {
         SQLiteDataSource ds = new SQLiteDataSource();
         ds.setUrl(DB_URL);
         return ds.getConnection();
-    }
-
-    /**
-     * Insert a monster into the database.
-     *
-     * @param monster The monster to insert.
-     */
-    public void insertMonster(Monster monster) {
-        String query = "INSERT INTO monsters (hp, name, attackSpeed, minDamage, maxDamage, " +
-                "hitChance, minHeal, maxHeal, chanceHeal) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
-        try (Connection conn = getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(query)) {
-
-            pstmt.setInt(1, monster.getHp());
-            pstmt.setString(2, monster.getChName());
-
-            pstmt.setInt(3, monster.getAttackSpeed());
-            pstmt.setInt(4, monster.getMinDamage());
-            pstmt.setInt(5, monster.getMaxDamage());
-            pstmt.setDouble(6, monster.getHitChance());
-            pstmt.setInt(7, monster.getMinHeal());
-            pstmt.setInt(8, monster.getMaxHeal());
-            pstmt.setDouble(9, monster.getChanceHeal());
-
-            pstmt.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
     }
 
     /**

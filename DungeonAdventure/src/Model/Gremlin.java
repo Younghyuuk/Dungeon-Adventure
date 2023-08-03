@@ -8,50 +8,6 @@ import java.util.Objects;
 import static javax.imageio.ImageIO.read;
 
 public class Gremlin extends Monster {
-//    /**
-//     * Min heal that Gremlin can heal for.
-//     */
-//    private static final int MIN_HEAL = 20;
-//
-//    /**
-//     * the max amount gremlin can heal for.
-//     */
-//    private static final int MAX_HEAL = 40;
-//
-//    /**
-//     * Chance at which gremlin has to heal.
-//     */
-//    private static final double CHANCE_HEAL = 0.4;
-//
-//    /**
-//     * Hp of gremlin.
-//     */
-//    private static final int HP = 70;
-//
-//    /**
-//     * Setting gremlin name.
-//     */
-//    private static final String NAME = "Gremlin";
-//
-//    /**
-//     * Setting this characters attack speed to 5.
-//     */
-//    private static final int ATTACK_SPEED = 5;
-//
-//    /**
-//     * Minimum damage of Gremlin.
-//     */
-//    private static final int MIN_DAMAGE = 15;
-//
-//    /**
-//     * Maximum damage of Gremlin.
-//     */
-//    private static final int MAX_DAMAGE = 30;
-//
-//    /**
-//     * Hit chance of Gremlin.
-//     */
-//    private static final double HIT_CHANCE = 0.8;
 
 
 
@@ -67,11 +23,6 @@ public class Gremlin extends Monster {
         getMonsterImage();
     }
 
-
-//    protected Gremlin(UUID theId) {
-//        super(theId, HP, NAME, ATTACK_SPEED, MIN_DAMAGE, MAX_DAMAGE, HIT_CHANCE, CHANCE_HEAL, MIN_HEAL, MAX_HEAL);
-//    }
-
     /**
      * Attack behavior of the gremlin.
      *
@@ -81,7 +32,6 @@ public class Gremlin extends Monster {
     public void regularAttack(final DungeonCharacter theOpp) {
         attackBehavior(theOpp);
     }
-
     @Override
     public void getMonsterImage() {
         try {
@@ -105,4 +55,5 @@ public class Gremlin extends Monster {
 //            System.out.println(getChName() + " heals itself for " + healPoints + " hit points.");
 //        }
 //    }
+
 }

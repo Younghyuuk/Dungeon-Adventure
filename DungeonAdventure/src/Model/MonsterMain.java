@@ -13,8 +13,13 @@ public class MonsterMain {
         GamePanel gp = new GamePanel();
         Keyboard kb = new Keyboard(gp);
         Heroes myHero = new Priestess(gp, kb);
+
         MonsterDataBase tester = new MonsterDataBase(gp);
         Battle newBattle = new Battle(myHero, tester.getMonster("Gremlin"));
+
+
+        Battle newBattle = new Battle(myHero, tester.getRandomMonster());
+
         String[] array = newBattle.getMyBattleLog();
 
         for(String s: array) {
