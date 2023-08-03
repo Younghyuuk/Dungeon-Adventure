@@ -3,7 +3,6 @@ package Model;
 import Control.Keyboard;
 import View.GamePanel;
 
-import javax.imageio.ImageIO;
 import java.io.IOException;
 import java.util.Objects;
 
@@ -17,12 +16,12 @@ public class Thief extends Heroes {
     /**
      * The chance at which the surprise attack succeeds.
      */
-    private static final double SURPRISE_ATTACK_CHANCE = 0.4;
+    private static final double SURPRISE_ATTACK_CHANCE = 0.9;
 
     /**
      * The chance at which it fails and thief gets caught.
      */
-    private static final double SURPRISE_FAIL_CHANCE = 0.2;
+    private static final double SURPRISE_FAIL_CHANCE = 0.1;
 
     /**
      * Hp of thief.
@@ -78,8 +77,9 @@ public class Thief extends Heroes {
      * @param theOpp opponent in which the attack will be targeted towards.
      */
     @Override
-    public void regularAttack(final DungeonCharacter theOpp) {
-        attackBehavior(theOpp);
+    public String regularAttack(final DungeonCharacter theOpp) {
+
+        return attackBehavior(theOpp);
     }
 
     /**
@@ -88,28 +88,36 @@ public class Thief extends Heroes {
      * @param theOpp which the special skill will be aimed towards.
      */
     @Override
-    public void specialSkill(final DungeonCharacter theOpp) {
+    public String specialSkill(final DungeonCharacter theOpp) {
 
         double random = Math.random();
-
-//        System.out.println(getChName() + " launches special skill surprise attack!");
+        StringBuilder special = new StringBuilder();
+        special.append("Thief launches special skill surprise attack!\n");
         if (random <= SURPRISE_ATTACK_CHANCE) {
             if (random <= SURPRISE_FAIL_CHANCE) {
-//                System.out.println("Oh no! " + getChName() + " got caught in the surprise attack and misses the attack.");
+                special.append("Oh no! Thief got caught in the surprise attack and misses!\n");
             } else {
-                System.out.println(getChName() + " successfully performs the surprise attack!");
+                special.append("Thief successfully performs the surprise attack!\n");
+
 
                 // Perform the extra attack
-//                System.out.println(getChName() + " launches the first attack");
-                attackBehavior(theOpp);
+                special.append("Thief launches the first attack.\n");
+                int damage1 = genDamage(getMinDamage(), getMaxDamage());
+                theOpp.setHp(damage1);
+                special.append(theOpp.getChName()).append(" gets hit for ").append(damage1)
+                        .append(" damage! ").append("\n");
 
                 // Perform the second attack
-//                System.out.println(getChName() + " strikes again for the second attack");
-                attackBehavior(theOpp);
+                special.append("Thief strikes again for the second attack\n");
+                int damage2 = genDamage(getMinDamage(), getMaxDamage());
+                theOpp.setHp(damage2);
+                special.append(theOpp.getChName()).append(" gets hit for ").append(damage2)
+                        .append(" damage! ").append("\n");
             }
         } else {
-//            System.out.println(getChName() + " fails to execute the surprise attack.");
+            special.append("Thief fails to execute the surprise attack!\n");
         }
+        return special.toString();
     }
 
     @Override

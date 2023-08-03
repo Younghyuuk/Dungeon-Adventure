@@ -20,7 +20,7 @@ public class Skeleton extends Monster{
      */
     protected Skeleton(int theHp, int theAttackSpeed, int theMinDamage, int theMaxDamage, double theHitChance,
                        double theChanceHeal, int theMinHeal, int theMaxHeal, GamePanel theGamePanel) {
-        super(theHp, "skeleton", theAttackSpeed, theMinDamage, theMaxDamage, theHitChance, theChanceHeal, theMinHeal, theMaxHeal,theGamePanel);
+        super(theHp, "Skeleton", theAttackSpeed, theMinDamage, theMaxDamage, theHitChance, theChanceHeal, theMinHeal, theMaxHeal,theGamePanel);
         getMonsterImage();
     }
 
@@ -30,37 +30,24 @@ public class Skeleton extends Monster{
      * @param theOpp which the monster will target
      */
     @Override
-    public void regularAttack(DungeonCharacter theOpp) {
-        attackBehavior(theOpp);
+    public String regularAttack(DungeonCharacter theOpp) {
+        return attackBehavior(theOpp);
     }
 
     @Override
     public void getMonsterImage() {
         try {
-            img1 = read(Objects.requireNonNull(getClass().getResourceAsStream("/skeleton/skele0.png")));
-            img2 = read(Objects.requireNonNull(getClass().getResourceAsStream("/skeleton/skele1.png")));
+            up1 = read(Objects.requireNonNull(getClass().getResourceAsStream("/skeleton/skele0.png")));
+            up2 = read(Objects.requireNonNull(getClass().getResourceAsStream("/skeleton/skele1.png")));
+            down1 = read(Objects.requireNonNull(getClass().getResourceAsStream("/skeleton/skele0.png")));
+            down2 = read(Objects.requireNonNull(getClass().getResourceAsStream("/skeleton/skele1.png")));
+            left1 = read(Objects.requireNonNull(getClass().getResourceAsStream("/skeleton/skele0.png")));
+            left2 = read(Objects.requireNonNull(getClass().getResourceAsStream("/skeleton/skele1.png")));
+            right1 = read(Objects.requireNonNull(getClass().getResourceAsStream("/skeleton/skele0.png")));
+            right2 = read(Objects.requireNonNull(getClass().getResourceAsStream("/skeleton/skele1.png")));
 
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
-
-
-
-
-//    /**
-//     * Heal potential for skeleton.
-//     */
-//    @Override
-//    public void heal() {
-//
-//        double random = Math.random();
-//        if (random <= CHANCE_HEAL) {
-//            int healPoints = (int) Math.floor(Math.random() * (MAX_HEAL - MIN_HEAL) + MIN_HEAL);
-//            setHp(getHp() + healPoints);
-//            System.out.println(getChName() + " heals itself for " + healPoints + " hit points.");
-//        }
-//    }
-
-
 }

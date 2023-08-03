@@ -2,6 +2,9 @@ package Model;
 
 import View.GamePanel;
 
+import java.awt.*;
+import java.awt.image.BufferedImage;
+
 /**
  * Creates the abstract class DungeonCharacter which other
  * classes extends from like Hero and Monster.
@@ -42,6 +45,16 @@ public abstract class DungeonCharacter {
     private double myHitChance;
 
     public GamePanel myGamePanel;
+    public BufferedImage up1, up2, down1, down2, left1, left2, right1, right2;
+    public String myDirection = "down";
+    public int mySpeed;
+    public boolean myCollision = false;
+    public Rectangle mySolidArea;
+
+    public int mySpriteCounter = 0;
+    public int mySpriteNum = 1;
+    public int myWorldXCoordinate;
+    public int myWorldYCoordinate;
 
     /**
      * The constructor of DungeonCharacter that initializes the hp, name, attack speed,
@@ -65,7 +78,31 @@ public abstract class DungeonCharacter {
         myHitChance = theHitChance;
         myGamePanel = theGamePanel;
     }
+    public void setMyCollision(final boolean theBool) {
+        myCollision = theBool;
+    }
+    public String getMyDirection() {
+        return myDirection;
+    }
+    public Rectangle getMySolidArea() {
+        return mySolidArea;
+    }
+    public int getMySpeed(){
+        return mySpeed;
+    }
+    public int getMyWorldXCoordinate() {
+        return myWorldXCoordinate;
+    }
 
+    public int getMyWorldYCoordinate() {
+        return myWorldYCoordinate;
+    }
+    public void setMyWorldXCoordinate(int theX) {
+        myWorldXCoordinate = theX;
+    }
+    public void setMyWorldYCoordinate(int theY) {
+        myWorldYCoordinate = theY;
+    }
     /**
      * Gets the hp that the character has currently.
      *
@@ -135,15 +172,21 @@ public abstract class DungeonCharacter {
      *
      * @param theOpp the opponent in which we are attacking
      */
-    public void attackBehavior(DungeonCharacter theOpp) {
+    public String attackBehavior(DungeonCharacter theOpp) {
+        StringBuilder attack = new StringBuilder();
         if (Math.random() <= getHitChance()) {
             int damage = genDamage(getMinDamage(), getMaxDamage());
             theOpp.subtractHp(damage);
+            attack.append(getChName()).append(" hits ").append(theOpp.getChName()).append(" for ")
+                            .append(damage).append(" damage!").append("\n");
 //            System.out.println(getChName() + " hits " + theOpp.getChName() +
 //                    " for " + damage + " damage.");
         } else {
+            attack.append("Aw ").append(getChName()).
+                    append(" misses horribly!").append("\n");
 //            System.out.println("Aw " + getChName() + " misses horribly!");
         }
+        return attack.toString();
     }
 
     /**

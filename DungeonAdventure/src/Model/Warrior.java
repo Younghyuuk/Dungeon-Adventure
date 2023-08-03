@@ -84,8 +84,9 @@ public class Warrior extends Heroes {
      * @param theOpp opponent in which the attack will be targeted towards.
      */
     @Override
-    public void regularAttack(final DungeonCharacter theOpp) {
-        attackBehavior(theOpp);
+    public String regularAttack(final DungeonCharacter theOpp) {
+
+        return attackBehavior(theOpp);
     }
 
 
@@ -96,15 +97,18 @@ public class Warrior extends Heroes {
      * @param theOpp which the special skill will be aimed towards.
      */
     @Override
-    public void specialSkill(final DungeonCharacter theOpp) {
+    public String specialSkill(final DungeonCharacter theOpp) {
+        StringBuilder special = new StringBuilder();
         if (Math.random() <= CRUSHING_BLOW_CHANCE) {
             int damage = genDamage(CRUSHING_BLOW_MIN_DAMAGE, CRUSHING_BLOW_MAX_DAMAGE);
             theOpp.subtractHp(damage);
-//            System.out.println("Warrior delivers crushing blow to " + theOpp.getChName() +
-//                    " for " + damage + " damage.");
+            special.append("Warrior delivers CRUSHING BLOW to ").append(theOpp.getChName()).append(" for ")
+                    .append(damage).append(" damage!\n");
         } else {
-//            System.out.println("Crushing blow failed!");
+            special.append("Crushing blow failed\n");
+
         }
+        return special.toString();
     }
 
     @Override

@@ -26,20 +26,26 @@ public class Ogre extends Monster {
      * @param theOpp which the monster will target
      */
     @Override
-    public void regularAttack(final DungeonCharacter theOpp) {
-        attackBehavior(theOpp);
+    public String regularAttack(final DungeonCharacter theOpp) {
+
+        return attackBehavior(theOpp);
     }
 
 
     @Override
     public void getMonsterImage() {
         try {
-            img1 = read(Objects.requireNonNull(getClass().getResourceAsStream("/skeleton/skele0.png")));
-            img2 = read(Objects.requireNonNull(getClass().getResourceAsStream("/skeleton/skele1.png")));
+            up1 = read(Objects.requireNonNull(getClass().getResourceAsStream("/skeleton/skele0.png")));
+            up2 = read(Objects.requireNonNull(getClass().getResourceAsStream("/skeleton/skele1.png")));
+            down1 = read(Objects.requireNonNull(getClass().getResourceAsStream("/skeleton/skele0.png")));
+            down2 = read(Objects.requireNonNull(getClass().getResourceAsStream("/skeleton/skele1.png")));
+            left1 = read(Objects.requireNonNull(getClass().getResourceAsStream("/skeleton/skele0.png")));
+            left2 = read(Objects.requireNonNull(getClass().getResourceAsStream("/skeleton/skele1.png")));
+            right1 = read(Objects.requireNonNull(getClass().getResourceAsStream("/skeleton/skele0.png")));
+            right2 = read(Objects.requireNonNull(getClass().getResourceAsStream("/skeleton/skele1.png")));
 
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
-
 }

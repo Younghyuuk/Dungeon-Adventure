@@ -17,23 +17,8 @@ public abstract class Heroes extends DungeonCharacter {
      * The double that gives the chance that the Hero will block.
      */
     private double myBlockChance;
-
-    public final static int HEROES_MOVE_SPEED = 6;
-
-    GamePanel myGamePanel;
     Keyboard myKeyInputs;
 
-    public BufferedImage up1, up2, down1, down2, left1, left2, right1, right2;
-    private String myDirection = "down";
-
-    private int mySpriteCounter = 0;
-    private int mySpriteNum = 1;
-
-    private final Rectangle mySolidArea;
-    private boolean myCollision = false;
-
-    private int myWorldXCoordinate;
-    private int myWorldYCoordinate;
     private final int myScreensMiddleX;
     private final int myScreensMiddleY;
 
@@ -55,26 +40,16 @@ public abstract class Heroes extends DungeonCharacter {
                      final double theHitChance, final double theBlockChance, final GamePanel theGamePanel, final Keyboard theKeyBoard) {
 
         super(theHp, theChName, theAttackSpeed, theMinDamage, theMaxDamage, theHitChance, theGamePanel);
-
-        myGamePanel = theGamePanel;
         myKeyInputs = theKeyBoard;
         myBlockChance = theBlockChance;
 
-        //testing
         myScreensMiddleX = myGamePanel.getMyScreenWidth() / 2 - (myGamePanel.getSpriteSize() / 2);
         myScreensMiddleY = myGamePanel.getMyScreenHeight() / 2 - (myGamePanel.getSpriteSize() / 2);
-
         myWorldXCoordinate = (myGamePanel.getMyWorldCol() * myGamePanel.getSpriteSize())/2;
         myWorldYCoordinate = (myGamePanel.getMyWorldRow() * myGamePanel.getSpriteSize())/2;
         mySolidArea = new Rectangle(12, 12, myGamePanel.getSpriteSize() - 24, myGamePanel.getSpriteSize() - 24);
-    }
-
-    public int getMyWorldXCoordinate() {
-        return myWorldXCoordinate;
-    }
-
-    public int getMyWorldYCoordinate() {
-        return myWorldYCoordinate;
+        mySpeed = 6
+        ;
     }
 
     public int getMyScreensMiddleX() {
@@ -85,15 +60,15 @@ public abstract class Heroes extends DungeonCharacter {
         return myScreensMiddleY;
     }
 
-    public Rectangle getMySolidArea() {
-        return mySolidArea;
+    public void resetSolidArea(){
+        mySolidArea.x = 12;
+        mySolidArea.y = 12;
     }
+    public void interactMonster(int i){
+        if( i != 999){
+            System.out.println("You hit the monster");
+        }
 
-    public void setMyCollision(final boolean theBool) {
-        myCollision = theBool;
-    }
-    public String getMyDirection() {
-        return myDirection;
     }
 
     public void update() {
@@ -107,15 +82,22 @@ public abstract class Heroes extends DungeonCharacter {
             myDirection = "right";
         }
 
+        // Checking Map Tile Collision
         myCollision = false;
         myGamePanel.getMyCollision().checkTile(this);
+
+        //Check Collision with Monsters
+        int monster = myGamePanel.getMyCollision().checkEntity(this, myGamePanel.getMyMonsterArray());
+        //FIGHT LOGIC MIGHT GO HERE
+        interactMonster(monster);
+        //FIGHT LOGIC MAYBE ABOVE METHOD
         if (myKeyInputs.up || myKeyInputs.down || myKeyInputs.left || myKeyInputs.right) {
             if (!myCollision) {
                 switch (myDirection) {
-                    case "up" -> myWorldYCoordinate -= HEROES_MOVE_SPEED;
-                    case "down" -> myWorldYCoordinate += HEROES_MOVE_SPEED;
-                    case "left" -> myWorldXCoordinate -= HEROES_MOVE_SPEED;
-                    case "right" -> myWorldXCoordinate += HEROES_MOVE_SPEED;
+                    case "up" -> myWorldYCoordinate -= mySpeed;
+                    case "down" -> myWorldYCoordinate += mySpeed;
+                    case "left" -> myWorldXCoordinate -= mySpeed;
+                    case "right" -> myWorldXCoordinate += mySpeed;
                 }
             }
         }
@@ -175,7 +157,7 @@ public abstract class Heroes extends DungeonCharacter {
      *
      * @param theOpp opponent in which the attack will be targeted towards.
      */
-    public abstract void regularAttack(DungeonCharacter theOpp);
+    public abstract String regularAttack(DungeonCharacter theOpp);
 
     /**
      * The special skill which each class will have unique to be their own
@@ -183,7 +165,7 @@ public abstract class Heroes extends DungeonCharacter {
      *
      * @param theTarget which the special skill will be aimed towards.
      */
-    public abstract void specialSkill(DungeonCharacter theTarget);
+    public abstract String specialSkill(DungeonCharacter theTarget);
 
     /**
      * Gets the block chance of the hero.

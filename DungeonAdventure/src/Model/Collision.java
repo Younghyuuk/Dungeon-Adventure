@@ -2,6 +2,8 @@ package Model;
 
 import View.GamePanel;
 
+import java.util.List;
+
 public class Collision {
 
     GamePanel myGamePanel;
@@ -10,11 +12,11 @@ public class Collision {
         myGamePanel = theGamePanel;
     }
 
-    public void checkTile(final Heroes theHeroes) {
-        int heroLeftWorldX = theHeroes.getMyWorldXCoordinate() + theHeroes.getMySolidArea().x;
-        int heroRightWorldX = theHeroes.getMyWorldXCoordinate() + theHeroes.getMySolidArea().x + theHeroes.getMySolidArea().width;
-        int heroTopWorldY = theHeroes.getMyWorldYCoordinate() + theHeroes.getMySolidArea().y;
-        int heroBottomWorldY = theHeroes.getMyWorldYCoordinate() + theHeroes.getMySolidArea().y + theHeroes.getMySolidArea().height;
+    public void checkTile(final DungeonCharacter dungeonChar) {
+        int heroLeftWorldX = dungeonChar.getMyWorldXCoordinate() + dungeonChar.getMySolidArea().x;
+        int heroRightWorldX = dungeonChar.getMyWorldXCoordinate() + dungeonChar.getMySolidArea().x + dungeonChar.getMySolidArea().width;
+        int heroTopWorldY = dungeonChar.getMyWorldYCoordinate() + dungeonChar.getMySolidArea().y;
+        int heroBottomWorldY = dungeonChar.getMyWorldYCoordinate() + dungeonChar.getMySolidArea().y + dungeonChar.getMySolidArea().height;
 
         int heroLeftCol = heroLeftWorldX / myGamePanel.getSpriteSize();
         int heroRightCol = heroRightWorldX / myGamePanel.getSpriteSize();
@@ -23,40 +25,123 @@ public class Collision {
 
         int tileNum1, tileNum2;
 
-        switch (theHeroes.getMyDirection()) {
+        switch (dungeonChar.getMyDirection()) {
             case "up":
-                heroTopRow = (heroTopWorldY - theHeroes.HEROES_MOVE_SPEED) / myGamePanel.getSpriteSize();
+                heroTopRow = (heroTopWorldY - dungeonChar.getMySpeed()) / myGamePanel.getSpriteSize();
                 tileNum1 = myGamePanel.getMyTileM().getMyMapArray()[heroTopRow][heroLeftCol];
                 tileNum2 = myGamePanel.getMyTileM().getMyMapArray()[heroTopRow][heroRightCol];
                 if (myGamePanel.getMyTileM().getMyTile()[tileNum1].getMyCollision() || myGamePanel.getMyTileM().getMyTile()[tileNum2].getMyCollision()) {
-                    theHeroes.setMyCollision(true);
+                    dungeonChar.setMyCollision(true);
                     // if the heroes collison is true and tile is monster , thennwe call battle.
                 }
                 break;
             case "down":
-                heroTopRow = (heroTopWorldY - theHeroes.HEROES_MOVE_SPEED) / myGamePanel.getSpriteSize();
+                heroTopRow = (heroTopWorldY - dungeonChar.getMySpeed()) / myGamePanel.getSpriteSize();
                 tileNum1 = myGamePanel.getMyTileM().getMyMapArray()[heroBottomRow][heroLeftCol];
                 tileNum2 = myGamePanel.getMyTileM().getMyMapArray()[heroBottomRow][heroRightCol];
                 if (myGamePanel.getMyTileM().getMyTile()[tileNum1].getMyCollision() || myGamePanel.getMyTileM().getMyTile()[tileNum2].getMyCollision()) {
-                    theHeroes.setMyCollision(true);
+                    dungeonChar.setMyCollision(true);
                 }
                 break;
             case "left":
-                heroTopRow = (heroTopWorldY - theHeroes.HEROES_MOVE_SPEED) / myGamePanel.getSpriteSize();
+                heroTopRow = (heroTopWorldY - dungeonChar.getMySpeed()) / myGamePanel.getSpriteSize();
                 tileNum1 = myGamePanel.getMyTileM().getMyMapArray()[heroTopRow][heroLeftCol];
                 tileNum2 = myGamePanel.getMyTileM().getMyMapArray()[heroBottomRow][heroLeftCol];
                 if (myGamePanel.getMyTileM().getMyTile()[tileNum1].getMyCollision() || myGamePanel.getMyTileM().getMyTile()[tileNum2].getMyCollision()) {
-                    theHeroes.setMyCollision(true);
+                    dungeonChar.setMyCollision(true);
                 }
                 break;
             case "right":
-                heroTopRow = (heroTopWorldY - theHeroes.HEROES_MOVE_SPEED) / myGamePanel.getSpriteSize();
+                heroTopRow = (heroTopWorldY - dungeonChar.getMySpeed()) / myGamePanel.getSpriteSize();
                 tileNum1 = myGamePanel.getMyTileM().getMyMapArray()[heroTopRow][heroRightCol];
                 tileNum2 = myGamePanel.getMyTileM().getMyMapArray()[heroBottomRow][heroRightCol];
                 if (myGamePanel.getMyTileM().getMyTile()[tileNum1].getMyCollision() || myGamePanel.getMyTileM().getMyTile()[tileNum2].getMyCollision()) {
-                    theHeroes.setMyCollision(true);
+                    dungeonChar.setMyCollision(true);
                 }
                 break;
         }
+    }
+
+    public int checkEntity(Heroes theHero, List<Monster> theMonsters) {
+            int index = 999;
+            int i = 0;
+        for (Monster mon : theMonsters){
+            theHero.getMySolidArea().x = theHero.myWorldXCoordinate + theHero.getMySolidArea().x;
+            theHero.getMySolidArea().y = theHero.myWorldYCoordinate + theHero.getMySolidArea().y;
+
+            mon.getMySolidArea().x = mon.getMyWorldXCoordinate() + mon.getMySolidArea().x;
+            mon.getMySolidArea().y = mon.myWorldYCoordinate + mon.getMySolidArea().y;
+
+            switch (theHero.getMyDirection()){
+                case "up" :
+                    theHero.getMySolidArea().y -= theHero.mySpeed;
+                    if(theHero.getMySolidArea().intersects(mon.getMySolidArea())){
+                        theHero.setMyCollision(true);
+                        index = i++;
+                    }
+                    break;
+                case "down" :
+                    theHero.getMySolidArea().y += theHero.mySpeed;
+                    if(theHero.getMySolidArea().intersects(mon.getMySolidArea())){
+                        theHero.setMyCollision(true);
+                        index = i++;
+                    }
+                    break;
+                case "left" :
+                    theHero.getMySolidArea().x -= theHero.mySpeed;
+                    if(theHero.getMySolidArea().intersects(mon.getMySolidArea())){
+                        theHero.setMyCollision(true);
+                        index = i++;
+                    }
+                    break;
+                case "right" :
+                    theHero.getMySolidArea().x += theHero.mySpeed;
+                    if(theHero.getMySolidArea().intersects(mon.getMySolidArea())){
+                        theHero.setMyCollision(true);
+                        index = i++;
+                    }
+                    break;
+            }
+            theHero.resetSolidArea();
+            mon.resetSolidArea();
+        }
+            return index;
+    }
+
+    public void monsterToPlayer(Monster theMon){
+        theMon.getMySolidArea().x = theMon.myWorldXCoordinate + theMon.getMySolidArea().x;
+        theMon.getMySolidArea().y = theMon.myWorldYCoordinate + theMon.getMySolidArea().y;
+
+        myGamePanel.getMyHero().getMySolidArea().x =  myGamePanel.getMyHero().getMyWorldXCoordinate() +  myGamePanel.getMyHero().getMySolidArea().x;
+        myGamePanel.getMyHero().getMySolidArea().y =  myGamePanel.getMyHero().myWorldYCoordinate +  myGamePanel.getMyHero().getMySolidArea().y;
+
+        switch (theMon.getMyDirection()){
+            case "up" :
+                theMon.getMySolidArea().y -= theMon.mySpeed;
+                if(theMon.getMySolidArea().intersects( myGamePanel.getMyHero().getMySolidArea())){
+                    theMon.setMyCollision(true);
+                }
+                break;
+            case "down" :
+                theMon.getMySolidArea().y += theMon.mySpeed;
+                if(theMon.getMySolidArea().intersects( myGamePanel.getMyHero().getMySolidArea())){
+                    theMon.setMyCollision(true);
+                }
+                break;
+            case "left" :
+                theMon.getMySolidArea().x -= theMon.mySpeed;
+                if(theMon.getMySolidArea().intersects( myGamePanel.getMyHero().getMySolidArea())){
+                    theMon.setMyCollision(true);
+                }
+                break;
+            case "right" :
+                theMon.getMySolidArea().x += theMon.mySpeed;
+                if(theMon.getMySolidArea().intersects( myGamePanel.getMyHero().getMySolidArea())){
+                    theMon.setMyCollision(true);
+                }
+                break;
+        }
+        theMon.resetSolidArea();
+        myGamePanel.getMyHero().resetSolidArea();
     }
 }

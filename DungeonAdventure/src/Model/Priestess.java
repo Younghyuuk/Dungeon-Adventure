@@ -101,8 +101,8 @@ public class Priestess extends Heroes {
      * @param theOpp opponent in which the attack will be targeted towards.
      */
     @Override
-    public void regularAttack(final DungeonCharacter theOpp) {
-        attackBehavior(theOpp);
+    public String regularAttack(final DungeonCharacter theOpp) {
+        return attackBehavior(theOpp);
     }
 
     /**
@@ -111,12 +111,15 @@ public class Priestess extends Heroes {
      * @param theAlly which the special skill will be aimed towards.
      */
     @Override
-    public void specialSkill(final DungeonCharacter theAlly) {
+    public String specialSkill(final DungeonCharacter theAlly) {
         // set hp of Priestess and not the monster
-        if (getHp() < 100) {
-            setHp(getHp() + genHeal());
-//            System.out.println(getChName() + " heals itself for " + genHeal() + " hit points.");
+        StringBuilder special = new StringBuilder();
+        if (getHp() < 150) {
+            int healPoints = genHeal();
+            setHp(getHp() + healPoints);
+            special.append(getChName()).append(" heals itself for ").append(healPoints).append(" hit points!\n");
         }
+        return special.toString();
     }
 
     /**
