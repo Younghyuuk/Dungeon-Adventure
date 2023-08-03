@@ -1,7 +1,5 @@
 package Model;
 
-import java.util.Random;
-
 /**
  * This class represents a single, randomly generated, room.
  */
@@ -206,7 +204,6 @@ public class Room {
             }
             sb.append("\n"); // Move to the next line after each row
         }
-
         return sb.toString();
     }
 }

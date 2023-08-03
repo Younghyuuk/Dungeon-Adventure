@@ -39,53 +39,6 @@ public class MonsterDataBase {
         }
     }
 
-
-    /**
-     * Initialize the monsters table with some default values.
-     * This method is for demonstration purposes only.
-     */
-    public void initializeDatabase() {
-        createTable();
-
-        String[] monsterNames = {"Ogre", "skeleton", "Gremlin"};
-        int[] hpValues = {200, 100, 70};
-        int[] attackSpeedValues = {2, 3, 5};
-        int[] minDamageValues = {30, 30, 15};
-        int[] maxDamageValues = {60, 50, 30};
-        double[] hitChanceValues = {0.6, 0.8, 0.8};
-        int[] minHealValues = {30, 30, 20};
-        int[] maxHealValues = {60, 50, 40};
-        double[] chanceHealValues = {0.1, 0.3, 0.4};
-
-        for (int i = 0; i < monsterNames.length; i++) {
-            String name = monsterNames[i];
-            int hp = hpValues[i];
-            int attackSpeed = attackSpeedValues[i];
-            int minDamage = minDamageValues[i];
-            int maxDamage = maxDamageValues[i];
-            double hitChance = hitChanceValues[i];
-            int minHeal = minHealValues[i];
-            int maxHeal = maxHealValues[i];
-            double chanceHeal = chanceHealValues[i];
-
-            Monster monster = null;
-            switch (name) {
-                case "Ogre" -> monster = new Ogre(hp, attackSpeed, minDamage, maxDamage, hitChance,
-                        chanceHeal, minHeal, maxHeal, myGamePanel);
-                case "skeleton" -> monster = new Skeleton(hp, attackSpeed, minDamage, maxDamage, hitChance,
-                        chanceHeal, minHeal, maxHeal, myGamePanel);
-                case "Gremlin" -> monster = new Gremlin(hp, attackSpeed, minDamage, maxDamage, hitChance,
-                        chanceHeal, minHeal, maxHeal, myGamePanel);
-            }
-
-            if (monster != null) {
-                insertMonster(monster);
-            }
-        }
-    }
-
-
-
     /**
      * Get a connection to the database.
      *
@@ -169,6 +122,53 @@ public class MonsterDataBase {
 
         return null;
     }
+
+
+    /**
+     * Initialize the monsters table with some default values.
+     * This method is for demonstration purposes only.
+     */
+    /*
+    public void initializeDatabase() {
+        createTable();
+
+        String[] monsterNames = {"Ogre", "skeleton", "Gremlin"};
+        int[] hpValues = {200, 100, 70};
+        int[] attackSpeedValues = {2, 3, 5};
+        int[] minDamageValues = {30, 30, 15};
+        int[] maxDamageValues = {60, 50, 30};
+        double[] hitChanceValues = {0.6, 0.8, 0.8};
+        int[] minHealValues = {30, 30, 20};
+        int[] maxHealValues = {60, 50, 40};
+        double[] chanceHealValues = {0.1, 0.3, 0.4};
+
+        for (int i = 0; i < monsterNames.length; i++) {
+            String name = monsterNames[i];
+            int hp = hpValues[i];
+            int attackSpeed = attackSpeedValues[i];
+            int minDamage = minDamageValues[i];
+            int maxDamage = maxDamageValues[i];
+            double hitChance = hitChanceValues[i];
+            int minHeal = minHealValues[i];
+            int maxHeal = maxHealValues[i];
+            double chanceHeal = chanceHealValues[i];
+
+            Monster monster = null;
+            switch (name) {
+                case "Ogre" -> monster = new Ogre(hp, attackSpeed, minDamage, maxDamage, hitChance,
+                        chanceHeal, minHeal, maxHeal, myGamePanel);
+                case "skeleton" -> monster = new Skeleton(hp, attackSpeed, minDamage, maxDamage, hitChance,
+                        chanceHeal, minHeal, maxHeal, myGamePanel);
+                case "Gremlin" -> monster = new Gremlin(hp, attackSpeed, minDamage, maxDamage, hitChance,
+                        chanceHeal, minHeal, maxHeal, myGamePanel);
+            }
+
+            if (monster != null) {
+                insertMonster(monster);
+            }
+        }
+    }
+*/
 
 }
 
