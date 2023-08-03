@@ -129,17 +129,13 @@ public class Battle {
             attackLog.append(myMonster.getChName()).append(" has ").append(myMonster.getHp()).append(" hit points remaining.\n");
         } else {
             attackLog.append(myHero.specialSkill(myMonster));
-//            if (myHero.getChName().equals("Priestess")) {
-//                attackLog.append(myHero.specialSkill(myMonster));
-////                attackLog.append(myHero.getChName()).append(" uses HEAL ").append(myHero.getChName())
-////                        .append(" new hp is ").append(myHero.getHp()).append("\n");
-//            } else if (myHero.getChName().equals("Warrior")) {
-//                attackLog.append(myHero.getChName()).append(" uses CRUSHING BLOW ").append(myMonster.getChName())
-//                        .append(" gets hit, new hp is ").append(myMonster.getHp()).append("\n");
-//            } else {
-//                attackLog.append(myHero.getChName()).append(" uses SURPRISE ATTACK ").append(myMonster.getChName())
-//                        .append(" new hp is ").append(myMonster.getHp()).append("\n");
-//            }
+            if (myHero.getChName().equals("Priestess")) {
+                attackLog.append(myHero.getChName()).append(" new hp is ").append(myHero.getHp()).append("\n");
+            } else if (myHero.getChName().equals("Warrior")) {
+                attackLog.append(myMonster.getChName()).append(" new hp is ").append(myMonster.getHp()).append("\n");
+            } else {
+                attackLog.append(myMonster.getChName()).append(" new hp is ").append(myMonster.getHp()).append("\n");
+            }
 
         }
 

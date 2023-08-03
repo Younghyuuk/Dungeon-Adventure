@@ -114,11 +114,10 @@ public class Priestess extends Heroes {
     public String specialSkill(final DungeonCharacter theAlly) {
         // set hp of Priestess and not the monster
         StringBuilder special = new StringBuilder();
-        if (getHp() < 100) {
+        if (getHp() < 150) {
             int healPoints = genHeal();
             setHp(getHp() + healPoints);
             special.append(getChName()).append(" heals itself for ").append(healPoints).append(" hit points!\n");
-//            System.out.println(getChName() + " heals itself for " + genHeal() + " hit points.");
         }
         return special.toString();
     }
