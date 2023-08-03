@@ -1,5 +1,12 @@
 package Model;
 
+import View.GamePanel;
+
+import java.io.IOException;
+import java.util.Objects;
+
+import static javax.imageio.ImageIO.read;
+
 /**
  * Skeleton class that extends monster one of the mobs
  * for the game.
@@ -57,8 +64,9 @@ public class Skeleton extends Monster{
      *
      */
     protected Skeleton(int theHp, int theAttackSpeed, int theMinDamage, int theMaxDamage, double theHitChance,
-                      double theChanceHeal, int theMinHeal, int theMaxHeal) {
-        super(theHp, "skeleton", theAttackSpeed, theMinDamage, theMaxDamage, theHitChance, theChanceHeal, theMinHeal, theMaxHeal);
+                       double theChanceHeal, int theMinHeal, int theMaxHeal, GamePanel theGamePanel) {
+        super(theHp, "skeleton", theAttackSpeed, theMinDamage, theMaxDamage, theHitChance, theChanceHeal, theMinHeal, theMaxHeal,theGamePanel);
+        getMonsterImage();
     }
 
     /**
@@ -73,8 +81,17 @@ public class Skeleton extends Monster{
 
     @Override
     public void getMonsterImage() {
+        try {
+            img1 = read(Objects.requireNonNull(getClass().getResourceAsStream("/skeleton/skele0.png")));
+            img2 = read(Objects.requireNonNull(getClass().getResourceAsStream("/skeleton/skele1.png")));
 
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
+
+
+
 
 //    /**
 //     * Heal potential for skeleton.

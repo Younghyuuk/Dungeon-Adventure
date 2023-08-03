@@ -1,5 +1,7 @@
 package Model;
 
+import View.GamePanel;
+
 /**
  * Creates the abstract class DungeonCharacter which other
  * classes extends from like Hero and Monster.
@@ -39,6 +41,8 @@ public abstract class DungeonCharacter {
      */
     private double myHitChance;
 
+    public GamePanel myGamePanel;
+
     /**
      * The constructor of DungeonCharacter that initializes the hp, name, attack speed,
      * minimum damage, maximum damage, and the hitchance of the character.
@@ -52,13 +56,14 @@ public abstract class DungeonCharacter {
      */
     protected DungeonCharacter(int theHp, String theChName, int theAttackSpeed,
                                int theMinDamage, int theMaxDamage,
-                               double theHitChance) {
+                               double theHitChance, GamePanel theGamePanel) {
         myHp = theHp;
         myChName = theChName;
         myAttackSpeed = theAttackSpeed;
         myMinDamage = theMinDamage;
         myMaxDamage = theMaxDamage;
         myHitChance = theHitChance;
+        myGamePanel = theGamePanel;
     }
 
     /**

@@ -1,6 +1,11 @@
 package Model;
 
-import java.util.UUID;
+import View.GamePanel;
+
+import java.io.IOException;
+import java.util.Objects;
+
+import static javax.imageio.ImageIO.read;
 
 public class Gremlin extends Monster {
 //    /**
@@ -57,8 +62,9 @@ public class Gremlin extends Monster {
 
     //Testing out a new Sqlite database implemented way
     protected Gremlin(int theHp, int theAttackSpeed, int theMinDamage, int theMaxDamage, double theHitChance,
-                      double theChanceHeal, int theMinHeal, int theMaxHeal) {
-        super(theHp, "Gremlin", theAttackSpeed, theMinDamage, theMaxDamage, theHitChance, theChanceHeal, theMinHeal, theMaxHeal);
+                      double theChanceHeal, int theMinHeal, int theMaxHeal, GamePanel theGamePanel) {
+        super(theHp, "Gremlin", theAttackSpeed, theMinDamage, theMaxDamage, theHitChance, theChanceHeal, theMinHeal, theMaxHeal,theGamePanel);
+        getMonsterImage();
     }
 
 
@@ -74,6 +80,17 @@ public class Gremlin extends Monster {
     @Override
     public void regularAttack(final DungeonCharacter theOpp) {
         attackBehavior(theOpp);
+    }
+
+    @Override
+    public void getMonsterImage() {
+        try {
+            img1 = read(Objects.requireNonNull(getClass().getResourceAsStream("/skeleton/skele0.png")));
+            img2 = read(Objects.requireNonNull(getClass().getResourceAsStream("/skeleton/skele1.png")));
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 //    /**

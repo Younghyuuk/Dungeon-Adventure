@@ -54,7 +54,7 @@ public abstract class Heroes extends DungeonCharacter {
     protected Heroes(final int theHp, final String theChName, final int theAttackSpeed, final int theMinDamage, final int theMaxDamage,
                      final double theHitChance, final double theBlockChance, final GamePanel theGamePanel, final Keyboard theKeyBoard) {
 
-        super(theHp, theChName, theAttackSpeed, theMinDamage, theMaxDamage, theHitChance);
+        super(theHp, theChName, theAttackSpeed, theMinDamage, theMaxDamage, theHitChance, theGamePanel);
 
         myGamePanel = theGamePanel;
         myKeyInputs = theKeyBoard;

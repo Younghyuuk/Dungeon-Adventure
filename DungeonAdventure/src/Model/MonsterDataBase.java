@@ -1,6 +1,7 @@
 package Model;
 
 
+import View.GamePanel;
 import org.sqlite.SQLiteDataSource;
 
 import java.sql.*;
@@ -8,10 +9,10 @@ import java.sql.*;
 public class MonsterDataBase {
 
     private static final String DB_URL = "jdbc:sqlite:monsters.db";
+    private GamePanel myGamePanel;
 
-
-    public MonsterDataBase() {
-
+    public MonsterDataBase(GamePanel theGamePanel) {
+        myGamePanel = theGamePanel;
 //        initializeDatabase();
     }
 
@@ -69,11 +70,11 @@ public class MonsterDataBase {
             Monster monster = null;
             switch (name) {
                 case "Ogre" -> monster = new Ogre(hp, attackSpeed, minDamage, maxDamage, hitChance,
-                        chanceHeal, minHeal, maxHeal);
+                        chanceHeal, minHeal, maxHeal, myGamePanel);
                 case "skeleton" -> monster = new Skeleton(hp, attackSpeed, minDamage, maxDamage, hitChance,
-                        chanceHeal, minHeal, maxHeal);
+                        chanceHeal, minHeal, maxHeal, myGamePanel);
                 case "Gremlin" -> monster = new Gremlin(hp, attackSpeed, minDamage, maxDamage, hitChance,
-                        chanceHeal, minHeal, maxHeal);
+                        chanceHeal, minHeal, maxHeal, myGamePanel);
             }
 
             if (monster != null) {
@@ -152,15 +153,15 @@ public class MonsterDataBase {
                     switch (name) {
                         case "Ogre" -> {
                             return new Ogre(hp, attackSpeed, minDamage, maxDamage, hitChance,
-                                    chanceHeal, minHeal, maxHeal);
+                                    chanceHeal, minHeal, maxHeal,myGamePanel);
                         }
-                        case "skeleton" -> {
+                        case "Skeleton" -> {
                             return new Skeleton(hp, attackSpeed, minDamage, maxDamage, hitChance,
-                                    chanceHeal, minHeal, maxHeal);
+                                    chanceHeal, minHeal, maxHeal,myGamePanel);
                         }
                         case "Gremlin" -> {
                             return new Gremlin(hp, attackSpeed, minDamage, maxDamage, hitChance,
-                                    chanceHeal, minHeal, maxHeal);
+                                    chanceHeal, minHeal, maxHeal, myGamePanel);
                         }
                     }
                 }
