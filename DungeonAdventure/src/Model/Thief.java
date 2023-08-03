@@ -3,7 +3,6 @@ package Model;
 import Control.Keyboard;
 import View.GamePanel;
 
-import javax.imageio.ImageIO;
 import java.io.IOException;
 import java.util.Objects;
 
