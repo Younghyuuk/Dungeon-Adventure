@@ -5,6 +5,7 @@ import Model.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.List;
 
 public class GamePanel extends JPanel implements Runnable {
 
@@ -19,7 +20,7 @@ public class GamePanel extends JPanel implements Runnable {
     private final static int FPS = 60;
 
     //We may need to pass this from mainframe and play with the gamestate to load new dungeons.=
-    final Dungeon myDungeon = new Dungeon();
+    private final Dungeon myDungeon = new Dungeon();
     // these values will be dependent on Dungeon Maze array size.
     /**
      * The width of the world map as a 2d array
@@ -38,6 +39,9 @@ public class GamePanel extends JPanel implements Runnable {
     private final TitlePage myTitlePage = new TitlePage(this);
     private final CharacterSelectionPage myCharacterSelectionPage = new CharacterSelectionPage(this);
     private final AboutPage myAboutPage = new AboutPage(this);
+    InitiateEntites myIE = new InitiateEntites(this);
+    List<Monster> myMonsterArray = myIE.getMyMonsterArray();
+
     private Heroes myHero;
 
     private int myGameState;
@@ -45,6 +49,7 @@ public class GamePanel extends JPanel implements Runnable {
     private final static int CHARACTER_STATE = 1;
     private final static int PLAY_STATE = 2;
     private boolean myAboutState = false;
+
 
 
     public GamePanel() {
@@ -95,6 +100,10 @@ public class GamePanel extends JPanel implements Runnable {
 
     public int getMyWorldRow() {
         return myWorldRow;
+    }
+
+    public Dungeon getMyDungeon() {
+        return myDungeon;
     }
 
     public Heroes getMyHero() {
@@ -171,6 +180,9 @@ public class GamePanel extends JPanel implements Runnable {
         } else if (myGameState == PLAY_STATE) {
             myTileM.draw(pen);
             myHero.draw(pen);
+            for (Monster list : myMonsterArray){
+                list.draw(pen);
+            }
             if (myAboutState) {
                 myAboutPage.draw(pen);
             }

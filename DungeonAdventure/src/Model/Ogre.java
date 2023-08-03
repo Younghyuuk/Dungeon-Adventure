@@ -1,6 +1,11 @@
 package Model;
 
-import java.util.UUID;
+import View.GamePanel;
+
+import java.io.IOException;
+import java.util.Objects;
+
+import static javax.imageio.ImageIO.read;
 
 public class Ogre extends Monster {
 
@@ -9,9 +14,10 @@ public class Ogre extends Monster {
      * The constructor of Monster that sets up the stats for Ogre class.
      */
     protected Ogre(int theHp, int theAttackSpeed, int theMinDamage, int theMaxDamage, double theHitChance,
-                      double theChanceHeal, int theMinHeal, int theMaxHeal) {
+                   double theChanceHeal, int theMinHeal, int theMaxHeal, GamePanel theGamePanel) {
         super(theHp, "Ogre", theAttackSpeed, theMinDamage, theMaxDamage, theHitChance, theChanceHeal,
-                theMinHeal, theMaxHeal);
+                theMinHeal, theMaxHeal, theGamePanel);
+        getMonsterImage();
     }
 
     /**
@@ -24,5 +30,16 @@ public class Ogre extends Monster {
         attackBehavior(theOpp);
     }
 
+
+    @Override
+    public void getMonsterImage() {
+        try {
+            img1 = read(Objects.requireNonNull(getClass().getResourceAsStream("/skeleton/skele0.png")));
+            img2 = read(Objects.requireNonNull(getClass().getResourceAsStream("/skeleton/skele1.png")));
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
 }

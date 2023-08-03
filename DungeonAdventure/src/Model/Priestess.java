@@ -1,9 +1,8 @@
 package Model;
 
-import View.GamePanel;
 import Control.Keyboard;
+import View.GamePanel;
 
-import java.awt.*;
 import java.io.IOException;
 import java.util.Objects;
 
