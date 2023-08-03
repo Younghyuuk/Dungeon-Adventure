@@ -104,11 +104,9 @@ public class Warrior extends Heroes {
             theOpp.subtractHp(damage);
             special.append("Warrior delivers CRUSHING BLOW to ").append(theOpp.getChName()).append(" for ")
                     .append(damage).append(" damage!\n");
-//            System.out.println("Warrior delivers crushing blow to " + theOpp.getChName() +
-//                    " for " + damage + " damage.");
         } else {
             special.append("Crushing blow failed\n");
-//            System.out.println("Crushing blow failed!");
+
         }
         return special.toString();
     }
