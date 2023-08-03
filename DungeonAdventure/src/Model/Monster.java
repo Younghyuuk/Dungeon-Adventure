@@ -74,14 +74,17 @@ public abstract class Monster extends DungeonCharacter {
 
 
     // new tester heal for all monster since all stats are from sqlite database
-    public void heal() {
+    public String heal() {
         double random = Math.random();
-
+        StringBuilder healLog = new StringBuilder();
         if (random <= getChanceHeal() && getHp() < myMaxHealth) {
             int healPoints = (int) Math.floor(Math.random() * (getMaxHeal() - getMinHeal()) + getMinHeal());
             setHp(getHp() + healPoints);
-            System.out.println(getChName() + " heals itself for " + healPoints + " hit points.");
+            healLog.append(getChName()).append(" heals itself for ").append(healPoints).
+                    append(" hit points!").append("\n");
+//            System.out.println(getChName() + " heals itself for " + healPoints + " hit points.");
         }
+        return healLog.toString();
     }
     public void draw(final Graphics2D theGraphics){
 

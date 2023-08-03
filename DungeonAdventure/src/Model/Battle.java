@@ -124,7 +124,7 @@ public class Battle {
         if (Math.random() <= 0.7) {
 
             attackLog.append(myHero.regularAttack(myMonster));
-            attackLog.append(myHero.getChName()).append(" tries to hit ").append(myMonster.getChName()).append("\n");
+
 
             attackLog.append(myMonster.getChName()).append(" has ").append(myMonster.getHp()).append(" hit points remaining.\n");
         } else {
@@ -156,16 +156,15 @@ public class Battle {
      */
     private String monsterAttack() {
         StringBuilder attackLog = new StringBuilder();
+        attackLog.append(myHero.getChName()).append(" original hp is ").append(myHero.getHp()).append("\n");
+        attackLog.append(myMonster.getChName()).append(" original hp is ").append(myMonster.getHp()).append("\n");
 
-        attackLog.append(myHero.getChName()).append(" original hp ").append(myHero.getHp()).append("\n");
-        myMonster.regularAttack(myHero);
-        attackLog.append(myMonster.getChName()).append(" tries to hit ").append(myHero.getChName()).append("\n");
-
+        attackLog.append(myMonster.regularAttack(myHero));
         attackLog.append(myHero.getChName()).append(" has ").append(myHero.getHp()).append(" hit points remaining.\n");
 
         attackLog.append(myMonster.getChName()).append(" tries to heal, original health is ").
                 append(myMonster.getHp()).append("\n");
-        myMonster.heal();
+        attackLog.append(myMonster.heal());
         attackLog.append(myMonster.getChName()).append(" new hp is ").append(myMonster.getHp()).append("\n");
 
         return attackLog.toString();
