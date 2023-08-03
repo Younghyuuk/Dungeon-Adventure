@@ -183,7 +183,7 @@ public abstract class Heroes extends DungeonCharacter {
      *
      * @param theTarget which the special skill will be aimed towards.
      */
-    public abstract void specialSkill(DungeonCharacter theTarget);
+    public abstract String specialSkill(DungeonCharacter theTarget);
 
     /**
      * Gets the block chance of the hero.

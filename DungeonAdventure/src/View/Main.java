@@ -16,7 +16,7 @@ public class Main {
 
         GamePanel gp = new GamePanel();
         Keyboard kb = new Keyboard(gp);
-        Heroes myHero = new Warrior(gp, kb);
+        Heroes myHero = new Priestess(gp, kb);
         Monster myMonster = new MonsterDataBase(gp).getRandomMonster();
 
         Battle newBattle = new Battle(myHero, myMonster);
