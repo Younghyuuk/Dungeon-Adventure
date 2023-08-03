@@ -49,4 +49,5 @@ public class Gremlin extends Monster {
             throw new RuntimeException(e);
         }
     }
+
 }

@@ -50,4 +50,5 @@ public class Skeleton extends Monster{
             throw new RuntimeException(e);
         }
     }
+
 }
