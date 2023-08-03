@@ -74,7 +74,7 @@ public class TileManager {
 
             int worldX = worldCol * myGamePanel.getSpriteSize();
             int worldY = worldRow * myGamePanel.getSpriteSize();
-            // myThief may need to change.
+
             int screenX = worldX - myGamePanel.getMyHero().getMyWorldXCoordinate() + myGamePanel.getMyHero().getMyScreensMiddleX();
             int screenY = worldY - myGamePanel.getMyHero().getMyWorldYCoordinate() + myGamePanel.getMyHero().getMyScreensMiddleY();
 
