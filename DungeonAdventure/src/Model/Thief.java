@@ -103,11 +103,17 @@ public class Thief extends Heroes {
 
                 // Perform the extra attack
                 special.append("Thief launches the first attack.\n");
-                special.append(attackBehavior(theOpp)).append("\n");
+                int damage1 = genDamage(getMinDamage(), getMaxDamage());
+                theOpp.setHp(damage1);
+                special.append(theOpp.getChName()).append(" gets hit for ").append(damage1)
+                        .append(" damage! ").append("\n");
 
                 // Perform the second attack
                 special.append("Thief strikes again for the second attack\n");
-                special.append(attackBehavior(theOpp)).append("\n");
+                int damage2 = genDamage(getMinDamage(), getMaxDamage());
+                theOpp.setHp(damage2);
+                special.append(theOpp.getChName()).append(" gets hit for ").append(damage2)
+                        .append(" damage! ").append("\n");
             }
         } else {
             special.append("Thief fails to execute the surprise attack!\n");
