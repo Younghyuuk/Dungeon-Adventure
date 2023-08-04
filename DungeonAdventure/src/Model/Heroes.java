@@ -87,10 +87,11 @@ public abstract class Heroes extends DungeonCharacter {
         // Checking Map Tile Collision
         myCollision = false;
         myGamePanel.getMyCollision().checkTile(this);
-
         //Check Collision with Monsters
         int monster = myGamePanel.getMyCollision().checkEntity(this, myGamePanel.getMyMonsterArray());
         interactMonster(monster);
+        //Check Collision with Four Pillars
+        int pillar = myGamePanel.getMyCollision().checkPillar(this, myGamePanel.getMyPillarArray());
 
         if (myKeyInputs.up || myKeyInputs.down || myKeyInputs.left || myKeyInputs.right) {
             if (!myCollision) {
@@ -145,8 +146,6 @@ public abstract class Heroes extends DungeonCharacter {
         // Draw my hero in the middle of the viewable screen.
         theGraphics.drawImage(image, myScreensMiddleX, myScreensMiddleY, myGamePanel.getSpriteSize(), myGamePanel.getSpriteSize(), null);
 
-        // draw the rectangle that acts as the collision indicator.
-        theGraphics.drawRect(myScreensMiddleX + getMySolidArea().x, myScreensMiddleY + mySolidArea.y, mySolidArea.width, mySolidArea.height);
     }
 
     public abstract void getHeroesImage();

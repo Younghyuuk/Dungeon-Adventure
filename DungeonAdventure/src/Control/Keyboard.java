@@ -35,7 +35,7 @@ public class Keyboard implements KeyListener {
                     break;
                 case KeyEvent.VK_ENTER:
                     if (myGamePanel.getMyTitlePage().getMyCommandNum() == 0) {
-
+                        myGamePanel.setNewGame();
                         myGamePanel.setMyGameState(1);
                     }
             }
@@ -93,12 +93,29 @@ public class Keyboard implements KeyListener {
                 myGamePanel.setMyGameState(2);
             }
         }
+        else if (myGamePanel.getMyGameState() == 4) {
+            int code = e.getKeyCode();
+            switch (code) {
+                case KeyEvent.VK_W:
+                    myGamePanel.getMyGameOver().setCommandToNewGame();
+                    break;
+                case KeyEvent.VK_S:
+                    myGamePanel.getMyGameOver().setCommandToLoadGame();
+                    break;
+                case KeyEvent.VK_ENTER:
+                    if (myGamePanel.getMyGameOver().getMyCommandNum() == 0) {
+                        myGamePanel.resetGame();
+                        myGamePanel.setMyGameState(2);
+                    } else {
+                        System.exit(0);
+                    }
+                    break;
+            }
+        }
     }
 
     @Override
     public void keyReleased(final KeyEvent e) {
-
-        if (myGamePanel.getMyGameState() == 2 ||myGamePanel.getMyGameState() == 3) {
             int code = e.getKeyCode();
             switch (code) {
                 case KeyEvent.VK_W:
@@ -116,6 +133,5 @@ public class Keyboard implements KeyListener {
                 default:
                     break;
             }
-        }
     }
 }

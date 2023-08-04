@@ -133,11 +133,8 @@ public class Battle {
 
         }
 
-
-
         return attackLog.toString();
     }
-
 
     /**
      * Give the log of monsters attacks and special ability making it all into a String
