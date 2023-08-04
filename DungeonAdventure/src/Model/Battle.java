@@ -70,18 +70,17 @@ public class Battle {
                 sb.append(heroAttack());
 
                 if(myMonster.isAlive()) {
-                    sb.append(myMonster.getChName()).append("s turn \n");
                     if (Math.random() > myHero.getBlockChance()) {
                         sb.append(monsterAttack());
                     } else {
-                        sb.append("Hero blocks attack, hp is still ").append(myHero.getHp()).append((" \n"));
+                        sb.append("Hero blocks attack, hp is still ").append(myHero.getHp()).append((". \n"));
                     }
                 }
 
                 //If Monster is faster this sequence happens
             } else {
 
-                sb.append(myMonster.getChName()).append("s turn \n");
+//                sb.append(myMonster.getChName()).append("s turn \n");
 
                 if (Math.random() > myHero.getBlockChance()) {
                     sb.append(monsterAttack());
@@ -117,9 +116,6 @@ public class Battle {
      */
     private String heroAttack() {
         StringBuilder attackLog = new StringBuilder();
-        attackLog.append("Players turn: ").append(myHero.getChName()).append(" \n");
-//        attackLog.append(myHero.getChName()).append(" original hp is ").append(myHero.getHp()).append("\n");
-//        attackLog.append(myMonster.getChName()).append(" original hp is ").append(myMonster.getHp()).append("\n");
         if (Math.random() <= 0.7) {
 
             attackLog.append(myHero.regularAttack(myMonster));
@@ -153,8 +149,6 @@ public class Battle {
      */
     private String monsterAttack() {
         StringBuilder attackLog = new StringBuilder();
-//        attackLog.append(myHero.getChName()).append(" original hp is ").append(myHero.getHp()).append("\n");
-//        attackLog.append(myMonster.getChName()).append(" original hp is ").append(myMonster.getHp()).append("\n");
 
         attackLog.append(myMonster.regularAttack(myHero));
         attackLog.append(myHero.getChName()).append(" has ").append(myHero.getHp()).append(" hit points remaining. \n");
