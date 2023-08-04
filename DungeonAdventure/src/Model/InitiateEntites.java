@@ -41,7 +41,7 @@ public class InitiateEntites {
             myMonsterArray.add(aMonster2);
         }
         for (int i = 1; i <= dungeonW; i++) {
-            for (int j = 1; j < dungeonH; j++) {
+            for (int j = 2; j < dungeonH; j++) {
                 if (i == 4 && j == 4) {
                     // Starting point. Do not have the monster here.
                 } else {
