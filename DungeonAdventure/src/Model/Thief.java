@@ -97,7 +97,7 @@ public class Thief extends Heroes {
             if (random <= SURPRISE_FAIL_CHANCE) {
                 special.append("Oh no! Thief got caught in the surprise attack and misses! \n");
             } else {
-                special.append("Thief successfully performs the surprise attack! \n");
+                special.append("Thief hits the surprise attack! \n");
 
 
                 // Perform the extra attack
@@ -105,17 +105,17 @@ public class Thief extends Heroes {
                 int damage1 = genDamage(getMinDamage(), getMaxDamage());
                 theOpp.setHp(damage1);
                 special.append(theOpp.getChName()).append(" gets hit for ").append(damage1)
-                        .append(" damage! \n");
+                        .append("! \n");
 
                 // Perform the second attack
                 special.append("Thief strikes again for the second attack \n");
                 int damage2 = genDamage(getMinDamage(), getMaxDamage());
                 theOpp.setHp(damage2);
                 special.append(theOpp.getChName()).append(" gets hit for ").append(damage2)
-                        .append(" damage! \n");
+                        .append("! \n");
             }
         } else {
-            special.append("Thief fails to execute the surprise attack! \n");
+            special.append("Thief fails the surprise attack! \n");
         }
         return special.toString();
     }

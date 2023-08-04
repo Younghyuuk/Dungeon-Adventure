@@ -179,6 +179,8 @@ public abstract class DungeonCharacter {
             theOpp.subtractHp(damage);
             attack.append(getChName()).append(" hits ").append(theOpp.getChName()).append(" for ")
                             .append(damage).append(" damage! \n");
+            attack.append(theOpp.getChName()).append(" has ").append(theOpp.getHp()).
+                    append(" hp remaining. \n");
 //            System.out.println(getChName() + " hits " + theOpp.getChName() +
 //                    " for " + damage + " damage.");
         } else {

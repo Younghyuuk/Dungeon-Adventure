@@ -73,6 +73,7 @@ public abstract class Monster extends DungeonCharacter {
             setHp(getHp() + healPoints);
             healLog.append(getChName()).append(" heals itself for ").append(healPoints).
                     append(" hit points! \n");
+            healLog.append(getChName()).append(" new hp is ").append(getHp()).append(". \n");
         }
         return healLog.toString();
     }
