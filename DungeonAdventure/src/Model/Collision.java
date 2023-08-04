@@ -110,7 +110,6 @@ public class Collision {
                             mon.isDead = true;
                             index = i++;
                             myGamePanel.setMyGameState(3);
-                            mon
                         }
                         break;
                 }
