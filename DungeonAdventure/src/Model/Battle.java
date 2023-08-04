@@ -122,7 +122,7 @@ public class Battle {
 
 
             attackLog.append(myMonster.getChName()).append(" has ").append(myMonster.getHp()).
-                    append(" hit points remaining. \n");
+                    append(" hp remaining. \n");
         } else {
             attackLog.append(myHero.specialSkill(myMonster));
             if (myHero.getChName().equals("Priestess")) {
@@ -151,7 +151,7 @@ public class Battle {
         StringBuilder attackLog = new StringBuilder();
 
         attackLog.append(myMonster.regularAttack(myHero));
-        attackLog.append(myHero.getChName()).append(" has ").append(myHero.getHp()).append(" hit points remaining. \n");
+        attackLog.append(myHero.getChName()).append(" has ").append(myHero.getHp()).append(" hp remaining. \n");
 
         attackLog.append(myMonster.getChName()).append(" tries to heal, original health is ").
                 append(myMonster.getHp()).append(". \n");
