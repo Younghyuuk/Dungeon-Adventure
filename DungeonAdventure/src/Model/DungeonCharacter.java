@@ -178,12 +178,12 @@ public abstract class DungeonCharacter {
             int damage = genDamage(getMinDamage(), getMaxDamage());
             theOpp.subtractHp(damage);
             attack.append(getChName()).append(" hits ").append(theOpp.getChName()).append(" for ")
-                            .append(damage).append(" damage!").append("\n");
+                            .append(damage).append(" damage! \n");
 //            System.out.println(getChName() + " hits " + theOpp.getChName() +
 //                    " for " + damage + " damage.");
         } else {
             attack.append("Aw ").append(getChName()).
-                    append(" misses horribly!").append("\n");
+                    append(" misses horribly! \n");
 //            System.out.println("Aw " + getChName() + " misses horribly!");
         }
         return attack.toString();

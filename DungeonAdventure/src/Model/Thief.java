@@ -92,30 +92,30 @@ public class Thief extends Heroes {
 
         double random = Math.random();
         StringBuilder special = new StringBuilder();
-        special.append("Thief launches special skill surprise attack!\n");
+        special.append("Thief launches special skill surprise attack! \n");
         if (random <= SURPRISE_ATTACK_CHANCE) {
             if (random <= SURPRISE_FAIL_CHANCE) {
-                special.append("Oh no! Thief got caught in the surprise attack and misses!\n");
+                special.append("Oh no! Thief got caught in the surprise attack and misses! \n");
             } else {
-                special.append("Thief successfully performs the surprise attack!\n");
+                special.append("Thief successfully performs the surprise attack! \n");
 
 
                 // Perform the extra attack
-                special.append("Thief launches the first attack.\n");
+                special.append("Thief launches the first attack. \n");
                 int damage1 = genDamage(getMinDamage(), getMaxDamage());
                 theOpp.setHp(damage1);
                 special.append(theOpp.getChName()).append(" gets hit for ").append(damage1)
-                        .append(" damage! ").append("\n");
+                        .append(" damage! \n");
 
                 // Perform the second attack
-                special.append("Thief strikes again for the second attack\n");
+                special.append("Thief strikes again for the second attack \n");
                 int damage2 = genDamage(getMinDamage(), getMaxDamage());
                 theOpp.setHp(damage2);
                 special.append(theOpp.getChName()).append(" gets hit for ").append(damage2)
-                        .append(" damage! ").append("\n");
+                        .append(" damage! \n");
             }
         } else {
-            special.append("Thief fails to execute the surprise attack!\n");
+            special.append("Thief fails to execute the surprise attack! \n");
         }
         return special.toString();
     }
