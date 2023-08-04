@@ -26,7 +26,7 @@ public class Thief extends Heroes {
     /**
      * Hp of thief.
      */
-    private static final int HP = 75;
+    private static final int HP = 100;
 
     /**
      * The name of the character.
@@ -46,7 +46,7 @@ public class Thief extends Heroes {
     /**
      * Maximum damage of thief.
      */
-    private static final int MAX_DAMAGE = 40;
+    private static final int MAX_DAMAGE = 50;
 
     /**
      * Hit chance of thief.

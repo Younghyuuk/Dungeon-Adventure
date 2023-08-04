@@ -32,7 +32,7 @@ public class Warrior extends Heroes {
     /**
      * Hp of Warrior.
      */
-    private static final int HP = 125;
+    private static final int HP = 150;
 
     /**
      * The name of the character.

@@ -154,9 +154,9 @@ public class Battle {
         attackLog.append(myHero.getChName()).append(" has ").append(myHero.getHp()).append(" hit points remaining. \n");
 
         attackLog.append(myMonster.getChName()).append(" tries to heal, original health is ").
-                append(myMonster.getHp()).append(" \n");
+                append(myMonster.getHp()).append(". \n");
         attackLog.append(myMonster.heal());
-        attackLog.append(myMonster.getChName()).append(" new hp is ").append(myMonster.getHp()).append(" \n");
+        attackLog.append(myMonster.getChName()).append(" new hp is ").append(myMonster.getHp()).append(". \n");
 
         return attackLog.toString();
     }
