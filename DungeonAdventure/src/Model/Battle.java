@@ -61,8 +61,7 @@ public class Battle {
 
     public void startBattle() {
         StringBuilder sb = new StringBuilder();
-        sb.append(myHero.getChName()).append(" engages in battle with ").append(myMonster.getChName()).append("\n");
-        sb.append("==============================================").append("\n");
+        sb.append(myHero.getChName()).append(" engages in battle with ").append(myMonster.getChName()).append(". \n");
 
         while (myHero.isAlive() && myMonster.isAlive()) {
 
@@ -71,24 +70,23 @@ public class Battle {
                 sb.append(heroAttack());
 
                 if(myMonster.isAlive()) {
-                    sb.append(myMonster.getChName()).append("s turn").append("\n");
                     if (Math.random() > myHero.getBlockChance()) {
                         sb.append(monsterAttack());
                     } else {
-                        sb.append("Hero blocks attack, hp is still ").append(myHero.getHp()).append(("\n"));
+                        sb.append("Hero blocks attack, hp is still ").append(myHero.getHp()).append((". \n"));
                     }
                 }
 
                 //If Monster is faster this sequence happens
             } else {
 
-                sb.append(myMonster.getChName()).append("s turn").append("\n");
+//                sb.append(myMonster.getChName()).append("s turn \n");
 
                 if (Math.random() > myHero.getBlockChance()) {
                     sb.append(monsterAttack());
 
                 } else {
-                    sb.append("Hero blocks attack, hp is still ").append(myHero.getHp()).append(("\n"));
+                    sb.append("Hero blocks attack, hp is still ").append(myHero.getHp()).append((". \n"));
 
                 }
                 if(myHero.isAlive()) {
@@ -99,12 +97,12 @@ public class Battle {
 
         }
 
-        sb.append("==============================================").append("\n");
 
         if (myHero.isAlive()) {
-            sb.append(myHero.getChName()).append(" defeats ").append((myMonster.getChName())).append("\n");
+            sb.append(myHero.getChName()).append(" defeats ").append((myMonster.getChName())).append("! \n");
         } else {
-            sb.append(myHero.getChName()).append(" has been defeated by ").append((myMonster.getChName())).append("\n");
+            sb.append(myHero.getChName()).append(" has been defeated by ").
+                    append((myMonster.getChName())).append("! \n");
         }
         addToLog(sb.toString());
     }
@@ -118,23 +116,21 @@ public class Battle {
      */
     private String heroAttack() {
         StringBuilder attackLog = new StringBuilder();
-        attackLog.append("Players turn: ").append(myHero.getChName()).append("\n");
-        attackLog.append(myHero.getChName()).append(" original hp is ").append(myHero.getHp()).append("\n");
-        attackLog.append(myMonster.getChName()).append(" original hp is ").append(myMonster.getHp()).append("\n");
         if (Math.random() <= 0.7) {
 
             attackLog.append(myHero.regularAttack(myMonster));
 
 
-            attackLog.append(myMonster.getChName()).append(" has ").append(myMonster.getHp()).append(" hit points remaining.\n");
+            attackLog.append(myMonster.getChName()).append(" has ").append(myMonster.getHp()).
+                    append(" hp remaining. \n");
         } else {
             attackLog.append(myHero.specialSkill(myMonster));
             if (myHero.getChName().equals("Priestess")) {
-                attackLog.append(myHero.getChName()).append(" new hp is ").append(myHero.getHp()).append("\n");
+                attackLog.append(myHero.getChName()).append(" new hp is ").append(myHero.getHp()).append(" \n");
             } else if (myHero.getChName().equals("Warrior")) {
-                attackLog.append(myMonster.getChName()).append(" new hp is ").append(myMonster.getHp()).append("\n");
+                attackLog.append(myMonster.getChName()).append(" new hp is ").append(myMonster.getHp()).append(" \n");
             } else {
-                attackLog.append(myMonster.getChName()).append(" new hp is ").append(myMonster.getHp()).append("\n");
+                attackLog.append(myMonster.getChName()).append(" new hp is ").append(myMonster.getHp()).append(" \n");
             }
 
         }
@@ -153,16 +149,14 @@ public class Battle {
      */
     private String monsterAttack() {
         StringBuilder attackLog = new StringBuilder();
-        attackLog.append(myHero.getChName()).append(" original hp is ").append(myHero.getHp()).append("\n");
-        attackLog.append(myMonster.getChName()).append(" original hp is ").append(myMonster.getHp()).append("\n");
 
         attackLog.append(myMonster.regularAttack(myHero));
-        attackLog.append(myHero.getChName()).append(" has ").append(myHero.getHp()).append(" hit points remaining.\n");
+        attackLog.append(myHero.getChName()).append(" has ").append(myHero.getHp()).append(" hp remaining. \n");
 
         attackLog.append(myMonster.getChName()).append(" tries to heal, original health is ").
-                append(myMonster.getHp()).append("\n");
+                append(myMonster.getHp()).append(". \n");
         attackLog.append(myMonster.heal());
-        attackLog.append(myMonster.getChName()).append(" new hp is ").append(myMonster.getHp()).append("\n");
+        attackLog.append(myMonster.getChName()).append(" new hp is ").append(myMonster.getHp()).append(". \n");
 
         return attackLog.toString();
     }
