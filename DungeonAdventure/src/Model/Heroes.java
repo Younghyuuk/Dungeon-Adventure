@@ -45,8 +45,10 @@ public abstract class Heroes extends DungeonCharacter {
 
         myScreensMiddleX = myGamePanel.getMyScreenWidth() / 2 - (myGamePanel.getSpriteSize() / 2);
         myScreensMiddleY = myGamePanel.getMyScreenHeight() / 2 - (myGamePanel.getSpriteSize() / 2);
-        myWorldXCoordinate = (myGamePanel.getMyWorldCol() * myGamePanel.getSpriteSize())/2;
-        myWorldYCoordinate = (myGamePanel.getMyWorldRow() * myGamePanel.getSpriteSize())/2;
+      myWorldXCoordinate = (myGamePanel.getMyWorldCol() * myGamePanel.getSpriteSize())/2;
+      myWorldYCoordinate = (myGamePanel.getMyWorldRow() * myGamePanel.getSpriteSize())/2;
+
+
         mySolidArea = new Rectangle(12, 12, myGamePanel.getSpriteSize() - 24, myGamePanel.getSpriteSize() - 24);
         mySpeed = 6
         ;
@@ -65,7 +67,7 @@ public abstract class Heroes extends DungeonCharacter {
         mySolidArea.y = 12;
     }
     public void interactMonster(int i){
-        if( i != 999){
+        if(i != 999){
             System.out.println("You hit the monster");
         }
 
@@ -88,9 +90,8 @@ public abstract class Heroes extends DungeonCharacter {
 
         //Check Collision with Monsters
         int monster = myGamePanel.getMyCollision().checkEntity(this, myGamePanel.getMyMonsterArray());
-        //FIGHT LOGIC MIGHT GO HERE
         interactMonster(monster);
-        //FIGHT LOGIC MAYBE ABOVE METHOD
+
         if (myKeyInputs.up || myKeyInputs.down || myKeyInputs.left || myKeyInputs.right) {
             if (!myCollision) {
                 switch (myDirection) {

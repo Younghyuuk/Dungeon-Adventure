@@ -17,7 +17,7 @@ public abstract class Monster extends DungeonCharacter {
     private final int myMinHeal;
     private final int myMaxHeal;
     private final int myMaxHealth;
-
+    public boolean isDead = false;
     public int solidAreaDefaultX, solidAreaDefaultY;
     private int actionLockCounter = 0;
 
@@ -77,7 +77,6 @@ public abstract class Monster extends DungeonCharacter {
         }
         return healLog.toString();
     }
-
     public void update() {
         setAction();
         myCollision = false;
