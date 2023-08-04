@@ -32,7 +32,7 @@ public class GamePanel extends JPanel implements Runnable {
      */
     private final int myWorldRow = myDungeon.getDungeonHeight() * myDungeon.getRooms()[0][0].getRoomHeight();
 
-    private final TileManager myTileM = new TileManager(this);
+    private TileManager myTileM = new TileManager(this);
     private final Thread gameThread = new Thread(this);
     private final Collision myCollision = new Collision(this);
     private final Keyboard myKeyInputs = new Keyboard(this);
@@ -40,18 +40,20 @@ public class GamePanel extends JPanel implements Runnable {
     private final CharacterSelectionPage myCharacterSelectionPage = new CharacterSelectionPage(this);
     private final AboutPage myAboutPage = new AboutPage(this);
     private BattlePage myBattlePage = new BattlePage(this);
+    private final GameOver myGameOverPage = new GameOver(this);
     private String[] myBattleLog;
 
     InitiateEntites myIE = new InitiateEntites(this);
     List<Monster> myMonsterArray = myIE.getMyMonsterArray();
 
     private Heroes myHero;
-
+    private int myHeroNum;
     private int myGameState;
     private final static int TITLE_STATE = 0;
     private final static int CHARACTER_STATE = 1;
     private final static int PLAY_STATE = 2;
-    private final static int BATTLE_STATE=3;
+    private final static int BATTLE_STATE = 3;
+    private final static int GAME_OVER_STATE = 4;
     private int count = 0;
     private boolean myAboutState = false;
 
@@ -65,6 +67,19 @@ public class GamePanel extends JPanel implements Runnable {
         setFocusable(true);
         myGameState = TITLE_STATE;
         setMyHero(1);
+    }
+    public void setNewGame(){
+        if (!myMonsterArray.isEmpty()) {
+            myMonsterArray.clear();
+        }
+        myIE.createMonster();
+        myMonsterArray = myIE.getMyMonsterArray();
+    }
+    public void resetGame(){
+        setMyHero(myHeroNum);
+        for (Monster mon : myMonsterArray){
+            mon.resetHP();
+        }
     }
 
     public void setMyBattleLog(String[] theBattleLog){
@@ -80,6 +95,9 @@ public class GamePanel extends JPanel implements Runnable {
     public TitlePage getMyTitlePage() {
         return myTitlePage;
 
+    }
+    public GameOver getMyGameOver(){
+        return myGameOverPage;
     }
     public void setMyDungeon(Dungeon theDungeon){
         myDungeon = theDungeon;
@@ -142,12 +160,15 @@ public class GamePanel extends JPanel implements Runnable {
     public void setMyHero(int number) {
         if (number == 1) {
             myHero = new Thief(this, myKeyInputs);
+            myHeroNum= 1;
         }
         if (number == 2) {
             myHero = new Warrior(this, myKeyInputs);
+            myHeroNum= 2;
         }
         if (number == 3) {
             myHero = new Priestess(this, myKeyInputs);
+            myHeroNum= 3;
         }
     }
 
@@ -180,6 +201,9 @@ public class GamePanel extends JPanel implements Runnable {
             for (Monster mon : myMonsterArray){
                 mon.update();
             }
+        }
+        if (!myHero.isAlive()){
+            setMyGameState(4);
         }
     }
 
@@ -221,10 +245,8 @@ public class GamePanel extends JPanel implements Runnable {
             myBattlePage.draw(pen);
             pen.dispose();
         }
-
-    }
-
-    public void startBattle(Battle theBattle){
-
+        else if(myGameState == GAME_OVER_STATE){
+            myGameOverPage.draw(pen);
+        }
     }
 }

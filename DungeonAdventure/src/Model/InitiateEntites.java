@@ -24,7 +24,6 @@ public class InitiateEntites {
         roomH = myGamePanel.getMyDungeon().getRooms()[0][0].getRoomHeight();
         roomW = myGamePanel.getMyDungeon().getRooms()[0][0].getRoomWidth();
         myMonsterArray = new ArrayList<>();
-        createMonster();
     }
 
     public void createMonster() {
