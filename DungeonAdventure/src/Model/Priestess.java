@@ -17,7 +17,7 @@ public class Priestess extends Heroes {
     /**
      * Min heal that priestess can heal for.
      */
-    private static final int MIN_HEAL = 25;
+    private static final int MIN_HEAL = 35;
 
     /**
      * the max amount priestess can heal for.
@@ -42,7 +42,7 @@ public class Priestess extends Heroes {
     /**
      * Minimum damage of priestess.
      */
-    private static final int MIN_DAMAGE = 25;
+    private static final int MIN_DAMAGE = 30;
 
     /**
      * Maximum damage of priestess.

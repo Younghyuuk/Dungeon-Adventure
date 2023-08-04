@@ -99,7 +99,8 @@ public class Battle {
 
 
         if (myHero.isAlive()) {
-            sb.append(myHero.getChName()).append(" defeats ").append((myMonster.getChName())).append("! \n");
+            sb.append(myHero.getChName()).append(" defeats ").append((myMonster.getChName())).
+                    append(" with ").append(myHero.getHp()).append(" hp! \n");
         } else {
             sb.append(myHero.getChName()).append(" has been defeated by ").
                     append((myMonster.getChName())).append("! \n");

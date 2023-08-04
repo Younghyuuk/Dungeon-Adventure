@@ -26,7 +26,7 @@ public class Thief extends Heroes {
     /**
      * Hp of thief.
      */
-    private static final int HP = 100;
+    private static final int HP = 80;
 
     /**
      * The name of the character.
@@ -56,7 +56,7 @@ public class Thief extends Heroes {
     /**
      * Block chance of thief.
      */
-    private static final double BLOCK_CHANCE = 0.4;
+    private static final double BLOCK_CHANCE = 0.7;
 
 
     /**
