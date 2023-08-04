@@ -61,7 +61,7 @@ public class Battle {
 
     public void startBattle() {
         StringBuilder sb = new StringBuilder();
-        sb.append(myHero.getChName()).append(" engages in battle with ").append(myMonster.getChName()).append("\n");
+        sb.append(myHero.getChName()).append(" engages in battle with ").append(myMonster.getChName()).append(". \n");
 
         while (myHero.isAlive() && myMonster.isAlive()) {
 
