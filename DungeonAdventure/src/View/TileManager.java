@@ -25,9 +25,9 @@ public class TileManager {
 
         try {
             myTile[0] = new Tile();
-            myTile[0].setMyImage(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Tiles/sandBrickFloor.png"))));
+            myTile[0].setMyImage(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Tiles/stoneFloor0.png"))));
             myTile[1] = new Tile();
-            myTile[1].setMyImage(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Tiles/stoneWall.png"))));
+            myTile[1].setMyImage(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Tiles/drkStoneWall_0.png"))));
             myTile[1].setMyCollision(true);
             myTile[3] = new Tile();
             myTile[3].setMyImage(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Tiles/door.png"))));

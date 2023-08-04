@@ -41,9 +41,11 @@ public class GamePanel extends JPanel implements Runnable {
     private final AboutPage myAboutPage = new AboutPage(this);
     private BattlePage myBattlePage = new BattlePage(this);
     private final GameOver myGameOverPage = new GameOver(this);
+    private final WinPage myWinPage = new WinPage(this);
     private String[] myBattleLog;
-
+    private int winCount = 0;
     InitiateEntites myIE = new InitiateEntites(this);
+    List<FourPillars> myPillarArray = myIE.getMyFourPillarsArray();
     List<Monster> myMonsterArray = myIE.getMyMonsterArray();
 
     private Heroes myHero;
@@ -54,6 +56,7 @@ public class GamePanel extends JPanel implements Runnable {
     private final static int PLAY_STATE = 2;
     private final static int BATTLE_STATE = 3;
     private final static int GAME_OVER_STATE = 4;
+    private final static int WIN_STATE = 5;
     private int count = 0;
     private boolean myAboutState = false;
 
@@ -74,12 +77,20 @@ public class GamePanel extends JPanel implements Runnable {
         }
         myIE.createMonster();
         myMonsterArray = myIE.getMyMonsterArray();
+        for (FourPillars pillars :myPillarArray){
+            pillars.setFound(false);
+        }
+        winCount = 0;
     }
     public void resetGame(){
         setMyHero(myHeroNum);
         for (Monster mon : myMonsterArray){
             mon.resetHP();
         }
+        for (FourPillars pillars :myPillarArray){
+            pillars.setFound(false);
+        }
+        winCount = 0;
     }
 
     public void setMyBattleLog(String[] theBattleLog){
@@ -148,7 +159,15 @@ public class GamePanel extends JPanel implements Runnable {
     public List<Monster> getMyMonsterArray(){
         return myMonsterArray;
     }
-
+    public List<FourPillars> getMyPillarArray(){
+        return myPillarArray;
+    }
+    public int getWinCount(){
+        return winCount;
+    }
+    public void incWinCount(){
+        winCount++;
+    }
     public void setMyAboutState(boolean theAboutState) {
         myAboutState = theAboutState;
     }
@@ -205,6 +224,10 @@ public class GamePanel extends JPanel implements Runnable {
         if (!myHero.isAlive()){
             setMyGameState(4);
         }
+        if(winCount == 4){
+            setMyGameState(5);
+        }
+        System.out.println(winCount);
     }
 
     // This method updates our view.
@@ -227,6 +250,11 @@ public class GamePanel extends JPanel implements Runnable {
                     mon.draw(pen);
                 }
             }
+            for (FourPillars pill : myPillarArray){
+                if(!pill.getFound()){
+                    pill.draw(pen);
+                }
+            }
             if (myAboutState) {
                 myAboutPage.draw(pen);
             }
@@ -247,6 +275,9 @@ public class GamePanel extends JPanel implements Runnable {
         }
         else if(myGameState == GAME_OVER_STATE){
             myGameOverPage.draw(pen);
+        }
+        else {
+            myWinPage.draw(pen);
         }
     }
 }

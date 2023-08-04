@@ -66,7 +66,6 @@ public class Collision {
     public int checkEntity(Heroes theHero, List<Monster> theMonsters) {
         int index = 999;
         int i = 0;
-        int count = 0;
         for (Monster mon : theMonsters) {
             if (mon.isAlive()) {
                 theHero.getMySolidArea().x = theHero.myWorldXCoordinate + theHero.getMySolidArea().x;
@@ -114,7 +113,6 @@ public class Collision {
                             myBattle = new Battle(theHero, mon);
                             myGamePanel.setMyBattleLog(myBattle.getMyBattleLog());
                             myGamePanel.setMyGameState(3);
-                            count++;
                         }
                         break;
                 }
@@ -123,18 +121,67 @@ public class Collision {
             }
         }
 
-        // updated version for the setHero can be deleted later if not needed
-//        if (theHero.getChName().equals("Priestess")) {
-//            theHero.setHp(100);
-//        } else if(theHero.getChName().equals("Warrior")) {
-//            theHero.setHp(150);
-//        } else {
-//            theHero.setHp(100);
-//        }
-
-//        theHero.setHp(125);
+        theHero.setHp(125);
         return index;
     }
+
+    public int checkPillar(Heroes theHero, List<FourPillars> thePillars) {
+        int index = 999;
+        int i = 0;
+        for (FourPillars pillar : thePillars) {
+            if (!pillar.getFound()) {
+                theHero.getMySolidArea().x = theHero.myWorldXCoordinate + theHero.getMySolidArea().x;
+                theHero.getMySolidArea().y = theHero.myWorldYCoordinate + theHero.getMySolidArea().y;
+
+                pillar.getMySolidArea().x = pillar.getMyWorldXCoordinate() + pillar.getMySolidArea().x;
+                pillar.getMySolidArea().y = pillar.myWorldYCoordinate + pillar.getMySolidArea().y;
+
+                switch (theHero.getMyDirection()) {
+                    case "up":
+                        theHero.getMySolidArea().y -= theHero.mySpeed;
+                        if (theHero.getMySolidArea().intersects(pillar.getMySolidArea())) {
+                            theHero.setMyCollision(true);
+                            index = i++;
+                            pillar.setFound(true);
+                            myGamePanel.incWinCount();
+                        }
+                        break;
+                    case "down":
+                        theHero.getMySolidArea().y += theHero.mySpeed;
+                        if (theHero.getMySolidArea().intersects(pillar.getMySolidArea())) {
+                            theHero.setMyCollision(true);
+                            index = i++;
+                            pillar.setFound(true);
+                            myGamePanel.incWinCount();
+                        }
+                        break;
+                    case "left":
+                        theHero.getMySolidArea().x -= theHero.mySpeed;
+                        if (theHero.getMySolidArea().intersects(pillar.getMySolidArea())) {
+                            theHero.setMyCollision(true);
+                            index = i++;
+                            pillar.setFound(true);
+                            myGamePanel.incWinCount();
+                        }
+                        break;
+                    case "right":
+                        theHero.getMySolidArea().x += theHero.mySpeed;
+                        if (theHero.getMySolidArea().intersects(pillar.getMySolidArea())) {
+                            theHero.setMyCollision(true);
+                            index = i++;
+                            pillar.setFound(true);
+                            myGamePanel.incWinCount();
+                        }
+                        break;
+                }
+                theHero.resetSolidArea();
+                pillar.resetSolidArea();
+            }
+        }
+        return index;
+    }
+}
+
     // Probably wont need as we will delete the monster on player to monster collision.
 //    public void monsterToPlayer(Monster theMon){
 //        theMon.getMySolidArea().x = theMon.myWorldXCoordinate + theMon.getMySolidArea().x;
@@ -172,4 +219,4 @@ public class Collision {
 //        theMon.resetSolidArea();
 //        myGamePanel.getMyHero().resetSolidArea();
 //    }
-}
+

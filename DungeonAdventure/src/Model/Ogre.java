@@ -35,15 +35,14 @@ public class Ogre extends Monster {
     @Override
     public void getMonsterImage() {
         try {
-            up1 = read(Objects.requireNonNull(getClass().getResourceAsStream("/skeleton/skele0.png")));
-            up2 = read(Objects.requireNonNull(getClass().getResourceAsStream("/skeleton/skele1.png")));
-            down1 = read(Objects.requireNonNull(getClass().getResourceAsStream("/skeleton/skele0.png")));
-            down2 = read(Objects.requireNonNull(getClass().getResourceAsStream("/skeleton/skele1.png")));
-            left1 = read(Objects.requireNonNull(getClass().getResourceAsStream("/skeleton/skele0.png")));
-            left2 = read(Objects.requireNonNull(getClass().getResourceAsStream("/skeleton/skele1.png")));
-            right1 = read(Objects.requireNonNull(getClass().getResourceAsStream("/skeleton/skele0.png")));
-            right2 = read(Objects.requireNonNull(getClass().getResourceAsStream("/skeleton/skele1.png")));
-
+            up1 = read(Objects.requireNonNull(getClass().getResourceAsStream("/ogre/ogre0.png")));
+            up2 = read(Objects.requireNonNull(getClass().getResourceAsStream("/ogre/ogre1.png")));
+            down1 = read(Objects.requireNonNull(getClass().getResourceAsStream("/ogre/ogre0.png")));
+            down2 = read(Objects.requireNonNull(getClass().getResourceAsStream("/ogre/ogre1.png")));
+            left1 = read(Objects.requireNonNull(getClass().getResourceAsStream("/ogre/ogre0.png")));
+            left2 = read(Objects.requireNonNull(getClass().getResourceAsStream("/ogre/ogre1.png")));
+            right1 = read(Objects.requireNonNull(getClass().getResourceAsStream("/ogre/ogre0.png")));
+            right2 = read(Objects.requireNonNull(getClass().getResourceAsStream("/ogre/ogre1.png")));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

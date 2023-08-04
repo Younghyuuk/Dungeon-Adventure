@@ -17,8 +17,6 @@ public abstract class Monster extends DungeonCharacter {
     private final int myMinHeal;
     private final int myMaxHeal;
     private final int myMaxHealth;
-    public boolean isDead = false;
-    public int solidAreaDefaultX, solidAreaDefaultY;
     private int actionLockCounter = 0;
 
     /**
@@ -169,7 +167,6 @@ public abstract class Monster extends DungeonCharacter {
                     break;
             }
             theGraphics.drawImage(image, screenX, screenY, myGamePanel.getSpriteSize(), myGamePanel.getSpriteSize(), null);
-            theGraphics.drawRect(screenX + getMySolidArea().x,screenY + mySolidArea.y, mySolidArea.width,  mySolidArea.height);
         }
     }
 
