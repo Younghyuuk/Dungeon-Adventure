@@ -102,7 +102,9 @@ public class GamePanel extends JPanel implements Runnable {
     public int getMyGameState() {
         return myGameState;
     }
-
+    public WinPage getMyWinPage(){
+        return myWinPage;
+    }
     public TitlePage getMyTitlePage() {
         return myTitlePage;
 
