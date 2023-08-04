@@ -1,8 +1,5 @@
 package View;
 
-import Control.Keyboard;
-import Model.*;
-
 public class Main {
 
 

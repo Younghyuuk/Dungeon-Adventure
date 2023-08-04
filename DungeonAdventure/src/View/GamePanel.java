@@ -117,6 +117,9 @@ public class GamePanel extends JPanel implements Runnable {
     public TileManager getMyTileM() {
         return myTileM;
     }
+    public List<Monster> getMyMonsterArray(){
+        return myMonsterArray;
+    }
 
     public void setMyAboutState(boolean theAboutState) {
         myAboutState = theAboutState;
@@ -162,7 +165,12 @@ public class GamePanel extends JPanel implements Runnable {
 
     // This method will update our model.
     public void update() {
-        myHero.update();
+        if(myGameState == PLAY_STATE) {
+            myHero.update();
+            for (Monster mon : myMonsterArray){
+                mon.update();
+            }
+        }
     }
 
     // This method updates our view.
@@ -180,6 +188,7 @@ public class GamePanel extends JPanel implements Runnable {
         } else if (myGameState == PLAY_STATE) {
             myTileM.draw(pen);
             myHero.draw(pen);
+
             for (Monster list : myMonsterArray){
                 list.draw(pen);
             }

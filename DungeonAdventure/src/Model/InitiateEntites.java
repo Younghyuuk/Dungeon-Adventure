@@ -28,12 +28,19 @@ public class InitiateEntites {
     }
 
     public void createMonster(){
+        for (int i = 1; i < dungeonW ; i++) {
+            for (int j = 2; j < dungeonH-1; j++) {
+                if(i == 4 && j == 4){
+                    // Starting point. Do not have the monster here.
+                }else {
+                    Monster aMonster1 = myMonsterDataBase.getRandomMonster();
+                    aMonster1.setMyWorldXCoordinate(((roomW * i) - ((roomW/2)+1))  * myGamePanel.getSpriteSize());
+                    aMonster1.setMyWorldYCoordinate(((roomH * j) - ((roomH/2)+1))  * myGamePanel.getSpriteSize());
+                    myMonsterArray.add(aMonster1);
+                }
 
-        Monster aMonster1 = myMonsterDataBase.getMonster("Skeleton");
-        aMonster1.setMyXCords(3 * myGamePanel.getSpriteSize());
-        aMonster1.setMyYCords(3 * myGamePanel.getSpriteSize());
-        myMonsterArray.add(aMonster1);
-
+            }
+        }
     }
 
     public List<Monster> getMyMonsterArray() {

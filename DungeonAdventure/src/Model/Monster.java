@@ -5,6 +5,7 @@ import View.GamePanel;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.Random;
 
 /**
  * Monster abstract class that extends DungeonCharacter
@@ -17,9 +18,9 @@ public abstract class Monster extends DungeonCharacter {
     private final int myMaxHeal;
     private final int myMaxHealth;
 
-    public BufferedImage img1, img2;
-    private int myXCords;
-    private int myYCords;
+    public int solidAreaDefaultX, solidAreaDefaultY;
+    private int actionLockCounter = 0;
+
     /**
      * The constructor of DungeonCharacter that initializes the hp, name, attack speed,
      * minimum damage, maximum damage, and the hitchance of the character.
@@ -40,26 +41,18 @@ public abstract class Monster extends DungeonCharacter {
         myMinHeal = theMinHeal;
         myMaxHeal = theMaxHeal;
         myMaxHealth = theHp;
-    }
-    public void setMyXCords(final int theXCords){
-        myXCords = theXCords;
-    }
-    public void setMyYCords(final int theYCords){
-        myYCords = theYCords;
+        mySolidArea = new Rectangle(0, 0, myGamePanel.getSpriteSize(), myGamePanel.getSpriteSize());
+        mySpeed = 2;
     }
 
-//    public UUID getId() {
-//        return myId;
-//    }
+    public Rectangle getMySolidArea() {
+        return mySolidArea;
+    }
+    public void resetSolidArea(){
+        mySolidArea.x = 0;
+        mySolidArea.y = 0;
+    }
 
-//    public void saveToDatabase() {
-//        MonsterDataBase.getInstance().saveMonsterToDatabase(this);
-//    }
-
-    // Factory method to get a monster by its ID from the database
-//    public static Monster getMonsterFromDatabase() {
-//        return MonsterDataBase.getInstance().getMonsterFromDatabase();
-//    }
     /**
      * Monster attack.
      *
@@ -71,8 +64,6 @@ public abstract class Monster extends DungeonCharacter {
      * Abstract method for monster child classes to heal.
      */
 //    public abstract void heal();
-
-
     // new tester heal for all monster since all stats are from sqlite database
     public String heal() {
         double random = Math.random();
@@ -86,21 +77,105 @@ public abstract class Monster extends DungeonCharacter {
         }
         return healLog.toString();
     }
-    public void draw(final Graphics2D theGraphics){
 
-        int screenX = myXCords - myGamePanel.getMyHero().getMyWorldXCoordinate() + myGamePanel.getMyHero().getMyScreensMiddleX();
-        int screenY = myYCords - myGamePanel.getMyHero().getMyWorldYCoordinate() + myGamePanel.getMyHero().getMyScreensMiddleY();
-
-        // draw only the tiles that are width a certain screen size.
-        if (myXCords + myGamePanel.getSpriteSize() > myGamePanel.getMyHero().getMyWorldXCoordinate() - myGamePanel.getMyHero().getMyScreensMiddleX() &&
-                myXCords - myGamePanel.getSpriteSize() < myGamePanel.getMyHero().getMyWorldXCoordinate() + myGamePanel.getMyHero().getMyScreensMiddleX() &&
-                myYCords + myGamePanel.getSpriteSize() > myGamePanel.getMyHero().getMyWorldYCoordinate() - myGamePanel.getMyHero().getMyScreensMiddleY() &&
-                myYCords - myGamePanel.getSpriteSize() < myGamePanel.getMyHero().getMyWorldYCoordinate() + myGamePanel.getMyHero().getMyScreensMiddleY()) {
-            theGraphics.drawImage(img1, screenX, screenY, myGamePanel.getSpriteSize(), myGamePanel.getSpriteSize(), null);
+    public void update() {
+        setAction();
+        myCollision = false;
+        myGamePanel.getMyCollision().checkTile(this);
+//        myGamePanel.getMyCollision().monsterToPlayer(this);
+        if (!myCollision) {
+            switch (myDirection) {
+                case "up" -> myWorldYCoordinate -= mySpeed;
+                case "down" -> myWorldYCoordinate += mySpeed;
+                case "left" -> myWorldXCoordinate -= mySpeed;
+                case "right" -> myWorldXCoordinate += mySpeed;
+            }
         }
-
+        mySpriteCounter++;
+        if (mySpriteCounter > 12) {
+            mySpriteNum = mySpriteNum == 1 ? 2 : 1;
+            mySpriteCounter = 0;
+        }
     }
+
+    public void setAction() {
+        actionLockCounter++;
+        if (actionLockCounter == 30) {
+            Random random = new Random();
+            int i = random.nextInt(100) + 1;
+            if (i <= 25) {
+                if (!myDirection.equals("up")) {
+                    myDirection = "up";
+                }
+
+            }
+            if (i > 25 && i <= 50) {
+                if (!myDirection.equals("down")) {
+                    myDirection = "down";
+                }
+            }
+            if (i > 50 && i <= 75) {
+
+                if (!myDirection.equals("right")) {
+                    myDirection = "right";
+                }
+            }
+            if (i > 75) {
+                if (!myDirection.equals("left")) {
+                    myDirection = "left";
+                }
+            }
+            actionLockCounter = 0;
+        }
+    }
+    public void draw(final Graphics2D theGraphics) {
+
+        int screenX = myWorldXCoordinate - myGamePanel.getMyHero().getMyWorldXCoordinate() + myGamePanel.getMyHero().getMyScreensMiddleX();
+        int screenY = myWorldYCoordinate - myGamePanel.getMyHero().getMyWorldYCoordinate() + myGamePanel.getMyHero().getMyScreensMiddleY();
+
+        if (myWorldXCoordinate + myGamePanel.getSpriteSize() > myGamePanel.getMyHero().getMyWorldXCoordinate() - myGamePanel.getMyHero().getMyScreensMiddleX() &&
+                myWorldXCoordinate - myGamePanel.getSpriteSize() < myGamePanel.getMyHero().getMyWorldXCoordinate() + myGamePanel.getMyHero().getMyScreensMiddleX() &&
+                myWorldYCoordinate + myGamePanel.getSpriteSize() > myGamePanel.getMyHero().getMyWorldYCoordinate() - myGamePanel.getMyHero().getMyScreensMiddleY() &&
+                myWorldYCoordinate - myGamePanel.getSpriteSize() < myGamePanel.getMyHero().getMyWorldYCoordinate() + myGamePanel.getMyHero().getMyScreensMiddleY()) {
+            BufferedImage image = null;
+
+            switch (myDirection) {
+                case "up":
+                    if (mySpriteNum == 1) {
+                        image = up1;
+                    } else {
+                        image = up2;
+                    }
+                    break;
+                case "down":
+                    if (mySpriteNum == 1) {
+                        image = down1;
+                    } else {
+                        image = down2;
+                    }
+                    break;
+                case "left":
+                    if (mySpriteNum == 1) {
+                        image = left1;
+                    } else {
+                        image = left2;
+                    }
+                    break;
+                case "right":
+                    if (mySpriteNum == 1) {
+                        image = right1;
+                    } else {
+                        image = right2;
+                    }
+                    break;
+            }
+            theGraphics.drawImage(image, screenX, screenY, myGamePanel.getSpriteSize(), myGamePanel.getSpriteSize(), null);
+            theGraphics.drawRect(screenX + getMySolidArea().x,screenY + mySolidArea.y, mySolidArea.width,  mySolidArea.height);
+        }
+    }
+
     public abstract void getMonsterImage();
+
     public double getChanceHeal() {
         return myChanceHeal;
     }
