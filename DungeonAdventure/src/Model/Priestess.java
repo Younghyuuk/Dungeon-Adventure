@@ -17,7 +17,7 @@ public class Priestess extends Heroes {
     /**
      * Min heal that priestess can heal for.
      */
-    private static final int MIN_HEAL = 25;
+    private static final int MIN_HEAL = 35;
 
     /**
      * the max amount priestess can heal for.
@@ -25,9 +25,9 @@ public class Priestess extends Heroes {
     private static final int MAX_HEAL = 55;
 
     /**
-     * Hp of priestess 75.
+     * Hp of priestess.
      */
-    private static final int HP = 75;
+    private static final int HP = 100;
 
     /**
      * Setting Priestess name.
@@ -42,7 +42,7 @@ public class Priestess extends Heroes {
     /**
      * Minimum damage of priestess.
      */
-    private static final int MIN_DAMAGE = 25;
+    private static final int MIN_DAMAGE = 30;
 
     /**
      * Maximum damage of priestess.
@@ -114,10 +114,10 @@ public class Priestess extends Heroes {
     public String specialSkill(final DungeonCharacter theAlly) {
         // set hp of Priestess and not the monster
         StringBuilder special = new StringBuilder();
-        if (getHp() < 150) {
+        if (getHp() < 200) {
             int healPoints = genHeal();
             setHp(getHp() + healPoints);
-            special.append(getChName()).append(" heals itself for ").append(healPoints).append(" hit points!\n");
+            special.append(getChName()).append(" heals itself for ").append(healPoints).append("! \n");
         }
         return special.toString();
     }

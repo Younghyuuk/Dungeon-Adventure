@@ -72,8 +72,8 @@ public abstract class Monster extends DungeonCharacter {
             int healPoints = (int) Math.floor(Math.random() * (getMaxHeal() - getMinHeal()) + getMinHeal());
             setHp(getHp() + healPoints);
             healLog.append(getChName()).append(" heals itself for ").append(healPoints).
-                    append(" hit points!").append("\n");
-//            System.out.println(getChName() + " heals itself for " + healPoints + " hit points.");
+                    append(" hit points! \n");
+            healLog.append(getChName()).append(" new hp is ").append(getHp()).append(". \n");
         }
         return healLog.toString();
     }

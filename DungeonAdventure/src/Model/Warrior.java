@@ -32,7 +32,7 @@ public class Warrior extends Heroes {
     /**
      * Hp of Warrior.
      */
-    private static final int HP = 125;
+    private static final int HP = 150;
 
     /**
      * The name of the character.
@@ -52,7 +52,7 @@ public class Warrior extends Heroes {
     /**
      * Maximum damage of warrior.
      */
-    private static final int MAX_DAMAGE = 60;
+    private static final int MAX_DAMAGE = 65;
 
     /**
      * Hit chance of warrior.
@@ -62,7 +62,7 @@ public class Warrior extends Heroes {
     /**
      * Block chance of warrior.
      */
-    private static final double BLOCK_CHANCE = 0.2;
+    private static final double BLOCK_CHANCE = 0.5;
 
     /**
      * Warrior constructor that sets all the stats for
@@ -103,9 +103,9 @@ public class Warrior extends Heroes {
             int damage = genDamage(CRUSHING_BLOW_MIN_DAMAGE, CRUSHING_BLOW_MAX_DAMAGE);
             theOpp.subtractHp(damage);
             special.append("Warrior delivers CRUSHING BLOW to ").append(theOpp.getChName()).append(" for ")
-                    .append(damage).append(" damage!\n");
+                    .append(damage).append("! \n");
         } else {
-            special.append("Crushing blow failed\n");
+            special.append("Crushing blow failed! \n");
 
         }
         return special.toString();

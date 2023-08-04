@@ -8,6 +8,7 @@ public class Collision {
 
     GamePanel myGamePanel;
     Battle myBattle;
+
     public Collision(final GamePanel theGamePanel) {
         myGamePanel = theGamePanel;
     }
@@ -63,9 +64,9 @@ public class Collision {
     }
 
     public int checkEntity(Heroes theHero, List<Monster> theMonsters) {
-            int index = 999;
-            int i = 0;
-            int count = 0;
+        int index = 999;
+        int i = 0;
+        int count = 0;
         for (Monster mon : theMonsters) {
             if (mon.isAlive()) {
                 theHero.getMySolidArea().x = theHero.myWorldXCoordinate + theHero.getMySolidArea().x;
@@ -121,8 +122,18 @@ public class Collision {
                 mon.resetSolidArea();
             }
         }
-        theHero.setHp(125);
-            return index;
+
+        // updated version for the setHero can be deleted later if not needed
+//        if (theHero.getChName().equals("Priestess")) {
+//            theHero.setHp(100);
+//        } else if(theHero.getChName().equals("Warrior")) {
+//            theHero.setHp(150);
+//        } else {
+//            theHero.setHp(100);
+//        }
+
+//        theHero.setHp(125);
+        return index;
     }
     // Probably wont need as we will delete the monster on player to monster collision.
 //    public void monsterToPlayer(Monster theMon){
