@@ -7,7 +7,7 @@ import java.util.List;
 public class Collision {
 
     GamePanel myGamePanel;
-
+    Battle myBattle;
     public Collision(final GamePanel theGamePanel) {
         myGamePanel = theGamePanel;
     }
@@ -65,10 +65,9 @@ public class Collision {
     public int checkEntity(Heroes theHero, List<Monster> theMonsters) {
             int index = 999;
             int i = 0;
+            int count = 0;
         for (Monster mon : theMonsters) {
-            if (!mon.isDead) {
-
-
+            if (mon.isAlive()) {
                 theHero.getMySolidArea().x = theHero.myWorldXCoordinate + theHero.getMySolidArea().x;
                 theHero.getMySolidArea().y = theHero.myWorldYCoordinate + theHero.getMySolidArea().y;
 
@@ -80,8 +79,9 @@ public class Collision {
                         theHero.getMySolidArea().y -= theHero.mySpeed;
                         if (theHero.getMySolidArea().intersects(mon.getMySolidArea())) {
                             theHero.setMyCollision(true);
-                            mon.isDead = true;
                             index = i++;
+                            myBattle = new Battle(theHero, mon);
+                            myGamePanel.setMyBattleLog(myBattle.getMyBattleLog());
                             myGamePanel.setMyGameState(3);
                         }
                         break;
@@ -89,8 +89,9 @@ public class Collision {
                         theHero.getMySolidArea().y += theHero.mySpeed;
                         if (theHero.getMySolidArea().intersects(mon.getMySolidArea())) {
                             theHero.setMyCollision(true);
-                            mon.isDead = true;
                             index = i++;
+                            myBattle = new Battle(theHero, mon);
+                            myGamePanel.setMyBattleLog(myBattle.getMyBattleLog());
                             myGamePanel.setMyGameState(3);
                         }
                         break;
@@ -98,8 +99,9 @@ public class Collision {
                         theHero.getMySolidArea().x -= theHero.mySpeed;
                         if (theHero.getMySolidArea().intersects(mon.getMySolidArea())) {
                             theHero.setMyCollision(true);
-                            mon.isDead = true;
                             index = i++;
+                            myBattle = new Battle(theHero, mon);
+                            myGamePanel.setMyBattleLog(myBattle.getMyBattleLog());
                             myGamePanel.setMyGameState(3);
                         }
                         break;
@@ -107,9 +109,11 @@ public class Collision {
                         theHero.getMySolidArea().x += theHero.mySpeed;
                         if (theHero.getMySolidArea().intersects(mon.getMySolidArea())) {
                             theHero.setMyCollision(true);
-                            mon.isDead = true;
                             index = i++;
+                            myBattle = new Battle(theHero, mon);
+                            myGamePanel.setMyBattleLog(myBattle.getMyBattleLog());
                             myGamePanel.setMyGameState(3);
+                            count++;
                         }
                         break;
                 }
@@ -117,6 +121,7 @@ public class Collision {
                 mon.resetSolidArea();
             }
         }
+        theHero.setHp(125);
             return index;
     }
     // Probably wont need as we will delete the monster on player to monster collision.

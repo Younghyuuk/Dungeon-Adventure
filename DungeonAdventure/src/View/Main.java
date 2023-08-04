@@ -10,7 +10,6 @@ public class Main {
             frame.setResizable(false);
             frame.setLocationRelativeTo(null);
 
-
 //        GamePanel gp = new GamePanel();
 //        Keyboard kb = new Keyboard(gp);
 //        Heroes myHero = new Thief(gp, kb);
@@ -22,7 +21,6 @@ public class Main {
 //        for (String s : array) {
 //            System.out.println(s);
 //        }
-
-
+//
     }
 }

@@ -20,7 +20,7 @@ public class GamePanel extends JPanel implements Runnable {
     private final static int FPS = 60;
 
     //We may need to pass this from mainframe and play with the gamestate to load new dungeons.=
-    private final Dungeon myDungeon = new Dungeon();
+    private Dungeon myDungeon = new Dungeon();
     // these values will be dependent on Dungeon Maze array size.
     /**
      * The width of the world map as a 2d array
@@ -39,7 +39,8 @@ public class GamePanel extends JPanel implements Runnable {
     private final TitlePage myTitlePage = new TitlePage(this);
     private final CharacterSelectionPage myCharacterSelectionPage = new CharacterSelectionPage(this);
     private final AboutPage myAboutPage = new AboutPage(this);
-    private final BattlePage myBattlePage = new BattlePage(this);
+    private BattlePage myBattlePage = new BattlePage(this);
+    private String[] myBattleLog;
 
     InitiateEntites myIE = new InitiateEntites(this);
     List<Monster> myMonsterArray = myIE.getMyMonsterArray();
@@ -51,6 +52,7 @@ public class GamePanel extends JPanel implements Runnable {
     private final static int CHARACTER_STATE = 1;
     private final static int PLAY_STATE = 2;
     private final static int BATTLE_STATE=3;
+    private int count = 0;
     private boolean myAboutState = false;
 
 
@@ -65,6 +67,9 @@ public class GamePanel extends JPanel implements Runnable {
         setMyHero(1);
     }
 
+    public void setMyBattleLog(String[] theBattleLog){
+        myBattleLog = theBattleLog;
+    }
     public CharacterSelectionPage getMyCharacterSelectionPage(){
         return myCharacterSelectionPage;
     }
@@ -76,7 +81,9 @@ public class GamePanel extends JPanel implements Runnable {
         return myTitlePage;
 
     }
-
+    public void setMyDungeon(Dungeon theDungeon){
+        myDungeon = theDungeon;
+    }
     public void setMyGameState(int theGameState) {
         myGameState = theGameState;
     }
@@ -192,21 +199,32 @@ public class GamePanel extends JPanel implements Runnable {
             myTileM.draw(pen);
             myHero.draw(pen);
             for (Monster mon : myMonsterArray){
-                if (!mon.isDead){
+                if (mon.isAlive()){
                     mon.draw(pen);
                 }
-
             }
             if (myAboutState) {
                 myAboutPage.draw(pen);
             }
-//            if(myBattleState){
-//                myBattlePage.draw(pen);
-//            }
             pen.dispose();
         }
         else if (myGameState == BATTLE_STATE){
+            myTileM.draw(pen);
+            myHero.draw(pen);
+            myBattlePage.setMyBattleLog(myBattleLog);
+
+            for (Monster mon : myMonsterArray) {
+                if (mon.isAlive()) {
+                    mon.draw(pen);
+                }
+            }
             myBattlePage.draw(pen);
+            pen.dispose();
         }
+
+    }
+
+    public void startBattle(Battle theBattle){
+
     }
 }

@@ -77,7 +77,6 @@ public abstract class Monster extends DungeonCharacter {
         }
         return healLog.toString();
     }
-
     public void update() {
         setAction();
         myCollision = false;

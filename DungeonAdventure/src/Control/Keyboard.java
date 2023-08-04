@@ -11,7 +11,7 @@ public class Keyboard implements KeyListener {
     public boolean down;
     public boolean left;
     public boolean right;
-    private final GamePanel myGamePanel;
+    private GamePanel myGamePanel;
 
     public Keyboard(GamePanel theGamePanel) {
         myGamePanel = theGamePanel;
@@ -35,6 +35,7 @@ public class Keyboard implements KeyListener {
                     break;
                 case KeyEvent.VK_ENTER:
                     if (myGamePanel.getMyTitlePage().getMyCommandNum() == 0) {
+
                         myGamePanel.setMyGameState(1);
                     }
             }
@@ -86,12 +87,18 @@ public class Keyboard implements KeyListener {
                     break;
             }
         }
+        else if(myGamePanel.getMyGameState() == 3){
+            int code = e.getKeyCode();
+            if (code == KeyEvent.VK_ENTER){
+                myGamePanel.setMyGameState(2);
+            }
+        }
     }
 
     @Override
     public void keyReleased(final KeyEvent e) {
 
-        if (myGamePanel.getMyGameState() == 2) {
+        if (myGamePanel.getMyGameState() == 2 ||myGamePanel.getMyGameState() == 3) {
             int code = e.getKeyCode();
             switch (code) {
                 case KeyEvent.VK_W:
