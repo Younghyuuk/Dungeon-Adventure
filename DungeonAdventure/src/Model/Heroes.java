@@ -65,7 +65,7 @@ public abstract class Heroes extends DungeonCharacter {
         mySolidArea.y = 12;
     }
     public void interactMonster(int i){
-        if( i != 999){
+        if(i != 999){
             System.out.println("You hit the monster");
         }
 
@@ -88,9 +88,8 @@ public abstract class Heroes extends DungeonCharacter {
 
         //Check Collision with Monsters
         int monster = myGamePanel.getMyCollision().checkEntity(this, myGamePanel.getMyMonsterArray());
-        //FIGHT LOGIC MIGHT GO HERE
         interactMonster(monster);
-        //FIGHT LOGIC MAYBE ABOVE METHOD
+
         if (myKeyInputs.up || myKeyInputs.down || myKeyInputs.left || myKeyInputs.right) {
             if (!myCollision) {
                 switch (myDirection) {

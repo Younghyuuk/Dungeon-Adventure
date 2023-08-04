@@ -39,6 +39,8 @@ public class GamePanel extends JPanel implements Runnable {
     private final TitlePage myTitlePage = new TitlePage(this);
     private final CharacterSelectionPage myCharacterSelectionPage = new CharacterSelectionPage(this);
     private final AboutPage myAboutPage = new AboutPage(this);
+    private final BattlePage myBattlePage = new BattlePage(this);
+
     InitiateEntites myIE = new InitiateEntites(this);
     List<Monster> myMonsterArray = myIE.getMyMonsterArray();
 
@@ -48,6 +50,7 @@ public class GamePanel extends JPanel implements Runnable {
     private final static int TITLE_STATE = 0;
     private final static int CHARACTER_STATE = 1;
     private final static int PLAY_STATE = 2;
+    private final static int BATTLE_STATE=3;
     private boolean myAboutState = false;
 
 
@@ -188,14 +191,22 @@ public class GamePanel extends JPanel implements Runnable {
         } else if (myGameState == PLAY_STATE) {
             myTileM.draw(pen);
             myHero.draw(pen);
+            for (Monster mon : myMonsterArray){
+                if (!mon.isDead){
+                    mon.draw(pen);
+                }
 
-            for (Monster list : myMonsterArray){
-                list.draw(pen);
             }
             if (myAboutState) {
                 myAboutPage.draw(pen);
             }
+//            if(myBattleState){
+//                myBattlePage.draw(pen);
+//            }
             pen.dispose();
+        }
+        else if (myGameState == BATTLE_STATE){
+            myBattlePage.draw(pen);
         }
     }
 }
