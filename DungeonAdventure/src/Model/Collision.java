@@ -124,13 +124,13 @@ public class Collision {
         }
 
         // updated version for the setHero can be deleted later if not needed
-        if (theHero.getChName().equals("Priestess")) {
-            theHero.setHp(100);
-        } else if(theHero.getChName().equals("Warrior")) {
-            theHero.setHp(150);
-        } else {
-            theHero.setHp(100);
-        }
+//        if (theHero.getChName().equals("Priestess")) {
+//            theHero.setHp(100);
+//        } else if(theHero.getChName().equals("Warrior")) {
+//            theHero.setHp(150);
+//        } else {
+//            theHero.setHp(100);
+//        }
 
 //        theHero.setHp(125);
         return index;

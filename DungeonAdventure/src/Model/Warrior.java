@@ -52,7 +52,7 @@ public class Warrior extends Heroes {
     /**
      * Maximum damage of warrior.
      */
-    private static final int MAX_DAMAGE = 60;
+    private static final int MAX_DAMAGE = 65;
 
     /**
      * Hit chance of warrior.
@@ -62,7 +62,7 @@ public class Warrior extends Heroes {
     /**
      * Block chance of warrior.
      */
-    private static final double BLOCK_CHANCE = 0.2;
+    private static final double BLOCK_CHANCE = 0.5;
 
     /**
      * Warrior constructor that sets all the stats for
