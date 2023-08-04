@@ -73,7 +73,7 @@ public class Battle {
                     if (Math.random() > myHero.getBlockChance()) {
                         sb.append(monsterAttack());
                     } else {
-                        sb.append("Hero blocks attack, hp is still ").append(myHero.getHp()).append((". \n"));
+                        sb.append("Hero blocks attack. \n");
                     }
                 }
 
@@ -86,7 +86,7 @@ public class Battle {
                     sb.append(monsterAttack());
 
                 } else {
-                    sb.append("Hero blocks attack, hp is still ").append(myHero.getHp()).append((". \n"));
+                    sb.append("Hero blocks attack. \n");
 
                 }
                 if(myHero.isAlive()) {
@@ -120,9 +120,6 @@ public class Battle {
 
             attackLog.append(myHero.regularAttack(myMonster));
 
-
-            attackLog.append(myMonster.getChName()).append(" has ").append(myMonster.getHp()).
-                    append(" hp remaining. \n");
         } else {
             attackLog.append(myHero.specialSkill(myMonster));
             if (myHero.getChName().equals("Priestess")) {
@@ -149,15 +146,8 @@ public class Battle {
      */
     private String monsterAttack() {
         StringBuilder attackLog = new StringBuilder();
-
         attackLog.append(myMonster.regularAttack(myHero));
-        attackLog.append(myHero.getChName()).append(" has ").append(myHero.getHp()).append(" hp remaining. \n");
-
-        attackLog.append(myMonster.getChName()).append(" tries to heal, original health is ").
-                append(myMonster.getHp()).append(". \n");
         attackLog.append(myMonster.heal());
-        attackLog.append(myMonster.getChName()).append(" new hp is ").append(myMonster.getHp()).append(". \n");
-
         return attackLog.toString();
     }
 
