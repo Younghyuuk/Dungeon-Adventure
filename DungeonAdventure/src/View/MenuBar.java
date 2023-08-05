@@ -12,7 +12,8 @@ public class MenuBar extends JMenuBar {
     public static final String SAVE = "Save";
 
     private final GamePanel myGamePanel;
-    public MenuBar (GamePanel theGamePanel) {
+
+    public MenuBar (GamePanel theGamePanel, JFrame theFrame) {
         super();
         myGamePanel = theGamePanel;
         JMenu options = new JMenu("Options");

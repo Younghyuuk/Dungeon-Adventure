@@ -13,14 +13,13 @@ import java.awt.image.BufferedImage;
  */
 public abstract class Heroes extends DungeonCharacter {
 
+    private final int myScreensMiddleX;
+    private final int myScreensMiddleY;
+    Keyboard myKeyInputs;
     /**
      * The double that gives the chance that the Hero will block.
      */
     private double myBlockChance;
-    Keyboard myKeyInputs;
-
-    private final int myScreensMiddleX;
-    private final int myScreensMiddleY;
 
     /**
      * Heroes constructor that initializes the hp, name, attack speed, min damage, max damage,
@@ -45,8 +44,10 @@ public abstract class Heroes extends DungeonCharacter {
 
         myScreensMiddleX = myGamePanel.getMyScreenWidth() / 2 - (myGamePanel.getSpriteSize() / 2);
         myScreensMiddleY = myGamePanel.getMyScreenHeight() / 2 - (myGamePanel.getSpriteSize() / 2);
-        myWorldXCoordinate = (myGamePanel.getMyWorldCol() * myGamePanel.getSpriteSize())/2;
-        myWorldYCoordinate = (myGamePanel.getMyWorldRow() * myGamePanel.getSpriteSize())/2;
+        myWorldXCoordinate = (myGamePanel.getMyWorldCol() * myGamePanel.getSpriteSize()) / 2;
+        myWorldYCoordinate = (myGamePanel.getMyWorldRow() * myGamePanel.getSpriteSize()) / 2;
+
+
         mySolidArea = new Rectangle(12, 12, myGamePanel.getSpriteSize() - 24, myGamePanel.getSpriteSize() - 24);
         mySpeed = 6
         ;
@@ -60,12 +61,13 @@ public abstract class Heroes extends DungeonCharacter {
         return myScreensMiddleY;
     }
 
-    public void resetSolidArea(){
+    public void resetSolidArea() {
         mySolidArea.x = 12;
         mySolidArea.y = 12;
     }
-    public void interactMonster(int i){
-        if( i != 999){
+
+    public void interactMonster(int i) {
+        if (i != 999) {
             System.out.println("You hit the monster");
         }
 
@@ -85,12 +87,12 @@ public abstract class Heroes extends DungeonCharacter {
         // Checking Map Tile Collision
         myCollision = false;
         myGamePanel.getMyCollision().checkTile(this);
-
         //Check Collision with Monsters
         int monster = myGamePanel.getMyCollision().checkEntity(this, myGamePanel.getMyMonsterArray());
-        //FIGHT LOGIC MIGHT GO HERE
         interactMonster(monster);
-        //FIGHT LOGIC MAYBE ABOVE METHOD
+        //Check Collision with Four Pillars
+        int pillar = myGamePanel.getMyCollision().checkPillar(this, myGamePanel.getMyPillarArray());
+
         if (myKeyInputs.up || myKeyInputs.down || myKeyInputs.left || myKeyInputs.right) {
             if (!myCollision) {
                 switch (myDirection) {
@@ -144,8 +146,6 @@ public abstract class Heroes extends DungeonCharacter {
         // Draw my hero in the middle of the viewable screen.
         theGraphics.drawImage(image, myScreensMiddleX, myScreensMiddleY, myGamePanel.getSpriteSize(), myGamePanel.getSpriteSize(), null);
 
-        // draw the rectangle that acts as the collision indicator.
-        theGraphics.drawRect(myScreensMiddleX + getMySolidArea().x,myScreensMiddleY + mySolidArea.y, mySolidArea.width,  mySolidArea.height);
     }
 
     public abstract void getHeroesImage();

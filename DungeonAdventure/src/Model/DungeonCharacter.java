@@ -18,7 +18,7 @@ public abstract class DungeonCharacter {
      * The int myHp that tracks the character health points.
      */
     private int myHp;
-
+    private int myDefalutHp;
     /**
      * The string name of the character created.
      */
@@ -77,6 +77,7 @@ public abstract class DungeonCharacter {
         myMaxDamage = theMaxDamage;
         myHitChance = theHitChance;
         myGamePanel = theGamePanel;
+        myDefalutHp = theHp;
     }
     public void setMyCollision(final boolean theBool) {
         myCollision = theBool;
@@ -178,12 +179,14 @@ public abstract class DungeonCharacter {
             int damage = genDamage(getMinDamage(), getMaxDamage());
             theOpp.subtractHp(damage);
             attack.append(getChName()).append(" hits ").append(theOpp.getChName()).append(" for ")
-                            .append(damage).append(" damage!").append("\n");
+                            .append(damage).append(" damage! \n");
+            attack.append(theOpp.getChName()).append(" has ").append(theOpp.getHp()).
+                    append(" hp remaining. \n");
 //            System.out.println(getChName() + " hits " + theOpp.getChName() +
 //                    " for " + damage + " damage.");
         } else {
             attack.append("Aw ").append(getChName()).
-                    append(" misses horribly!").append("\n");
+                    append(" misses horribly! \n");
 //            System.out.println("Aw " + getChName() + " misses horribly!");
         }
         return attack.toString();
@@ -213,6 +216,9 @@ public abstract class DungeonCharacter {
 
     public boolean isAlive() {
         return getHp() > 0;
+    }
+    public void resetHP(){
+        myHp = myDefalutHp;
     }
 
     /**

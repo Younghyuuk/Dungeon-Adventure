@@ -17,8 +17,6 @@ public abstract class Monster extends DungeonCharacter {
     private final int myMinHeal;
     private final int myMaxHeal;
     private final int myMaxHealth;
-
-    public int solidAreaDefaultX, solidAreaDefaultY;
     private int actionLockCounter = 0;
 
     /**
@@ -72,12 +70,11 @@ public abstract class Monster extends DungeonCharacter {
             int healPoints = (int) Math.floor(Math.random() * (getMaxHeal() - getMinHeal()) + getMinHeal());
             setHp(getHp() + healPoints);
             healLog.append(getChName()).append(" heals itself for ").append(healPoints).
-                    append(" hit points!").append("\n");
-//            System.out.println(getChName() + " heals itself for " + healPoints + " hit points.");
+                    append(" hit points! \n");
+            healLog.append(getChName()).append(" new hp is ").append(getHp()).append(". \n");
         }
         return healLog.toString();
     }
-
     public void update() {
         setAction();
         myCollision = false;
@@ -170,7 +167,6 @@ public abstract class Monster extends DungeonCharacter {
                     break;
             }
             theGraphics.drawImage(image, screenX, screenY, myGamePanel.getSpriteSize(), myGamePanel.getSpriteSize(), null);
-            theGraphics.drawRect(screenX + getMySolidArea().x,screenY + mySolidArea.y, mySolidArea.width,  mySolidArea.height);
         }
     }
 

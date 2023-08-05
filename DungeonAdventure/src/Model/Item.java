@@ -41,7 +41,7 @@ public abstract class Item {
     /**
      * Gets the images associated with the specific item.
      */
-    public void getItemImage() {}
+    public abstract void getItemImage();
 
     /**
      * Sets the spawn location of an item in the world.
