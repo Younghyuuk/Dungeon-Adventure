@@ -1,5 +1,8 @@
 package Model;
 
+import View.GamePanel;
+
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Objects;
@@ -12,21 +15,13 @@ import static javax.imageio.ImageIO.read;
  */
 public class HealthPotion extends Item {
     /**
-     * The row that the 'HealthPotion' will live in.
-     */
-    private int myRow;
-    /**
-     * The column that the 'HealthPotion' will live in.
-     */
-    private int myCol;
-    /**
      * The images associated with a 'HealthPotion'.
      */
     private BufferedImage myHealth1, myHealth2, myHealth3;
     /**
      * The number associated with a 'HealthPotion' item.
      */
-    private static final int ITEM_NUMBER = 4;
+    private static final String ITEM_NAME = "HEALTH_POTION";
     /**
      * The chance a health potion will spawn in any given room.
      */
@@ -39,35 +34,39 @@ public class HealthPotion extends Item {
      * The maximum amount of health that can be received.
      */
     private static final int MAX_HEALTH = 15;
+    /**
+     * The amount of health this 'HealthPotion' will give back.
+     */
+    private int myHealthBack;
 
     /**
      * Constructs a basic 'HealthPotion' object.
      *
-     * @param theDungeon The dungeon to place the 'HealthPotion' in.
+     * @param theWorldX The world-x coordinate to draw the item at.
+     * @param theWorldY The world-y coordinate to draw the item at.
+     * @param theGP     The GamePanel to draw the item onto.
      */
-    public HealthPotion(final Dungeon theDungeon) {
-        // TODO: Get random row and col in correct spots
-        super(ITEM_NUMBER, SPAWN_CHANCE, theDungeon);
+    public HealthPotion(final int theWorldX, final int theWorldY, final GamePanel theGP) {
+        super(theGP, theWorldX, theWorldY, ITEM_NAME, SPAWN_CHANCE);
+        findHealth();
         getItemImage();
     }
 
-    public int getRowAndCol() {
-        // We want to randomly select from the rows and columns available
+    /**
+     * Calculates the amount of health this 'HealthPotion' will give.
+     */
+    private void findHealth() {
         Random random = new Random();
-        int[] rows = {0, 1, 2, 3, 4, 5, 6};
-        int[] cols = {0, 1, 2, 3, 4, 5, 6};
-
-        return 0;
+        myHealthBack = random.nextInt(MAX_HEALTH - MIN_HEALTH + 1) + MIN_HEALTH;
     }
 
     /**
-     * Gets the amount of health this 'HealthPotion' will give.
+     * Gets the amount of health back this potion will give.
      *
-     * @return The amount of health obtainable.
+     * @return The amount of health back obtainable from this potion.
      */
-    public int getHealth() {
-        Random random = new Random();
-        return random.nextInt(MAX_HEALTH - MIN_HEALTH + 1) + MIN_HEALTH;
+    public int getHealthBack() {
+        return myHealthBack;
     }
 
     /**

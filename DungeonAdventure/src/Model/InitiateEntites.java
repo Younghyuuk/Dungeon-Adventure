@@ -4,6 +4,7 @@ import View.GamePanel;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * This class initiates all the monsters and items that will be in the dungeon.
@@ -25,7 +26,9 @@ public class InitiateEntites {
      * A list that stores every item that will be in the dungeon.
      */
     private List<Item> myItemArray;
-  
+    /**
+     * A list that stores all the four pillars of OO that are in the dungeon.
+     */
     private List<FourPillars> myFourPillarsArray;
     /**
      * The height of the dungeon.
@@ -57,12 +60,16 @@ public class InitiateEntites {
         roomH = myGamePanel.getMyDungeon().getRooms()[0][0].getRoomHeight();
         roomW = myGamePanel.getMyDungeon().getRooms()[0][0].getRoomWidth();
         myMonsterArray = new ArrayList<>();
-        myItemArray = new ArrayList<>();
         createMonster();
+        myItemArray = new ArrayList<>();
+        createItems();
         myFourPillarsArray = new ArrayList<>();
         createFourPillars();
     }
-        
+
+    /**
+     * Creates and draws in all the Four Pillars of OO into the dungeon.
+     */
     public void createFourPillars() {
         FourPillars abstraction = new FourPillars(((roomW) - ((roomW / 2) + 1)) * myGamePanel.getSpriteSize(),
                 ((roomH) - ((roomH / 2) + 1)) * myGamePanel.getSpriteSize(),"a", myGamePanel);
@@ -79,6 +86,9 @@ public class InitiateEntites {
         myFourPillarsArray.add(polymorphism);
     }
 
+    /**
+     * Creates and draws in all the monsters into the dungeon.
+     */
     public void createMonster() {
         // Fills out the first and last row, not including the first and last collumn.
         for (int i = 2; i < dungeonW; i++) {
@@ -101,13 +111,61 @@ public class InitiateEntites {
                     aMonster1.setMyWorldXCoordinate(((roomW * i) - ((roomW / 2) + 1)) * myGamePanel.getSpriteSize());
                     aMonster1.setMyWorldYCoordinate(((roomH * j) - ((roomH / 2) + 1)) * myGamePanel.getSpriteSize());
                     myMonsterArray.add(aMonster1);
+                }
+            }
+        }
+    }
+
+    /**
+     * Creates and draws in all the items into the dungeon.
+     */
+    public void createItems() {
+        // We will create a random generator to decide where an item will be placed.
+        Random random = new Random();
+        int
+        int firstRoom = 1;
+        int middleRoom = 4;
+        for (int i = 1; i <= dungeonH; i++) {
+            for (int j = 1; j <= dungeonW; j++) {
+                // We will check for the cases that an item is in the corners or where the character spawns
+                if (i == firstRoom && j == firstRoom || i == firstRoom && j == dungeonW ||
+                        i == dungeonH && j == firstRoom || i == dungeonH && j == dungeonW ||
+                                                        i == middleRoom && j == middleRoom) {
+                    // We don't want to draw an item in these rooms.
+                } else {
+                    Item item = ItemGenerator.getRandomItem(0, myGamePanel);
+                    item.setMyWorldXCoordinate(getRandomX());
+                    item.setMyWorldYCoordinate(getRandomY());
 
                 }
             }
         }
     }
-  
 
+    /**
+     * Calculates the value for a random X coordinate in the dungeon.
+     *
+     * @return A valid, random, X-coordinate.
+     */
+    private int getRandomX() {
+        Random random = new Random();
+        int randomRoomX = {1, 2, 3, }
+    }
+
+    /**
+     * Calculates the value for a random Y coordinate in the dungeon.
+     *
+     * @return A valid, random, Y-coordinate.
+     */
+    private int getRandomY() {
+        Random random = new Random();
+    }
+
+    /**
+     * Gets the list of every Pillar of OO currently in the dungeon.
+     *
+     * @return The list of pillars contained in the dungeon.
+     */
     public List<FourPillars> getMyFourPillarsArray(){
         return myFourPillarsArray;
     }
