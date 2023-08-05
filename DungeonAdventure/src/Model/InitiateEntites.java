@@ -46,6 +46,14 @@ public class InitiateEntites {
      * The width of every room.
      */
     private int roomW;
+    /**
+     * The random X value assigned to an item.
+     */
+    private int myRandomX;
+    /**
+     * The random Y value assigned to an item.
+     */
+    private int myRandomY;
 
     /**
      * Sets up all the entities that will be contained within the dungeon.
@@ -120,9 +128,6 @@ public class InitiateEntites {
      * Creates and draws in all the items into the dungeon.
      */
     public void createItems() {
-        // We will create a random generator to decide where an item will be placed.
-        Random random = new Random();
-        int
         int firstRoom = 1;
         int middleRoom = 4;
         for (int i = 1; i <= dungeonH; i++) {
@@ -134,9 +139,9 @@ public class InitiateEntites {
                     // We don't want to draw an item in these rooms.
                 } else {
                     Item item = ItemGenerator.getRandomItem(0, myGamePanel);
-                    item.setMyWorldXCoordinate(getRandomX());
-                    item.setMyWorldYCoordinate(getRandomY());
-
+                    item.setMyWorldYCoordinate(((roomH * i) + getRandomY()) * myGamePanel.getSpriteSize());
+                    item.setMyWorldXCoordinate(((roomW * j) + getRandomX()) * myGamePanel.getSpriteSize());
+                    myItemArray.add(item);
                 }
             }
         }
@@ -149,7 +154,11 @@ public class InitiateEntites {
      */
     private int getRandomX() {
         Random random = new Random();
-        int randomRoomX = {1, 2, 3, }
+        // Since the places where an item can actually spawn is only in a 5x5 area
+        // We want to get a random value between 1 - 5
+        int randomX = random.nextInt(5) + 1;
+        // We want to avoid the center of the room where the monsters spawn
+        return (randomX == 4) ? randomX + 1 : randomX;
     }
 
     /**
@@ -159,6 +168,11 @@ public class InitiateEntites {
      */
     private int getRandomY() {
         Random random = new Random();
+        // Since the places where an item can actually spawn is only in a 5x5 area
+        // We want to get a random value between 1 - 5
+        int randomY = random.nextInt(5) + 1;
+        // We want to avoid the center of the room where the monsters spawn
+        return (randomY == 4) ? randomY + 1 : randomY;
     }
 
     /**

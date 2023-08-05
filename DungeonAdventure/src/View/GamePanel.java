@@ -47,6 +47,7 @@ public class GamePanel extends JPanel implements Runnable {
     InitiateEntites myIE = new InitiateEntites(this);
     List<FourPillars> myPillarArray = myIE.getMyFourPillarsArray();
     List<Monster> myMonsterArray = myIE.getMyMonsterArray();
+    List<Item> myItemArray = myIE.getMyItemArray();
 
     private Heroes myHero;
     private int myHeroNum;
