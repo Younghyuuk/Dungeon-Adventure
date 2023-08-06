@@ -9,11 +9,14 @@ import java.util.Random;
 
 import static javax.imageio.ImageIO.read;
 
+/**
+ * This class represents a vision potion that is able to be picked up within the dungeon.
+ */
 public class VisionPotion extends Item {
     /**
      * The images associated with a 'HealthPotion'.
      */
-    private BufferedImage myVision1, myVision2, myVision3;
+    private BufferedImage myVision;
     /**
      * The number associated with a 'HealthPotion' item.
      */
@@ -33,6 +36,7 @@ public class VisionPotion extends Item {
     public VisionPotion(final int theWorldX, final int theWorldY, final GamePanel theGP) {
         super(theGP, theWorldX, theWorldY, ITEM_NAME, SPAWN_CHANCE);
         getItemImage();
+        super.setImage(myVision);
     }
 
     /**
@@ -41,9 +45,9 @@ public class VisionPotion extends Item {
     @Override
     public void getItemImage() {
         try {
-            myVision1 = read(Objects.requireNonNull(getClass().getResourceAsStream("/Vision/Vision_1.png")));
-            myVision2 = read(Objects.requireNonNull(getClass().getResourceAsStream("/Vision/Vision_2.png")));
-            myVision3 = read(Objects.requireNonNull(getClass().getResourceAsStream("/Vision/Vision_3.png")));
+            myVision = read(Objects.requireNonNull(getClass().getResourceAsStream("/fourPillars/a.png")));
+//            myVision2 = read(Objects.requireNonNull(getClass().getResourceAsStream("/Vision/Vision_2.png")));
+//            myVision3 = read(Objects.requireNonNull(getClass().getResourceAsStream("/Vision/Vision_3.png")));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

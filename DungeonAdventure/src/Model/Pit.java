@@ -24,7 +24,7 @@ public class Pit extends Item{
     /**
      * The images associated with a 'Pit'.
      */
-    private BufferedImage myPit1, myPit2;
+    private BufferedImage myPit;
     /**
      * The number associated with a 'Pit' item.
      */
@@ -41,6 +41,10 @@ public class Pit extends Item{
      * The maximum amount of damage that a pit can inflict.
      */
     private static final int MAX_DAMAGE = 20;
+    /**
+     * The amount of damage this pit will cause.
+     */
+    private int myPitDamage;
 
     /**
      * Constructs a basic 'Pit' object.
@@ -52,16 +56,25 @@ public class Pit extends Item{
     public Pit(final int theWorldX, final int theWorldY, final GamePanel theGP) {
         super(theGP, theWorldX, theWorldY, ITEM_NAME, SPAWN_CHANCE);
         getItemImage();
+        setPitDamage();
+        super.setImage(myPit);
     }
 
     /**
-     * Gets the amount of damage that this pit will cause.
+     * Calculates the amount of damage this pit will cause to the player if hit.
+     */
+    public void setPitDamage() {
+        Random random = new Random();
+        myPitDamage = random.nextInt(MAX_DAMAGE - MIN_DAMAGE + 1) + MIN_DAMAGE;
+    }
+
+    /**
+     * Gets the amount of damage this pit will cause if it collides with the player.
      *
-     * @return Returns the damage (1-20) it will inflict on the player.
+     * @return The damage the pit will cause.
      */
     public int getPitDamage() {
-        Random random = new Random();
-        return random.nextInt(MAX_DAMAGE - MIN_DAMAGE + 1) + MIN_DAMAGE;
+        return myPitDamage;
     }
 
     /**
@@ -70,8 +83,8 @@ public class Pit extends Item{
     @Override
     public void getItemImage() {
         try {
-            myPit1 = read(Objects.requireNonNull(getClass().getResourceAsStream("/Tiles/sandBrickFloor.png")));
-            myPit2 = read(Objects.requireNonNull(getClass().getResourceAsStream("/Tiles/pit.png")));
+//            myPit1 = read(Objects.requireNonNull(getClass().getResourceAsStream("/Tiles/sandBrickFloor.png")));
+            myPit = read(Objects.requireNonNull(getClass().getResourceAsStream("/Tiles/pit.png")));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

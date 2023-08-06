@@ -50,7 +50,7 @@ public class HealthPotion extends Item {
         super(theGP, theWorldX, theWorldY, ITEM_NAME, SPAWN_CHANCE);
         findHealth();
         getItemImage();
-        setImage(myHealth);
+        super.setImage(myHealth);
     }
 
     /**
