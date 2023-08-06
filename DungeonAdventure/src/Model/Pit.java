@@ -1,5 +1,7 @@
 package Model;
 
+import View.GamePanel;
+
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Objects;
@@ -26,7 +28,7 @@ public class Pit extends Item{
     /**
      * The number associated with a 'Pit' item.
      */
-    private static final int ITEM_NUMBER = 6;
+    private static final String ITEM_NAME = "PIT";
     /**
      * The chance a pit will spawn in any given room.
      */
@@ -41,12 +43,14 @@ public class Pit extends Item{
     private static final int MAX_DAMAGE = 20;
 
     /**
-     * Construts a basic 'Pit' object.
+     * Constructs a basic 'Pit' object.
      *
-     * @param theDungeon The dungeon that the pit will be placed in.
+     * @param theWorldX The world-x coordinate to draw the item at.
+     * @param theWorldY The world-y coordinate to draw the item at.
+     * @param theGP     The GamePanel to draw the item onto.
      */
-    public Pit(final Dungeon theDungeon) {
-        super(ITEM_NUMBER, SPAWN_CHANCE, theDungeon);
+    public Pit(final int theWorldX, final int theWorldY, final GamePanel theGP) {
+        super(theGP, theWorldX, theWorldY, ITEM_NAME, SPAWN_CHANCE);
         getItemImage();
     }
 

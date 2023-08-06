@@ -44,9 +44,13 @@ public class GamePanel extends JPanel implements Runnable {
     private final WinPage myWinPage = new WinPage(this);
     private String[] myBattleLog;
     private int winCount = 0;
-    InitiateEntites myIE = new InitiateEntites(this);
+    InitiateEntities myIE = new InitiateEntities(this);
     List<FourPillars> myPillarArray = myIE.getMyFourPillarsArray();
     List<Monster> myMonsterArray = myIE.getMyMonsterArray();
+    /**
+     * A list of every item contained within the dungeon.
+     */
+    private List<Item> myItemArray = myIE.getMyItemArray();
 
     private Heroes myHero;
     private int myHeroNum;
@@ -80,6 +84,9 @@ public class GamePanel extends JPanel implements Runnable {
         for (FourPillars pillars :myPillarArray){
             pillars.setFound(false);
         }
+        for (Item item : myItemArray) {
+            item.setFound(false);
+        }
         winCount = 0;
     }
     public void resetGame(){
@@ -89,6 +96,9 @@ public class GamePanel extends JPanel implements Runnable {
         }
         for (FourPillars pillars :myPillarArray){
             pillars.setFound(false);
+        }
+        for (Item item : myItemArray) {
+            item.setFound(false);
         }
         winCount = 0;
     }
@@ -163,6 +173,15 @@ public class GamePanel extends JPanel implements Runnable {
     }
     public List<FourPillars> getMyPillarArray(){
         return myPillarArray;
+    }
+
+    /**
+     * Gets the list of every item contained within the dungeon.
+     *
+     * @return The list of the items in the game.
+     */
+    public List<Item> getMyItemArray() {
+        return myItemArray;
     }
     public int getWinCount(){
         return winCount;
@@ -255,6 +274,11 @@ public class GamePanel extends JPanel implements Runnable {
             for (FourPillars pill : myPillarArray){
                 if(!pill.getFound()){
                     pill.draw(pen);
+                }
+            }
+            for (Item item : myItemArray) {
+                if(!item.getFound()) {
+                    item.draw(pen);
                 }
             }
             if (myAboutState) {

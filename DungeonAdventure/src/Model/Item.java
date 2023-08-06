@@ -1,17 +1,22 @@
 package Model;
 
+import View.GamePanel;
+
+import java.awt.*;
+import java.awt.image.BufferedImage;
+
 /**
  * An abstract class representing an item that could appear in a room.
  */
 public abstract class Item {
     /**
+     * The game panel to draw the item onto.
+     */
+    private GamePanel myGamePanel;
+    /**
      * The chance the item will spawn.
      */
-    private double spawnChance;
-    /**
-     * The locations every item will spawn in, in a world.
-     */
-    private int[][] spawnLocation;
+    private double mySpawnChance;
     /**
      * The world-x coordinate of the item.
      */
@@ -20,48 +25,48 @@ public abstract class Item {
      * The world-y coordinate of the item.
      */
     private int myWorldYCoordinate;
+    /**
+     * The item this item is.
+     */
+    private String myItem;
+    /**
+     * The Rectangle that acts as the item's hit box.
+     */
+    private Rectangle mySolidArea;
+    /**
+     * The image representing the current item.
+     */
+    private BufferedImage myItemImage;
+    /**
+     * Boolean that determines whether an item has been "found," or not. <br>
+     * In other words: has the player collided with the item?
+     */
+    private boolean myFound;
 
     /**
      * Constructs an item.
      *
-     * @param theItem The type of item this item will be.
+     * @param theGP          The 'GamePanel' to draw the item onto.
+     * @param theWorldX      The world-x coordinate to draw the item at.
+     * @param theWorldY      The world-y coordinate to draw the item at.
+     * @param theItem        The type of item this item will be.
      * @param theSpawnChance The chance the item will spawn.
-     * @param theDungeon The dungeon that this item is in.
      */
-    public Item(final int theItem, final double theSpawnChance, final Dungeon theDungeon) {
-        // First set up the spawnLocation array
-        int height = theDungeon.getDungeonHeight() * theDungeon.getDungeonHeight();
-        int width = theDungeon.getDungeonWidth() * theDungeon.getDungeonWidth();
-        spawnLocation = new int[height][width];
-        // Then set up everything else
-        spawnChance = theSpawnChance;
-//        spawnLocation[theRow][theCol] = theItem;
+    public Item(final GamePanel theGP, final int theWorldX, final int theWorldY,
+                                final String theItem, final double theSpawnChance) {
+        myGamePanel = theGP;
+        myWorldXCoordinate = theWorldX;
+        myWorldYCoordinate = theWorldY;
+        myItem = theItem;
+        mySpawnChance = theSpawnChance;
+        mySolidArea = new Rectangle(0, 0, myGamePanel.getSpriteSize(), myGamePanel.getSpriteSize());
+        myFound = false;
     }
 
     /**
      * Gets the images associated with the specific item.
      */
     public abstract void getItemImage();
-
-    /**
-     * Sets the spawn location of an item in the world.
-     *
-     * @param theItem The item to put in the dungeon.
-     * @param theRow The row to put the item in.
-     * @param theCol The column to put the item in.
-     */
-    public void setSpawnLocation(final int theItem, final int theRow, final int theCol) {
-        spawnLocation[theRow][theCol]  = theItem;
-    }
-
-    /**
-     * Gets the 2D array of all spawn locations of every item.
-     *
-     * @return Returns the array of spawn locations.
-     */
-    public int[][] getSpawnLocations() {
-        return spawnLocation;
-    }
 
     /**
      * Gets the world-x coordinate of the item.
@@ -82,6 +87,15 @@ public abstract class Item {
     }
 
     /**
+     * Gets this item's hit box to be used in collision.
+     *
+     * @return The hit box of the item.
+     */
+    public Rectangle getMySolidArea() {
+        return mySolidArea;
+    }
+
+    /**
      * Sets the world-x coordinate of the item.
      *
      * @param theX The world-x coordinate to set this item's world-x to.
@@ -97,5 +111,61 @@ public abstract class Item {
      */
     public void setMyWorldYCoordinate(final int theY) {
         myWorldYCoordinate = theY;
+    }
+
+    /**
+     * Gets whether the item has been picked up/ran into or not.
+     *
+     * @return True or false depending on if the player has collided with the item.
+     */
+    public boolean getFound() {
+        return myFound;
+    }
+
+    /**
+     * Sets whether the item has been picked up/collided with.
+     *
+     * @param theFound The boolean value to set 'myFound' to.
+     */
+    public void setFound(boolean theFound) {
+        myFound = theFound;
+    }
+
+
+    /**
+     * Sets the image associated with the item.
+     *
+     * @param theImage The image to set 'myItemImage' to.
+     */
+    public void setImage(final BufferedImage theImage) {
+        if (theImage.toString().equals("myHealth1")) {
+            myItemImage = theImage;
+        }
+    }
+
+    /**
+     * Resets the item's hit box.
+     */
+    public void resetSolidArea(){
+        mySolidArea.x = 0;
+        mySolidArea.y = 0;
+    }
+
+    /**
+     * Draws the current item onto the game panel.
+     *
+     * @param theGraphics The 2D graphics object to draw the item with.
+     */
+    public void draw(final Graphics2D theGraphics) {
+        int screenX = myWorldXCoordinate - myGamePanel.getMyHero().getMyWorldXCoordinate() + myGamePanel.getMyHero().getMyScreensMiddleX();
+        int screenY = myWorldYCoordinate - myGamePanel.getMyHero().getMyWorldYCoordinate() + myGamePanel.getMyHero().getMyScreensMiddleY();
+
+        if (myWorldXCoordinate + myGamePanel.getSpriteSize() > myGamePanel.getMyHero().getMyWorldXCoordinate() - myGamePanel.getMyHero().getMyScreensMiddleX() &&
+                myWorldXCoordinate - myGamePanel.getSpriteSize() < myGamePanel.getMyHero().getMyWorldXCoordinate() + myGamePanel.getMyHero().getMyScreensMiddleX() &&
+                myWorldYCoordinate + myGamePanel.getSpriteSize() > myGamePanel.getMyHero().getMyWorldYCoordinate() - myGamePanel.getMyHero().getMyScreensMiddleY() &&
+                myWorldYCoordinate - myGamePanel.getSpriteSize() < myGamePanel.getMyHero().getMyWorldYCoordinate() + myGamePanel.getMyHero().getMyScreensMiddleY()) {
+
+            theGraphics.drawImage(myItemImage, screenX, screenY, myGamePanel.getSpriteSize(), myGamePanel.getSpriteSize(), null);
+        }
     }
 }
