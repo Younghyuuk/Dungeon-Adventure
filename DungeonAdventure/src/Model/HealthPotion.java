@@ -15,10 +15,6 @@ import static javax.imageio.ImageIO.read;
  */
 public class HealthPotion extends Item {
     /**
-     * The images associated with a 'HealthPotion'.
-     */
-    private BufferedImage myHealth1, myHealth2, myHealth3;
-    /**
      * The number associated with a 'HealthPotion' item.
      */
     private static final String ITEM_NAME = "HEALTH_POTION";
@@ -35,6 +31,10 @@ public class HealthPotion extends Item {
      */
     private static final int MAX_HEALTH = 15;
     /**
+     * The image associated with a 'HealthPotion'.
+     */
+    private BufferedImage myHealth;
+    /**
      * The amount of health this 'HealthPotion' will give back.
      */
     private int myHealthBack;
@@ -50,6 +50,7 @@ public class HealthPotion extends Item {
         super(theGP, theWorldX, theWorldY, ITEM_NAME, SPAWN_CHANCE);
         findHealth();
         getItemImage();
+        setImage(myHealth);
     }
 
     /**
@@ -75,9 +76,9 @@ public class HealthPotion extends Item {
     @Override
     public void getItemImage() {
         try {
-            myHealth1 = read(Objects.requireNonNull(getClass().getResourceAsStream("/Health/Health_1.png")));
-            myHealth2 = read(Objects.requireNonNull(getClass().getResourceAsStream("/Health/Health_2.png")));
-            myHealth3 = read(Objects.requireNonNull(getClass().getResourceAsStream("/Health/Health_3.png")));
+            myHealth = read(Objects.requireNonNull(getClass().getResourceAsStream("/Health/Health_1.png")));
+//            myHealth2 = read(Objects.requireNonNull(getClass().getResourceAsStream("/Health/Health_2.png")));
+//            myHealth3 = read(Objects.requireNonNull(getClass().getResourceAsStream("/Health/Health_3.png")));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

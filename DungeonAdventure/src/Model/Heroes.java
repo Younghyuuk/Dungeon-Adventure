@@ -92,6 +92,8 @@ public abstract class Heroes extends DungeonCharacter {
         interactMonster(monster);
         //Check Collision with Four Pillars
         int pillar = myGamePanel.getMyCollision().checkPillar(this, myGamePanel.getMyPillarArray());
+        // Check collision with the items
+        int item = myGamePanel.getMyCollision().checkItem(this, myGamePanel.getMyItemArray());
 
         if (myKeyInputs.up || myKeyInputs.down || myKeyInputs.left || myKeyInputs.right) {
             if (!myCollision) {

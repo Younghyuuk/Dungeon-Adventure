@@ -3,6 +3,7 @@ package Model;
 import View.GamePanel;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 /**
  * An abstract class representing an item that could appear in a room.
@@ -31,7 +32,16 @@ public abstract class Item {
     /**
      * The Rectangle that acts as the item's hit box.
      */
-    private Rectangle myHitBox;
+    private Rectangle mySolidArea;
+    /**
+     * The image representing the current item.
+     */
+    private BufferedImage myItemImage;
+    /**
+     * Boolean that determines whether an item has been "found," or not. <br>
+     * In other words: has the player collided with the item?
+     */
+    private boolean myFound;
 
     /**
      * Constructs an item.
@@ -49,6 +59,8 @@ public abstract class Item {
         myWorldYCoordinate = theWorldY;
         myItem = theItem;
         mySpawnChance = theSpawnChance;
+        mySolidArea = new Rectangle(0, 0, myGamePanel.getSpriteSize(), myGamePanel.getSpriteSize());
+        myFound = false;
     }
 
     /**
@@ -75,6 +87,15 @@ public abstract class Item {
     }
 
     /**
+     * Gets this item's hit box to be used in collision.
+     *
+     * @return The hit box of the item.
+     */
+    public Rectangle getMySolidArea() {
+        return mySolidArea;
+    }
+
+    /**
      * Sets the world-x coordinate of the item.
      *
      * @param theX The world-x coordinate to set this item's world-x to.
@@ -90,5 +111,61 @@ public abstract class Item {
      */
     public void setMyWorldYCoordinate(final int theY) {
         myWorldYCoordinate = theY;
+    }
+
+    /**
+     * Gets whether the item has been picked up/ran into or not.
+     *
+     * @return True or false depending on if the player has collided with the item.
+     */
+    public boolean getFound() {
+        return myFound;
+    }
+
+    /**
+     * Sets whether the item has been picked up/collided with.
+     *
+     * @param theFound The boolean value to set 'myFound' to.
+     */
+    public void setFound(boolean theFound) {
+        myFound = theFound;
+    }
+
+
+    /**
+     * Sets the image associated with the item.
+     *
+     * @param theImage The image to set 'myItemImage' to.
+     */
+    public void setImage(final BufferedImage theImage) {
+        if (theImage.toString().equals("myHealth1")) {
+            myItemImage = theImage;
+        }
+    }
+
+    /**
+     * Resets the item's hit box.
+     */
+    public void resetSolidArea(){
+        mySolidArea.x = 0;
+        mySolidArea.y = 0;
+    }
+
+    /**
+     * Draws the current item onto the game panel.
+     *
+     * @param theGraphics The 2D graphics object to draw the item with.
+     */
+    public void draw(final Graphics2D theGraphics) {
+        int screenX = myWorldXCoordinate - myGamePanel.getMyHero().getMyWorldXCoordinate() + myGamePanel.getMyHero().getMyScreensMiddleX();
+        int screenY = myWorldYCoordinate - myGamePanel.getMyHero().getMyWorldYCoordinate() + myGamePanel.getMyHero().getMyScreensMiddleY();
+
+        if (myWorldXCoordinate + myGamePanel.getSpriteSize() > myGamePanel.getMyHero().getMyWorldXCoordinate() - myGamePanel.getMyHero().getMyScreensMiddleX() &&
+                myWorldXCoordinate - myGamePanel.getSpriteSize() < myGamePanel.getMyHero().getMyWorldXCoordinate() + myGamePanel.getMyHero().getMyScreensMiddleX() &&
+                myWorldYCoordinate + myGamePanel.getSpriteSize() > myGamePanel.getMyHero().getMyWorldYCoordinate() - myGamePanel.getMyHero().getMyScreensMiddleY() &&
+                myWorldYCoordinate - myGamePanel.getSpriteSize() < myGamePanel.getMyHero().getMyWorldYCoordinate() + myGamePanel.getMyHero().getMyScreensMiddleY()) {
+
+            theGraphics.drawImage(myItemImage, screenX, screenY, myGamePanel.getSpriteSize(), myGamePanel.getSpriteSize(), null);
+        }
     }
 }
