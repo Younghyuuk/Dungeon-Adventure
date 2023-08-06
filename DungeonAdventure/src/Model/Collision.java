@@ -199,7 +199,6 @@ public class Collision {
                             theHero.setMyCollision(true);
                             index = i++;
                             item.setFound(true);
-                            myGamePanel.incWinCount();
                         }
                         break;
                     case "down":
@@ -208,7 +207,6 @@ public class Collision {
                             theHero.setMyCollision(true);
                             index = i++;
                             item.setFound(true);
-                            myGamePanel.incWinCount();
                         }
                         break;
                     case "left":
@@ -217,7 +215,6 @@ public class Collision {
                             theHero.setMyCollision(true);
                             index = i++;
                             item.setFound(true);
-                            myGamePanel.incWinCount();
                         }
                         break;
                     case "right":
@@ -226,7 +223,6 @@ public class Collision {
                             theHero.setMyCollision(true);
                             index = i++;
                             item.setFound(true);
-                            myGamePanel.incWinCount();
                         }
                         break;
                 }
