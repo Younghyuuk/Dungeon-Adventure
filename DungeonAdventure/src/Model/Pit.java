@@ -1,5 +1,7 @@
 package Model;
 
+import View.GamePanel;
+
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Objects;
@@ -22,11 +24,11 @@ public class Pit extends Item{
     /**
      * The images associated with a 'Pit'.
      */
-    private BufferedImage myPit1, myPit2;
+    private BufferedImage myPit;
     /**
      * The number associated with a 'Pit' item.
      */
-    private static final int ITEM_NUMBER = 6;
+    private static final String ITEM_NAME = "PIT";
     /**
      * The chance a pit will spawn in any given room.
      */
@@ -39,25 +41,40 @@ public class Pit extends Item{
      * The maximum amount of damage that a pit can inflict.
      */
     private static final int MAX_DAMAGE = 20;
+    /**
+     * The amount of damage this pit will cause.
+     */
+    private int myPitDamage;
 
     /**
-     * Construts a basic 'Pit' object.
+     * Constructs a basic 'Pit' object.
      *
-     * @param theDungeon The dungeon that the pit will be placed in.
+     * @param theWorldX The world-x coordinate to draw the item at.
+     * @param theWorldY The world-y coordinate to draw the item at.
+     * @param theGP     The GamePanel to draw the item onto.
      */
-    public Pit(final Dungeon theDungeon) {
-        super(ITEM_NUMBER, SPAWN_CHANCE, theDungeon);
+    public Pit(final int theWorldX, final int theWorldY, final GamePanel theGP) {
+        super(theGP, theWorldX, theWorldY, ITEM_NAME, SPAWN_CHANCE);
         getItemImage();
+        setPitDamage();
+        super.setImage(myPit);
     }
 
     /**
-     * Gets the amount of damage that this pit will cause.
+     * Calculates the amount of damage this pit will cause to the player if hit.
+     */
+    public void setPitDamage() {
+        Random random = new Random();
+        myPitDamage = random.nextInt(MAX_DAMAGE - MIN_DAMAGE + 1) + MIN_DAMAGE;
+    }
+
+    /**
+     * Gets the amount of damage this pit will cause if it collides with the player.
      *
-     * @return Returns the damage (1-20) it will inflict on the player.
+     * @return The damage the pit will cause.
      */
     public int getPitDamage() {
-        Random random = new Random();
-        return random.nextInt(MAX_DAMAGE - MIN_DAMAGE + 1) + MIN_DAMAGE;
+        return myPitDamage;
     }
 
     /**
@@ -66,8 +83,8 @@ public class Pit extends Item{
     @Override
     public void getItemImage() {
         try {
-            myPit1 = read(Objects.requireNonNull(getClass().getResourceAsStream("/Tiles/sandBrickFloor.png")));
-            myPit2 = read(Objects.requireNonNull(getClass().getResourceAsStream("/Tiles/pit.png")));
+//            myPit1 = read(Objects.requireNonNull(getClass().getResourceAsStream("/Tiles/sandBrickFloor.png")));
+            myPit = read(Objects.requireNonNull(getClass().getResourceAsStream("/Tiles/pit.png")));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

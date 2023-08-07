@@ -180,6 +180,58 @@ public class Collision {
         }
         return index;
     }
+
+    public int checkItem(final Heroes theHero, final List<Item> theItemList) {
+        int index = 999;
+        int i = 0;
+        for (Item item : theItemList) {
+            if (!item.getFound()) {
+                theHero.getMySolidArea().x = theHero.myWorldXCoordinate + theHero.getMySolidArea().x;
+                theHero.getMySolidArea().y = theHero.myWorldYCoordinate + theHero.getMySolidArea().y;
+
+                item.getMySolidArea().x = item.getMyWorldXCoordinate() + item.getMySolidArea().x;
+                item.getMySolidArea().y = item.getMyWorldYCoordinate() + item.getMySolidArea().y;
+
+                switch (theHero.getMyDirection()) {
+                    case "up":
+                        theHero.getMySolidArea().y -= theHero.mySpeed;
+                        if (theHero.getMySolidArea().intersects(item.getMySolidArea())) {
+                            theHero.setMyCollision(true);
+                            index = i++;
+                            item.setFound(true);
+                        }
+                        break;
+                    case "down":
+                        theHero.getMySolidArea().y += theHero.mySpeed;
+                        if (theHero.getMySolidArea().intersects(item.getMySolidArea())) {
+                            theHero.setMyCollision(true);
+                            index = i++;
+                            item.setFound(true);
+                        }
+                        break;
+                    case "left":
+                        theHero.getMySolidArea().x -= theHero.mySpeed;
+                        if (theHero.getMySolidArea().intersects(item.getMySolidArea())) {
+                            theHero.setMyCollision(true);
+                            index = i++;
+                            item.setFound(true);
+                        }
+                        break;
+                    case "right":
+                        theHero.getMySolidArea().x += theHero.mySpeed;
+                        if (theHero.getMySolidArea().intersects(item.getMySolidArea())) {
+                            theHero.setMyCollision(true);
+                            index = i++;
+                            item.setFound(true);
+                        }
+                        break;
+                }
+                theHero.resetSolidArea();
+                item.resetSolidArea();
+            }
+        }
+        return index;
+    }
 }
 
     // Probably wont need as we will delete the monster on player to monster collision.
