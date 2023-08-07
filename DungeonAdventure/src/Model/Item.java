@@ -14,10 +14,6 @@ public abstract class Item {
      */
     private GamePanel myGamePanel;
     /**
-     * The chance the item will spawn.
-     */
-    private double mySpawnChance;
-    /**
      * The world-x coordinate of the item.
      */
     private int myWorldXCoordinate;
@@ -25,10 +21,6 @@ public abstract class Item {
      * The world-y coordinate of the item.
      */
     private int myWorldYCoordinate;
-    /**
-     * The item this item is.
-     */
-    private String myItem;
     /**
      * The Rectangle that acts as the item's hit box.
      */
@@ -49,16 +41,11 @@ public abstract class Item {
      * @param theGP          The 'GamePanel' to draw the item onto.
      * @param theWorldX      The world-x coordinate to draw the item at.
      * @param theWorldY      The world-y coordinate to draw the item at.
-     * @param theItem        The type of item this item will be.
-     * @param theSpawnChance The chance the item will spawn.
      */
-    public Item(final GamePanel theGP, final int theWorldX, final int theWorldY,
-                                final String theItem, final double theSpawnChance) {
+    public Item(final GamePanel theGP, final int theWorldX, final int theWorldY) {
         myGamePanel = theGP;
         myWorldXCoordinate = theWorldX;
         myWorldYCoordinate = theWorldY;
-        myItem = theItem;
-        mySpawnChance = theSpawnChance;
         mySolidArea = new Rectangle(0, 0, myGamePanel.getSpriteSize(), myGamePanel.getSpriteSize());
         myFound = false;
     }
@@ -127,7 +114,7 @@ public abstract class Item {
      *
      * @param theFound The boolean value to set 'myFound' to.
      */
-    public void setFound(boolean theFound) {
+    public void setFound(final boolean theFound) {
         myFound = theFound;
     }
 
@@ -138,9 +125,7 @@ public abstract class Item {
      * @param theImage The image to set 'myItemImage' to.
      */
     public void setImage(final BufferedImage theImage) {
-        if (theImage.toString().equals("myHealth1")) {
-            myItemImage = theImage;
-        }
+        myItemImage = theImage;
     }
 
     /**

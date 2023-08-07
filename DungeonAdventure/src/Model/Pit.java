@@ -12,27 +12,7 @@ import static javax.imageio.ImageIO.read;
 /**
  * Represents a basic 'Pit' object that can spawn in any room of a dungeon.
  */
-public class Pit extends Item{
-    /**
-     * The row that the 'Pit' will live in.
-     */
-    private int myRow;
-    /**
-     * The column that the 'Pit' will live in.
-     */
-    private int myCol;
-    /**
-     * The images associated with a 'Pit'.
-     */
-    private BufferedImage myPit;
-    /**
-     * The number associated with a 'Pit' item.
-     */
-    private static final String ITEM_NAME = "PIT";
-    /**
-     * The chance a pit will spawn in any given room.
-     */
-    private static final double SPAWN_CHANCE = 0.10;
+public class Pit extends Item {
     /**
      * The minimum amount of damage that a pit can inflict.
      */
@@ -41,6 +21,10 @@ public class Pit extends Item{
      * The maximum amount of damage that a pit can inflict.
      */
     private static final int MAX_DAMAGE = 20;
+    /**
+     * The images associated with a 'Pit'.
+     */
+    private BufferedImage myPit;
     /**
      * The amount of damage this pit will cause.
      */
@@ -54,7 +38,7 @@ public class Pit extends Item{
      * @param theGP     The GamePanel to draw the item onto.
      */
     public Pit(final int theWorldX, final int theWorldY, final GamePanel theGP) {
-        super(theGP, theWorldX, theWorldY, ITEM_NAME, SPAWN_CHANCE);
+        super(theGP, theWorldX, theWorldY);
         getItemImage();
         setPitDamage();
         super.setImage(myPit);
