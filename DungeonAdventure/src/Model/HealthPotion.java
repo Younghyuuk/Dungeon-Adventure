@@ -15,14 +15,6 @@ import static javax.imageio.ImageIO.read;
  */
 public class HealthPotion extends Item {
     /**
-     * The number associated with a 'HealthPotion' item.
-     */
-    private static final String ITEM_NAME = "HEALTH_POTION";
-    /**
-     * The chance a health potion will spawn in any given room.
-     */
-    private static final double SPAWN_CHANCE = 0.10;
-    /**
      * The minimum amount of health that can be received.
      */
     private static final int MIN_HEALTH = 5;
@@ -47,7 +39,7 @@ public class HealthPotion extends Item {
      * @param theGP     The GamePanel to draw the item onto.
      */
     public HealthPotion(final int theWorldX, final int theWorldY, final GamePanel theGP) {
-        super(theGP, theWorldX, theWorldY, ITEM_NAME, SPAWN_CHANCE);
+        super(theGP, theWorldX, theWorldY);
         findHealth();
         getItemImage();
         super.setImage(myHealth);
