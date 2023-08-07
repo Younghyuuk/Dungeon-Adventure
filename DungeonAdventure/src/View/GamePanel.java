@@ -5,6 +5,7 @@ import Model.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.List;
 
 public class GamePanel extends JPanel implements Runnable {
 
@@ -19,7 +20,7 @@ public class GamePanel extends JPanel implements Runnable {
     private final static int FPS = 60;
 
     //We may need to pass this from mainframe and play with the gamestate to load new dungeons.=
-    final Dungeon myDungeon = new Dungeon();
+    private Dungeon myDungeon = new Dungeon();
     // these values will be dependent on Dungeon Maze array size.
     /**
      * The width of the world map as a 2d array
@@ -31,20 +32,34 @@ public class GamePanel extends JPanel implements Runnable {
      */
     private final int myWorldRow = myDungeon.getDungeonHeight() * myDungeon.getRooms()[0][0].getRoomHeight();
 
-    private final TileManager myTileM = new TileManager(this);
+    private TileManager myTileM = new TileManager(this);
     private final Thread gameThread = new Thread(this);
     private final Collision myCollision = new Collision(this);
     private final Keyboard myKeyInputs = new Keyboard(this);
     private final TitlePage myTitlePage = new TitlePage(this);
     private final CharacterSelectionPage myCharacterSelectionPage = new CharacterSelectionPage(this);
     private final AboutPage myAboutPage = new AboutPage(this);
-    private Heroes myHero;
+    private BattlePage myBattlePage = new BattlePage(this);
+    private final GameOver myGameOverPage = new GameOver(this);
+    private final WinPage myWinPage = new WinPage(this);
+    private String[] myBattleLog;
+    private int winCount = 0;
+    InitiateEntites myIE = new InitiateEntites(this);
+    List<FourPillars> myPillarArray = myIE.getMyFourPillarsArray();
+    List<Monster> myMonsterArray = myIE.getMyMonsterArray();
 
+    private Heroes myHero;
+    private int myHeroNum;
     private int myGameState;
     private final static int TITLE_STATE = 0;
     private final static int CHARACTER_STATE = 1;
     private final static int PLAY_STATE = 2;
+    private final static int BATTLE_STATE = 3;
+    private final static int GAME_OVER_STATE = 4;
+    private final static int WIN_STATE = 5;
+    private int count = 0;
     private boolean myAboutState = false;
+
 
 
     public GamePanel() {
@@ -56,19 +71,50 @@ public class GamePanel extends JPanel implements Runnable {
         myGameState = TITLE_STATE;
         setMyHero(1);
     }
+    public void setNewGame(){
+        if (!myMonsterArray.isEmpty()) {
+            myMonsterArray.clear();
+        }
+        myIE.createMonster();
+        myMonsterArray = myIE.getMyMonsterArray();
+        for (FourPillars pillars :myPillarArray){
+            pillars.setFound(false);
+        }
+        winCount = 0;
+    }
+    public void resetGame(){
+        setMyHero(myHeroNum);
+        for (Monster mon : myMonsterArray){
+            mon.resetHP();
+        }
+        for (FourPillars pillars :myPillarArray){
+            pillars.setFound(false);
+        }
+        winCount = 0;
+    }
 
+    public void setMyBattleLog(String[] theBattleLog){
+        myBattleLog = theBattleLog;
+    }
     public CharacterSelectionPage getMyCharacterSelectionPage(){
         return myCharacterSelectionPage;
     }
     public int getMyGameState() {
         return myGameState;
     }
-
+    public WinPage getMyWinPage(){
+        return myWinPage;
+    }
     public TitlePage getMyTitlePage() {
         return myTitlePage;
 
     }
-
+    public GameOver getMyGameOver(){
+        return myGameOverPage;
+    }
+    public void setMyDungeon(Dungeon theDungeon){
+        myDungeon = theDungeon;
+    }
     public void setMyGameState(int theGameState) {
         myGameState = theGameState;
     }
@@ -97,6 +143,10 @@ public class GamePanel extends JPanel implements Runnable {
         return myWorldRow;
     }
 
+    public Dungeon getMyDungeon() {
+        return myDungeon;
+    }
+
     public Heroes getMyHero() {
         return myHero;
     }
@@ -108,7 +158,18 @@ public class GamePanel extends JPanel implements Runnable {
     public TileManager getMyTileM() {
         return myTileM;
     }
-
+    public List<Monster> getMyMonsterArray(){
+        return myMonsterArray;
+    }
+    public List<FourPillars> getMyPillarArray(){
+        return myPillarArray;
+    }
+    public int getWinCount(){
+        return winCount;
+    }
+    public void incWinCount(){
+        winCount++;
+    }
     public void setMyAboutState(boolean theAboutState) {
         myAboutState = theAboutState;
     }
@@ -120,12 +181,15 @@ public class GamePanel extends JPanel implements Runnable {
     public void setMyHero(int number) {
         if (number == 1) {
             myHero = new Thief(this, myKeyInputs);
+            myHeroNum= 1;
         }
         if (number == 2) {
             myHero = new Warrior(this, myKeyInputs);
+            myHeroNum= 2;
         }
         if (number == 3) {
             myHero = new Priestess(this, myKeyInputs);
+            myHeroNum= 3;
         }
     }
 
@@ -153,7 +217,19 @@ public class GamePanel extends JPanel implements Runnable {
 
     // This method will update our model.
     public void update() {
-        myHero.update();
+        if(myGameState == PLAY_STATE) {
+            myHero.update();
+            for (Monster mon : myMonsterArray){
+                mon.update();
+            }
+        }
+        if (!myHero.isAlive()){
+            setMyGameState(4);
+        }
+        if(winCount == 4){
+            setMyGameState(5);
+        }
+        System.out.println(winCount);
     }
 
     // This method updates our view.
@@ -171,10 +247,39 @@ public class GamePanel extends JPanel implements Runnable {
         } else if (myGameState == PLAY_STATE) {
             myTileM.draw(pen);
             myHero.draw(pen);
+            for (Monster mon : myMonsterArray){
+                if (mon.isAlive()){
+                    mon.draw(pen);
+                }
+            }
+            for (FourPillars pill : myPillarArray){
+                if(!pill.getFound()){
+                    pill.draw(pen);
+                }
+            }
             if (myAboutState) {
                 myAboutPage.draw(pen);
             }
             pen.dispose();
+        }
+        else if (myGameState == BATTLE_STATE){
+            myTileM.draw(pen);
+            myHero.draw(pen);
+            myBattlePage.setMyBattleLog(myBattleLog);
+
+            for (Monster mon : myMonsterArray) {
+                if (mon.isAlive()) {
+                    mon.draw(pen);
+                }
+            }
+            myBattlePage.draw(pen);
+            pen.dispose();
+        }
+        else if(myGameState == GAME_OVER_STATE){
+            myGameOverPage.draw(pen);
+        }
+        else {
+            myWinPage.draw(pen);
         }
     }
 }

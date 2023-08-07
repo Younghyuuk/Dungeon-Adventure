@@ -1,6 +1,11 @@
 package Model;
 
-import java.util.UUID;
+import View.GamePanel;
+
+import java.io.IOException;
+import java.util.Objects;
+
+import static javax.imageio.ImageIO.read;
 
 public class Ogre extends Monster {
 
@@ -9,9 +14,10 @@ public class Ogre extends Monster {
      * The constructor of Monster that sets up the stats for Ogre class.
      */
     protected Ogre(int theHp, int theAttackSpeed, int theMinDamage, int theMaxDamage, double theHitChance,
-                      double theChanceHeal, int theMinHeal, int theMaxHeal) {
+                   double theChanceHeal, int theMinHeal, int theMaxHeal, GamePanel theGamePanel) {
         super(theHp, "Ogre", theAttackSpeed, theMinDamage, theMaxDamage, theHitChance, theChanceHeal,
-                theMinHeal, theMaxHeal);
+                theMinHeal, theMaxHeal, theGamePanel);
+        getMonsterImage();
     }
 
     /**
@@ -20,9 +26,25 @@ public class Ogre extends Monster {
      * @param theOpp which the monster will target
      */
     @Override
-    public void regularAttack(final DungeonCharacter theOpp) {
-        attackBehavior(theOpp);
+    public String regularAttack(final DungeonCharacter theOpp) {
+
+        return attackBehavior(theOpp);
     }
 
 
+    @Override
+    public void getMonsterImage() {
+        try {
+            up1 = read(Objects.requireNonNull(getClass().getResourceAsStream("/ogre/ogre0.png")));
+            up2 = read(Objects.requireNonNull(getClass().getResourceAsStream("/ogre/ogre1.png")));
+            down1 = read(Objects.requireNonNull(getClass().getResourceAsStream("/ogre/ogre0.png")));
+            down2 = read(Objects.requireNonNull(getClass().getResourceAsStream("/ogre/ogre1.png")));
+            left1 = read(Objects.requireNonNull(getClass().getResourceAsStream("/ogre/ogre0.png")));
+            left2 = read(Objects.requireNonNull(getClass().getResourceAsStream("/ogre/ogre1.png")));
+            right1 = read(Objects.requireNonNull(getClass().getResourceAsStream("/ogre/ogre0.png")));
+            right2 = read(Objects.requireNonNull(getClass().getResourceAsStream("/ogre/ogre1.png")));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

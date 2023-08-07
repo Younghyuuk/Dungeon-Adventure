@@ -32,7 +32,7 @@ public class Warrior extends Heroes {
     /**
      * Hp of Warrior.
      */
-    private static final int HP = 125;
+    private static final int HP = 150;
 
     /**
      * The name of the character.
@@ -52,7 +52,7 @@ public class Warrior extends Heroes {
     /**
      * Maximum damage of warrior.
      */
-    private static final int MAX_DAMAGE = 60;
+    private static final int MAX_DAMAGE = 65;
 
     /**
      * Hit chance of warrior.
@@ -62,7 +62,7 @@ public class Warrior extends Heroes {
     /**
      * Block chance of warrior.
      */
-    private static final double BLOCK_CHANCE = 0.2;
+    private static final double BLOCK_CHANCE = 0.5;
 
     /**
      * Warrior constructor that sets all the stats for
@@ -84,8 +84,9 @@ public class Warrior extends Heroes {
      * @param theOpp opponent in which the attack will be targeted towards.
      */
     @Override
-    public void regularAttack(final DungeonCharacter theOpp) {
-        attackBehavior(theOpp);
+    public String regularAttack(final DungeonCharacter theOpp) {
+
+        return attackBehavior(theOpp);
     }
 
 
@@ -96,15 +97,18 @@ public class Warrior extends Heroes {
      * @param theOpp which the special skill will be aimed towards.
      */
     @Override
-    public void specialSkill(final DungeonCharacter theOpp) {
+    public String specialSkill(final DungeonCharacter theOpp) {
+        StringBuilder special = new StringBuilder();
         if (Math.random() <= CRUSHING_BLOW_CHANCE) {
             int damage = genDamage(CRUSHING_BLOW_MIN_DAMAGE, CRUSHING_BLOW_MAX_DAMAGE);
             theOpp.subtractHp(damage);
-//            System.out.println("Warrior delivers crushing blow to " + theOpp.getChName() +
-//                    " for " + damage + " damage.");
+            special.append("Warrior delivers CRUSHING BLOW to ").append(theOpp.getChName()).append(" for ")
+                    .append(damage).append("! \n");
         } else {
-//            System.out.println("Crushing blow failed!");
+            special.append("Crushing blow failed! \n");
+
         }
+        return special.toString();
     }
 
     @Override
