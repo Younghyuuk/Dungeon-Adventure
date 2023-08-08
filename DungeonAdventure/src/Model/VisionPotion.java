@@ -17,14 +17,6 @@ public class VisionPotion extends Item {
      * The images associated with a 'HealthPotion'.
      */
     private BufferedImage myVision;
-    /**
-     * The number associated with a 'HealthPotion' item.
-     */
-    private static final String ITEM_NAME = "VISION_POTION";
-    /**
-     * The chance a health potion will spawn in any given room.
-     */
-    private static final double SPAWN_CHANCE = 0.10;
 
     /**
      * Constructs a basic 'HealthPotion' object.
@@ -34,7 +26,7 @@ public class VisionPotion extends Item {
      * @param theGP     The GamePanel to draw the item onto.
      */
     public VisionPotion(final int theWorldX, final int theWorldY, final GamePanel theGP) {
-        super(theGP, theWorldX, theWorldY, ITEM_NAME, SPAWN_CHANCE);
+        super(theGP, theWorldX, theWorldY);
         getItemImage();
         super.setImage(myVision);
     }
@@ -45,7 +37,7 @@ public class VisionPotion extends Item {
     @Override
     public void getItemImage() {
         try {
-            myVision = read(Objects.requireNonNull(getClass().getResourceAsStream("/fourPillars/a.png")));
+            myVision = read(Objects.requireNonNull(getClass().getResourceAsStream("/vision/visionPotion.png")));
 //            myVision2 = read(Objects.requireNonNull(getClass().getResourceAsStream("/Vision/Vision_2.png")));
 //            myVision3 = read(Objects.requireNonNull(getClass().getResourceAsStream("/Vision/Vision_3.png")));
         } catch (IOException e) {
