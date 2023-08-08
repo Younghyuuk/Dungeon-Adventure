@@ -17,8 +17,6 @@ public abstract class Item {
      * Constructs an item.
      *
      * @param theSpawnChance The chance the item will spawn.
-     * @param theRow The row the item will spawn in.
-     * @param theCol The column the item will spawn in.
      */
     public Item(final int theItem, final double theSpawnChance, final Dungeon theDungeon) {
         // First set up the spawnLocation array
