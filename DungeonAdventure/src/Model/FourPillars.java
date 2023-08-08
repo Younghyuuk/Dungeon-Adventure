@@ -65,22 +65,4 @@ public class FourPillars extends Item {
             default -> null;
         };
     }
-    public void draw(Graphics2D theGraphics){
-        int screenX = myWorldXCoordinate - myGamePanel.getMyHero().getMyWorldXCoordinate() + myGamePanel.getMyHero().getMyScreensMiddleX();
-        int screenY = myWorldYCoordinate - myGamePanel.getMyHero().getMyWorldYCoordinate() + myGamePanel.getMyHero().getMyScreensMiddleY();
-
-        if (myWorldXCoordinate + myGamePanel.getSpriteSize() > myGamePanel.getMyHero().getMyWorldXCoordinate() - myGamePanel.getMyHero().getMyScreensMiddleX() &&
-                myWorldXCoordinate - myGamePanel.getSpriteSize() < myGamePanel.getMyHero().getMyWorldXCoordinate() + myGamePanel.getMyHero().getMyScreensMiddleX() &&
-                myWorldYCoordinate + myGamePanel.getSpriteSize() > myGamePanel.getMyHero().getMyWorldYCoordinate() - myGamePanel.getMyHero().getMyScreensMiddleY() &&
-                myWorldYCoordinate - myGamePanel.getSpriteSize() < myGamePanel.getMyHero().getMyWorldYCoordinate() + myGamePanel.getMyHero().getMyScreensMiddleY()) {
-            BufferedImage image = switch (myName) {
-                case "a" -> abstraction;
-                case "e" -> encapsulation;
-                case "i" -> inheritance;
-                case "p" -> polymorphism;
-                default -> null;
-            };
-            theGraphics.drawImage(image, screenX, screenY, myGamePanel.getSpriteSize(), myGamePanel.getSpriteSize(), null);
-        }
-    }
 }
