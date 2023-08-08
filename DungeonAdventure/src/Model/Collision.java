@@ -160,7 +160,7 @@ public class Collision {
                 theHero.getMySolidArea().y = theHero.myWorldYCoordinate + theHero.getMySolidArea().y;
 
                 pillar.getMySolidArea().x = pillar.getMyWorldXCoordinate() + pillar.getMySolidArea().x;
-                pillar.getMySolidArea().y = pillar.myWorldYCoordinate + pillar.getMySolidArea().y;
+                pillar.getMySolidArea().y = pillar.getMyWorldYCoordinate() + pillar.getMySolidArea().y;
 
                 switch (theHero.getMyDirection()) {
                     case "up":
