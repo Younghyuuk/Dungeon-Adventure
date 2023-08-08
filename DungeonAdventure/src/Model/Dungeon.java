@@ -26,7 +26,7 @@ public class Dungeon {
     /**
      * The file to output the text version of the dungeon to.
      */
-    private static final String TEXT_DUNGEON = "Resources/map/dungeon.txt";
+    private static final String TEXT_DUNGEON = "/Resources/map/dungeon.txt";
     /**
      * The height, in rooms, of the dungeon (the Y).
      */
@@ -511,9 +511,9 @@ public class Dungeon {
      */
     protected void textDungeon(final String theFileName) {
         try {
-            String dungeon = this.toString();
+//            String dungeon = this.toString();
             FileWriter fileWriter = new FileWriter(theFileName);
-            fileWriter.write(dungeon);
+            fileWriter.write(this.toString());
             fileWriter.close();
         } catch (IOException e) {
             System.err.println("An error occurred when printing to output file: " + e.getMessage());

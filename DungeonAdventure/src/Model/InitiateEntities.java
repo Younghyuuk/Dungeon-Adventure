@@ -74,29 +74,30 @@ public class InitiateEntities {
         myMonsterArray = new ArrayList<>();
         createMonster();
         myItemArray = new ArrayList<>();
-        createItems();
         myFourPillarsArray = new ArrayList<>();
-        createFourPillars();
+        // This creates both the items and pillars in the game
+        createItems();
+//        createFourPillars();
     }
 
-    /**
-     * Creates and draws in all the Four Pillars of OO into the dungeon.
-     */
-    public void createFourPillars() {
-        FourPillars abstraction = new FourPillars(((myRoomW) - ((myRoomW / 2) + 1)) * myGamePanel.getSpriteSize(),
-                ((myRoomH) - ((myRoomH / 2) + 1)) * myGamePanel.getSpriteSize(),"a", myGamePanel);
-        FourPillars encapsulation = new FourPillars(((myRoomW * myDungeonW) - ((myRoomW / 2) + 1)) * myGamePanel.getSpriteSize(),
-                ((myRoomH) - ((myRoomH / 2) + 1)) * myGamePanel.getSpriteSize(),"e", myGamePanel);
-        FourPillars inheritance = new FourPillars(((myRoomW) - ((myRoomW / 2) + 1)) * myGamePanel.getSpriteSize(),
-                ((myRoomH * myDungeonH) - ((myRoomH / 2) + 1)) * myGamePanel.getSpriteSize(),"i", myGamePanel);
-        FourPillars polymorphism = new FourPillars(((myRoomW * myDungeonW) - ((myRoomW / 2) + 1)) * myGamePanel.getSpriteSize(),
-                ((myRoomH * myDungeonH) - ((myRoomH / 2) + 1)) * myGamePanel.getSpriteSize(),"p", myGamePanel);
-
-        myFourPillarsArray.add(abstraction);
-        myFourPillarsArray.add(encapsulation);
-        myFourPillarsArray.add(inheritance);
-        myFourPillarsArray.add(polymorphism);
-    }
+//    /**
+//     * Creates and draws in all the Four Pillars of OO into the dungeon.
+//     */
+//    public void createFourPillars() {
+//        FourPillars abstraction = new FourPillars(((myRoomW) - ((myRoomW / 2) + 1)) * myGamePanel.getSpriteSize(),
+//                ((myRoomH) - ((myRoomH / 2) + 1)) * myGamePanel.getSpriteSize(),"a", myGamePanel);
+//        FourPillars encapsulation = new FourPillars(((myRoomW * myDungeonW) - ((myRoomW / 2) + 1)) * myGamePanel.getSpriteSize(),
+//                ((myRoomH) - ((myRoomH / 2) + 1)) * myGamePanel.getSpriteSize(),"e", myGamePanel);
+//        FourPillars inheritance = new FourPillars(((myRoomW) - ((myRoomW / 2) + 1)) * myGamePanel.getSpriteSize(),
+//                ((myRoomH * myDungeonH) - ((myRoomH / 2) + 1)) * myGamePanel.getSpriteSize(),"i", myGamePanel);
+//        FourPillars polymorphism = new FourPillars(((myRoomW * myDungeonW) - ((myRoomW / 2) + 1)) * myGamePanel.getSpriteSize(),
+//                ((myRoomH * myDungeonH) - ((myRoomH / 2) + 1)) * myGamePanel.getSpriteSize(),"p", myGamePanel);
+//
+//        myFourPillarsArray.add(abstraction);
+//        myFourPillarsArray.add(encapsulation);
+//        myFourPillarsArray.add(inheritance);
+//        myFourPillarsArray.add(polymorphism);
+//    }
 
     /**
      * Creates and draws in all the monsters into the dungeon.
@@ -129,17 +130,45 @@ public class InitiateEntities {
     }
 
     /**
-     * Creates and draws in all the items into the dungeon.
+     * Creates and draws in all the items (including pillars) into the dungeon.
      */
     public void createItems() {
+        // Here we are making variables to represent the first rooms in both
+        // the rows and columns and also the middle room in both the rows and columns
         int firstRoom = 1;
+        int middleRoom = 4;
+
         for (int i = 1; i <= myDungeonH; i++) {
             for (int j = 1; j <= myDungeonW; j++) {
-                // We will check for the cases that an item is in the corners or where the character spawns
-                if (i == firstRoom && j == firstRoom || i == firstRoom && j == myDungeonW ||
-                        i == myDungeonH && j == firstRoom || i == myDungeonH && j == myDungeonW ||
-                                                        i == MIDDLE_OF_ROOM && j == MIDDLE_OF_ROOM) {
-                    // We don't want to draw an item in these rooms.
+                // We will check for the cases where we are in the pillar rooms or the spawn room
+                if (i == firstRoom && j == firstRoom) { // Top Left Room
+                    FourPillars abstraction = new FourPillars(
+                            ((myRoomW) - ((myRoomW / 2) + 1)) * myGamePanel.getSpriteSize(),
+                            ((myRoomH) - ((myRoomH / 2) + 1)) * myGamePanel.getSpriteSize(),
+                            "a", myGamePanel);
+                    myFourPillarsArray.add(abstraction);
+                } else if (i == firstRoom && j == myDungeonW) { // Top Right Room
+                    FourPillars encapsulation = new FourPillars(
+                            ((myRoomW * myDungeonW) - ((myRoomW / 2) + 1)) * myGamePanel.getSpriteSize(),
+                            ((myRoomH) - ((myRoomH / 2) + 1)) * myGamePanel.getSpriteSize(),
+                            "e", myGamePanel);
+                    myFourPillarsArray.add(encapsulation);
+                } else if (i == myDungeonH && j == firstRoom) { // Bottom Left Room
+                    FourPillars inheritance = new FourPillars(
+                            ((myRoomW) - ((myRoomW / 2) + 1)) * myGamePanel.getSpriteSize(),
+                            ((myRoomH * myDungeonH) - ((myRoomH / 2) + 1)) * myGamePanel.getSpriteSize(),
+                            "i", myGamePanel
+                    );
+                    myFourPillarsArray.add(inheritance);
+                } else if (i == myDungeonH && j == myDungeonW) { // Bottom Right Room
+                    FourPillars polymorphism = new FourPillars(
+                            ((myRoomW * myDungeonW) - ((myRoomW / 2) + 1)) * myGamePanel.getSpriteSize(),
+                            ((myRoomH * myDungeonH) - ((myRoomH / 2) + 1)) * myGamePanel.getSpriteSize(),
+                            "p", myGamePanel
+                    );
+                    myFourPillarsArray.add(polymorphism);
+                } else if (i == middleRoom && j == middleRoom) {
+                    // Don't do anything if we are in the middle room
                 } else {
                     Item item = ItemGenerator.getRandomItem(0, myGamePanel);
                     item.setMyWorldYCoordinate(((myRoomH * i) + getRandomY()) * myGamePanel.getSpriteSize());
