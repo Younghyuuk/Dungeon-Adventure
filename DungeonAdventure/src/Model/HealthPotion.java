@@ -2,7 +2,6 @@ package Model;
 
 import View.GamePanel;
 
-import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Objects;
