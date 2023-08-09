@@ -1,12 +1,13 @@
 package Control;
 
+import Model.GameData;
 import View.GamePanel;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.Serializable;
 
-public class Keyboard implements KeyListener, Serializable {
+public class Keyboard implements KeyListener {
     public boolean up;
     public boolean down;
     public boolean left;
@@ -36,6 +37,10 @@ public class Keyboard implements KeyListener, Serializable {
                     if (myGamePanel.getMyTitlePage().getMyCommandNum() == 0) {
                         myGamePanel.setNewGame();
                         myGamePanel.setMyGameState(1);
+                    }
+                    if(myGamePanel.getMyTitlePage().getMyCommandNum() == 1) {
+                        myGamePanel.saveLoad.load();
+                        myGamePanel.setMyGameState(myGamePanel.getMyGameState());
                     }
             }
         } else if (myGamePanel.getMyGameState() == 1) {

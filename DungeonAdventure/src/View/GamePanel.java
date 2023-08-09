@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * This class acts as the GUI for the DungeonAdventure game.
  */
-public class GamePanel extends JPanel implements Runnable, Serializable {
+public class GamePanel extends JPanel implements Runnable {
 
     private static final long serialversionUID = -1234567;
     /**
@@ -171,11 +171,15 @@ public class GamePanel extends JPanel implements Runnable, Serializable {
      * Boolean representing whether the player is looking at the about section of the game.
      */
 
+
+    public SaveLoad saveLoad = new SaveLoad(this);
+
     private boolean myAboutState = false;
     /**
      * Creates and sets up the game panel.
      */
     public GamePanel() {
+//        myGameData = new GameData(this);
         setPreferredSize(new Dimension(myScreenWidth, myScreenHeight));
         setBackground(Color.BLACK);
         setDoubleBuffered(true);

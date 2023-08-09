@@ -15,6 +15,7 @@ import static javax.imageio.ImageIO.read;
  */
 public class Warrior extends Heroes implements Serializable {
 
+    private static final long serialversionUID = 123456799L;
     /**
      * The chance at which Warriors special hits.
      */
