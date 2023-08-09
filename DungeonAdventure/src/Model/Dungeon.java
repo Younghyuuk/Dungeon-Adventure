@@ -12,6 +12,7 @@ import java.util.Stack;
  */
 public class Dungeon implements Serializable {
 
+
     private static final long serialversionUID = 1234567L;
     
     /**

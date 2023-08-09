@@ -10,6 +10,8 @@ import java.io.Serializable;
  * An abstract class representing an item that could appear in a room.
  */
 public abstract class Item implements Serializable {
+
+    private static final long serialVersionUID = 12347767839L;
     /**
      * The game panel to draw the item onto.
      */

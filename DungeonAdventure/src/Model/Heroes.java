@@ -20,7 +20,7 @@ import java.io.Serializable;
  */
 public abstract class Heroes extends DungeonCharacter {
 
-
+    private static final long serialVersionUID = 123456789L;
     private int myScreensMiddleX;
     private int myScreensMiddleY;
     transient Keyboard myKeyInputs;

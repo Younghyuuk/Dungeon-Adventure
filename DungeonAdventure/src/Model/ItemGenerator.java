@@ -10,6 +10,7 @@ import java.util.Random;
  * that can be added into the dungeon.
  */
 public class ItemGenerator implements Serializable {
+    private static final long serialVersionUID = 1234775678L;
     /**
      * Represents the amount of different items that are available.
      */

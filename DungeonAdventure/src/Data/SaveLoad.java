@@ -7,9 +7,12 @@ import Model.Priestess;
 import View.GamePanel;
 
 import java.io.*;
+import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.List;
 
-public class SaveLoad {
-
+public class SaveLoad implements Serializable{
+    private static final long serialVersionUID = 1234567839L;
     GamePanel myGp;
 
    public SaveLoad(GamePanel theGp) {
@@ -54,6 +57,8 @@ public class SaveLoad {
             myGp.getMyHero().setHitChance(gd.myHeroHit);
             myGp.getMyHero().setMyScreensMiddleX(gd.myScreensMiddleX);
             myGp.getMyHero().setMyScreensMiddleY(gd.myScreensMiddleY);
+
+            System.out.println(myGp.toString());
             ois.close();
         }
         catch (Exception e) {

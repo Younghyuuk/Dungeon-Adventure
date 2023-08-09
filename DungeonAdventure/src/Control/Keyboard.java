@@ -7,6 +7,8 @@ import java.awt.event.KeyListener;
 import java.io.Serializable;
 
 public class Keyboard implements KeyListener, Serializable {
+    private static final long serialVersionUID = 1234567895L;
+
     public boolean up;
     public boolean down;
     public boolean left;

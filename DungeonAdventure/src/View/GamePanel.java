@@ -6,15 +6,18 @@ import Model.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.Serial;
 import java.io.Serializable;
+import java.math.BigInteger;
 import java.util.List;
 
 /**
  * This class acts as the GUI for the DungeonAdventure game.
  */
-public class GamePanel extends JPanel implements Runnable, Serializable {
+public class GamePanel extends JPanel implements Runnable, Serializable{
+    @Serial
+    private static final BigInteger serialVersionUID = new BigInteger("501648749617479875");
 
-    private static final long serialversionUID = 193456799L;
     /**
      * The actual size of a sprite (16x16).
      */
@@ -173,7 +176,7 @@ public class GamePanel extends JPanel implements Runnable, Serializable {
      */
 
 
-    public transient SaveLoad saveLoad = new SaveLoad(this);
+    public SaveLoad saveLoad = new SaveLoad(this);
 
     private boolean myAboutState = false;
     /**

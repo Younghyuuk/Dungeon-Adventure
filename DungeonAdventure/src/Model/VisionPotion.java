@@ -13,6 +13,7 @@ import static javax.imageio.ImageIO.read;
  * This class represents a vision potion that is able to be picked up within the dungeon.
  */
 public class VisionPotion extends Item {
+    private static final long serialVersionUID = 123456789L;
     /**
      * The images associated with a 'HealthPotion'.
      */
