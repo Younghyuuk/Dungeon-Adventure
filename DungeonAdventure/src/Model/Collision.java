@@ -4,15 +4,34 @@ import View.GamePanel;
 
 import java.util.List;
 
+/**
+ * This class checks if the player collides with any objects within the dungeon.
+ */
 public class Collision {
+    /**
+     * The game panel that the character and entities are drawn on.
+     */
+    private GamePanel myGamePanel;
+    /**
+     * The battle that happens when the character fights a monster.
+     */
+    private Battle myBattle;
 
-    GamePanel myGamePanel;
-    Battle myBattle;
-
+    /**
+     * Sets up the collision object with the correct game panel.
+     *
+     * @param theGamePanel The game panel the game is being drawn on.
+     */
     public Collision(final GamePanel theGamePanel) {
         myGamePanel = theGamePanel;
     }
 
+    /**
+     * Goes through all the tiles in the dungeon and checks if the player collided with any. <br>
+     * If the player hits a tile that they can't move through, we stop the player.
+     *
+     * @param dungeonChar   The character that we are checking for collisions with.
+     */
     public void checkTile(final DungeonCharacter dungeonChar) {
         int heroLeftWorldX = dungeonChar.getMyWorldXCoordinate() + dungeonChar.getMySolidArea().x;
         int heroRightWorldX = dungeonChar.getMyWorldXCoordinate() + dungeonChar.getMySolidArea().x + dungeonChar.getMySolidArea().width;
@@ -33,7 +52,6 @@ public class Collision {
                 tileNum2 = myGamePanel.getMyTileM().getMyMapArray()[heroTopRow][heroRightCol];
                 if (myGamePanel.getMyTileM().getMyTile()[tileNum1].getMyCollision() || myGamePanel.getMyTileM().getMyTile()[tileNum2].getMyCollision()) {
                     dungeonChar.setMyCollision(true);
-                    // if the heroes collison is true and tile is monster , thennwe call battle.
                 }
                 break;
             case "down":
@@ -63,6 +81,14 @@ public class Collision {
         }
     }
 
+    /**
+     * Goes through all the entities, or monsters, in the dungeon and checks if the player collided with any. <br>
+     * If the player hits a monster, a battle will happen.
+     *
+     * @param theHero       The character that we are checking for collisions with.
+     * @param theMonsters   The list of every monster in the dungeon.
+     * @return The amount of collisions made with items.
+     */
     public int checkEntity(Heroes theHero, List<Monster> theMonsters) {
         int index = 999;
         int i = 0;
@@ -134,7 +160,7 @@ public class Collision {
                 theHero.getMySolidArea().y = theHero.myWorldYCoordinate + theHero.getMySolidArea().y;
 
                 pillar.getMySolidArea().x = pillar.getMyWorldXCoordinate() + pillar.getMySolidArea().x;
-                pillar.getMySolidArea().y = pillar.myWorldYCoordinate + pillar.getMySolidArea().y;
+                pillar.getMySolidArea().y = pillar.getMyWorldYCoordinate() + pillar.getMySolidArea().y;
 
                 switch (theHero.getMyDirection()) {
                     case "up":
@@ -176,6 +202,94 @@ public class Collision {
                 }
                 theHero.resetSolidArea();
                 pillar.resetSolidArea();
+            }
+        }
+        return index;
+    }
+
+    /**
+     * Goes through all the items in the dungeon and checks if the player collided with any. <br>
+     * If the player hits a pit or a health potion, we will set their HP accordingly.
+     *
+     * @param theHero       The character that we are checking for collisions with.
+     * @param theItemList   The list of every item in the dungeon.
+     * @return The amount of collisions made with items.
+     */
+    public int checkItem(final Heroes theHero, final List<Item> theItemList) {
+        // We preset the indices
+        int index = 999;
+        int i = 0;
+        // Then go through the item list looking at every item that hasn't been found
+        for (Item item : theItemList) {
+            if (!item.getFound()) {
+                theHero.getMySolidArea().x = theHero.myWorldXCoordinate + theHero.getMySolidArea().x;
+                theHero.getMySolidArea().y = theHero.myWorldYCoordinate + theHero.getMySolidArea().y;
+
+                item.getMySolidArea().x = item.getMyWorldXCoordinate() + item.getMySolidArea().x;
+                item.getMySolidArea().y = item.getMyWorldYCoordinate() + item.getMySolidArea().y;
+
+                // Then we go through every direction the player might be going in and check for a collision
+                // If one happens we adjust their hp accordingly
+                switch (theHero.getMyDirection()) {
+                    case "up" -> {
+                        theHero.getMySolidArea().y -= theHero.mySpeed;
+                        if (theHero.getMySolidArea().intersects(item.getMySolidArea())) {
+                            theHero.setMyCollision(true);
+                            index = i++;
+                            item.setFound(true);
+                            // We need to check if we hit a health potion
+                            if (item instanceof HealthPotion) {
+                                theHero.setHp(theHero.getHp() + ((HealthPotion) item).getHealthBack());
+                            } else if (item instanceof Pit) { // Or if we hit a pit
+                                theHero.setHp(theHero.getHp() - ((Pit) item).getPitDamage());
+                            }
+                        }
+                    }
+                    case "down" -> {
+                        theHero.getMySolidArea().y += theHero.mySpeed;
+                        if (theHero.getMySolidArea().intersects(item.getMySolidArea())) {
+                            theHero.setMyCollision(true);
+                            index = i++;
+                            item.setFound(true);
+                            // We need to check if we hit a health potion
+                            if (item instanceof HealthPotion) {
+                                theHero.setHp(theHero.getHp() + ((HealthPotion) item).getHealthBack());
+                            } else if (item instanceof Pit) { // Or if we hit a pit
+                                theHero.setHp(theHero.getHp() - ((Pit) item).getPitDamage());
+                            }
+                        }
+                    }
+                    case "left" -> {
+                        theHero.getMySolidArea().x -= theHero.mySpeed;
+                        if (theHero.getMySolidArea().intersects(item.getMySolidArea())) {
+                            theHero.setMyCollision(true);
+                            index = i++;
+                            item.setFound(true);
+                            // We need to check if we hit a health potion
+                            if (item instanceof HealthPotion) {
+                                theHero.setHp(theHero.getHp() + ((HealthPotion) item).getHealthBack());
+                            } else if (item instanceof Pit) { // Or if we hit a pit
+                                theHero.setHp(theHero.getHp() - ((Pit) item).getPitDamage());
+                            }
+                        }
+                    }
+                    case "right" -> {
+                        theHero.getMySolidArea().x += theHero.mySpeed;
+                        if (theHero.getMySolidArea().intersects(item.getMySolidArea())) {
+                            theHero.setMyCollision(true);
+                            index = i++;
+                            item.setFound(true);
+                            // We need to check if we hit a health potion
+                            if (item instanceof HealthPotion) {
+                                theHero.setHp(theHero.getHp() + ((HealthPotion) item).getHealthBack());
+                            } else if (item instanceof Pit) { // Or if we hit a pit
+                                theHero.setHp(theHero.getHp() - ((Pit) item).getPitDamage());
+                            }
+                        }
+                    }
+                }
+                theHero.resetSolidArea();
+                item.resetSolidArea();
             }
         }
         return index;

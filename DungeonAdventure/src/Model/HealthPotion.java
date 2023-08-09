@@ -1,5 +1,8 @@
 package Model;
 
+import View.GamePanel;
+
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Objects;
@@ -12,26 +15,6 @@ import static javax.imageio.ImageIO.read;
  */
 public class HealthPotion extends Item {
     /**
-     * The row that the 'HealthPotion' will live in.
-     */
-    private int myRow;
-    /**
-     * The column that the 'HealthPotion' will live in.
-     */
-    private int myCol;
-    /**
-     * The images associated with a 'HealthPotion'.
-     */
-    private BufferedImage myHealth1, myHealth2, myHealth3;
-    /**
-     * The number associated with a 'HealthPotion' item.
-     */
-    private static final int ITEM_NUMBER = 4;
-    /**
-     * The chance a health potion will spawn in any given room.
-     */
-    private static final double SPAWN_CHANCE = 0.10;
-    /**
      * The minimum amount of health that can be received.
      */
     private static final int MIN_HEALTH = 5;
@@ -39,35 +22,44 @@ public class HealthPotion extends Item {
      * The maximum amount of health that can be received.
      */
     private static final int MAX_HEALTH = 15;
+    /**
+     * The image associated with a 'HealthPotion'.
+     */
+    private BufferedImage myHealth;
+    /**
+     * The amount of health this 'HealthPotion' will give back.
+     */
+    private int myHealthBack;
 
     /**
      * Constructs a basic 'HealthPotion' object.
      *
-     * @param theDungeon The dungeon to place the 'HealthPotion' in.
+     * @param theWorldX The world-x coordinate to draw the item at.
+     * @param theWorldY The world-y coordinate to draw the item at.
+     * @param theGP     The GamePanel to draw the item onto.
      */
-    public HealthPotion(final Dungeon theDungeon) {
-        // TODO: Get random row and col in correct spots
-        super(ITEM_NUMBER, SPAWN_CHANCE, theDungeon);
+    public HealthPotion(final int theWorldX, final int theWorldY, final GamePanel theGP) {
+        super(theGP, theWorldX, theWorldY);
+        findHealth();
         getItemImage();
-    }
-
-    public int getRowAndCol() {
-        // We want to randomly select from the rows and columns available
-        Random random = new Random();
-        int[] rows = {0, 1, 2, 3, 4, 5, 6};
-        int[] cols = {0, 1, 2, 3, 4, 5, 6};
-
-        return 0;
+        super.setImage(myHealth);
     }
 
     /**
-     * Gets the amount of health this 'HealthPotion' will give.
-     *
-     * @return The amount of health obtainable.
+     * Calculates the amount of health this 'HealthPotion' will give.
      */
-    public int getHealth() {
+    private void findHealth() {
         Random random = new Random();
-        return random.nextInt(MAX_HEALTH - MIN_HEALTH + 1) + MIN_HEALTH;
+        myHealthBack = random.nextInt(MAX_HEALTH - MIN_HEALTH + 1) + MIN_HEALTH;
+    }
+
+    /**
+     * Gets the amount of health back this potion will give.
+     *
+     * @return The amount of health back obtainable from this potion.
+     */
+    public int getHealthBack() {
+        return myHealthBack;
     }
 
     /**
@@ -76,9 +68,9 @@ public class HealthPotion extends Item {
     @Override
     public void getItemImage() {
         try {
-            myHealth1 = read(Objects.requireNonNull(getClass().getResourceAsStream("/Health/Health_1.png")));
-            myHealth2 = read(Objects.requireNonNull(getClass().getResourceAsStream("/Health/Health_2.png")));
-            myHealth3 = read(Objects.requireNonNull(getClass().getResourceAsStream("/Health/Health_3.png")));
+            myHealth = read(Objects.requireNonNull(getClass().getResourceAsStream("/Health/Health_1.png")));
+//            myHealth2 = read(Objects.requireNonNull(getClass().getResourceAsStream("/Health/Health_2.png")));
+//            myHealth3 = read(Objects.requireNonNull(getClass().getResourceAsStream("/Health/Health_3.png")));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
