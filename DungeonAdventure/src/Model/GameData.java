@@ -4,6 +4,7 @@ import Control.Keyboard;
 import View.GamePanel;
 
 import java.io.*;
+import java.util.List;
 
 public class GameData implements Serializable {
     private static final long serialVersionUID = -123456;
@@ -14,13 +15,18 @@ public class GameData implements Serializable {
     public int myScreensMiddleY;
 
     public int myHeroHp;
-    private Dungeon dungeon;
-    private Heroes hero;
+    private Dungeon myDungeon;
+    private Heroes myHero;
+    private int myGameState;
+
+    private List<Monster> myMonsterList;
 
 //    public GameData(Dungeon dungeon, Heroes hero) {
 //        this.dungeon = dungeon;
 //        this.hero = hero;
 //    }
+
+
 
     // Deserialization method
     public static GameData loadFromFile(String fileName) {
@@ -34,6 +40,7 @@ public class GameData implements Serializable {
         return null;
     }
 
+
     //Delete later
     public static void main(String[] args) {
         // Sample usage
@@ -41,10 +48,11 @@ public class GameData implements Serializable {
         GamePanel gp = new GamePanel();
         Keyboard kb = new Keyboard(gp);
         Heroes hero = new Priestess(gp, kb);
+        System.out.println(hero.getHeroData().myHeroHp);
 
         GameData gameData = new GameData();
         gameData.saveToFile("game_data.save");
-
+        hero.setHp(90);
         GameData loadedGameData = GameData.loadFromFile("game_data.save");
         if (loadedGameData != null) {
             Dungeon loadedDungeon = loadedGameData.getDungeon();
@@ -55,13 +63,40 @@ public class GameData implements Serializable {
         }
     }
 
+
+
     public Dungeon getDungeon() {
-        return dungeon;
+        return myDungeon;
+    }
+
+    public void setDungeon(Dungeon theDungeon) {
+        myDungeon = theDungeon;
     }
 
     public Heroes getHero() {
-        return hero;
+        return myHero;
     }
+
+    public void setHero(Heroes theHero) {
+        myHero = theHero;
+    }
+
+    public List<Monster> getMonsterList() {
+        return myMonsterList;
+    }
+
+    public void setMonsterList(List<Monster> theMonsterList) {
+        myMonsterList = theMonsterList;
+    }
+
+    public int getGameState() {
+        return myGameState;
+    }
+
+    public void setGameState(int theGameState) {
+        myGameState = theGameState;
+    }
+
 
     // Serialization method
     public void saveToFile(String fileName) {

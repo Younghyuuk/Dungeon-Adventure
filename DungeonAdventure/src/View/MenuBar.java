@@ -3,6 +3,7 @@ package View;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.beans.PropertyChangeListener;
 
 public class MenuBar extends JMenuBar {
 
@@ -24,7 +25,15 @@ public class MenuBar extends JMenuBar {
                 System.exit(0);
             }
         });
+        //new stuff
         JMenuItem save = new JMenuItem("Save");
+//        save.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                myGamePanel.saveGame("game_data.save");
+//            }
+//        });
+        // ================
         JMenuItem mainMenu = new JMenuItem("Main Menu");
         mainMenu.addActionListener(new ActionListener() {
             @Override
