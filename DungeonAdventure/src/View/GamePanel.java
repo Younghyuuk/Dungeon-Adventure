@@ -11,6 +11,7 @@ import java.util.List;
  * This class acts as the GUI for the DungeonAdventure game.
  */
 public class GamePanel extends JPanel implements Runnable {
+
     /**
      * The actual size of a sprite (16x16).
      */
@@ -504,7 +505,7 @@ public class GamePanel extends JPanel implements Runnable {
         if(winCount == 4){
             setMyGameState(5);
         }
-        System.out.println(winCount);
+        System.out.println(myHero.getHp());
     }
 
     // This method updates our view.

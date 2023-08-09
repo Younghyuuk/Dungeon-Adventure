@@ -68,7 +68,7 @@ public class Pit extends Item {
     public void getItemImage() {
         try {
 //            myPit1 = read(Objects.requireNonNull(getClass().getResourceAsStream("/Tiles/sandBrickFloor.png")));
-            myPit = read(Objects.requireNonNull(getClass().getResourceAsStream("/Tiles/pit.png")));
+            myPit = read(Objects.requireNonNull(getClass().getResourceAsStream("/Tiles/pit0.png")));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

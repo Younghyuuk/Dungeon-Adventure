@@ -26,7 +26,7 @@ public class Dungeon {
     /**
      * The file to output the text version of the dungeon to.
      */
-    private static final String TEXT_DUNGEON = "/Resources/map/dungeon.txt";
+    private static final String TEXT_DUNGEON = "Resources/map/dungeon.txt";
     /**
      * The height, in rooms, of the dungeon (the Y).
      */
