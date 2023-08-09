@@ -5,13 +5,16 @@ import View.GamePanel;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.Serializable;
 
 /**
  * Heroes class which extends from DungeonCharacter
  * we will be creating 3 other subclasses which extends
  * off of Heroes which will be Priestess, Thief, and Warrior.
  */
-public abstract class Heroes extends DungeonCharacter {
+public abstract class Heroes extends DungeonCharacter implements Serializable {
+
+    private static final long serialversionUID = 123456;
 
     private final int myScreensMiddleX;
     private final int myScreensMiddleY;
@@ -49,8 +52,7 @@ public abstract class Heroes extends DungeonCharacter {
 
 
         mySolidArea = new Rectangle(12, 12, myGamePanel.getSpriteSize() - 24, myGamePanel.getSpriteSize() - 24);
-        mySpeed = 6
-        ;
+        mySpeed = 6;
     }
 
     public int getMyScreensMiddleX() {

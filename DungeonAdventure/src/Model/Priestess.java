@@ -4,6 +4,7 @@ import Control.Keyboard;
 import View.GamePanel;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.Objects;
 
 import static javax.imageio.ImageIO.read;
@@ -12,8 +13,8 @@ import static javax.imageio.ImageIO.read;
  * Priestess class which has the ability to heal and
  * extends from the Heroes class.
  */
-public class Priestess extends Heroes {
-
+public class Priestess extends Heroes implements Serializable {
+    private static final long serialversionUID = 1234567;
     /**
      * Min heal that priestess can heal for.
      */
