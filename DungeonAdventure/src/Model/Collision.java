@@ -147,7 +147,7 @@ public class Collision {
             }
         }
 
-        theHero.setHp(125);
+//        theHero.setHp(125);
         return index;
     }
 

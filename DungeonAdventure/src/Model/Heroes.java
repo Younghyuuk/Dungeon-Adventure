@@ -5,13 +5,16 @@ import View.GamePanel;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.Serializable;
 
 /**
  * Heroes class which extends from DungeonCharacter
  * we will be creating 3 other subclasses which extends
  * off of Heroes which will be Priestess, Thief, and Warrior.
  */
-public abstract class Heroes extends DungeonCharacter {
+public abstract class Heroes extends DungeonCharacter implements Serializable {
+
+    private static final long serialversionUID = 123456;
 
     private final int myScreensMiddleX;
     private final int myScreensMiddleY;
@@ -35,7 +38,7 @@ public abstract class Heroes extends DungeonCharacter {
      * @param theGamePanel   the gamepanel of the hero.
      * @param theKeyBoard    the keyboard input of the hero.
      */
-    protected Heroes(final int theHp, final String theChName, final int theAttackSpeed, final int theMinDamage, final int theMaxDamage,
+    protected Heroes(int theHp, final String theChName, final int theAttackSpeed, final int theMinDamage, final int theMaxDamage,
                      final double theHitChance, final double theBlockChance, final GamePanel theGamePanel, final Keyboard theKeyBoard) {
 
         super(theHp, theChName, theAttackSpeed, theMinDamage, theMaxDamage, theHitChance, theGamePanel);
@@ -49,8 +52,7 @@ public abstract class Heroes extends DungeonCharacter {
 
 
         mySolidArea = new Rectangle(12, 12, myGamePanel.getSpriteSize() - 24, myGamePanel.getSpriteSize() - 24);
-        mySpeed = 6
-        ;
+        mySpeed = 6;
     }
 
     public int getMyScreensMiddleX() {
@@ -71,6 +73,14 @@ public abstract class Heroes extends DungeonCharacter {
             System.out.println("You hit the monster");
         }
 
+    }
+
+    public GameData getHeroData() {
+        GameData heroData = new GameData();
+        heroData.myHeroHp = getHp();
+        heroData.myScreensMiddleX = myScreensMiddleX;
+        heroData.myScreensMiddleY = myScreensMiddleY;
+        return heroData;
     }
 
     public void update() {
