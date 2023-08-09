@@ -1,6 +1,9 @@
 package Data;
 
+import Control.Keyboard;
 import Data.GameData;
+import Model.Heroes;
+import Model.Priestess;
 import View.GamePanel;
 
 import java.io.*;
@@ -14,9 +17,9 @@ public class SaveLoad {
    }
     public void save() {
         try {
-            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(new File("save.dat")));
+            FileOutputStream fos = new FileOutputStream("game.save");
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
             GameData gd = new GameData();
-
 //            gd.myHero = myGp.getMyHero();
             gd.myHeroHp = myGp.getMyHero().getHp();
             System.out.println(gd.myHeroHp);
@@ -24,12 +27,12 @@ public class SaveLoad {
             gd.myHeroAttackSpeed = myGp.getMyHero().getAttackSpeed();
             gd.myHeroMinDamage = myGp.getMyHero().getMinDamage();
             gd.myHeroMaxDamage = myGp.getMyHero().getMaxDamage();
-            gd.myHeroBlock = myGp.getMyHero().getBlockChance();
             gd.myHeroHit = myGp.getMyHero().getHitChance();
+            gd.myHeroBlock = myGp.getMyHero().getBlockChance();
             gd.myScreensMiddleX = myGp.getMyHero().getMyScreensMiddleX();
             gd.myScreensMiddleY = myGp.getMyHero().getMyScreensMiddleY();
 
-            oos.writeObject((Object)gd);
+            oos.writeObject(gd);
             oos.close();
         }
         catch(Exception e) {

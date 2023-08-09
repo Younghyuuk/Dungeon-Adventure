@@ -45,7 +45,7 @@ public abstract class Heroes extends DungeonCharacter {
      * @param theGamePanel   the gamepanel of the hero.
      * @param theKeyBoard    the keyboard input of the hero.
      */
-    protected Heroes(int theHp, final String theChName, final int theAttackSpeed, final int theMinDamage, final int theMaxDamage,
+    protected Heroes(final int theHp, final String theChName, final int theAttackSpeed, final int theMinDamage, final int theMaxDamage,
                      final double theHitChance, final double theBlockChance, final GamePanel theGamePanel, final Keyboard theKeyBoard) {
 
         super(theHp, theChName, theAttackSpeed, theMinDamage, theMaxDamage, theHitChance, theGamePanel);

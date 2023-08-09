@@ -47,7 +47,7 @@ public abstract class DungeonCharacter implements Serializable {
      */
     private double myHitChance;
 
-    public GamePanel myGamePanel;
+    public transient GamePanel myGamePanel;
     public transient BufferedImage up1, up2, down1, down2, left1, left2, right1, right2;
     public String myDirection = "down";
     public int mySpeed;
@@ -107,6 +107,7 @@ public abstract class DungeonCharacter implements Serializable {
     public void setMyWorldYCoordinate(int theY) {
         myWorldYCoordinate = theY;
     }
+
     /**
      * Gets the hp that the character has currently.
      *
