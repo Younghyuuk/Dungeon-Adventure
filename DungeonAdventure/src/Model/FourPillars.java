@@ -17,7 +17,7 @@ public class FourPillars extends Item implements Serializable {
     /**
      * The images representing each pillar of OO.
      */
-    private BufferedImage myAbstraction, myEncapsulation, myInheritance, myPolymorphism;
+    private transient BufferedImage myAbstraction, myEncapsulation, myInheritance, myPolymorphism;
     /**
      * The name of the specific pillar of OO this 'FourPillars' object is.
      */

@@ -29,7 +29,7 @@ public abstract class Item implements Serializable {
     /**
      * The image representing the current item.
      */
-    private BufferedImage myItemImage;
+    private transient BufferedImage myItemImage;
     /**
      * Boolean that determines whether an item has been "found," or not. <br>
      * In other words: has the player collided with the item?

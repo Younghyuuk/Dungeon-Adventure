@@ -12,8 +12,9 @@ import java.util.List;
 /**
  * This class acts as the GUI for the DungeonAdventure game.
  */
-public class GamePanel extends JPanel implements Runnable {
+public class GamePanel extends JPanel implements Runnable, Serializable {
 
+    private static final long serialversionUID = 193456799L;
     /**
      * The actual size of a sprite (16x16).
      */
@@ -63,11 +64,11 @@ public class GamePanel extends JPanel implements Runnable {
     /**
      * The object that will manage all the background tiles in the dungeon (the walls, floor, and doors
      */
-    private TileManager myTileM = new TileManager(this);
+    private transient TileManager myTileM = new TileManager(this);
     /**
      * The thread to use to run the game.
      */
-    private final Thread gameThread = new Thread(this);
+    private transient final Thread gameThread = new Thread(this);
     /**
      * The object that will check for collisions between the player and everything in the dungeon.
      */
@@ -75,31 +76,31 @@ public class GamePanel extends JPanel implements Runnable {
     /**
      * The object that will check for player key inputs to move the character.
      */
-    private final Keyboard myKeyInputs = new Keyboard(this);
+    private final transient Keyboard myKeyInputs = new Keyboard(this);
     /**
      * The object that will create the title page that is shown before starting a game.
      */
-    private final TitlePage myTitlePage = new TitlePage(this);
+    private final transient TitlePage myTitlePage = new TitlePage(this);
     /**
      * The object that will create a character selection page that is shown after the title page.
      */
-    private final CharacterSelectionPage myCharacterSelectionPage = new CharacterSelectionPage(this);
+    private final transient CharacterSelectionPage myCharacterSelectionPage = new CharacterSelectionPage(this);
     /**
      * The object that will tell the player the rules about the game.
      */
-    private final AboutPage myAboutPage = new AboutPage(this);
+    private final transient AboutPage myAboutPage = new AboutPage(this);
     /**
      * The object that will display the results of a battle between the character and a monster.
      */
-    private BattlePage myBattlePage = new BattlePage(this);
+    private transient BattlePage myBattlePage = new BattlePage(this);
     /**
      * The page that will display if the player dies before collecting all 4 pillars.
      */
-    private final GameOver myGameOverPage = new GameOver(this);
+    private final transient GameOver myGameOverPage = new GameOver(this);
     /**
      * The page that will display if the player collects all 4 pillars before dying.
      */
-    private final WinPage myWinPage = new WinPage(this);
+    private final transient WinPage myWinPage = new WinPage(this);
     /**
      * Stores every move made by the character and monster as well as their health
      * and if their moves landed or not.
@@ -172,7 +173,7 @@ public class GamePanel extends JPanel implements Runnable {
      */
 
 
-    public SaveLoad saveLoad = new SaveLoad(this);
+    public transient SaveLoad saveLoad = new SaveLoad(this);
 
     private boolean myAboutState = false;
     /**

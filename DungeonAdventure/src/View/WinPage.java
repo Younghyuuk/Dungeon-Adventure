@@ -12,9 +12,9 @@ public class WinPage {
     private GamePanel myGamePanel;
     private Graphics2D myPen;
     private int myCommandNum = 0;
-    private BufferedImage myThiefImage;
-    private BufferedImage myWarriorImage;
-    private BufferedImage myPriestImage;
+    private transient BufferedImage myThiefImage;
+    private transient BufferedImage myWarriorImage;
+    private transient BufferedImage myPriestImage;
 
     public WinPage(GamePanel theGamePanel){
         myGamePanel = theGamePanel;

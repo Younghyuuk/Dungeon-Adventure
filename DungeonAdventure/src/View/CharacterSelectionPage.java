@@ -10,9 +10,9 @@ import static javax.imageio.ImageIO.read;
 public class CharacterSelectionPage {
 
     GamePanel myGamePanel;
-    private BufferedImage myThiefImage;
-    private BufferedImage myWarriorImage;
-    private BufferedImage myPriestImage;
+    private transient BufferedImage myThiefImage;
+    private transient BufferedImage myWarriorImage;
+    private transient BufferedImage myPriestImage;
     private Graphics2D myPen;
     private int myCommandNum = 0;
 

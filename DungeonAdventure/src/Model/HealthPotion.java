@@ -25,7 +25,7 @@ public class HealthPotion extends Item implements Serializable {
     /**
      * The image associated with a 'HealthPotion'.
      */
-    private BufferedImage myHealth;
+    private transient BufferedImage myHealth;
     /**
      * The amount of health this 'HealthPotion' will give back.
      */

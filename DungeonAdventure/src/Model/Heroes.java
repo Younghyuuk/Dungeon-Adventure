@@ -29,7 +29,7 @@ public abstract class Heroes extends DungeonCharacter {
      */
     private double myBlockChance;
 
-    transient BufferedImage hp0,hp1,hp2,hp3,hp4,hp5,hp6,hp7,hp8,hp9,hp10,hp11,hp12,hp13,hp14,hp15,hp16;
+    public transient BufferedImage hp0,hp1,hp2,hp3,hp4,hp5,hp6,hp7,hp8,hp9,hp10,hp11,hp12,hp13,hp14,hp15,hp16;
 
     /**
      * Heroes constructor that initializes the hp, name, attack speed, min damage, max damage,
