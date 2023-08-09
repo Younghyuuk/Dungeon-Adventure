@@ -4,6 +4,7 @@ import View.GamePanel;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.Serializable;
 
 /**
  * Creates the abstract class DungeonCharacter which other
@@ -13,12 +14,15 @@ import java.awt.image.BufferedImage;
  * @version July 2023.
  */
 
-public abstract class DungeonCharacter {
+public abstract class DungeonCharacter implements Serializable {
+
+    private static final long serialversionUID = 12345;
+
     /**
      * The int myHp that tracks the character health points.
      */
     private int myHp;
-    private int myDefalutHp;
+    private int myDefaultHp;
     /**
      * The string name of the character created.
      */
@@ -77,7 +81,7 @@ public abstract class DungeonCharacter {
         myMaxDamage = theMaxDamage;
         myHitChance = theHitChance;
         myGamePanel = theGamePanel;
-        myDefalutHp = theHp;
+        myDefaultHp = theHp;
     }
     public void setMyCollision(final boolean theBool) {
         myCollision = theBool;
@@ -218,7 +222,7 @@ public abstract class DungeonCharacter {
         return getHp() > 0;
     }
     public void resetHP(){
-        myHp = myDefalutHp;
+        myHp = myDefaultHp;
     }
 
     /**
