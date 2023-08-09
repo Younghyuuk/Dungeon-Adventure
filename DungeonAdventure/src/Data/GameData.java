@@ -1,5 +1,6 @@
-package Model;
+package Data;
 
+import Model.Heroes;
 import View.GamePanel;
 
 import java.io.*;

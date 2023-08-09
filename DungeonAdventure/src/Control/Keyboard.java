@@ -1,6 +1,5 @@
 package Control;
 
-import Model.GameData;
 import View.GamePanel;
 
 import java.awt.event.KeyEvent;

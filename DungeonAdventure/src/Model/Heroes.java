@@ -23,7 +23,7 @@ public abstract class Heroes extends DungeonCharacter {
 
     private int myScreensMiddleX;
     private int myScreensMiddleY;
-    Keyboard myKeyInputs;
+    transient Keyboard myKeyInputs;
     /**
      * The double that gives the chance that the Hero will block.
      */

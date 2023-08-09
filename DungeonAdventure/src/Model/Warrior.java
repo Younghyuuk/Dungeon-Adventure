@@ -74,9 +74,9 @@ public class Warrior extends Heroes {
      * @param theKeyboard  keyboard input of character
      */
     public Warrior(final GamePanel theGamePanel, final Keyboard theKeyboard) {
-        super(150, NAME, ATTACK_SPEED,
-                MIN_DAMAGE, MAX_DAMAGE,
-                HIT_CHANCE, BLOCK_CHANCE, theGamePanel, theKeyboard);
+        super(150, "Warrior", 4,
+                35, 65,
+                0.8, 0.5, theGamePanel, theKeyboard);
         getHeroesImage();
     }
 

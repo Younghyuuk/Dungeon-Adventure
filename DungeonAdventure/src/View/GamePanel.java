@@ -1,17 +1,18 @@
 package View;
 
 import Control.Keyboard;
+import Data.SaveLoad;
 import Model.*;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.*;
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * This class acts as the GUI for the DungeonAdventure game.
  */
-public class GamePanel extends JPanel implements Runnable {
+public class GamePanel extends JPanel implements Runnable, Serializable {
 
     /**
      * The actual size of a sprite (16x16).
