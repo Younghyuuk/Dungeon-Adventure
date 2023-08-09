@@ -4,11 +4,12 @@ import View.GamePanel;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.Serializable;
 
 /**
  * An abstract class representing an item that could appear in a room.
  */
-public abstract class Item {
+public abstract class Item implements Serializable {
     /**
      * The game panel to draw the item onto.
      */

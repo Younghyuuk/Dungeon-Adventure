@@ -2,13 +2,14 @@ package Model;
 
 import View.GamePanel;
 
+import java.io.Serializable;
 import java.util.Random;
 
 /**
  * This class is designed specifically to generate a random item
  * that can be added into the dungeon.
  */
-public class ItemGenerator {
+public class ItemGenerator implements Serializable {
     /**
      * Represents the amount of different items that are available.
      */

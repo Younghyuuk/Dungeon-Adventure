@@ -2,12 +2,13 @@ package Model;
 
 import View.GamePanel;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * This class checks if the player collides with any objects within the dungeon.
  */
-public class Collision {
+public class Collision implements Serializable {
     /**
      * The game panel that the character and entities are drawn on.
      */

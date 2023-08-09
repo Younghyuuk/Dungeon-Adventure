@@ -4,9 +4,10 @@ package Model;
 import View.GamePanel;
 import org.sqlite.SQLiteDataSource;
 
+import java.io.Serializable;
 import java.sql.*;
 
-public class MonsterDataBase {
+public class MonsterDataBase implements Serializable {
 
     private static final String DB_URL = "jdbc:sqlite:monsters.db";
     private GamePanel myGamePanel;

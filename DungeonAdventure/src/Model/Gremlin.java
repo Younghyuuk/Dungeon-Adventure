@@ -3,6 +3,7 @@ package Model;
 import View.GamePanel;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.Objects;
 
 import static javax.imageio.ImageIO.read;

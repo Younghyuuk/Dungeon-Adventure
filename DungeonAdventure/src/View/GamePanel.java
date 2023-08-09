@@ -11,9 +11,8 @@ import java.util.List;
 /**
  * This class acts as the GUI for the DungeonAdventure game.
  */
-public class GamePanel extends JPanel implements Runnable, Serializable {
+public class GamePanel extends JPanel implements Runnable {
 
-    private static final long serialversionUID = -1234567;
     /**
      * The actual size of a sprite (16x16).
      */

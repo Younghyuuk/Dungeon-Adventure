@@ -13,7 +13,7 @@ import static javax.imageio.ImageIO.read;
 /**
  * Thief class which extends from Heroes.
  */
-public class Thief extends Heroes implements Serializable {
+public class Thief extends Heroes {
 
     /**
      * The chance at which the surprise attack succeeds.

@@ -7,7 +7,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.Serializable;
 
-public class Keyboard implements KeyListener {
+public class Keyboard implements KeyListener, Serializable {
     public boolean up;
     public boolean down;
     public boolean left;

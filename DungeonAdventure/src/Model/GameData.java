@@ -13,6 +13,7 @@ public class GameData implements Serializable {
 
     public int myScreensMiddleY;
 
+    public Heroes myHero;
     public int myHeroHp;
     public String myHeroName;
     public int myHeroAttackSpeed;

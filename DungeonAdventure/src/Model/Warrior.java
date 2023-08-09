@@ -13,7 +13,7 @@ import static javax.imageio.ImageIO.read;
 /**
  * Warrior class that extends Heroes.
  */
-public class Warrior extends Heroes implements Serializable {
+public class Warrior extends Heroes {
 
     private static final long serialversionUID = 123456799L;
     /**

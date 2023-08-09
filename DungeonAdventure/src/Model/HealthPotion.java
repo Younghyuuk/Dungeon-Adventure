@@ -4,6 +4,7 @@ import View.GamePanel;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.Objects;
 import java.util.Random;
 
@@ -12,7 +13,7 @@ import static javax.imageio.ImageIO.read;
 /**
  * Represents a basic Health Potion object.
  */
-public class HealthPotion extends Item {
+public class HealthPotion extends Item implements Serializable {
     /**
      * The minimum amount of health that can be received.
      */
