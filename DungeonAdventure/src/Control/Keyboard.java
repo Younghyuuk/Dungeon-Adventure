@@ -85,7 +85,11 @@ public class Keyboard implements KeyListener {
         } else if (myGamePanel.getMyGameState() == 3) {
             int code = e.getKeyCode();
             if (code == KeyEvent.VK_ENTER) {
-                myGamePanel.setMyGameState(2);
+                if (myGamePanel.getMyHero().isAlive()){
+                    myGamePanel.setMyGameState(2);
+                } else {
+                    myGamePanel.setMyGameState(4);
+                }
             }
         } else if (myGamePanel.getMyGameState() == 4) {
             int code = e.getKeyCode();

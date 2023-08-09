@@ -168,9 +168,8 @@ public class GamePanel extends JPanel implements Runnable {
     /**
      * Boolean representing whether the player is looking at the about section of the game.
      */
-    private boolean myAboutState = false;
-    private int count = 0;
 
+    private boolean myAboutState = false;
     /**
      * Creates and sets up the game panel.
      */
@@ -406,7 +405,6 @@ public class GamePanel extends JPanel implements Runnable {
     public List<Item> getMyItemArray() {
         return myItemArray;
     }
-
     /**
      * Gets the amount of pillars that the player has picked up.
      *
@@ -499,9 +497,6 @@ public class GamePanel extends JPanel implements Runnable {
                 mon.update();
             }
         }
-        if (!myHero.isAlive()){
-            setMyGameState(4);
-        }
         if(winCount == 4){
             setMyGameState(5);
         }
@@ -544,15 +539,7 @@ public class GamePanel extends JPanel implements Runnable {
             pen.dispose();
         }
         else if (myGameState == BATTLE_STATE){
-            myTileM.draw(pen);
-            myHero.draw(pen);
             myBattlePage.setMyBattleLog(myBattleLog);
-
-            for (Monster mon : myMonsterArray) {
-                if (mon.isAlive()) {
-                    mon.draw(pen);
-                }
-            }
             myBattlePage.draw(pen);
             pen.dispose();
         }
