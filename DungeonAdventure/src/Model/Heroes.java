@@ -22,8 +22,8 @@ public abstract class Heroes extends DungeonCharacter implements Serializable {
 
     private static final long serialversionUID = 123456;
 
-    private final int myScreensMiddleX;
-    private final int myScreensMiddleY;
+    private int myScreensMiddleX;
+    private int myScreensMiddleY;
     Keyboard myKeyInputs;
     /**
      * The double that gives the chance that the Hero will block.
@@ -69,8 +69,16 @@ public abstract class Heroes extends DungeonCharacter implements Serializable {
         return myScreensMiddleX;
     }
 
+    public void setMyScreensMiddleX(int theScreensMiddleX) {
+        myScreensMiddleX = theScreensMiddleX;
+    }
+
     public int getMyScreensMiddleY() {
         return myScreensMiddleY;
+    }
+
+    public void setMyScreensMiddleY(int theScreensMiddleY) {
+        myScreensMiddleY = theScreensMiddleY;
     }
 
     public void resetSolidArea() {

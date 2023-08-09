@@ -160,6 +160,10 @@ public abstract class DungeonCharacter {
         return myMaxDamage;
     }
 
+
+    public void setMaxDamage(int theMaxDamage) {
+        myMaxDamage = theMaxDamage;
+    }
     /**
      * Gets the attack speed.
      *
@@ -182,6 +186,9 @@ public abstract class DungeonCharacter {
         return myHitChance;
     }
 
+    public void setHitChance(double theHitChance) {
+        myHitChance = theHitChance;
+    }
     /**
      * This method attacks an opponent based on the characters
      * hit chance and damage range and deals that damage to theOpp.

@@ -34,7 +34,6 @@ public class GameData implements Serializable {
             gd.myHeroAttackSpeed = gp.getMyHero().getAttackSpeed();
             gd.myHeroMinDamage = gp.getMyHero().getMinDamage();
             gd.myHeroMaxDamage = gp.getMyHero().getMaxDamage();
-            gd.myHeroAttackSpeed = gp.getMyHero().getAttackSpeed();
             gd.myHeroBlock = gp.getMyHero().getBlockChance();
             gd.myHeroHit = gp.getMyHero().getHitChance();
             gd.myScreensMiddleX = gp.getMyHero().getMyScreensMiddleX();
@@ -50,16 +49,16 @@ public class GameData implements Serializable {
         try {
             ObjectInputStream ois = new ObjectInputStream(new FileInputStream(new File ("save.dat")));
             GameData gd = (GameData)ois.readObject();
+            
             gp.getMyHero().setHp(gd.myHeroHp);
             gp.getMyHero().setChName(gd.myHeroName);
             gp.getMyHero().setAttackSpeed(gd.myHeroAttackSpeed);
             gp.getMyHero().setMinDamage(gd.myHeroMinDamage);
-            gd.myHeroMaxDamage = gp.getMyHero().getMaxDamage();
-            gd.myHeroAttackSpeed = gp.getMyHero().getAttackSpeed();
-            gd.myHeroBlock = gp.getMyHero().getBlockChance();
-            gd.myHeroHit = gp.getMyHero().getHitChance();
-            gd.myScreensMiddleX = gp.getMyHero().getMyScreensMiddleX();
-            gd.myScreensMiddleY = gp.getMyHero().getMyScreensMiddleY();
+            gp.getMyHero().setMaxDamage(gd.myHeroMaxDamage);
+            gp.getMyHero().setBlockChance(gd.myHeroBlock);
+            gp.getMyHero().setHitChance(gd.myHeroHit);
+            gp.getMyHero().setMyScreensMiddleX(gd.myScreensMiddleX);
+            gp.getMyHero().setMyScreensMiddleY(gd.myScreensMiddleY);
         }
         catch (Exception e) {
             System.out.println("Load exception");
