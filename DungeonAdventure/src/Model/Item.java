@@ -125,13 +125,10 @@ public abstract class Item {
      * @param theImage The image to set 'myItemImage' to.
      */
     public void setImage(final BufferedImage theImage) {
-<<<<<<< HEAD
 //        if (theImage.toString().equals("myHealth_1")) {
             myItemImage = theImage;
 //        }
-=======
-        myItemImage = theImage;
->>>>>>> 82630ceca58f3907b55c2c003e3c9f4b7e1e7b88
+
     }
 
     /**
