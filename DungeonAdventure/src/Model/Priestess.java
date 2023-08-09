@@ -70,7 +70,7 @@ public class Priestess extends Heroes implements Serializable {
      * @param theKeyboard  keyboard input of character
      */
     public Priestess(final GamePanel theGamePanel, final Keyboard theKeyboard) {
-        super(HP, NAME, ATTACK_SPEED, MIN_DAMAGE, MAX_DAMAGE, HIT_CHANCE, BLOCK_CHANCE, theGamePanel, theKeyboard);
+        super(100, NAME, ATTACK_SPEED, MIN_DAMAGE, MAX_DAMAGE, HIT_CHANCE, BLOCK_CHANCE, theGamePanel, theKeyboard);
         getHeroesImage();
     }
 

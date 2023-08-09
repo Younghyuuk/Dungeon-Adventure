@@ -13,6 +13,7 @@ import java.util.List;
  */
 public class GamePanel extends JPanel implements Runnable, Serializable {
 
+    private static final long serialversionUID = -1234567;
     /**
      * The actual size of a sprite (16x16).
      */
@@ -218,44 +219,6 @@ public class GamePanel extends JPanel implements Runnable, Serializable {
         }
         winCount = 0;
     }
-
-//    public void saveGame(String theFileName) {
-//        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(theFileName))) {
-//            GameData gameData = new GameData();
-//            gameData.setDungeon(myDungeon);
-//            gameData.setHero(myHero);
-//            gameData.setGameState(myGameState);
-//            gameData.setMonsterList(myMonsterArray);
-//
-//            oos.writeObject(gameData);
-//            System.out.println("Game data saved successfully.");
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
-//
-//    public void loadGame(String theFileName) {
-//        try (ObjectInputStream input = new ObjectInputStream(new FileInputStream(theFileName))) {
-//            GameData loadedGameData = (GameData) input.readObject();
-//
-//            // Restore the loaded game state
-//            myDungeon = loadedGameData.getDungeon();
-//            myHero = loadedGameData.getHero();
-//            myGameState = loadedGameData.getGameState();
-//
-//            // Restore the loaded monster list
-//            myMonsterArray = loadedGameData.getMonsterList();
-//
-//            // Other necessary updates based on loaded data
-//            // ...
-//
-//            // Repaint the panel to display the loaded game state
-//            repaint();
-//            System.out.println("Game data loaded successfully.");
-//        } catch (IOException | ClassNotFoundException e) {
-//            e.printStackTrace();
-//        }
-//    }
 
     /**
      * Sets the in class battle log to the input battle log.
@@ -539,7 +502,7 @@ public class GamePanel extends JPanel implements Runnable, Serializable {
         if(winCount == 4){
             setMyGameState(5);
         }
-        System.out.println(myHero.getHp());
+//        System.out.println(myHero.getHp());
     }
 
     // This method updates our view.

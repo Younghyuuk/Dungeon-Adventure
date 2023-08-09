@@ -2,6 +2,7 @@ package Model;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Random;
 import java.util.Stack;
@@ -9,7 +10,10 @@ import java.util.Stack;
 /**
  * This class represents the randomly generated dungeon.
  */
-public class Dungeon {
+public class Dungeon implements Serializable {
+
+    private static final long serialversionUID = 1234567L;
+    
     /**
      * A 2D array of all the rooms in the dungeon.
      */

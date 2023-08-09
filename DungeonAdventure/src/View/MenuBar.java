@@ -4,8 +4,11 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeListener;
+import java.io.Serializable;
 
-public class MenuBar extends JMenuBar {
+public class MenuBar extends JMenuBar implements Serializable {
+
+    private static final long serialversionUID = -12345678;
 
     /** The command associated with the Quit option. */
     public static final String QUIT = "Quit";
@@ -30,10 +33,16 @@ public class MenuBar extends JMenuBar {
 //        save.addActionListener(new ActionListener() {
 //            @Override
 //            public void actionPerformed(ActionEvent e) {
-//                myGamePanel.saveGame("game_data.save");
+//                JFileChooser fileChooser = new JFileChooser();
+//                int userSelection = fileChooser.showSaveDialog(theFrame);
+//
+//                if (userSelection == JFileChooser.APPROVE_OPTION) {
+//                    String filePath = fileChooser.getSelectedFile().getAbsolutePath();
+////                    myGamePanel.saveGame(filePath);
+//                    System.out.println("Game saved to: " + filePath);
+//                }
 //            }
-//        });
-        // ================
+
         JMenuItem mainMenu = new JMenuItem("Main Menu");
         mainMenu.addActionListener(new ActionListener() {
             @Override

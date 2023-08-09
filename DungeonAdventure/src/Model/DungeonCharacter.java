@@ -135,6 +135,10 @@ public abstract class DungeonCharacter {
         return myChName;
     }
 
+    public void setChName(String theChName) {
+        myChName = theChName;
+    }
+
     /**
      * Gets the minimum amount of damage.
      *
@@ -144,6 +148,9 @@ public abstract class DungeonCharacter {
         return myMinDamage;
     }
 
+    public void setMinDamage(int theMinDamage) {
+        myMinDamage = theMinDamage;
+    }
     /**
      * Gets the max amount of damage.
      *
@@ -162,6 +169,10 @@ public abstract class DungeonCharacter {
         return myAttackSpeed;
     }
 
+
+    public void setAttackSpeed(int theAttackSpeed) {
+        myAttackSpeed = theAttackSpeed;
+    }
     /**
      * Gets the hit chance.
      *
