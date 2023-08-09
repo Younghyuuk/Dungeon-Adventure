@@ -146,8 +146,6 @@ public class Collision {
                 mon.resetSolidArea();
             }
         }
-
-//        theHero.setHp(125);
         return index;
     }
 
