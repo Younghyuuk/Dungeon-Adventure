@@ -1,5 +1,7 @@
 package View;
 
+import Model.MonsterDataBase;
+
 public class Main {
 
 
@@ -9,6 +11,7 @@ public class Main {
             frame.setVisible(true);
             frame.setResizable(false);
             frame.setLocationRelativeTo(null);
+//            MonsterDataBase mdb = new MonsterDataBase(new GamePanel());
 
     }
 }
