@@ -19,7 +19,7 @@ public class GamePanel extends JPanel implements Runnable {
     private final int myScreenHeight = myMaxScreenRow * mySpriteSize;
     private final static int FPS = 60;
 
-    //We may need to pass this from mainframe and play with the gamestate to load new dungeons.=
+
     private Dungeon myDungeon = new Dungeon();
     // these values will be dependent on Dungeon Maze array size.
     /**
@@ -248,7 +248,7 @@ public class GamePanel extends JPanel implements Runnable {
         if(winCount == 4){
             setMyGameState(5);
         }
-        System.out.println(winCount);
+        System.out.println(myHero.getHp());
     }
 
     // This method updates our view.

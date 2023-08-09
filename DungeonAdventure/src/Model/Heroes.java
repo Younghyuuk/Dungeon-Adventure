@@ -5,6 +5,10 @@ import View.GamePanel;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.util.Objects;
+
+import static javax.imageio.ImageIO.read;
 
 /**
  * Heroes class which extends from DungeonCharacter
@@ -20,6 +24,8 @@ public abstract class Heroes extends DungeonCharacter {
      * The double that gives the chance that the Hero will block.
      */
     private double myBlockChance;
+
+    BufferedImage hp0,hp1,hp2,hp3,hp4,hp5,hp6,hp7,hp8,hp9,hp10,hp11,hp12,hp13,hp14,hp15,hp16;
 
     /**
      * Heroes constructor that initializes the hp, name, attack speed, min damage, max damage,
@@ -49,8 +55,8 @@ public abstract class Heroes extends DungeonCharacter {
 
 
         mySolidArea = new Rectangle(12, 12, myGamePanel.getSpriteSize() - 24, myGamePanel.getSpriteSize() - 24);
-        mySpeed = 6
-        ;
+        mySpeed = 6;
+        setHPBar();
     }
 
     public int getMyScreensMiddleX() {
@@ -110,6 +116,7 @@ public abstract class Heroes extends DungeonCharacter {
             mySpriteNum = mySpriteNum == 1 ? 2 : 1;
             mySpriteCounter = 0;
         }
+
     }
 
     public void draw(final Graphics2D theGraphics) {
@@ -147,11 +154,40 @@ public abstract class Heroes extends DungeonCharacter {
         }
         // Draw my hero in the middle of the viewable screen.
         theGraphics.drawImage(image, myScreensMiddleX, myScreensMiddleY, myGamePanel.getSpriteSize(), myGamePanel.getSpriteSize(), null);
-
+        drawHpBar(theGraphics);
     }
+    abstract public void drawHpBar(Graphics2D theGraphics);
+    public int getMyScreenMiddleX(){
+        return myScreensMiddleX;
+    }
+    public int getMyScreenMiddleY(){
+        return myScreensMiddleY;
+    }
+    public void setHPBar(){
+        try {
+            hp0 = read(Objects.requireNonNull(getClass().getResourceAsStream("/healthBar/healthBar00.png")));
+            hp1 = read(Objects.requireNonNull(getClass().getResourceAsStream("/healthBar/healthBar01.png")));
+            hp2 = read(Objects.requireNonNull(getClass().getResourceAsStream("/healthBar/healthBar02.png")));
+            hp3 = read(Objects.requireNonNull(getClass().getResourceAsStream("/healthBar/healthBar03.png")));
+            hp4 = read(Objects.requireNonNull(getClass().getResourceAsStream("/healthBar/healthBar04.png")));
+            hp5 = read(Objects.requireNonNull(getClass().getResourceAsStream("/healthBar/healthBar05.png")));
+            hp6 = read(Objects.requireNonNull(getClass().getResourceAsStream("/healthBar/healthBar06.png")));
+            hp7 = read(Objects.requireNonNull(getClass().getResourceAsStream("/healthBar/healthBar07.png")));
+            hp8 = read(Objects.requireNonNull(getClass().getResourceAsStream("/healthBar/healthBar08.png")));
+            hp9 = read(Objects.requireNonNull(getClass().getResourceAsStream("/healthBar/healthBar09.png")));
+            hp10 = read(Objects.requireNonNull(getClass().getResourceAsStream("/healthBar/healthBar10.png")));
+            hp11 = read(Objects.requireNonNull(getClass().getResourceAsStream("/healthBar/healthBar11.png")));
+            hp12 = read(Objects.requireNonNull(getClass().getResourceAsStream("/healthBar/healthBar12.png")));
+            hp13 = read(Objects.requireNonNull(getClass().getResourceAsStream("/healthBar/healthBar13.png")));
+            hp14 = read(Objects.requireNonNull(getClass().getResourceAsStream("/healthBar/healthBar14.png")));
+            hp15 = read(Objects.requireNonNull(getClass().getResourceAsStream("/healthBar/healthBar15.png")));
+            hp16 = read(Objects.requireNonNull(getClass().getResourceAsStream("/healthBar/healthBar16.png")));
 
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
     public abstract void getHeroesImage();
-
 
     /**
      * Abstract method in which we implement so that the hero classes
