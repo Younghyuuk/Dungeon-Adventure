@@ -1,13 +1,8 @@
 package View;
 
-import Control.Keyboard;
-
-import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.nio.Buffer;
-import java.security.Key;
 import java.util.Objects;
 
 import static javax.imageio.ImageIO.read;
@@ -21,7 +16,6 @@ public class TitlePage {
     private BufferedImage myThiefImage;
     private BufferedImage myWarriorImage;
     private BufferedImage myPriestImage;
-
 
     public TitlePage(GamePanel theGamePanel) {
         myGamePanel = theGamePanel;

@@ -21,7 +21,7 @@ public class GamePanel extends JPanel implements Runnable, Serializable {
     /**
      * The multiplier to make the sprites fit onto the screen properly.
      */
-    private final static int SCALE = 2;
+    private final static int SCALE = 3;
     /**
      * The size we want the sprites to be to fit the screen.
      */
