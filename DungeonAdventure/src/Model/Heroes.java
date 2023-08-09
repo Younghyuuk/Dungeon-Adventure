@@ -38,7 +38,7 @@ public abstract class Heroes extends DungeonCharacter implements Serializable {
      * @param theGamePanel   the gamepanel of the hero.
      * @param theKeyBoard    the keyboard input of the hero.
      */
-    protected Heroes(final int theHp, final String theChName, final int theAttackSpeed, final int theMinDamage, final int theMaxDamage,
+    protected Heroes(int theHp, final String theChName, final int theAttackSpeed, final int theMinDamage, final int theMaxDamage,
                      final double theHitChance, final double theBlockChance, final GamePanel theGamePanel, final Keyboard theKeyBoard) {
 
         super(theHp, theChName, theAttackSpeed, theMinDamage, theMaxDamage, theHitChance, theGamePanel);
@@ -73,6 +73,14 @@ public abstract class Heroes extends DungeonCharacter implements Serializable {
             System.out.println("You hit the monster");
         }
 
+    }
+
+    public GameData getHeroData() {
+        GameData heroData = new GameData();
+        heroData.myHeroHp = getHp();
+        heroData.myScreensMiddleX = myScreensMiddleX;
+        heroData.myScreensMiddleY = myScreensMiddleY;
+        return heroData;
     }
 
     public void update() {

@@ -14,7 +14,7 @@ import java.io.Serializable;
  * @version July 2023.
  */
 
-public abstract class DungeonCharacter implements Serializable {
+public abstract class DungeonCharacter {
 
     private static final long serialversionUID = 12345;
 
