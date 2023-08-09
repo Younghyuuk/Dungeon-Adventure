@@ -20,7 +20,7 @@ public class GamePanel extends JPanel implements Runnable, Serializable {
     /**
      * The multiplier to make the sprites fit onto the screen properly.
      */
-    private final static int SCALE = 3;
+    private final static int SCALE = 2;
     /**
      * The size we want the sprites to be to fit the screen.
      */
@@ -169,9 +169,8 @@ public class GamePanel extends JPanel implements Runnable, Serializable {
     /**
      * Boolean representing whether the player is looking at the about section of the game.
      */
-    private boolean myAboutState = false;
-    private int count = 0;
 
+    private boolean myAboutState = false;
     /**
      * Creates and sets up the game panel.
      */
@@ -445,7 +444,6 @@ public class GamePanel extends JPanel implements Runnable, Serializable {
     public List<Item> getMyItemArray() {
         return myItemArray;
     }
-
     /**
      * Gets the amount of pillars that the player has picked up.
      *
@@ -538,9 +536,6 @@ public class GamePanel extends JPanel implements Runnable, Serializable {
                 mon.update();
             }
         }
-        if (!myHero.isAlive()){
-            setMyGameState(4);
-        }
         if(winCount == 4){
             setMyGameState(5);
         }
@@ -583,15 +578,7 @@ public class GamePanel extends JPanel implements Runnable, Serializable {
             pen.dispose();
         }
         else if (myGameState == BATTLE_STATE){
-            myTileM.draw(pen);
-            myHero.draw(pen);
             myBattlePage.setMyBattleLog(myBattleLog);
-
-            for (Monster mon : myMonsterArray) {
-                if (mon.isAlive()) {
-                    mon.draw(pen);
-                }
-            }
             myBattlePage.draw(pen);
             pen.dispose();
         }
