@@ -4,7 +4,9 @@ import View.GamePanel;
 
 import java.io.*;
 
-public class SaveLoad {
+public class SaveLoad implements Serializable{
+
+    private static final long serialVersionUID = -341835787402514619L;
     GamePanel myGp;
 
    public SaveLoad(GamePanel theGp) {
@@ -25,9 +27,11 @@ public class SaveLoad {
             gd.myScreensMiddleY = myGp.getMyHero().getMyScreensMiddleY();
 
             oos.writeObject(gd);
+            oos.close();
         }
         catch(Exception e) {
-            System.out.println("Save exception");
+            System.out.println("Save exception" + e.getMessage());
+            e.printStackTrace();
         }
     }
     public void load() {
@@ -44,9 +48,11 @@ public class SaveLoad {
             myGp.getMyHero().setHitChance(gd.myHeroHit);
             myGp.getMyHero().setMyScreensMiddleX(gd.myScreensMiddleX);
             myGp.getMyHero().setMyScreensMiddleY(gd.myScreensMiddleY);
+            ois.close();
         }
         catch (Exception e) {
-            System.out.println("Load exception");
+            System.out.println("Load exception" + e.getMessage());
+            e.printStackTrace();
         }
     }
 }

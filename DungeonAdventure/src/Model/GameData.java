@@ -5,7 +5,7 @@ import View.GamePanel;
 import java.io.*;
 
 public class GameData implements Serializable {
-//    private static final long serialVersionUID = -123456;
+    private static final long serialVersionUID = -123456;
 
     //    public Heroes myHero;
     GamePanel myGp = new GamePanel();
@@ -21,9 +21,9 @@ public class GameData implements Serializable {
     public double myHeroBlock;
     public double myHeroHit;
 
-    private Dungeon myDungeon;
-    //    private Heroes myHero;
-    private int myGameState;
+//    private Dungeon myDungeon;
+//    //    private Heroes myHero;
+//    private int myGameState;
 
 
 }

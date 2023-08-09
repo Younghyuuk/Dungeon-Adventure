@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * This class acts as the GUI for the DungeonAdventure game.
  */
-public class GamePanel extends JPanel implements Runnable {
+public class GamePanel extends JPanel implements Runnable, Serializable {
 
     private static final long serialversionUID = -1234567;
     /**

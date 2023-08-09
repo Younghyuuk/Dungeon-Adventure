@@ -14,7 +14,7 @@ import java.io.Serializable;
  * @version July 2023.
  */
 
-public abstract class DungeonCharacter {
+public abstract class DungeonCharacter implements Serializable {
 
     private static final long serialversionUID = 12345;
 
@@ -49,7 +49,7 @@ public abstract class DungeonCharacter {
     private double myHitChance;
 
     public GamePanel myGamePanel;
-    public BufferedImage up1, up2, down1, down2, left1, left2, right1, right2;
+    public transient BufferedImage up1, up2, down1, down2, left1, left2, right1, right2;
     public String myDirection = "down";
     public int mySpeed;
     public boolean myCollision = false;

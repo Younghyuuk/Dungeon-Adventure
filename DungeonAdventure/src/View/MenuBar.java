@@ -5,7 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.Serializable;
 
-public class MenuBar extends JMenuBar {
+public class MenuBar extends JMenuBar implements Serializable {
 
     /**
      * The command associated with the Quit option.
