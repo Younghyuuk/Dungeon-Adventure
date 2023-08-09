@@ -5,6 +5,7 @@ import View.GamePanel;
 
 import java.awt.*;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.Objects;
 
 import static javax.imageio.ImageIO.read;
@@ -12,7 +13,7 @@ import static javax.imageio.ImageIO.read;
 /**
  * Warrior class that extends Heroes.
  */
-public class Warrior extends Heroes {
+public class Warrior extends Heroes implements Serializable {
 
     /**
      * The chance at which Warriors special hits.

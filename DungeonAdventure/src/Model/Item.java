@@ -38,9 +38,11 @@ public abstract class Item {
     /**
      * Constructs an item.
      *
+
      * @param theGP          The 'GamePanel' to draw the item onto.
      * @param theWorldX      The world-x coordinate to draw the item at.
      * @param theWorldY      The world-y coordinate to draw the item at.
+
      */
     public Item(final GamePanel theGP, final int theWorldX, final int theWorldY) {
         myGamePanel = theGP;
@@ -125,7 +127,10 @@ public abstract class Item {
      * @param theImage The image to set 'myItemImage' to.
      */
     public void setImage(final BufferedImage theImage) {
-        myItemImage = theImage;
+//        if (theImage.toString().equals("myHealth_1")) {
+            myItemImage = theImage;
+//        }
+
     }
 
     /**
