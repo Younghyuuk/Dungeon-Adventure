@@ -8,7 +8,7 @@ import java.util.Objects;
 import static javax.imageio.ImageIO.read;
 
 public class Ogre extends Monster {
-
+    private static final long serialVersionUID = 123456789L;
 
     /**
      * The constructor of Monster that sets up the stats for Ogre class.

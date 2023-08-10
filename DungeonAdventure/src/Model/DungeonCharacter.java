@@ -16,7 +16,6 @@ import java.io.Serializable;
 
 public abstract class DungeonCharacter implements Serializable {
 
-    private static final long serialVersionUID = 123456789L;
     /**
      * The int myHp that tracks the character health points.
      */

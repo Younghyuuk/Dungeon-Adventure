@@ -14,7 +14,7 @@ import static javax.imageio.ImageIO.read;
  * Represents a basic Health Potion object.
  */
 public class HealthPotion extends Item implements Serializable {
-
+    private static final long serialVersionUID = 123456789L;
     /**
      * The minimum amount of health that can be received.
      */
