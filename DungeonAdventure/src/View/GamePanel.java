@@ -12,9 +12,9 @@ import java.util.List;
  * This class acts as the GUI for the DungeonAdventure game.
  */
 public class GamePanel extends JPanel implements Runnable {
-//    @Serial
+    //    @Serial
 //    private static final BigInteger serialVersionUID = new BigInteger("501648749617479875");
-
+    private static final long serialVersionUID = 123456789L;
     /**
      * The actual size of a sprite (16x16).
      */
@@ -176,11 +176,11 @@ public class GamePanel extends JPanel implements Runnable {
     public transient SaveLoad saveLoad = new SaveLoad(this);
 
     private transient boolean myAboutState = false;
+
     /**
      * Creates and sets up the game panel.
      */
     public GamePanel() {
-//        myGameData = new GameData(this);
         setPreferredSize(new Dimension(myScreenWidth, myScreenHeight));
         setBackground(Color.BLACK);
         setDoubleBuffered(true);
@@ -193,13 +193,13 @@ public class GamePanel extends JPanel implements Runnable {
     /**
      * Sets up a brand-new game!
      */
-    public void setNewGame(){
+    public void setNewGame() {
         if (!myMonsterArray.isEmpty()) {
             myMonsterArray.clear();
         }
         myIE.createMonster();
         myMonsterArray = myIE.getMyMonsterArray();
-        for (FourPillars pillars :myPillarArray){
+        for (FourPillars pillars : myPillarArray) {
             pillars.setFound(false);
         }
         for (Item item : myItemArray) {
@@ -211,12 +211,12 @@ public class GamePanel extends JPanel implements Runnable {
     /**
      * Resets everything in the game.
      */
-    public void resetGame(){
+    public void resetGame() {
         setMyHero(myHeroNum);
-        for (Monster mon : myMonsterArray){
+        for (Monster mon : myMonsterArray) {
             mon.resetHP();
         }
-        for (FourPillars pillars :myPillarArray){
+        for (FourPillars pillars : myPillarArray) {
             pillars.setFound(false);
         }
         for (Item item : myItemArray) {
@@ -230,7 +230,7 @@ public class GamePanel extends JPanel implements Runnable {
      *
      * @param theBattleLog The battle log to set this class's battle log to.
      */
-    public void setMyBattleLog(String[] theBattleLog){
+    public void setMyBattleLog(String[] theBattleLog) {
         myBattleLog = theBattleLog;
     }
 
@@ -239,7 +239,7 @@ public class GamePanel extends JPanel implements Runnable {
      *
      * @return The character selection page.
      */
-    public CharacterSelectionPage getMyCharacterSelectionPage(){
+    public CharacterSelectionPage getMyCharacterSelectionPage() {
         return myCharacterSelectionPage;
     }
 
@@ -257,7 +257,7 @@ public class GamePanel extends JPanel implements Runnable {
      *
      * @return The win page.
      */
-    public WinPage getMyWinPage(){
+    public WinPage getMyWinPage() {
         return myWinPage;
     }
 
@@ -276,7 +276,7 @@ public class GamePanel extends JPanel implements Runnable {
      *
      * @return The game over screen.
      */
-    public GameOver getMyGameOver(){
+    public GameOver getMyGameOver() {
         return myGameOverPage;
     }
 
@@ -285,7 +285,7 @@ public class GamePanel extends JPanel implements Runnable {
      *
      * @param theDungeon The input dungeon to set this class's dungeon to.
      */
-    public void setMyDungeon(Dungeon theDungeon){
+    public void setMyDungeon(Dungeon theDungeon) {
         myDungeon = theDungeon;
     }
 
@@ -391,7 +391,7 @@ public class GamePanel extends JPanel implements Runnable {
      *
      * @return The list of all monsters in the dungeon.
      */
-    public List<Monster> getMyMonsterArray(){
+    public List<Monster> getMyMonsterArray() {
         return myMonsterArray;
     }
 
@@ -400,7 +400,7 @@ public class GamePanel extends JPanel implements Runnable {
      *
      * @return The list of all four pillars of OO in the dungeon.
      */
-    public List<FourPillars> getMyPillarArray(){
+    public List<FourPillars> getMyPillarArray() {
         return myPillarArray;
     }
 
@@ -412,19 +412,20 @@ public class GamePanel extends JPanel implements Runnable {
     public List<Item> getMyItemArray() {
         return myItemArray;
     }
+
     /**
      * Gets the amount of pillars that the player has picked up.
      *
      * @return The amount of pillars the player has obtained.
      */
-    public int getWinCount(){
+    public int getWinCount() {
         return winCount;
     }
 
     /**
      * Increases the amount of pillars that the player has obtained by 1.
      */
-    public void incWinCount(){
+    public void incWinCount() {
         winCount++;
     }
 
@@ -442,7 +443,7 @@ public class GamePanel extends JPanel implements Runnable {
      *
      * @return True or false depending on if the player has the about page open.
      */
-    public boolean getMyAboutState(){
+    public boolean getMyAboutState() {
         return myAboutState;
     }
 
@@ -459,15 +460,15 @@ public class GamePanel extends JPanel implements Runnable {
     public void setMyHero(int number) {
         if (number == 1) {
             myHero = new Thief(this, myKeyInputs);
-            myHeroNum= 1;
+            myHeroNum = 1;
         }
         if (number == 2) {
             myHero = new Warrior(this, myKeyInputs);
-            myHeroNum= 2;
+            myHeroNum = 2;
         }
         if (number == 3) {
             myHero = new Priestess(this, myKeyInputs);
-            myHeroNum= 3;
+            myHeroNum = 3;
         }
     }
 
@@ -498,13 +499,13 @@ public class GamePanel extends JPanel implements Runnable {
      * Updates the game panel depending on the state of the game.
      */
     public void update() {
-        if(myGameState == PLAY_STATE) {
+        if (myGameState == PLAY_STATE) {
             myHero.update();
-            for (Monster mon : myMonsterArray){
+            for (Monster mon : myMonsterArray) {
                 mon.update();
             }
         }
-        if(winCount == 4){
+        if (winCount == 4) {
             setMyGameState(5);
         }
 //        System.out.println(myHero.getHp());
@@ -525,18 +526,18 @@ public class GamePanel extends JPanel implements Runnable {
         } else if (myGameState == PLAY_STATE) {
             myTileM.draw(pen);
             myHero.draw(pen);
-            for (Monster mon : myMonsterArray){
-                if (mon.isAlive()){
+            for (Monster mon : myMonsterArray) {
+                if (mon.isAlive()) {
                     mon.draw(pen);
                 }
             }
-            for (FourPillars pill : myPillarArray){
-                if(!pill.getFound()){
+            for (FourPillars pill : myPillarArray) {
+                if (!pill.getFound()) {
                     pill.draw(pen);
                 }
             }
             for (Item item : myItemArray) {
-                if(!item.getFound()) {
+                if (!item.getFound()) {
                     item.draw(pen);
                 }
             }
@@ -544,16 +545,13 @@ public class GamePanel extends JPanel implements Runnable {
                 myAboutPage.draw(pen);
             }
             pen.dispose();
-        }
-        else if (myGameState == BATTLE_STATE){
+        } else if (myGameState == BATTLE_STATE) {
             myBattlePage.setMyBattleLog(myBattleLog);
             myBattlePage.draw(pen);
             pen.dispose();
-        }
-        else if(myGameState == GAME_OVER_STATE){
+        } else if (myGameState == GAME_OVER_STATE) {
             myGameOverPage.draw(pen);
-        }
-        else {
+        } else {
             myWinPage.draw(pen);
         }
     }

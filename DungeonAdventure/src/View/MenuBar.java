@@ -15,7 +15,7 @@ public class MenuBar extends JMenuBar {
      * The command associated with the Save option.
      */
     public static final String SAVE = "Save";
-    private static final long serialversionUID = -12345678;
+
     private final GamePanel myGamePanel;
 
 

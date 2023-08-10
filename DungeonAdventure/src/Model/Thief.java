@@ -14,6 +14,7 @@ import static javax.imageio.ImageIO.read;
  * Thief class which extends from Heroes.
  */
 public class Thief extends Heroes {
+    private static final long serialVersionUID = 123456789L;
 
 //    private static final long serialVersionUID = 123456789L;
 

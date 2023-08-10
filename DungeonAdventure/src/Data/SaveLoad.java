@@ -4,9 +4,10 @@ import View.GamePanel;
 
 import java.io.*;
 
-public class SaveLoad  {
-    //    private static final long serialVersionUID = 1234567839L;
+public class SaveLoad {
+    private static final long serialVersionUID = 123456789L;
     transient GamePanel myGp;
+
 
     public SaveLoad(GamePanel theGp) {
         myGp = theGp;

@@ -12,6 +12,8 @@ import java.util.Random;
  * Monster abstract class that extends DungeonCharacter
  */
 public abstract class Monster extends DungeonCharacter {
+
+    private static final long serialVersionUID = 123456789L;
 //    private final UUID myId;
     private final double myChanceHeal;
     private final int myMinHeal;
