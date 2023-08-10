@@ -1,23 +1,17 @@
 package Data;
 
-import Control.Keyboard;
-import Data.GameData;
-import Model.Heroes;
-import Model.Priestess;
 import View.GamePanel;
 
 import java.io.*;
-import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.List;
 
-public class SaveLoad implements Serializable{
-    private static final long serialVersionUID = 1234567839L;
-    GamePanel myGp;
+public class SaveLoad implements Serializable {
+    //    private static final long serialVersionUID = 1234567839L;
+    transient GamePanel myGp;
 
-   public SaveLoad(GamePanel theGp) {
-       myGp = theGp;
-   }
+    public SaveLoad(GamePanel theGp) {
+        myGp = theGp;
+    }
+
     public void save() {
         try {
             FileOutputStream fos = new FileOutputStream("game.save");
@@ -37,16 +31,16 @@ public class SaveLoad implements Serializable{
 
             oos.writeObject(gd);
             oos.close();
-        }
-        catch(Exception e) {
-            System.out.println("Save exception" + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Save exception " + e.getMessage());
             e.printStackTrace();
         }
     }
+
     public void load() {
         try {
-            ObjectInputStream ois = new ObjectInputStream(new FileInputStream(new File ("save.dat")));
-            GameData gd = (GameData)ois.readObject();
+            ObjectInputStream ois = new ObjectInputStream(new FileInputStream(new File("save.dat")));
+            GameData gd = (GameData) ois.readObject();
 
             myGp.getMyHero().setHp(gd.myHeroHp);
             myGp.getMyHero().setChName(gd.myHeroName);
@@ -58,11 +52,10 @@ public class SaveLoad implements Serializable{
             myGp.getMyHero().setMyScreensMiddleX(gd.myScreensMiddleX);
             myGp.getMyHero().setMyScreensMiddleY(gd.myScreensMiddleY);
 
-            System.out.println(myGp.toString());
+//            System.out.println(myGp.toString());
             ois.close();
-        }
-        catch (Exception e) {
-            System.out.println("Load exception" + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Load exception " + e.getMessage());
             e.printStackTrace();
         }
     }

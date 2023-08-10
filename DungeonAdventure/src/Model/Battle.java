@@ -10,7 +10,6 @@ import java.io.Serializable;
  * @version July 19, 2023
  */
 public class Battle implements Serializable {
-    private static final long serialVersionUID = 123344567839L;
     /**
      * Hero class so all other types of Heroes can be called.
      */

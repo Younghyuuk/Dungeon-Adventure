@@ -13,7 +13,6 @@ import java.util.Stack;
 public class Dungeon implements Serializable {
 
 
-    private static final long serialversionUID = 1234567L;
     
     /**
      * A 2D array of all the rooms in the dungeon.

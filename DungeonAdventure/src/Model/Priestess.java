@@ -15,7 +15,8 @@ import static javax.imageio.ImageIO.read;
  * extends from the Heroes class.
  */
 public class Priestess extends Heroes {
-    private static final long serialVersionUID = 123456789L;
+
+//    private static final long serialVersionUID = 123456789L;
 
     /**
      * Min heal that priestess can heal for.

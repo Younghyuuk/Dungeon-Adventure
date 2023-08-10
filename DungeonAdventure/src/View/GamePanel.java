@@ -14,9 +14,9 @@ import java.util.List;
 /**
  * This class acts as the GUI for the DungeonAdventure game.
  */
-public class GamePanel extends JPanel implements Runnable, Serializable{
-    @Serial
-    private static final BigInteger serialVersionUID = new BigInteger("501648749617479875");
+public class GamePanel extends JPanel implements Runnable{
+//    @Serial
+//    private static final BigInteger serialVersionUID = new BigInteger("501648749617479875");
 
     /**
      * The actual size of a sprite (16x16).
@@ -75,7 +75,7 @@ public class GamePanel extends JPanel implements Runnable, Serializable{
     /**
      * The object that will check for collisions between the player and everything in the dungeon.
      */
-    private final Collision myCollision = new Collision(this);
+    private transient final Collision myCollision = new Collision(this);
     /**
      * The object that will check for player key inputs to move the character.
      */
@@ -176,7 +176,7 @@ public class GamePanel extends JPanel implements Runnable, Serializable{
      */
 
 
-    public SaveLoad saveLoad = new SaveLoad(this);
+    public transient SaveLoad saveLoad = new SaveLoad(this);
 
     private boolean myAboutState = false;
     /**

@@ -9,7 +9,7 @@ import java.util.List;
  * This class checks if the player collides with any objects within the dungeon.
  */
 public class Collision implements Serializable {
-    private static final long serialVersionUID = 123456327839L;
+
     /**
      * The game panel that the character and entities are drawn on.
      */

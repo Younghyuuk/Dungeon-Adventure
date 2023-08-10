@@ -12,7 +12,6 @@ import java.util.Random;
  */
 public class InitiateEntities implements Serializable {
 
-    private static final long serialVersionUID = 23477567839L;
     /**
      * Represents the index in both the x and y direction of the middle of the room.
      */

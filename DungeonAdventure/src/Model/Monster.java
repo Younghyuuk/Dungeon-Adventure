@@ -13,7 +13,6 @@ import java.util.Random;
  */
 public abstract class Monster extends DungeonCharacter {
 //    private final UUID myId;
-private static final long serialVersionUID = 123477567839L;
     private final double myChanceHeal;
     private final int myMinHeal;
     private final int myMaxHeal;
