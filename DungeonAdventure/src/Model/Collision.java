@@ -13,7 +13,7 @@ public class Collision implements Serializable {
     /**
      * The game panel that the character and entities are drawn on.
      */
-    private GamePanel myGamePanel;
+    private transient GamePanel myGamePanel;
     /**
      * The battle that happens when the character fights a monster.
      */

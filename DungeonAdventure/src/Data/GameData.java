@@ -9,12 +9,10 @@ public class GameData implements Serializable {
     private static final long serialVersionUID = -123456;
 
     //    public Heroes myHero;
-    GamePanel myGp = new GamePanel();
+    transient GamePanel myGp = new GamePanel();
     public int myScreensMiddleX;
 
     public int myScreensMiddleY;
-
-    public Heroes myHero;
     public int myHeroHp;
     public String myHeroName;
     public int myHeroAttackSpeed;

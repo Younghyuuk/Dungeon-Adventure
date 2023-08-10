@@ -4,7 +4,7 @@ import View.GamePanel;
 
 import java.io.*;
 
-public class SaveLoad implements Serializable {
+public class SaveLoad  {
     //    private static final long serialVersionUID = 1234567839L;
     transient GamePanel myGp;
 

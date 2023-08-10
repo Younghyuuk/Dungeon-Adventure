@@ -21,7 +21,7 @@ public abstract class DungeonCharacter implements Serializable {
      * The int myHp that tracks the character health points.
      */
     private int myHp;
-    private int myDefaultHp;
+    private transient int myDefaultHp;
     /**
      * The string name of the character created.
      */
@@ -49,15 +49,15 @@ public abstract class DungeonCharacter implements Serializable {
 
     public transient GamePanel myGamePanel;
     public transient BufferedImage up1, up2, down1, down2, left1, left2, right1, right2;
-    public String myDirection = "down";
-    public int mySpeed;
-    public boolean myCollision = false;
+    public transient String myDirection = "down";
+    public transient int mySpeed;
+    public transient boolean myCollision = false;
     public transient Rectangle mySolidArea;
 
-    public int mySpriteCounter = 0;
-    public int mySpriteNum = 1;
-    public int myWorldXCoordinate;
-    public int myWorldYCoordinate;
+    public transient int mySpriteCounter = 0;
+    public transient int mySpriteNum = 1;
+    public transient int myWorldXCoordinate;
+    public transient int myWorldYCoordinate;
 
     /**
      * The constructor of DungeonCharacter that initializes the hp, name, attack speed,

@@ -10,7 +10,7 @@ import java.sql.*;
 public class MonsterDataBase implements Serializable {
 
     private static final String DB_URL = "jdbc:sqlite:monsters.db";
-    private GamePanel myGamePanel;
+    private transient GamePanel myGamePanel;
 
     public MonsterDataBase(GamePanel theGamePanel) {
         myGamePanel = theGamePanel;
