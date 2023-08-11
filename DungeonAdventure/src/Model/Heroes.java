@@ -20,17 +20,21 @@ import java.io.Serializable;
  */
 public abstract class Heroes extends DungeonCharacter {
 
+<<<<<<< HEAD
 //    private static final long serialversionUID = 123456L;
+=======
+>>>>>>> 0e48ed96ef24b99c1f3a82f7cad96b0773192489
 
+//    private static final long serialVersionUID = 123456789L;
     private int myScreensMiddleX;
     private int myScreensMiddleY;
-    Keyboard myKeyInputs;
+    transient Keyboard myKeyInputs;
     /**
      * The double that gives the chance that the Hero will block.
      */
     private double myBlockChance;
 
-    transient BufferedImage hp0,hp1,hp2,hp3,hp4,hp5,hp6,hp7,hp8,hp9,hp10,hp11,hp12,hp13,hp14,hp15,hp16;
+    public transient BufferedImage hp0,hp1,hp2,hp3,hp4,hp5,hp6,hp7,hp8,hp9,hp10,hp11,hp12,hp13,hp14,hp15,hp16;
 
     /**
      * Heroes constructor that initializes the hp, name, attack speed, min damage, max damage,
@@ -46,7 +50,7 @@ public abstract class Heroes extends DungeonCharacter {
      * @param theGamePanel   the gamepanel of the hero.
      * @param theKeyBoard    the keyboard input of the hero.
      */
-    protected Heroes(int theHp, final String theChName, final int theAttackSpeed, final int theMinDamage, final int theMaxDamage,
+    protected Heroes(final int theHp, final String theChName, final int theAttackSpeed, final int theMinDamage, final int theMaxDamage,
                      final double theHitChance, final double theBlockChance, final GamePanel theGamePanel, final Keyboard theKeyBoard) {
 
         super(theHp, theChName, theAttackSpeed, theMinDamage, theMaxDamage, theHitChance, theGamePanel);

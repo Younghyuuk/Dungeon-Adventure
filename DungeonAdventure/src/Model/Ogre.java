@@ -9,7 +9,6 @@ import static javax.imageio.ImageIO.read;
 
 public class Ogre extends Monster {
 
-
     /**
      * The constructor of Monster that sets up the stats for Ogre class.
      */

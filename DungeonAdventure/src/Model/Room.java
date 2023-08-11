@@ -6,7 +6,6 @@ import java.io.Serializable;
  * This class represents a single, randomly generated, room.
  */
 public class Room implements Serializable {
-    private static final long serialversionUID = -1234567L;
     /**
      * A 2D array of Strings that will represent the room.
      */

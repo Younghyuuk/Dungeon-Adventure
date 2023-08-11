@@ -13,7 +13,9 @@ import static javax.imageio.ImageIO.read;
 /**
  * Thief class which extends from Heroes.
  */
-public class Thief extends Heroes implements Serializable {
+public class Thief extends Heroes {
+
+//    private static final long serialVersionUID = 123456789L;
 
     private static final long serialversionUID = 1234567998L;
 
@@ -71,7 +73,7 @@ public class Thief extends Heroes implements Serializable {
      * @param theKeyboard  keyboard input of character
      */
     public Thief(final GamePanel theGamePanel, final Keyboard theKeyboard) {
-        super(80, NAME, ATTACK_SPEED, MIN_DAMAGE, MAX_DAMAGE, HIT_CHANCE, BLOCK_CHANCE, theGamePanel, theKeyboard);
+        super(80, "Thief", 6, 20, 50, 0.8, 0.7, theGamePanel, theKeyboard);
         getHeroesImage();
     }
 

@@ -4,15 +4,17 @@ import View.GamePanel;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.Serializable;
 
 /**
  * An abstract class representing an item that could appear in a room.
  */
-public abstract class Item {
+public abstract class Item implements Serializable {
+
     /**
      * The game panel to draw the item onto.
      */
-    private GamePanel myGamePanel;
+    private transient GamePanel myGamePanel;
     /**
      * The world-x coordinate of the item.
      */
@@ -28,7 +30,7 @@ public abstract class Item {
     /**
      * The image representing the current item.
      */
-    private BufferedImage myItemImage;
+    private transient BufferedImage myItemImage;
     /**
      * Boolean that determines whether an item has been "found," or not. <br>
      * In other words: has the player collided with the item?

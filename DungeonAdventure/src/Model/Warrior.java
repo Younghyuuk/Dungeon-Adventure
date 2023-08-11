@@ -13,9 +13,9 @@ import static javax.imageio.ImageIO.read;
 /**
  * Warrior class that extends Heroes.
  */
-public class Warrior extends Heroes implements Serializable {
+public class Warrior extends Heroes {
 
-    private static final long serialversionUID = 123456799L;
+
     /**
      * The chance at which Warriors special hits.
      */
@@ -74,9 +74,9 @@ public class Warrior extends Heroes implements Serializable {
      * @param theKeyboard  keyboard input of character
      */
     public Warrior(final GamePanel theGamePanel, final Keyboard theKeyboard) {
-        super(150, NAME, ATTACK_SPEED,
-                MIN_DAMAGE, MAX_DAMAGE,
-                HIT_CHANCE, BLOCK_CHANCE, theGamePanel, theKeyboard);
+        super(150, "Warrior", 4,
+                35, 65,
+                0.8, 0.5, theGamePanel, theKeyboard);
         getHeroesImage();
     }
 

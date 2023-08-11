@@ -1,18 +1,17 @@
 package Control;
 
-import Model.GameData;
 import View.GamePanel;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.io.Serializable;
 
 public class Keyboard implements KeyListener {
+    private static final long serialVersionUID = 123456789L;
     public boolean up;
     public boolean down;
     public boolean left;
     public boolean right;
-    private GamePanel myGamePanel;
+    private final GamePanel myGamePanel;
 
     public Keyboard(GamePanel theGamePanel) {
         myGamePanel = theGamePanel;
@@ -40,7 +39,16 @@ public class Keyboard implements KeyListener {
                     }
                     if(myGamePanel.getMyTitlePage().getMyCommandNum() == 1) {
                         myGamePanel.saveLoad.load();
-                        myGamePanel.setMyGameState(myGamePanel.getMyGameState());
+                        myGamePanel.setMyGameState(2);
+//                        if(myGamePanel.getMyHero().getChName().equals("Thief")) {
+//                            //add in the sprites
+//                            myGamePanel.getMyHero().getHeroesImage();
+//                        } else if(myGamePanel.getMyHero().getChName().equals("Warrior")) {
+////                            myGamePanel.setMyHero(2);
+//                            myGamePanel.getMyHero().getHeroesImage();
+//                        } else {
+//                             myGamePanel.getMyHero().getHeroesImage();
+//                        }
                     }
             }
         } else if (myGamePanel.getMyGameState() == 1) {

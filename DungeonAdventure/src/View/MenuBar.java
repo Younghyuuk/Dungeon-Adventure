@@ -5,7 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.Serializable;
 
-public class MenuBar extends JMenuBar implements Serializable {
+public class MenuBar extends JMenuBar {
 
     /**
      * The command associated with the Quit option.
@@ -14,8 +14,13 @@ public class MenuBar extends JMenuBar implements Serializable {
     /**
      * The command associated with the Save option.
      */
+<<<<<<< HEAD
     public final String SAVE = "Save";
     private final long serialversionUID = -12345678;
+=======
+    public static final String SAVE = "Save";
+
+>>>>>>> 0e48ed96ef24b99c1f3a82f7cad96b0773192489
     private final GamePanel myGamePanel;
 
 

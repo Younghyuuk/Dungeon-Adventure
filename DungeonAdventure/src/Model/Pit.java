@@ -24,7 +24,7 @@ public class Pit extends Item {
     /**
      * The images associated with a 'Pit'.
      */
-    private BufferedImage myPit;
+    private transient BufferedImage myPit;
     /**
      * The amount of damage this pit will cause.
      */
