@@ -15,6 +15,8 @@ import static javax.imageio.ImageIO.read;
  */
 public class Thief extends Heroes implements Serializable {
 
+    private static final long serialversionUID = 1234567998L;
+
     /**
      * The chance at which the surprise attack succeeds.
      */

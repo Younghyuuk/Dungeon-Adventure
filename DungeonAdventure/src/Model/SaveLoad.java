@@ -16,15 +16,16 @@ public class SaveLoad implements Serializable{
         try {
             ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(new File("save.dat")));
             GameData gd = new GameData();
-            gd.myHeroHp = myGp.getMyHero().getHp();
+            gd.myHero = myGp.getMyHero();
+//            gd.myHeroHp = myGp.getMyHero().getHp();
 //            gd.myHeroName = myGp.getMyHero().getChName();
 //            gd.myHeroAttackSpeed = myGp.getMyHero().getAttackSpeed();
 //            gd.myHeroMinDamage = myGp.getMyHero().getMinDamage();
 //            gd.myHeroMaxDamage = myGp.getMyHero().getMaxDamage();
 //            gd.myHeroBlock = myGp.getMyHero().getBlockChance();
 //            gd.myHeroHit = myGp.getMyHero().getHitChance();
-            gd.myScreensMiddleX = myGp.getMyHero().getMyScreensMiddleX();
-            gd.myScreensMiddleY = myGp.getMyHero().getMyScreensMiddleY();
+//            gd.myScreensMiddleX = myGp.getMyHero().getMyScreensMiddleX();
+//            gd.myScreensMiddleY = myGp.getMyHero().getMyScreensMiddleY();
 
             oos.writeObject(gd);
             oos.close();

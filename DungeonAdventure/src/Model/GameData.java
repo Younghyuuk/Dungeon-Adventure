@@ -20,6 +20,7 @@ public class GameData implements Serializable {
     public int myHeroMaxDamage;
     public double myHeroBlock;
     public double myHeroHit;
+    public Heroes myHero;
 
 //    private Dungeon myDungeon;
 //    //    private Heroes myHero;

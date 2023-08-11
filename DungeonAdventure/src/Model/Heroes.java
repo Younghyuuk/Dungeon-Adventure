@@ -18,9 +18,9 @@ import java.io.Serializable;
  * we will be creating 3 other subclasses which extends
  * off of Heroes which will be Priestess, Thief, and Warrior.
  */
-public abstract class Heroes extends DungeonCharacter implements Serializable {
+public abstract class Heroes extends DungeonCharacter {
 
-    private static final long serialversionUID = 123456;
+//    private static final long serialversionUID = 123456L;
 
     private int myScreensMiddleX;
     private int myScreensMiddleY;

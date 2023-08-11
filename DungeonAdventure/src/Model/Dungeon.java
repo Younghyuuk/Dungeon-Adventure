@@ -30,41 +30,41 @@ public class Dungeon implements Serializable {
     /**
      * The file to output the text version of the dungeon to.
      */
-    private static final String TEXT_DUNGEON = "Resources/map/dungeon.txt";
+    private final String TEXT_DUNGEON = "Resources/map/dungeon.txt";
     /**
      * The height, in rooms, of the dungeon (the Y).
      */
-    private static final int DUNGEON_HEIGHT = 7;
+    private final int DUNGEON_HEIGHT = 7;
     /**
      * The width, in rooms, of the dungeon (the X).
      */
-    private static final int DUNGEON_WIDTH = 7;
+    private final int DUNGEON_WIDTH = 7;
     /**
      * The index of the first column in the dungeon.
      */
-    private static final int FIRST_ROOM_COL = 0;
+    private final int FIRST_ROOM_COL = 0;
     /**
      * The index of the last column in the dungeon.
      */
-    private static final int LAST_ROOM_COL = DUNGEON_WIDTH - 1;
+    private final int LAST_ROOM_COL = DUNGEON_WIDTH - 1;
     /**
      * The index of the first row in the dungeon.
      */
-    private static final int FIRST_ROOM_ROW = 0;
+    private final int FIRST_ROOM_ROW = 0;
     /**
      * The index of the last row in the dungeon.
      */
-    private static final int LAST_ROOM_ROW = DUNGEON_HEIGHT - 1;
+    private final int LAST_ROOM_ROW = DUNGEON_HEIGHT - 1;
     /**
      * A direction vector for the columns. <br>
      * Used to traverse in DFS to adjacent cells.
      */
-    private static final int[] DIRECTION_VECTOR_COLUMNS = {-1, 0, 1, 0};
+    private final int[] DIRECTION_VECTOR_COLUMNS = {-1, 0, 1, 0};
     /**
      * A direction vector for the rows. <br>
      * Used to traverse in DFS to adjacent cells.
      */
-    private static final int[] DIRECTION_VECTOR_ROWS = {0, 1, 0, -1};
+    private final int[] DIRECTION_VECTOR_ROWS = {0, 1, 0, -1};
 
     /**
      * Constructs the randomly generated dungeon.

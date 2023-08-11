@@ -10,12 +10,12 @@ public class MenuBar extends JMenuBar implements Serializable {
     /**
      * The command associated with the Quit option.
      */
-    public static final String QUIT = "Quit";
+    public final String QUIT = "Quit";
     /**
      * The command associated with the Save option.
      */
-    public static final String SAVE = "Save";
-    private static final long serialversionUID = -12345678;
+    public final String SAVE = "Save";
+    private final long serialversionUID = -12345678;
     private final GamePanel myGamePanel;
 
 
