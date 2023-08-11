@@ -18,7 +18,7 @@ public class SaveLoad {
             FileOutputStream fos = new FileOutputStream("game.save");
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             GameData gd = new GameData();
-//            gd.myHero = myGp.getMyHero();
+            gd.myHero = myGp.getMyHero();
             gd.myHeroHp = myGp.getMyHero().getHp();
             System.out.println(gd.myHeroHp);
             gd.myHeroName = myGp.getMyHero().getChName();
@@ -43,7 +43,15 @@ public class SaveLoad {
 //            FileInputStream fis = new FileInputStream("game.save");
             ObjectInputStream ois = new ObjectInputStream(new FileInputStream(new File("game.save")));
             GameData gd = (GameData) ois.readObject();
-
+            int num = 0;
+            if(gd.myHero.getChName().equals("Thief")) {
+                num = 1;
+            } else if(gd.myHero.getChName().equals("Warrior")) {
+                num = 2;
+            } else {
+                num = 3;
+            }
+            myGp.setMyHero(num);
             myGp.getMyHero().setHp(gd.myHeroHp);
             myGp.getMyHero().setChName(gd.myHeroName);
             myGp.getMyHero().setAttackSpeed(gd.myHeroAttackSpeed);

@@ -39,9 +39,16 @@ public class Keyboard implements KeyListener {
                     }
                     if(myGamePanel.getMyTitlePage().getMyCommandNum() == 1) {
                         myGamePanel.saveLoad.load();
-                        myGamePanel.getMyHero().getHeroesImage();
                         myGamePanel.setMyGameState(2);
-
+//                        if(myGamePanel.getMyHero().getChName().equals("Thief")) {
+//                            //add in the sprites
+//                            myGamePanel.getMyHero().getHeroesImage();
+//                        } else if(myGamePanel.getMyHero().getChName().equals("Warrior")) {
+////                            myGamePanel.setMyHero(2);
+//                            myGamePanel.getMyHero().getHeroesImage();
+//                        } else {
+//                             myGamePanel.getMyHero().getHeroesImage();
+//                        }
                     }
             }
         } else if (myGamePanel.getMyGameState() == 1) {
