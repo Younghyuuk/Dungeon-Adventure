@@ -12,6 +12,5 @@ public class Main {
             frame.setResizable(false);
             frame.setLocationRelativeTo(null);
 //            MonsterDataBase mdb = new MonsterDataBase(new GamePanel());
-
     }
 }
