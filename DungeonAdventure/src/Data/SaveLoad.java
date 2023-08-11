@@ -18,17 +18,17 @@ public class SaveLoad {
             FileOutputStream fos = new FileOutputStream("game.save");
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             GameData gd = new GameData();
-            gd.myHero = myGp.getMyHero();
-            gd.myHeroHp = myGp.getMyHero().getHp();
-            System.out.println(gd.myHeroHp);
-            gd.myHeroName = myGp.getMyHero().getChName();
-            gd.myHeroAttackSpeed = myGp.getMyHero().getAttackSpeed();
-            gd.myHeroMinDamage = myGp.getMyHero().getMinDamage();
-            gd.myHeroMaxDamage = myGp.getMyHero().getMaxDamage();
-            gd.myHeroHit = myGp.getMyHero().getHitChance();
-            gd.myHeroBlock = myGp.getMyHero().getBlockChance();
-            gd.myScreensMiddleX = myGp.getMyHero().getMyScreensMiddleX();
-            gd.myScreensMiddleY = myGp.getMyHero().getMyScreensMiddleY();
+            gd.setMyHero(myGp.getMyHero());
+            gd.setMyHeroHp(myGp.getMyHero().getHp());
+            System.out.println(gd.getMyHeroHp());
+            gd.setMyHeroName(myGp.getMyHero().getChName());
+            gd.setMyHeroAttackSpeed(myGp.getMyHero().getAttackSpeed());
+            gd.setMyHeroMinDamage(myGp.getMyHero().getMinDamage());
+            gd.setMyHeroMaxDamage(myGp.getMyHero().getMaxDamage());
+            gd.setMyHeroHit(myGp.getMyHero().getHitChance());
+            gd.setMyHeroBlock(myGp.getMyHero().getBlockChance());
+            gd.setMyScreensMiddleX(myGp.getMyHero().getMyScreensMiddleX());
+            gd.setMyScreensMiddleY(myGp.getMyHero().getMyScreensMiddleY());
 
             oos.writeObject(gd);
             oos.close();
@@ -44,23 +44,23 @@ public class SaveLoad {
             ObjectInputStream ois = new ObjectInputStream(new FileInputStream(new File("game.save")));
             GameData gd = (GameData) ois.readObject();
             int num = 0;
-            if(gd.myHero.getChName().equals("Thief")) {
+            if(gd.getMyHero().getChName().equals("Thief")) {
                 num = 1;
-            } else if(gd.myHero.getChName().equals("Warrior")) {
+            } else if(gd.getMyHero().getChName().equals("Warrior")) {
                 num = 2;
             } else {
                 num = 3;
             }
             myGp.setMyHero(num);
-            myGp.getMyHero().setHp(gd.myHeroHp);
-            myGp.getMyHero().setChName(gd.myHeroName);
-            myGp.getMyHero().setAttackSpeed(gd.myHeroAttackSpeed);
-            myGp.getMyHero().setMinDamage(gd.myHeroMinDamage);
-            myGp.getMyHero().setMaxDamage(gd.myHeroMaxDamage);
-            myGp.getMyHero().setBlockChance(gd.myHeroBlock);
-            myGp.getMyHero().setHitChance(gd.myHeroHit);
-            myGp.getMyHero().setMyScreensMiddleX(gd.myScreensMiddleX);
-            myGp.getMyHero().setMyScreensMiddleY(gd.myScreensMiddleY);
+            myGp.getMyHero().setHp(gd.getMyHeroHp());
+            myGp.getMyHero().setChName(gd.getMyHeroName());
+            myGp.getMyHero().setAttackSpeed(gd.getMyHeroAttackSpeed());
+            myGp.getMyHero().setMinDamage(gd.getMyHeroMinDamage());
+            myGp.getMyHero().setMaxDamage(gd.getMyHeroMaxDamage());
+            myGp.getMyHero().setBlockChance(gd.getMyHeroBlock());
+            myGp.getMyHero().setHitChance(gd.getMyHeroHit());
+            myGp.getMyHero().setMyScreensMiddleX(gd.getMyScreensMiddleX());
+            myGp.getMyHero().setMyScreensMiddleY(gd.getMyScreensMiddleY());
 
 //            System.out.println(myGp.toString());
             ois.close();

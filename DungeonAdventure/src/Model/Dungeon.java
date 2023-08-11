@@ -11,9 +11,6 @@ import java.util.Stack;
  * This class represents the randomly generated dungeon.
  */
 public class Dungeon implements Serializable {
-
-
-    
     /**
      * A 2D array of all the rooms in the dungeon.
      */

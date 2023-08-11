@@ -25,22 +25,18 @@ public abstract class DungeonCharacter implements Serializable {
      * The string name of the character created.
      */
     private String myChName;
-
     /**
      * The attack speed of the character.
      */
     private int myAttackSpeed;
-
     /**
      * The minimum amount of damage a character can do to an enemy.
      */
     private int myMinDamage;
-
     /**
      * The max amount of damage a character can do to an enemy.
      */
     private int myMaxDamage;
-
     /**
      * The chance that the character has to hitting its target a double.
      */
