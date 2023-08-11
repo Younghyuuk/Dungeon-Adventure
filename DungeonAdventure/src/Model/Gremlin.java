@@ -9,7 +9,7 @@ import java.util.Objects;
 import static javax.imageio.ImageIO.read;
 
 public class Gremlin extends Monster {
-    private static final long serialVersionUID = 123456789L;
+
 
 
     /**
