@@ -40,7 +40,8 @@ public class SaveLoad {
 
     public void load() {
         try {
-            ObjectInputStream ois = new ObjectInputStream(new FileInputStream(new File("save.dat")));
+//            FileInputStream fis = new FileInputStream("game.save");
+            ObjectInputStream ois = new ObjectInputStream(new FileInputStream(new File("game.save")));
             GameData gd = (GameData) ois.readObject();
 
             myGp.getMyHero().setHp(gd.myHeroHp);

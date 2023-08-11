@@ -39,7 +39,7 @@ public class Keyboard implements KeyListener {
                     }
                     if(myGamePanel.getMyTitlePage().getMyCommandNum() == 1) {
                         myGamePanel.saveLoad.load();
-                        myGamePanel.setMyGameState(myGamePanel.getMyGameState());
+                        myGamePanel.setMyGameState(1);
                     }
             }
         } else if (myGamePanel.getMyGameState() == 1) {
