@@ -47,17 +47,17 @@ public class GamePanel extends JPanel implements Runnable {
     /**
      * The dungeon object that the game panel will use to load the game correctly.
      */
-    private transient Dungeon myDungeon = new Dungeon();
+    private Dungeon myDungeon = new Dungeon();
     /**
      * The width of the game column-wise. <br>
      * Determined by the dungeon width (the amount of rooms in each column) * the width of a room.
      */
-    private transient final int myWorldCol = myDungeon.getDungeonWidth() * myDungeon.getRooms()[0][0].getRoomWidth();
+    private final int myWorldCol = myDungeon.getDungeonWidth() * myDungeon.getRooms()[0][0].getRoomWidth();
     /**
      * The height of the game row-wise. <br>
      * Determined by the dungeon height (the amount of rooms in each row) * the height of a room.
      */
-    private transient final int myWorldRow = myDungeon.getDungeonHeight() * myDungeon.getRooms()[0][0].getRoomHeight();
+    private final int myWorldRow = myDungeon.getDungeonHeight() * myDungeon.getRooms()[0][0].getRoomHeight();
     /**
      * The object that will manage all the background tiles in the dungeon (the walls, floor, and doors
      */
@@ -102,27 +102,27 @@ public class GamePanel extends JPanel implements Runnable {
      * Stores every move made by the character and monster as well as their health
      * and if their moves landed or not.
      */
-    private transient String[] myBattleLog;
+    private String[] myBattleLog;
     /**
      * The amount of pillars that the player has picked up.
      */
-    private transient int winCount = 0;
+    private int winCount = 0;
     /**
      * The object that initiates all the entities within the dungeon.
      */
-    transient InitiateEntities myIE = new InitiateEntities(this);
+    InitiateEntities myIE = new InitiateEntities(this);
     /**
      * The list of all pillars stored within the game.
      */
-    transient List<FourPillars> myPillarArray = myIE.getMyFourPillarsArray();
+    List<FourPillars> myPillarArray = myIE.getMyFourPillarsArray();
     /**
      * The list of all the monsters stored within the game.
      */
-    transient List<Monster> myMonsterArray = myIE.getMyMonsterArray();
+    List<Monster> myMonsterArray = myIE.getMyMonsterArray();
     /**
      * A list of every item contained within the dungeon.
      */
-    private transient List<Item> myItemArray = myIE.getMyItemArray();
+    private List<Item> myItemArray = myIE.getMyItemArray();
     /**
      * The hero the player will play as.
      */
@@ -130,7 +130,7 @@ public class GamePanel extends JPanel implements Runnable {
     /**
      * The specific class the player picked.
      */
-    private transient int myHeroNum;
+    private int myHeroNum;
     /**
      * Represents the state that the game is in. <br>
      * 0 - Title page <br>
@@ -140,7 +140,7 @@ public class GamePanel extends JPanel implements Runnable {
      * 4 - Game over <br>
      * 5 - Game won
      */
-    private transient int myGameState;
+    private int myGameState;
     /**
      * Number representing that the game is in the title page state of the game.
      */
