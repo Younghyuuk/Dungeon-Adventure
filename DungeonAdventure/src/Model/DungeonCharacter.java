@@ -51,8 +51,8 @@ public abstract class DungeonCharacter implements Serializable {
 
     public transient int mySpriteCounter = 0;
     public transient int mySpriteNum = 1;
-    public transient int myWorldXCoordinate;
-    public transient int myWorldYCoordinate;
+    public int myWorldXCoordinate;
+    public int myWorldYCoordinate;
 
     /**
      * The constructor of DungeonCharacter that initializes the hp, name, attack speed,

@@ -19,7 +19,7 @@ public class Dungeon implements Serializable {
      * A 2D array of all the visited rooms in the dungeon. <br>
      * A cell in the array that is true means that we have visited that room.
      */
-    private Boolean[][] myVisited;
+    private boolean[][] myVisited;
     /**
      * A 2D array that contains the doors for each room.
      */
@@ -70,7 +70,7 @@ public class Dungeon implements Serializable {
         // Set up the size of the dungeon
         myRooms = new Room[DUNGEON_HEIGHT][DUNGEON_WIDTH];
         // And the array of the visited rooms
-        myVisited = new Boolean[DUNGEON_HEIGHT][DUNGEON_WIDTH];
+        myVisited = new boolean[DUNGEON_HEIGHT][DUNGEON_WIDTH];
         // Then we need to initially populate 'myVisited'
         setMyVisited();
         // Then we need to populate the array of door types for each room
@@ -496,15 +496,6 @@ public class Dungeon implements Serializable {
     }
 
     /**
-     * Get method to get the array that represents the dungeon.
-     *
-     * @return Returns the 'myRooms' 2D Room array.
-     */
-    public Room[][] getRooms(){
-        return myRooms;
-    }
-
-    /**
      * Uses 'toString' to create a text representation of the dungeon
      * and then outputs that to a text file.
      *
@@ -519,17 +510,6 @@ public class Dungeon implements Serializable {
         } catch (IOException e) {
             System.err.println("An error occurred when printing to output file: " + e.getMessage());
         }
-    }
-
-    /**
-     * Get method to check if a given room has already been visited.
-     *
-     * @param theRow The row the room is stored in.
-     * @param theCol The column the room is stored in.
-     * @return Returns whether the room has been visited.
-     */
-    public boolean getIfVisited(final int theRow, final int theCol) {
-        return myVisited[theRow][theCol];
     }
 
     /**
@@ -569,6 +549,35 @@ public class Dungeon implements Serializable {
         }
 
         return sb.toString();
+    }
+
+    /**
+     * Get method to check if a given room has already been visited.
+     *
+     * @param theRow The row the room is stored in.
+     * @param theCol The column the room is stored in.
+     * @return Returns whether the room has been visited.
+     */
+    public boolean getIfVisited(final int theRow, final int theCol) {
+        return myVisited[theRow][theCol];
+    }
+
+    /**
+     * Get method to get the array that represents the dungeon.
+     *
+     * @return The 'myRooms' 2D Room array.
+     */
+    public Room[][] getRooms(){
+        return myRooms;
+    }
+
+    /**
+     * Get method to get the array that represents all the visited rooms in the dungeon.
+     *
+     * @return The 2D array of visited rooms in the dungeon.
+     */
+    public boolean[][] getVisitedRooms() {
+        return myVisited;
     }
 
     /**

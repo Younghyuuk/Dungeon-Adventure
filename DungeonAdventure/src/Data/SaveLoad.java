@@ -18,6 +18,7 @@ public class SaveLoad {
             FileOutputStream fos = new FileOutputStream("game.save");
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             GameData gd = new GameData();
+            // Save the hero data
             gd.setMyHero(myGp.getMyHero());
             gd.setMyHeroHp(myGp.getMyHero().getHp());
             System.out.println(gd.getMyHeroHp());
@@ -29,6 +30,12 @@ public class SaveLoad {
             gd.setMyHeroBlock(myGp.getMyHero().getBlockChance());
             gd.setMyScreensMiddleX(myGp.getMyHero().getMyScreensMiddleX());
             gd.setMyScreensMiddleY(myGp.getMyHero().getMyScreensMiddleY());
+            gd.setMyWorldX(myGp.getMyHero().getMyWorldXCoordinate());
+            gd.setMyWorldY(myGp.getMyHero().getMyWorldYCoordinate());
+            // Save the dungeon data
+            gd.setMyDungeon(myGp.getMyDungeon());
+//            gd.setMyDungeonRooms(myGp.getMyDungeon().getRooms());
+//            gd.setMyVisitedRooms(myGp.getMyDungeon().getVisitedRooms());
 
             oos.writeObject(gd);
             oos.close();
@@ -51,6 +58,7 @@ public class SaveLoad {
             } else {
                 num = 3;
             }
+            // Load in the hero data
             myGp.setMyHero(num);
             myGp.getMyHero().setHp(gd.getMyHeroHp());
             myGp.getMyHero().setChName(gd.getMyHeroName());
@@ -61,6 +69,10 @@ public class SaveLoad {
             myGp.getMyHero().setHitChance(gd.getMyHeroHit());
             myGp.getMyHero().setMyScreensMiddleX(gd.getMyScreensMiddleX());
             myGp.getMyHero().setMyScreensMiddleY(gd.getMyScreensMiddleY());
+            myGp.getMyHero().setMyWorldXCoordinate(gd.getMyWorldX());
+            myGp.getMyHero().setMyWorldYCoordinate(gd.getMyWorldY());
+            // Load in the dungeon data
+            myGp.setMyDungeon(gd.getMyDungeon());
 
 //            System.out.println(myGp.toString());
             ois.close();

@@ -2,6 +2,7 @@ package Data;
 
 import Model.Dungeon;
 import Model.Heroes;
+import Model.Room;
 import View.GamePanel;
 
 import java.io.*;
@@ -36,6 +37,14 @@ public class GameData implements Serializable {
      */
     private int myScreensMiddleY;
     /**
+     * The world x-coordinate of the hero.
+     */
+    private int myWorldX;
+    /**
+     * The world y-coordinate of the hero.
+     */
+    private int myWorldY;
+    /**
      * The HP of the specific hero to save.
      */
     private int myHeroHp;
@@ -64,6 +73,15 @@ public class GameData implements Serializable {
      */
     private double myHeroHit;
 
+//    /**
+//     * The 2D array of rooms that makes up the dungeon.
+//     */
+//    private Room[][] myDungeonRooms;
+//    /**
+//     * The 2D boolean array that represents all the visited rooms in the dungeon.
+//     */
+//    private boolean[][] myVisitedRooms;
+
     /**
      * Constructs the game data that will be saved.
      */
@@ -74,10 +92,19 @@ public class GameData implements Serializable {
     /**
      * Gets the game panel associated with this object.
      *
-     * @return The game panel connected to this class.
+     * @return The game panel to save.
      */
     public GamePanel getMyGp() {
         return myGp;
+    }
+
+    /**
+     * Gets the dungeon associated with this object.
+     *
+     * @return The dungeon to save.
+     */
+    public Dungeon getMyDungeon() {
+        return myDungeon;
     }
 
     /**
@@ -171,6 +198,51 @@ public class GameData implements Serializable {
     }
 
     /**
+     * Gets the world x-coordinate of the player.
+     *
+     * @return The world-x coordinate of the player.
+     */
+    public int getMyWorldX() {
+        return myWorldX;
+    }
+
+    /**
+     * Gets the world y-coordinate of the player.
+     *
+     * @return The world-y coordinate of the player.
+     */
+    public int getMyWorldY() {
+        return myWorldY;
+    }
+
+//    /**
+//     * Gets the 2D room array that represents the dungeon.
+//     *
+//     * @return The 2D array of 'Room' objects.
+//     */
+//    public Room[][] getMyDungeonRooms() {
+//        return myDungeonRooms;
+//    }
+//
+//    /**
+//     * Gets the 2D boolean array that represents all the visited rooms in the dungeon.
+//     *
+//     * @return The 2D array of visited rooms.
+//     */
+//    public boolean[][] getMyVisitedRooms() {
+//        return myVisitedRooms;
+//    }
+
+    /**
+     * Sets the dungeon to the specified 'Dungeon' object.
+     *
+     * @param theDungeon The dungeon to set 'myDungeon' to.
+     */
+    public void setMyDungeon(final Dungeon theDungeon) {
+        myDungeon = theDungeon;
+    }
+
+    /**
      * Sets the hero to the specified 'Heroes' object.
      *
      * @param theHero The hero to set 'myHero' to.
@@ -259,6 +331,43 @@ public class GameData implements Serializable {
     public void setMyScreensMiddleY(final int theScreenMiddleY) {
         myScreensMiddleY = theScreenMiddleY;
     }
+
+    /**
+     * Sets the world x-coordinate of the player.
+     *
+     * @param theWorldX The world x to set as the new x position for the player.
+     */
+    public void setMyWorldX(final int theWorldX) {
+        myWorldX = theWorldX;
+    }
+
+    /**
+     * Sets the world y-coordinate of the player.
+     *
+     * @param theWorldY The world y to set as the new y position for the player.
+     */
+    public void setMyWorldY(final int theWorldY) {
+        myWorldY = theWorldY;
+    }
+
+
+//    /**
+//     * Sets the 2D array of rooms.
+//     *
+//     * @param theDungeonRooms The 2D array of rooms to set as the new 2D 'Room' array.
+//     */
+//    public void setMyDungeonRooms(final Room[][] theDungeonRooms) {
+//        myDungeonRooms = theDungeonRooms;
+//    }
+//
+//    /**
+//     * Sets the 2D array of visited rooms.
+//     *
+//     * @param theVisitedRooms The input visited rooms array to set as the new visited rooms array.
+//     */
+//    public void setMyVisitedRooms(final boolean[][] theVisitedRooms) {
+//        myVisitedRooms = theVisitedRooms;
+//    }
 
 //    private Dungeon myDungeon;
 //    //    private Heroes myHero;

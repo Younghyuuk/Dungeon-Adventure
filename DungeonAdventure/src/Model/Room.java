@@ -136,16 +136,6 @@ public class Room implements Serializable {
     }
 
     /**
-     * Get method to get the amount of health the health potion will give.
-     *
-     * @return Returns the amount of health obtainable from this room's health potion
-     * (if it has one).
-     */
-    public int getHealth() {
-        return myHealth;
-    }
-
-    /**
      * Get method to get the door types of a certain room in the dungeon.
      *
      * @param theRow The row of this room in 'Dungeon'.
