@@ -16,11 +16,9 @@ import java.io.Serializable;
 
 public abstract class DungeonCharacter implements Serializable {
 
-<<<<<<< HEAD
 //    private static final long serialversionUID = 12345L;
 
-=======
->>>>>>> 0e48ed96ef24b99c1f3a82f7cad96b0773192489
+
     /**
      * The int myHp that tracks the character health points.
      */
@@ -53,15 +51,10 @@ public abstract class DungeonCharacter implements Serializable {
 
     public transient GamePanel myGamePanel;
     public transient BufferedImage up1, up2, down1, down2, left1, left2, right1, right2;
-<<<<<<< HEAD
     public String myDirection = "down";
     public int mySpeed;
     public boolean myCollision = false;
-=======
-    public transient String myDirection = "down";
-    public transient int mySpeed;
-    public transient boolean myCollision = false;
->>>>>>> 0e48ed96ef24b99c1f3a82f7cad96b0773192489
+
     public transient Rectangle mySolidArea;
 
     public transient int mySpriteCounter = 0;

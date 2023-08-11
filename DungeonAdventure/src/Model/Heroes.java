@@ -20,10 +20,8 @@ import java.io.Serializable;
  */
 public abstract class Heroes extends DungeonCharacter {
 
-<<<<<<< HEAD
 //    private static final long serialversionUID = 123456L;
-=======
->>>>>>> 0e48ed96ef24b99c1f3a82f7cad96b0773192489
+
 
 //    private static final long serialVersionUID = 123456789L;
     private int myScreensMiddleX;
