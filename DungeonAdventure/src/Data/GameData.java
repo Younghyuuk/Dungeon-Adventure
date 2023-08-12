@@ -1,11 +1,10 @@
 package Data;
 
-import Model.Dungeon;
-import Model.Heroes;
-import Model.Room;
+import Model.*;
 import View.GamePanel;
 
 import java.io.*;
+import java.util.List;
 
 /**
  * This class saves all the game data.
@@ -16,18 +15,11 @@ public class GameData implements Serializable {
      */
     @Serial
     private static final long serialVersionUID = 123456789L;
+    // Hero data
     /**
      * The hero object to save.
      */
     private Heroes myHero;
-    /**
-     * The dungeon object to save.
-     */
-    private Dungeon myDungeon;
-    /**
-     * The game panel object that contains all the game data.
-     */
-    private transient GamePanel myGp;
     /**
      * The middle x-coordinate of the screen.
      */
@@ -72,15 +64,25 @@ public class GameData implements Serializable {
      * The chance that a hero's attack hits.
      */
     private double myHeroHit;
+    // Dungeon data
+    /**
+     * The dungeon object to save.
+     */
+    private Dungeon myDungeon;
+    // Game Panel data
+    /**
+     * The game panel object that contains all the game data.
+     */
+    private GamePanel myGp;
+    /**
+     * The list of every monster.
+     */
+    private List<Monster> myMonsters;
+    /**
+     * The list of every item.
+     */
+    private List<Item> myItems;
 
-//    /**
-//     * The 2D array of rooms that makes up the dungeon.
-//     */
-//    private Room[][] myDungeonRooms;
-//    /**
-//     * The 2D boolean array that represents all the visited rooms in the dungeon.
-//     */
-//    private boolean[][] myVisitedRooms;
 
     /**
      * Constructs the game data that will be saved.
@@ -215,23 +217,23 @@ public class GameData implements Serializable {
         return myWorldY;
     }
 
-//    /**
-//     * Gets the 2D room array that represents the dungeon.
-//     *
-//     * @return The 2D array of 'Room' objects.
-//     */
-//    public Room[][] getMyDungeonRooms() {
-//        return myDungeonRooms;
-//    }
-//
-//    /**
-//     * Gets the 2D boolean array that represents all the visited rooms in the dungeon.
-//     *
-//     * @return The 2D array of visited rooms.
-//     */
-//    public boolean[][] getMyVisitedRooms() {
-//        return myVisitedRooms;
-//    }
+    /**
+     * Gets the list containing every monster in the dungeon.
+     *
+     * @return The list of all monsters in the dungeon.
+     */
+    public List<Monster> getMyMonsters() {
+        return myMonsters;
+    }
+
+    /**
+     * Gets the list containing every item in the dungeon.
+     *
+     * @return The list of all items in the dungeon.
+     */
+    public List<Item> getMyItems() {
+        return myItems;
+    }
 
     /**
      * Sets the dungeon to the specified 'Dungeon' object.
@@ -350,29 +352,31 @@ public class GameData implements Serializable {
         myWorldY = theWorldY;
     }
 
+    /**
+     * Sets the GP object.
+     *
+     * @param theGP The game panel to use to load the game.
+     */
+    public void setMyGp(final GamePanel theGP) {
+        myGp = theGP;
+    }
 
-//    /**
-//     * Sets the 2D array of rooms.
-//     *
-//     * @param theDungeonRooms The 2D array of rooms to set as the new 2D 'Room' array.
-//     */
-//    public void setMyDungeonRooms(final Room[][] theDungeonRooms) {
-//        myDungeonRooms = theDungeonRooms;
-//    }
-//
-//    /**
-//     * Sets the 2D array of visited rooms.
-//     *
-//     * @param theVisitedRooms The input visited rooms array to set as the new visited rooms array.
-//     */
-//    public void setMyVisitedRooms(final boolean[][] theVisitedRooms) {
-//        myVisitedRooms = theVisitedRooms;
-//    }
+    /**
+     * Sets the list containing all the monsters in the dungeon.
+     *
+     * @param theMonsters The monster list to save/load.
+     */
+    public void setMyMonsters(final List<Monster> theMonsters) {
+        myMonsters = theMonsters;
+    }
 
-//    private Dungeon myDungeon;
-//    //    private Heroes myHero;
-//    private int myGameState;
-
-
+    /**
+     * Sets the list containing all the items in the dungeon.
+     *
+     * @param theItems The item list to save/load.
+     */
+    public void setMyItems(final List<Item> theItems) {
+        myItems = theItems;
+    }
 }
 

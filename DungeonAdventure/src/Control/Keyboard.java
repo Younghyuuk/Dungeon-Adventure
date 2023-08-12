@@ -6,7 +6,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class Keyboard implements KeyListener {
-    private static final long serialVersionUID = 123456789L;
     public boolean up;
     public boolean down;
     public boolean left;

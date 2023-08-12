@@ -4,10 +4,16 @@ package Model;
 import View.GamePanel;
 import org.sqlite.SQLiteDataSource;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.sql.*;
 
 public class MonsterDataBase implements Serializable {
+    /**
+     * The serial ID associated with this 'GameData' object.
+     */
+    @Serial
+    private static final long serialVersionUID = 123456789L;
 
     private static final String DB_URL = "jdbc:sqlite:monsters.db";
     private transient GamePanel myGamePanel;

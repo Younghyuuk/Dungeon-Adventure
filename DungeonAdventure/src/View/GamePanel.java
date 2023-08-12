@@ -6,12 +6,20 @@ import Model.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.Serial;
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * This class acts as the GUI for the DungeonAdventure game.
  */
-public class GamePanel extends JPanel implements Runnable {
+public class GamePanel extends JPanel implements Runnable, Serializable {
+    /**
+     * The serial ID associated with this 'GameData' object.
+     */
+    @Serial
+    private static final long serialVersionUID = 123456789L;
     /**
      * The actual size of a sprite (16x16).
      */
@@ -23,23 +31,23 @@ public class GamePanel extends JPanel implements Runnable {
     /**
      * The size we want the sprites to be to fit the screen.
      */
-    private transient final int mySpriteSize = ORIGINAL_SPRITE_SIZE * SCALE;
+    private final int mySpriteSize = ORIGINAL_SPRITE_SIZE * SCALE;
     /**
      * The amount of tiles to fit into a row of the screen.
      */
-    private transient final int myMaxScreenRow = 12;
+    private final int myMaxScreenRow = 12;
     /**
      * The amount of tiles to fit into a column of the screen.
      */
-    private transient final int myMaxScreenCol = 16;
+    private final int myMaxScreenCol = 16;
     /**
      * The width of the screen based on the tile size and the max amount of tiles in a column.
      */
-    private transient final int myScreenWidth = myMaxScreenCol * mySpriteSize;
+    private final int myScreenWidth = myMaxScreenCol * mySpriteSize;
     /**
      * The height of the screen based on the tile size and the max amount of tiles in a row.
      */
-    private transient final int myScreenHeight = myMaxScreenRow * mySpriteSize;
+    private final int myScreenHeight = myMaxScreenRow * mySpriteSize;
     /**
      * The amount of frames per second this game will have.
      */
@@ -65,11 +73,11 @@ public class GamePanel extends JPanel implements Runnable {
     /**
      * The thread to use to run the game.
      */
-    private transient final Thread gameThread = new Thread(this);
+    private final transient Thread gameThread = new Thread(this);
     /**
      * The object that will check for collisions between the player and everything in the dungeon.
      */
-    private transient final Collision myCollision = new Collision(this);
+    private final Collision myCollision = new Collision(this);
     /**
      * The object that will check for player key inputs to move the character.
      */
@@ -168,11 +176,10 @@ public class GamePanel extends JPanel implements Runnable {
     /**
      * Boolean representing whether the player is looking at the about section of the game.
      */
-
+    private boolean myAboutState = false;
 
     public transient SaveLoad saveLoad = new SaveLoad(this);
 
-    private transient boolean myAboutState = false;
 
     /**
      * Creates and sets up the game panel.
@@ -284,6 +291,14 @@ public class GamePanel extends JPanel implements Runnable {
      */
     public void setMyDungeon(Dungeon theDungeon) {
         myDungeon = theDungeon;
+    }
+
+    public void setMonsterList(final List<Monster> theMonsterList) {
+        myMonsterArray = theMonsterList;
+    }
+
+    public void setItemList(final List<Item> theItemList) {
+        myItemArray = theItemList;
     }
 
     /**

@@ -4,6 +4,7 @@ import View.GamePanel;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.Serial;
 import java.io.Serializable;
 
 /**
@@ -15,7 +16,11 @@ import java.io.Serializable;
  */
 
 public abstract class DungeonCharacter implements Serializable {
-
+    /**
+     * The serial ID associated with this 'GameData' object.
+     */
+    @Serial
+    private static final long serialVersionUID = 123456789L;
     /**
      * The int myHp that tracks the character health points.
      */
