@@ -76,6 +76,8 @@ public class GameData implements Serializable {
     private Room[][] myRooms;
     private int[][] myDoors;
 
+    private String myTextDungeon;
+
 //    /**
 //     * The 2D array of rooms that makes up the dungeon.
 //     */
@@ -243,6 +245,13 @@ public class GameData implements Serializable {
         return myDoors;
     }
 
+    public String getTextDungeon() {
+        return myTextDungeon;
+    }
+
+    public void setTextDungeon(String theTextDungeon) {
+        myTextDungeon = theTextDungeon;
+    }
 
     /**
      * Sets the dungeon to the specified 'Dungeon' object.

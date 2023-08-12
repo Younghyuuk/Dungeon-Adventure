@@ -11,6 +11,8 @@ import java.util.Stack;
  * This class represents the randomly generated dungeon.
  */
 public class Dungeon implements Serializable {
+    private static final long serialversionUID = 12345L;
+
     /**
      * A 2D array of all the rooms in the dungeon.
      */
@@ -27,7 +29,7 @@ public class Dungeon implements Serializable {
     /**
      * The file to output the text version of the dungeon to.
      */
-    private final String TEXT_DUNGEON = "Resources/map/dungeon.txt";
+    private String TEXT_DUNGEON = "Resources/map/dungeon.txt";
     /**
      * The height, in rooms, of the dungeon (the Y).
      */
@@ -225,6 +227,9 @@ public class Dungeon implements Serializable {
         myDoors = theDoors;
     }
 
+    public void setTextDungeon(String theTextDungeon) {
+        TEXT_DUNGEON = theTextDungeon;
+    }
     /**
      * Helper method used by 'connectRooms' to check if two rooms are connected or not.
      *
@@ -573,6 +578,10 @@ public class Dungeon implements Serializable {
      */
     public Room[][] getRooms(){
         return myRooms;
+    }
+
+    public String getTEXT_DUNGEON() {
+        return TEXT_DUNGEON;
     }
 
     public int[][] getDoors() {
