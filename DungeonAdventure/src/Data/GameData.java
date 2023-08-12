@@ -76,6 +76,9 @@ public class GameData implements Serializable {
     private Room[][] myRooms;
     private int[][] myDoors;
 
+    private int myDungeonH;
+    private int myDungeonW;
+
     private String myTextDungeon;
 
 //    /**
@@ -90,8 +93,8 @@ public class GameData implements Serializable {
     /**
      * Constructs the game data that will be saved.
      */
-    public GameData() {
-        myGp = new GamePanel();
+    public GameData(GamePanel theGp) {
+        myGp = theGp;
     }
 
     /**
@@ -248,6 +251,22 @@ public class GameData implements Serializable {
     public String getTextDungeon() {
         return myTextDungeon;
     }
+    public int getMyDungeonH() {
+        return myDungeonH;
+    }
+
+    public int getMyDungeonW() {
+        return myDungeonW;
+    }
+
+    public void setDungeonH(int theDungeonH) {
+        myDungeonH = theDungeonH;
+    }
+
+    public void setDungeonW(int theDungeonW) {
+        myDungeonW = theDungeonW;
+    }
+
 
     public void setTextDungeon(String theTextDungeon) {
         myTextDungeon = theTextDungeon;

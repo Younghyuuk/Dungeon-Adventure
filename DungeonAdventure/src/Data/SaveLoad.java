@@ -3,6 +3,9 @@ package Data;
 import View.GamePanel;
 
 import java.io.*;
+import java.util.Objects;
+
+import static javax.imageio.ImageIO.read;
 
 public class SaveLoad {
     private static final long serialVersionUID = 123456789L;
@@ -17,7 +20,7 @@ public class SaveLoad {
         try {
             FileOutputStream fos = new FileOutputStream("game.save");
             ObjectOutputStream oos = new ObjectOutputStream(fos);
-            GameData gd = new GameData();
+            GameData gd = new GameData(myGp);
             // Save the hero data
             gd.setMyHero(myGp.getMyHero());
             gd.setMyHeroHp(myGp.getMyHero().getHp());
@@ -35,10 +38,12 @@ public class SaveLoad {
             // Save the dungeon data
 //            gd.setMyRooms(myGp.getMyDungeon().getRooms());
 //            gd.setMyDoors(myGp.getMyDungeon().getRooms());
-            gd.setMyDungeon(myGp.getMyDungeon());
-            gd.setTextDungeon(myGp.getMyDungeon().getTEXT_DUNGEON());
+//            gd.setMyDungeon(myGp.getMyDungeon());
+//            gd.setTextDungeon(myGp.getMyDungeon().getTEXT_DUNGEON());
+            gd.setTextDungeon("/map/dungeon.txt");
+//            gd.setDungeonH(myGp.getMyDungeon().getDungeonHeight());
+//            gd.setDungeonH(myGp.getMyDungeon().getDungeonWidth());
 
-            gd.setDoors(myGp.getMyDungeon().getDoors());
 //            gd.setMyDungeonRooms(myGp.getMyDungeon().getRooms());
 //            gd.setMyVisitedRooms(myGp.getMyDungeon().getVisitedRooms());
 
@@ -78,7 +83,7 @@ public class SaveLoad {
             myGp.getMyHero().setMyWorldYCoordinate(gd.getMyWorldY());
             // Load in the dungeon data
 //            myGp.getMyDungeon().setDoors(gd.getDoors());
-            myGp.setMyDungeon(gd.getMyDungeon());
+//            myGp.setMyDungeon(gd.getMyDungeon());
             myGp.getMyDungeon().setTextDungeon(gd.getTextDungeon());
 //            myGp.setMyDungeon(gd.getMyDungeon());
 //            myGp.getMyDungeon().setDoors(gd.getMyDoors());
