@@ -73,6 +73,9 @@ public class GameData implements Serializable {
      */
     private double myHeroHit;
 
+    private Room[][] myRooms;
+    private int[][] myDoors;
+
 //    /**
 //     * The 2D array of rooms that makes up the dungeon.
 //     */
@@ -105,6 +108,10 @@ public class GameData implements Serializable {
      */
     public Dungeon getMyDungeon() {
         return myDungeon;
+    }
+
+    public Room[][] getMyRooms() {
+        return myRooms;
     }
 
     /**
@@ -232,6 +239,10 @@ public class GameData implements Serializable {
 //    public boolean[][] getMyVisitedRooms() {
 //        return myVisitedRooms;
 //    }
+    public int[][] getDoors() {
+        return myDoors;
+    }
+
 
     /**
      * Sets the dungeon to the specified 'Dungeon' object.
@@ -240,6 +251,13 @@ public class GameData implements Serializable {
      */
     public void setMyDungeon(final Dungeon theDungeon) {
         myDungeon = theDungeon;
+    }
+
+    public void setDoors(int[][] theDoors) {
+        myDoors = theDoors;
+    }
+    public void setRooms(Room[][] theRooms) {
+        myRooms = theRooms;
     }
 
     /**

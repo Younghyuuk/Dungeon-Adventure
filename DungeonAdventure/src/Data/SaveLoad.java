@@ -21,7 +21,7 @@ public class SaveLoad {
             // Save the hero data
             gd.setMyHero(myGp.getMyHero());
             gd.setMyHeroHp(myGp.getMyHero().getHp());
-            System.out.println(gd.getMyHeroHp());
+//            System.out.println(gd.getMyHeroHp());
             gd.setMyHeroName(myGp.getMyHero().getChName());
             gd.setMyHeroAttackSpeed(myGp.getMyHero().getAttackSpeed());
             gd.setMyHeroMinDamage(myGp.getMyHero().getMinDamage());
@@ -33,7 +33,10 @@ public class SaveLoad {
             gd.setMyWorldX(myGp.getMyHero().getMyWorldXCoordinate());
             gd.setMyWorldY(myGp.getMyHero().getMyWorldYCoordinate());
             // Save the dungeon data
-            gd.setMyDungeon(myGp.getMyDungeon());
+//            gd.setMyRooms(myGp.getMyDungeon().getRooms());
+//            gd.setMyDoors(myGp.getMyDungeon().getRooms());
+            gd.setDoors(myGp.getMyDungeon().getDoors());
+
 //            gd.setMyDungeonRooms(myGp.getMyDungeon().getRooms());
 //            gd.setMyVisitedRooms(myGp.getMyDungeon().getVisitedRooms());
 
@@ -72,7 +75,10 @@ public class SaveLoad {
             myGp.getMyHero().setMyWorldXCoordinate(gd.getMyWorldX());
             myGp.getMyHero().setMyWorldYCoordinate(gd.getMyWorldY());
             // Load in the dungeon data
-            myGp.setMyDungeon(gd.getMyDungeon());
+            myGp.getMyDungeon().setDoors(gd.getDoors());
+//            myGp.setMyDungeon(gd.getMyDungeon());
+//            myGp.getMyDungeon().setDoors(gd.getMyDoors());
+
 
 //            System.out.println(myGp.toString());
             ois.close();

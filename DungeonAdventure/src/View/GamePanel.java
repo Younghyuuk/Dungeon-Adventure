@@ -48,6 +48,7 @@ public class GamePanel extends JPanel implements Runnable {
      * The dungeon object that the game panel will use to load the game correctly.
      */
     private Dungeon myDungeon = new Dungeon();
+
     /**
      * The width of the game column-wise. <br>
      * Determined by the dungeon width (the amount of rooms in each column) * the width of a room.
@@ -285,6 +286,7 @@ public class GamePanel extends JPanel implements Runnable {
     public void setMyDungeon(Dungeon theDungeon) {
         myDungeon = theDungeon;
     }
+
 
     /**
      * Sets the current game state.

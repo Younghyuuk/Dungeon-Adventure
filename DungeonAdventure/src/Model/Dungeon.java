@@ -221,6 +221,10 @@ public class Dungeon implements Serializable {
         }
     }
 
+    public void setDoors(int[][] theDoors) {
+        myDoors = theDoors;
+    }
+
     /**
      * Helper method used by 'connectRooms' to check if two rooms are connected or not.
      *
@@ -569,6 +573,10 @@ public class Dungeon implements Serializable {
      */
     public Room[][] getRooms(){
         return myRooms;
+    }
+
+    public int[][] getDoors() {
+        return myDoors;
     }
 
     /**
