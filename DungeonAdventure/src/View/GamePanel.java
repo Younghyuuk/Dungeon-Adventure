@@ -55,7 +55,7 @@ public class GamePanel extends JPanel implements Runnable, Serializable {
     /**
      * The file to output the text version of the dungeon to.
      */
-    private final static String DUNGEON_FILE = "dungeon.txt";
+    private final static String DUNGEON_FILE = "Resources/map/dungeon.txt";
     /**
      * The dungeon object that the game panel will use to load the game correctly.
      */

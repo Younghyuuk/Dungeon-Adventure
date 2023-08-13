@@ -11,7 +11,7 @@ public class SaveLoad {
     /**
      * The filename of the save file.
      */
-    private static final String FILENAME = "game.save";
+    private static final String FILENAME = "Resources/save/game.save";
     /**
      * The game panel containing all the data for the game.
      */
