@@ -5,22 +5,43 @@ import View.GamePanel;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+/**
+ * This class tracks all the key movements made by the player.
+ */
 public class Keyboard implements KeyListener {
-    private static final long serialVersionUID = 123456789L;
+    /**
+     * Boolean representing if the player has pressed an "up" key.
+     */
     public boolean up;
+    /**
+     * Boolean representing if the player has pressed a "down" key.
+     */
     public boolean down;
+    /**
+     * Boolean representing if the player has pressed a "left" key.
+     */
     public boolean left;
+    /**
+     * Boolean representing if the player has pressed a "right" key.
+     */
     public boolean right;
+    /**
+     * The game panel that the key inputs will interact with.
+     */
     private final GamePanel myGamePanel;
 
+    /**
+     * Initializes the class with the game panel needed to control player movement.
+     *
+     * @param theGamePanel The game panel that will display the character when moving.
+     */
     public Keyboard(GamePanel theGamePanel) {
         myGamePanel = theGamePanel;
     }
 
     @Override
-    public void keyTyped(final KeyEvent e) {
+    public void keyTyped(final KeyEvent e) {}
 
-    }
     @Override
     public void keyPressed(final KeyEvent e) {
         if (myGamePanel.getMyGameState() == 0) {
@@ -38,17 +59,8 @@ public class Keyboard implements KeyListener {
                         myGamePanel.setMyGameState(1);
                     }
                     if(myGamePanel.getMyTitlePage().getMyCommandNum() == 1) {
-                        myGamePanel.saveLoad.load();
+                        myGamePanel.getSaveLoad().load();
                         myGamePanel.setMyGameState(2);
-//                        if(myGamePanel.getMyHero().getChName().equals("Thief")) {
-//                            //add in the sprites
-//                            myGamePanel.getMyHero().getHeroesImage();
-//                        } else if(myGamePanel.getMyHero().getChName().equals("Warrior")) {
-////                            myGamePanel.setMyHero(2);
-//                            myGamePanel.getMyHero().getHeroesImage();
-//                        } else {
-//                             myGamePanel.getMyHero().getHeroesImage();
-//                        }
                     }
             }
         } else if (myGamePanel.getMyGameState() == 1) {
@@ -143,6 +155,7 @@ public class Keyboard implements KeyListener {
             }
         }
     }
+
     @Override
     public void keyReleased(final KeyEvent e) {
             int code = e.getKeyCode();

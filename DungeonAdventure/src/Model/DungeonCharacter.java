@@ -4,6 +4,7 @@ import View.GamePanel;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.Serial;
 import java.io.Serializable;
 
 /**
@@ -15,7 +16,11 @@ import java.io.Serializable;
  */
 
 public abstract class DungeonCharacter implements Serializable {
-
+    /**
+     * The serial ID associated with this 'GameData' object.
+     */
+    @Serial
+    private static final long serialVersionUID = 123456789L;
     /**
      * The int myHp that tracks the character health points.
      */
@@ -25,22 +30,18 @@ public abstract class DungeonCharacter implements Serializable {
      * The string name of the character created.
      */
     private String myChName;
-
     /**
      * The attack speed of the character.
      */
     private int myAttackSpeed;
-
     /**
      * The minimum amount of damage a character can do to an enemy.
      */
     private int myMinDamage;
-
     /**
      * The max amount of damage a character can do to an enemy.
      */
     private int myMaxDamage;
-
     /**
      * The chance that the character has to hitting its target a double.
      */
@@ -55,8 +56,8 @@ public abstract class DungeonCharacter implements Serializable {
 
     public transient int mySpriteCounter = 0;
     public transient int mySpriteNum = 1;
-    public transient int myWorldXCoordinate;
-    public transient int myWorldYCoordinate;
+    public int myWorldXCoordinate;
+    public int myWorldYCoordinate;
 
     /**
      * The constructor of DungeonCharacter that initializes the hp, name, attack speed,
