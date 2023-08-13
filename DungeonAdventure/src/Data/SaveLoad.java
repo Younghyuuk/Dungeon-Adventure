@@ -35,7 +35,7 @@ public class SaveLoad {
             ObjectOutputStream output = new ObjectOutputStream(file);
             GameData gd = new GameData();
             // Save the game panel
-            gd.setMyGp(myGp);
+//            gd.setMyGp(myGp);
             // Save the hero data
             gd.setMyHero(myGp.getMyHero());
             gd.setMyHeroHp(myGp.getMyHero().getHp());
@@ -103,8 +103,8 @@ public class SaveLoad {
             // Load in the dungeon data
             myGp.setMyDungeon(gd.getMyDungeon());
             // Load lists
-            myGp.setMonsterList(gd.getMyMonsters());
-            myGp.setItemList(gd.getMyItems());
+//            myGp.setMonsterList(gd.getMyMonsters());
+//            myGp.setItemList(gd.getMyItems());
 
             // Then close everything
             input.close();
