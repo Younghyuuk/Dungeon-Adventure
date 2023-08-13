@@ -45,7 +45,6 @@ public abstract class Item implements Serializable {
     /**
      * Constructs an item.
      *
-
      * @param theGP          The 'GamePanel' to draw the item onto.
      * @param theWorldX      The world-x coordinate to draw the item at.
      * @param theWorldY      The world-y coordinate to draw the item at.
@@ -134,10 +133,7 @@ public abstract class Item implements Serializable {
      * @param theImage The image to set 'myItemImage' to.
      */
     public void setImage(final BufferedImage theImage) {
-//        if (theImage.toString().equals("myHealth_1")) {
-            myItemImage = theImage;
-//        }
-
+        myItemImage = theImage;
     }
 
     /**

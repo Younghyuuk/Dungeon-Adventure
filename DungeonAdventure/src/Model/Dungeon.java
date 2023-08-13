@@ -1,5 +1,6 @@
 package Model;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Serializable;
@@ -24,10 +25,6 @@ public class Dungeon implements Serializable {
      * A 2D array that contains the doors for each room.
      */
     private int[][] myDoors;
-    /**
-     * The file to output the text version of the dungeon to.
-     */
-    private static final String TEXT_DUNGEON = "Resources/map/dungeon.txt";
     /**
      * The height, in rooms, of the dungeon (the Y).
      */
@@ -66,7 +63,7 @@ public class Dungeon implements Serializable {
     /**
      * Constructs the randomly generated dungeon.
      */
-    public Dungeon() {
+    public Dungeon(final String theFileName) {
         // Set up the size of the dungeon
         myRooms = new Room[DUNGEON_HEIGHT][DUNGEON_WIDTH];
         // And the array of the visited rooms
@@ -80,7 +77,7 @@ public class Dungeon implements Serializable {
         // Next, we need to create every room
         createRooms();
         // Finally, we will output the dungeon to a text file to use with the GUI
-        textDungeon(TEXT_DUNGEON);
+        textDungeon(theFileName);
     }
 
     /**
@@ -503,8 +500,8 @@ public class Dungeon implements Serializable {
      */
     protected void textDungeon(final String theFileName) {
         try {
-//            String dungeon = this.toString();
             FileWriter fileWriter = new FileWriter(theFileName);
+            System.out.println("code reaches here");
             fileWriter.write(this.toString());
             fileWriter.close();
         } catch (IOException e) {

@@ -53,9 +53,13 @@ public class GamePanel extends JPanel implements Runnable, Serializable {
      */
     private final static int FPS = 60;
     /**
+     * The file to output the text version of the dungeon to.
+     */
+    private final static String DUNGEON_FILE = "dungeon.txt";
+    /**
      * The dungeon object that the game panel will use to load the game correctly.
      */
-    private Dungeon myDungeon = new Dungeon();
+    private Dungeon myDungeon = new Dungeon(DUNGEON_FILE);
     /**
      * The width of the game column-wise. <br>
      * Determined by the dungeon width (the amount of rooms in each column) * the width of a room.
@@ -118,15 +122,15 @@ public class GamePanel extends JPanel implements Runnable, Serializable {
     /**
      * The object that initiates all the entities within the dungeon.
      */
-    InitiateEntities myIE = new InitiateEntities(this);
+    private InitiateEntities myIE = new InitiateEntities(this);
     /**
      * The list of all pillars stored within the game.
      */
-    List<FourPillars> myPillarArray = myIE.getMyFourPillarsArray();
+    private List<FourPillars> myPillarArray = myIE.getMyFourPillarsArray();
     /**
      * The list of all the monsters stored within the game.
      */
-    List<Monster> myMonsterArray = myIE.getMyMonsterArray();
+    private List<Monster> myMonsterArray = myIE.getMyMonsterArray();
     /**
      * A list of every item contained within the dungeon.
      */
@@ -177,9 +181,10 @@ public class GamePanel extends JPanel implements Runnable, Serializable {
      * Boolean representing whether the player is looking at the about section of the game.
      */
     private boolean myAboutState = false;
-
-    public transient SaveLoad saveLoad = new SaveLoad(this);
-
+    /**
+     * We use this to properly save and load the game.
+     */
+    private final transient SaveLoad mySaveLoad = new SaveLoad(this);
 
     /**
      * Creates and sets up the game panel.
@@ -192,6 +197,7 @@ public class GamePanel extends JPanel implements Runnable, Serializable {
         setFocusable(true);
         myGameState = TITLE_STATE;
         setMyHero(1);
+        System.out.println(myDungeon);
     }
 
     /**
@@ -293,10 +299,20 @@ public class GamePanel extends JPanel implements Runnable, Serializable {
         myDungeon = theDungeon;
     }
 
+    /**
+     * Sets the monster list to a new monster list.
+     *
+     * @param theMonsterList The input monster list that will be used in the game.
+     */
     public void setMonsterList(final List<Monster> theMonsterList) {
         myMonsterArray = theMonsterList;
     }
 
+    /**
+     * Sets the item list to a new item list.
+     *
+     * @param theItemList The input item list that will be used in the game.
+     */
     public void setItemList(final List<Item> theItemList) {
         myItemArray = theItemList;
     }
@@ -435,6 +451,14 @@ public class GamePanel extends JPanel implements Runnable, Serializable {
     }
 
     /**
+     * Gets the object used to save and load the game.
+     *
+     * @return The 'SaveLoad' object to save and load the game.
+     */
+    public SaveLoad getSaveLoad() {
+        return mySaveLoad;
+    }
+    /**
      * Increases the amount of pillars that the player has obtained by 1.
      */
     public void incWinCount() {
@@ -458,8 +482,6 @@ public class GamePanel extends JPanel implements Runnable, Serializable {
     public boolean getMyAboutState() {
         return myAboutState;
     }
-
-    // For now, 1 is thief, 2 is Priestess, and 3 is Warrior.
 
     /**
      * Sets the hero that the player is using. <br>
