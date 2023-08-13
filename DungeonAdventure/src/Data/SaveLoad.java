@@ -86,7 +86,7 @@ public class SaveLoad {
                 num = 3;
             }
             // Load in the game panel
-            myGp = gd.getMyGp();
+//            myGp = gd.getMyGp();
             // Load in the hero data
             myGp.setMyHero(num);
             myGp.getMyHero().setHp(gd.getMyHeroHp());
