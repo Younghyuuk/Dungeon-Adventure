@@ -13,7 +13,11 @@ import static javax.imageio.ImageIO.read;
 /**
  * Thief class which extends from Heroes.
  */
-public class Thief extends Heroes implements Serializable {
+public class Thief extends Heroes {
+
+//    private static final long serialVersionUID = 123456789L;
+
+    private static final long serialversionUID = 1234567998L;
 
     /**
      * The chance at which the surprise attack succeeds.

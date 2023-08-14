@@ -2,6 +2,7 @@ package Model;
 
 import View.GamePanel;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -9,7 +10,7 @@ import java.util.Random;
 /**
  * This class initiates all the monsters and items that will be in the dungeon.
  */
-public class InitiateEntities {
+public class InitiateEntities implements Serializable {
     /**
      * Represents the index in both the x and y direction of the middle of the room.
      */
@@ -17,7 +18,7 @@ public class InitiateEntities {
     /**
      * The panel that we will draw all the entities to.
      */
-    private GamePanel myGamePanel;
+    private transient GamePanel myGamePanel;
     /**
      * The database containing all the info for the monsters in the dungeon.
      */

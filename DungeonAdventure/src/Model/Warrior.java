@@ -13,7 +13,8 @@ import static javax.imageio.ImageIO.read;
 /**
  * Warrior class that extends Heroes.
  */
-public class Warrior extends Heroes implements Serializable {
+public class Warrior extends Heroes {
+
 
     /**
      * The chance at which Warriors special hits.

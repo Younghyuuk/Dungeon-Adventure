@@ -1,6 +1,7 @@
 package View;
 
 import Control.Keyboard;
+import Data.SaveLoad;
 import Model.*;
 
 import javax.swing.*;
@@ -11,43 +12,43 @@ import java.util.List;
  * This class acts as the GUI for the DungeonAdventure game.
  */
 public class GamePanel extends JPanel implements Runnable {
-
     /**
      * The actual size of a sprite (16x16).
      */
-    private final static int ORIGINAL_SPRITE_SIZE = 16;
+    private final int ORIGINAL_SPRITE_SIZE = 16;
     /**
      * The multiplier to make the sprites fit onto the screen properly.
      */
-    private final static int SCALE = 3;
+    private final int SCALE = 3;
     /**
      * The size we want the sprites to be to fit the screen.
      */
-    private final int mySpriteSize = ORIGINAL_SPRITE_SIZE * SCALE;
+    private transient final int mySpriteSize = ORIGINAL_SPRITE_SIZE * SCALE;
     /**
      * The amount of tiles to fit into a row of the screen.
      */
-    private final int myMaxScreenRow = 12;
+    private transient final int myMaxScreenRow = 12;
     /**
      * The amount of tiles to fit into a column of the screen.
      */
-    private final int myMaxScreenCol = 16;
+    private transient final int myMaxScreenCol = 16;
     /**
      * The width of the screen based on the tile size and the max amount of tiles in a column.
      */
-    private final int myScreenWidth = myMaxScreenCol * mySpriteSize;
+    private transient final int myScreenWidth = myMaxScreenCol * mySpriteSize;
     /**
      * The height of the screen based on the tile size and the max amount of tiles in a row.
      */
-    private final int myScreenHeight = myMaxScreenRow * mySpriteSize;
+    private transient final int myScreenHeight = myMaxScreenRow * mySpriteSize;
     /**
      * The amount of frames per second this game will have.
      */
-    private final static int FPS = 60;
+    private final int FPS = 60;
     /**
      * The dungeon object that the game panel will use to load the game correctly.
      */
     private Dungeon myDungeon = new Dungeon();
+
     /**
      * The width of the game column-wise. <br>
      * Determined by the dungeon width (the amount of rooms in each column) * the width of a room.
@@ -61,43 +62,43 @@ public class GamePanel extends JPanel implements Runnable {
     /**
      * The object that will manage all the background tiles in the dungeon (the walls, floor, and doors
      */
-    private TileManager myTileM = new TileManager(this);
+    private transient TileManager myTileM = new TileManager(this);
     /**
      * The thread to use to run the game.
      */
-    private final Thread gameThread = new Thread(this);
+    private transient final Thread gameThread = new Thread(this);
     /**
      * The object that will check for collisions between the player and everything in the dungeon.
      */
-    private final Collision myCollision = new Collision(this);
+    private transient final Collision myCollision = new Collision(this);
     /**
      * The object that will check for player key inputs to move the character.
      */
-    private final Keyboard myKeyInputs = new Keyboard(this);
+    private final transient Keyboard myKeyInputs = new Keyboard(this);
     /**
      * The object that will create the title page that is shown before starting a game.
      */
-    private final TitlePage myTitlePage = new TitlePage(this);
+    private final transient TitlePage myTitlePage = new TitlePage(this);
     /**
      * The object that will create a character selection page that is shown after the title page.
      */
-    private final CharacterSelectionPage myCharacterSelectionPage = new CharacterSelectionPage(this);
+    private final transient CharacterSelectionPage myCharacterSelectionPage = new CharacterSelectionPage(this);
     /**
      * The object that will tell the player the rules about the game.
      */
-    private final AboutPage myAboutPage = new AboutPage(this);
+    private final transient AboutPage myAboutPage = new AboutPage(this);
     /**
      * The object that will display the results of a battle between the character and a monster.
      */
-    private BattlePage myBattlePage = new BattlePage(this);
+    private transient BattlePage myBattlePage = new BattlePage(this);
     /**
      * The page that will display if the player dies before collecting all 4 pillars.
      */
-    private final GameOver myGameOverPage = new GameOver(this);
+    private final transient GameOver myGameOverPage = new GameOver(this);
     /**
      * The page that will display if the player collects all 4 pillars before dying.
      */
-    private final WinPage myWinPage = new WinPage(this);
+    private final transient WinPage myWinPage = new WinPage(this);
     /**
      * Stores every move made by the character and monster as well as their health
      * and if their moves landed or not.
@@ -144,32 +145,36 @@ public class GamePanel extends JPanel implements Runnable {
     /**
      * Number representing that the game is in the title page state of the game.
      */
-    private final static int TITLE_STATE = 0;
+    private final int TITLE_STATE = 0;
     /**
      * Number representing that the game is in the character selection state of the game.
      */
-    private final static int CHARACTER_STATE = 1;
+    private final int CHARACTER_STATE = 1;
     /**
      * Number representing that the game is in the game play state of the game.
      */
-    private final static int PLAY_STATE = 2;
+    private final int PLAY_STATE = 2;
     /**
      * Number representing that the game is in the battle state of the game.
      */
-    private final static int BATTLE_STATE = 3;
+    private final int BATTLE_STATE = 3;
     /**
      * Number representing that the game is in the game over page state of the game.
      */
-    private final static int GAME_OVER_STATE = 4;
+    private final int GAME_OVER_STATE = 4;
     /**
      * Number representing that the game is in the game won page state of the game.
      */
-    private final static int WIN_STATE = 5;
+    private final int WIN_STATE = 5;
     /**
      * Boolean representing whether the player is looking at the about section of the game.
      */
 
-    private boolean myAboutState = false;
+
+    public transient SaveLoad saveLoad = new SaveLoad(this);
+
+    private transient boolean myAboutState = false;
+
     /**
      * Creates and sets up the game panel.
      */
@@ -186,13 +191,13 @@ public class GamePanel extends JPanel implements Runnable {
     /**
      * Sets up a brand-new game!
      */
-    public void setNewGame(){
+    public void setNewGame() {
         if (!myMonsterArray.isEmpty()) {
             myMonsterArray.clear();
         }
         myIE.createMonster();
         myMonsterArray = myIE.getMyMonsterArray();
-        for (FourPillars pillars :myPillarArray){
+        for (FourPillars pillars : myPillarArray) {
             pillars.setFound(false);
         }
         for (Item item : myItemArray) {
@@ -204,12 +209,12 @@ public class GamePanel extends JPanel implements Runnable {
     /**
      * Resets everything in the game.
      */
-    public void resetGame(){
+    public void resetGame() {
         setMyHero(myHeroNum);
-        for (Monster mon : myMonsterArray){
+        for (Monster mon : myMonsterArray) {
             mon.resetHP();
         }
-        for (FourPillars pillars :myPillarArray){
+        for (FourPillars pillars : myPillarArray) {
             pillars.setFound(false);
         }
         for (Item item : myItemArray) {
@@ -223,7 +228,7 @@ public class GamePanel extends JPanel implements Runnable {
      *
      * @param theBattleLog The battle log to set this class's battle log to.
      */
-    public void setMyBattleLog(String[] theBattleLog){
+    public void setMyBattleLog(String[] theBattleLog) {
         myBattleLog = theBattleLog;
     }
 
@@ -232,7 +237,7 @@ public class GamePanel extends JPanel implements Runnable {
      *
      * @return The character selection page.
      */
-    public CharacterSelectionPage getMyCharacterSelectionPage(){
+    public CharacterSelectionPage getMyCharacterSelectionPage() {
         return myCharacterSelectionPage;
     }
 
@@ -250,7 +255,7 @@ public class GamePanel extends JPanel implements Runnable {
      *
      * @return The win page.
      */
-    public WinPage getMyWinPage(){
+    public WinPage getMyWinPage() {
         return myWinPage;
     }
 
@@ -269,7 +274,7 @@ public class GamePanel extends JPanel implements Runnable {
      *
      * @return The game over screen.
      */
-    public GameOver getMyGameOver(){
+    public GameOver getMyGameOver() {
         return myGameOverPage;
     }
 
@@ -278,9 +283,10 @@ public class GamePanel extends JPanel implements Runnable {
      *
      * @param theDungeon The input dungeon to set this class's dungeon to.
      */
-    public void setMyDungeon(Dungeon theDungeon){
+    public void setMyDungeon(Dungeon theDungeon) {
         myDungeon = theDungeon;
     }
+
 
     /**
      * Sets the current game state.
@@ -384,7 +390,7 @@ public class GamePanel extends JPanel implements Runnable {
      *
      * @return The list of all monsters in the dungeon.
      */
-    public List<Monster> getMyMonsterArray(){
+    public List<Monster> getMyMonsterArray() {
         return myMonsterArray;
     }
 
@@ -393,7 +399,7 @@ public class GamePanel extends JPanel implements Runnable {
      *
      * @return The list of all four pillars of OO in the dungeon.
      */
-    public List<FourPillars> getMyPillarArray(){
+    public List<FourPillars> getMyPillarArray() {
         return myPillarArray;
     }
 
@@ -405,19 +411,20 @@ public class GamePanel extends JPanel implements Runnable {
     public List<Item> getMyItemArray() {
         return myItemArray;
     }
+
     /**
      * Gets the amount of pillars that the player has picked up.
      *
      * @return The amount of pillars the player has obtained.
      */
-    public int getWinCount(){
+    public int getWinCount() {
         return winCount;
     }
 
     /**
      * Increases the amount of pillars that the player has obtained by 1.
      */
-    public void incWinCount(){
+    public void incWinCount() {
         winCount++;
     }
 
@@ -435,7 +442,7 @@ public class GamePanel extends JPanel implements Runnable {
      *
      * @return True or false depending on if the player has the about page open.
      */
-    public boolean getMyAboutState(){
+    public boolean getMyAboutState() {
         return myAboutState;
     }
 
@@ -452,15 +459,15 @@ public class GamePanel extends JPanel implements Runnable {
     public void setMyHero(int number) {
         if (number == 1) {
             myHero = new Thief(this, myKeyInputs);
-            myHeroNum= 1;
+            myHeroNum = 1;
         }
         if (number == 2) {
             myHero = new Warrior(this, myKeyInputs);
-            myHeroNum= 2;
+            myHeroNum = 2;
         }
         if (number == 3) {
             myHero = new Priestess(this, myKeyInputs);
-            myHeroNum= 3;
+            myHeroNum = 3;
         }
     }
 
@@ -491,16 +498,16 @@ public class GamePanel extends JPanel implements Runnable {
      * Updates the game panel depending on the state of the game.
      */
     public void update() {
-        if(myGameState == PLAY_STATE) {
+        if (myGameState == PLAY_STATE) {
             myHero.update();
-            for (Monster mon : myMonsterArray){
+            for (Monster mon : myMonsterArray) {
                 mon.update();
             }
         }
-        if(winCount == 4){
+        if (winCount == 4) {
             setMyGameState(5);
         }
-        System.out.println(myHero.getHp());
+//        System.out.println(myHero.getHp());
     }
 
     // This method updates our view.
@@ -518,18 +525,18 @@ public class GamePanel extends JPanel implements Runnable {
         } else if (myGameState == PLAY_STATE) {
             myTileM.draw(pen);
             myHero.draw(pen);
-            for (Monster mon : myMonsterArray){
-                if (mon.isAlive()){
+            for (Monster mon : myMonsterArray) {
+                if (mon.isAlive()) {
                     mon.draw(pen);
                 }
             }
-            for (FourPillars pill : myPillarArray){
-                if(!pill.getFound()){
+            for (FourPillars pill : myPillarArray) {
+                if (!pill.getFound()) {
                     pill.draw(pen);
                 }
             }
             for (Item item : myItemArray) {
-                if(!item.getFound()) {
+                if (!item.getFound()) {
                     item.draw(pen);
                 }
             }
@@ -537,16 +544,13 @@ public class GamePanel extends JPanel implements Runnable {
                 myAboutPage.draw(pen);
             }
             pen.dispose();
-        }
-        else if (myGameState == BATTLE_STATE){
+        } else if (myGameState == BATTLE_STATE) {
             myBattlePage.setMyBattleLog(myBattleLog);
             myBattlePage.draw(pen);
             pen.dispose();
-        }
-        else if(myGameState == GAME_OVER_STATE){
+        } else if (myGameState == GAME_OVER_STATE) {
             myGameOverPage.draw(pen);
-        }
-        else {
+        } else {
             myWinPage.draw(pen);
         }
     }

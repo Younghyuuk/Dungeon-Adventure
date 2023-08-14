@@ -6,11 +6,12 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class Keyboard implements KeyListener {
+    private static final long serialVersionUID = 123456789L;
     public boolean up;
     public boolean down;
     public boolean left;
     public boolean right;
-    private GamePanel myGamePanel;
+    private final GamePanel myGamePanel;
 
     public Keyboard(GamePanel theGamePanel) {
         myGamePanel = theGamePanel;
@@ -35,6 +36,10 @@ public class Keyboard implements KeyListener {
                     if (myGamePanel.getMyTitlePage().getMyCommandNum() == 0) {
                         myGamePanel.setNewGame();
                         myGamePanel.setMyGameState(1);
+                    }
+                    if(myGamePanel.getMyTitlePage().getMyCommandNum() == 1) {
+                        myGamePanel.saveLoad.load();
+                        myGamePanel.setMyGameState(2);
                     }
             }
         } else if (myGamePanel.getMyGameState() == 1) {

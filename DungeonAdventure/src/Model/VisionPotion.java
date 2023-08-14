@@ -16,7 +16,7 @@ public class VisionPotion extends Item {
     /**
      * The images associated with a 'HealthPotion'.
      */
-    private BufferedImage myVision;
+    private transient BufferedImage myVision;
 
     /**
      * Constructs a basic 'HealthPotion' object.

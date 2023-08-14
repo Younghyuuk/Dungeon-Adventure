@@ -1,9 +1,14 @@
 package Model;
 
+import java.io.Serializable;
+
 /**
  * This class represents a single, randomly generated, room.
  */
-public class Room {
+public class Room implements Serializable {
+
+    private static final long serialversionUID = 12345L;
+
     /**
      * A 2D array of Strings that will represent the room.
      */
@@ -12,24 +17,6 @@ public class Room {
      * A 2D array of integers that stores the door types of every room that is added to the dungeon. <br>
      */
     private int[][] doors;
-    /**
-     * The amount of health the health pot (if in the room) will give. <br>
-     * Ranges from 5-15 hit points.
-     */
-    private int myHealth;
-    /**
-     * The amount of damage that will be taken if the player falls into the pit (if in the room). <br>
-     * Ranges from 1-20 hit points.
-     */
-    private int myPitDamage;
-    /**
-     * Represents the minimum amount of health obtainable from a health potion.
-     */
-    private static final int HEALTH_MIN = 5;
-    /**
-     * Represents the maximum amount of health obtainable from a health potion.
-     */
-    private static final int HEALTH_MAX = 15;
     /**
      * The height of a room.
      */
@@ -149,16 +136,6 @@ public class Room {
         } else if (theDirection == 3) { // North
             myRoom[0][ROOM_WIDTH / 2] = "3";
         }
-    }
-
-    /**
-     * Get method to get the amount of health the health potion will give.
-     *
-     * @return Returns the amount of health obtainable from this room's health potion
-     * (if it has one).
-     */
-    public int getHealth() {
-        return myHealth;
     }
 
     /**
