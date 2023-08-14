@@ -1,10 +1,11 @@
 package Data;
 
-import Model.Dungeon;
-import Model.Item;
-import Model.Monster;
+import Model.*;
 import View.GamePanel;
 
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -62,6 +63,8 @@ public class SaveLoad {
             gd.setMyDungeon(myGp.getMyDungeon());
 
             // Save the data for my lists
+            List<Monster> monsterList = myGp.getMyMonsterArray();
+            gd.setMyMonsters(monsterList);
 //            gd.setMyMonsters(myGp.getMyMonsterArray());
 //            gd.setMyItems(myGp.getMyItemArray());
             List<Item> itemList = myGp.getMyItemArray();
@@ -77,22 +80,7 @@ public class SaveLoad {
             System.out.println("Save exception " + e.getMessage());
             e.printStackTrace();
         }
-//        // monster saving
-//        try {
-//            FileOutputStream file = new FileOutputStream("Resources/save/monster.save");
-//            ObjectOutputStream output = new ObjectOutputStream(file);
-//
-//            List<Monster> monsters = myGp.getMyMonsterArray();
-//
-//
-////            monsterList.setMyMonsters(myGp.getMyMonsterArray());
-//
-//            output.writeObject(monsters);
-//
-//        } catch (Exception e) {
-//            System.out.println("Save exception " + e.getMessage());
-//            e.printStackTrace();
-//        }
+
 
     }
 
@@ -133,7 +121,21 @@ public class SaveLoad {
             Dungeon dungeon = gd.getMyDungeon();
             myGp.setMyDungeon(dungeon);
 
-            List<Item> itemList = gd.getMyItems();
+//            List<Monster> monsterList = gd.getMyMonsters();
+//            myGp.setMonsterList(monsterList);
+
+            List<Item> itemList = new ArrayList<>();
+
+            for(Item items : gd.getMyItems()) {
+                if(items instanceof HealthPotion && !items.getFound()) {
+                    items = new HealthPotion(items.getMyWorldXCoordinate(), items.getMyWorldYCoordinate(), myGp);
+                } else if(items instanceof VisionPotion && !items.getFound()) {
+                    items = new VisionPotion(items.getMyWorldXCoordinate(), items.getMyWorldYCoordinate(), myGp);
+                } else if(items instanceof Pit && !items.getFound()){
+                    items = new Pit(items.getMyWorldXCoordinate(), items.getMyWorldYCoordinate(), myGp);
+                }
+                itemList.add(items);
+            }
             myGp.setItemList(itemList);
 
             // Load lists
@@ -150,5 +152,14 @@ public class SaveLoad {
 
 
 
+
+    }
+    private BufferedImage loadImage(String imagePath) {
+        try {
+            return ImageIO.read(new File(imagePath));
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }

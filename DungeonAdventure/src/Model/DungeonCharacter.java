@@ -51,8 +51,8 @@ public abstract class DungeonCharacter implements Serializable {
     public transient BufferedImage up1, up2, down1, down2, left1, left2, right1, right2;
     public transient String myDirection = "down";
     public transient int mySpeed;
-    public transient boolean myCollision = false;
-    public transient Rectangle mySolidArea;
+    public boolean myCollision = false;
+    public Rectangle mySolidArea;
 
     public transient int mySpriteCounter = 0;
     public transient int mySpriteNum = 1;
