@@ -63,7 +63,6 @@ public class Keyboard implements KeyListener {
                         System.out.println(myGamePanel.getWinCount());
                         myGamePanel.setMyGameState(2);
 
-
                     }
             }
         } else if (myGamePanel.getMyGameState() == 1) {

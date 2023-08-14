@@ -17,6 +17,8 @@ public class Thief extends Heroes {
 
 //    private static final long serialVersionUID = 123456789L;
 
+    private static final long serialversionUID = 1234567998L;
+
     /**
      * The chance at which the surprise attack succeeds.
      */
@@ -71,7 +73,7 @@ public class Thief extends Heroes {
      * @param theKeyboard  keyboard input of character
      */
     public Thief(final GamePanel theGamePanel, final Keyboard theKeyboard) {
-        super(80, "Thief", 6, 20, 50, 0.8, 0.7, theGamePanel, theKeyboard);
+        super(HP, NAME, ATTACK_SPEED, MIN_DAMAGE, MAX_DAMAGE, HIT_CHANCE, BLOCK_CHANCE, theGamePanel, theKeyboard);
         getHeroesImage();
     }
 

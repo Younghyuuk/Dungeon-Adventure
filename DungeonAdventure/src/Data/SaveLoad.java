@@ -7,9 +7,15 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import java.util.Objects;
+
+import static javax.imageio.ImageIO.read;
+
 
 /**
  * This class saves and loads the game data.
@@ -39,9 +45,10 @@ public class SaveLoad {
      */
     public void save() {
         try {
+
             FileOutputStream file = new FileOutputStream(FILENAME);
             ObjectOutputStream output = new ObjectOutputStream(file);
-            GameData gd = new GameData();
+            GameData gd = new GameData(myGp);
 
             // Save the hero data
             gd.setMyHero(myGp.getMyHero());
@@ -56,6 +63,7 @@ public class SaveLoad {
             gd.setMyScreensMiddleY(myGp.getMyHero().getMyScreensMiddleY());
             gd.setMyWorldX(myGp.getMyHero().getMyWorldXCoordinate());
             gd.setMyWorldY(myGp.getMyHero().getMyWorldYCoordinate());
+
 
             // Save the dungeon data
             Dungeon dungeon = myGp.getMyDungeon();
@@ -123,6 +131,9 @@ public class SaveLoad {
 //            }
 //            dungeon.textDungeon("Resources/save/loadMap");
             myGp.setMyDungeon(dungeon);
+//            myGp.getMyDungeon().setDoors(gd.getDoors());
+//            myGp.setMyDungeon(gd.getMyDungeon());
+
 
 
             List<Monster> monsterList = new ArrayList<>();

@@ -21,6 +21,9 @@ public abstract class DungeonCharacter implements Serializable {
      */
     @Serial
     private static final long serialVersionUID = 123456789L;
+
+//    private static final long serialversionUID = 12345L;
+
     /**
      * The int myHp that tracks the character health points.
      */
@@ -53,7 +56,6 @@ public abstract class DungeonCharacter implements Serializable {
     public transient int mySpeed;
     public boolean myCollision = false;
     public Rectangle mySolidArea;
-
     public transient int mySpriteCounter = 0;
     public transient int mySpriteNum = 1;
     public int myWorldXCoordinate;

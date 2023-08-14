@@ -88,12 +88,29 @@ public class GameData implements Serializable {
     private int myWinCount;
     //Map items
 
+    private Room[][] myRooms;
+    private int[][] myDoors;
+
+    private int myDungeonH;
+    private int myDungeonW;
+
+    private String myTextDungeon;
+
+//    /**
+//     * The 2D array of rooms that makes up the dungeon.
+//     */
+//    private Room[][] myDungeonRooms;
+//    /**
+//     * The 2D boolean array that represents all the visited rooms in the dungeon.
+//     */
+//    private boolean[][] myVisitedRooms;
+
 
     /**
      * Constructs the game data that will be saved.
      */
-    public GameData() {
-        myGp = new GamePanel();
+    public GameData(GamePanel theGp) {
+        myGp = theGp;
     }
 
     /**
@@ -112,6 +129,10 @@ public class GameData implements Serializable {
      */
     public Dungeon getMyDungeon() {
         return myDungeon;
+    }
+
+    public Room[][] getMyRooms() {
+        return myRooms;
     }
 
     /**
@@ -246,6 +267,51 @@ public class GameData implements Serializable {
     public int getMyWinCount() {
         return myWinCount;
     }
+//    /**
+//     * Gets the 2D room array that represents the dungeon.
+//     *
+//     * @return The 2D array of 'Room' objects.
+//     */
+//    public Room[][] getMyDungeonRooms() {
+//        return myDungeonRooms;
+//    }
+//
+//    /**
+//     * Gets the 2D boolean array that represents all the visited rooms in the dungeon.
+//     *
+//     * @return The 2D array of visited rooms.
+//     */
+//    public boolean[][] getMyVisitedRooms() {
+//        return myVisitedRooms;
+//    }
+
+    public int[][] getDoors() {
+        return myDoors;
+    }
+
+    public String getTextDungeon() {
+        return myTextDungeon;
+    }
+    public int getMyDungeonH() {
+        return myDungeonH;
+    }
+
+    public int getMyDungeonW() {
+        return myDungeonW;
+    }
+
+    public void setDungeonH(int theDungeonH) {
+        myDungeonH = theDungeonH;
+    }
+
+    public void setDungeonW(int theDungeonW) {
+        myDungeonW = theDungeonW;
+    }
+
+
+    public void setTextDungeon(String theTextDungeon) {
+        myTextDungeon = theTextDungeon;
+    }
 
     /**
      * Sets the dungeon to the specified 'Dungeon' object.
@@ -254,6 +320,13 @@ public class GameData implements Serializable {
      */
     public void setMyDungeon(final Dungeon theDungeon) {
         myDungeon = theDungeon;
+    }
+
+    public void setDoors(int[][] theDoors) {
+        myDoors = theDoors;
+    }
+    public void setRooms(Room[][] theRooms) {
+        myRooms = theRooms;
     }
 
     /**
@@ -390,6 +463,7 @@ public class GameData implements Serializable {
     public void setMyItems(final List<Item> theItems) {
         myItems = theItems;
     }
+
 
     public void setMyPillars(final List<FourPillars> thePillars) {
         myPillars = thePillars;

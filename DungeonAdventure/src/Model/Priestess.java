@@ -15,52 +15,53 @@ import static javax.imageio.ImageIO.read;
  * extends from the Heroes class.
  */
 public class Priestess extends Heroes {
+    private static final long serialversionUID = 1234567L;
 
 
     /**
      * Min heal that priestess can heal for.
      */
-    private final int myMinHeal = 35;
+    private static final int MIN_HEAL = 45;
 
     /**
      * the max amount priestess can heal for.
      */
-    private final int myMaxHeal = 55;
-//
-//    /**
-//     * Hp of priestess.
-//     */
-//    private static final int HP = 100;
-//
-//    /**
-//     * Setting Priestess name.
-//     */
-//    private static final String NAME = "Priestess";
-//
-//    /**
-//     * Setting this characters attack speed to 5.
-//     */
-//    private static final int ATTACK_SPEED = 5;
-//
-//    /**
-//     * Minimum damage of priestess.
-//     */
-//    private static final int MIN_DAMAGE = 30;
-//
-//    /**
-//     * Maximum damage of priestess.
-//     */
-//    private static final int MAX_DAMAGE = 45;
-//
-//    /**
-//     * Hit chance of priestess.
-//     */
-//    private static final double HIT_CHANCE = 0.7;
-//
-//    /**
-//     * Block chance of priestess.
-//     */
-//    private static final double BLOCK_CHANCE = 0.3;
+    private static final int MAX_HEAL = 65;
+
+    /**
+     * Hp of priestess.
+     */
+    private static final int HP = 100;
+
+    /**
+     * Setting Priestess name.
+     */
+    private static final String NAME = "Priestess";
+
+    /**
+     * Setting this characters attack speed to 5.
+     */
+    private static final int ATTACK_SPEED = 5;
+
+    /**
+     * Minimum damage of priestess.
+     */
+    private static final int MIN_DAMAGE = 30;
+
+    /**
+     * Maximum damage of priestess.
+     */
+    private static final int MAX_DAMAGE = 45;
+
+    /**
+     * Hit chance of priestess.
+     */
+    private static final double HIT_CHANCE = 0.7;
+
+    /**
+     * Block chance of priestess.
+     */
+    private static final double BLOCK_CHANCE = 0.3;
 
     /**
      * Priestess constructor which sets up all her stats
@@ -71,7 +72,7 @@ public class Priestess extends Heroes {
      * @param theKeyboard  keyboard input of character
      */
     public Priestess(final GamePanel theGamePanel, final Keyboard theKeyboard) {
-        super(100, "Priestess", 5, 30, 45, 0.7, 0.3, theGamePanel, theKeyboard);
+        super(HP, NAME, ATTACK_SPEED, MIN_DAMAGE, MAX_DAMAGE, HIT_CHANCE, BLOCK_CHANCE, theGamePanel, theKeyboard);
         getHeroesImage();
     }
 
@@ -172,7 +173,7 @@ public class Priestess extends Heroes {
      * @return range of heal from min to max
      */
     private int genHeal() {
-        return (int) Math.floor(Math.random() * (myMaxHeal - myMinHeal) + myMinHeal);
+        return (int) Math.floor(Math.random() * (MAX_HEAL - MIN_HEAL) +MIN_HEAL);
     }
 
 }

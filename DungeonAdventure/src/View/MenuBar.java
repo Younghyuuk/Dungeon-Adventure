@@ -12,6 +12,14 @@ public class MenuBar extends JMenuBar {
     /**
      * The game panel that will be used to draw the menu bar onto.
      */
+    public final String QUIT = "Quit";
+    /**
+     * The command associated with the Save option.
+     */
+
+    public final String SAVE = "Save";
+
+
     private final GamePanel myGamePanel;
 
     /**

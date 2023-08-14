@@ -23,11 +23,11 @@ public class GamePanel extends JPanel implements Runnable, Serializable {
     /**
      * The actual size of a sprite (16x16).
      */
-    private final static int ORIGINAL_SPRITE_SIZE = 16;
+    private final int ORIGINAL_SPRITE_SIZE = 16;
     /**
      * The multiplier to make the sprites fit onto the screen properly.
      */
-    private final static int SCALE = 3;
+    private final int SCALE = 3;
     /**
      * The size we want the sprites to be to fit the screen.
      */
@@ -51,7 +51,7 @@ public class GamePanel extends JPanel implements Runnable, Serializable {
     /**
      * The amount of frames per second this game will have.
      */
-    private final static int FPS = 60;
+    private final int FPS = 60;
     /**
      * The file to output the text version of the dungeon to.
      */
@@ -60,6 +60,8 @@ public class GamePanel extends JPanel implements Runnable, Serializable {
      * The dungeon object that the game panel will use to load the game correctly.
      */
     private Dungeon myDungeon = new Dungeon(myDungeonFile);
+
+
     /**
      * The width of the game column-wise. <br>
      * Determined by the dungeon width (the amount of rooms in each column) * the width of a room.
@@ -156,27 +158,27 @@ public class GamePanel extends JPanel implements Runnable, Serializable {
     /**
      * Number representing that the game is in the title page state of the game.
      */
-    private final static int TITLE_STATE = 0;
+    private final int TITLE_STATE = 0;
     /**
      * Number representing that the game is in the character selection state of the game.
      */
-    private final static int CHARACTER_STATE = 1;
+    private final int CHARACTER_STATE = 1;
     /**
      * Number representing that the game is in the game play state of the game.
      */
-    private final static int PLAY_STATE = 2;
+    private final int PLAY_STATE = 2;
     /**
      * Number representing that the game is in the battle state of the game.
      */
-    private final static int BATTLE_STATE = 3;
+    private final int BATTLE_STATE = 3;
     /**
      * Number representing that the game is in the game over page state of the game.
      */
-    private final static int GAME_OVER_STATE = 4;
+    private final int GAME_OVER_STATE = 4;
     /**
      * Number representing that the game is in the game won page state of the game.
      */
-    private final static int WIN_STATE = 5;
+    private final int WIN_STATE = 5;
     /**
      * Boolean representing whether the player is looking at the about section of the game.
      */
@@ -298,6 +300,7 @@ public class GamePanel extends JPanel implements Runnable, Serializable {
     public void setMyDungeon(Dungeon theDungeon) {
         myDungeon = theDungeon;
     }
+
 
     /**
      * Sets the monster list to a new monster list.

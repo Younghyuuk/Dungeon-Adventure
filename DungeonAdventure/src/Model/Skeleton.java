@@ -11,7 +11,7 @@ import static javax.imageio.ImageIO.read;
  * Skeleton class that extends monster one of the mobs
  * for the game.
  */
-public class Skeleton extends Monster{
+public class Skeleton extends Monster {
 
     /**
      * The constructor of DungeonCharacter that initializes the hp, name, attack speed,

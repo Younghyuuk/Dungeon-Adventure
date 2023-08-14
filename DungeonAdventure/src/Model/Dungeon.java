@@ -12,6 +12,8 @@ import java.util.Stack;
  * This class represents the randomly generated dungeon.
  */
 public class Dungeon implements Serializable {
+    private static final long serialversionUID = 12345L;
+
     /**
      * A 2D array of all the rooms in the dungeon.
      */
@@ -25,40 +27,41 @@ public class Dungeon implements Serializable {
      * A 2D array that contains the doors for each room.
      */
     private int[][] myDoors;
+
     /**
      * The height, in rooms, of the dungeon (the Y).
      */
-    private static final int DUNGEON_HEIGHT = 7;
+    private final int DUNGEON_HEIGHT = 7;
     /**
      * The width, in rooms, of the dungeon (the X).
      */
-    private static final int DUNGEON_WIDTH = 7;
+    private final int DUNGEON_WIDTH = 7;
     /**
      * The index of the first column in the dungeon.
      */
-    private static final int FIRST_ROOM_COL = 0;
+    private final int FIRST_ROOM_COL = 0;
     /**
      * The index of the last column in the dungeon.
      */
-    private static final int LAST_ROOM_COL = DUNGEON_WIDTH - 1;
+    private final int LAST_ROOM_COL = DUNGEON_WIDTH - 1;
     /**
      * The index of the first row in the dungeon.
      */
-    private static final int FIRST_ROOM_ROW = 0;
+    private final int FIRST_ROOM_ROW = 0;
     /**
      * The index of the last row in the dungeon.
      */
-    private static final int LAST_ROOM_ROW = DUNGEON_HEIGHT - 1;
+    private final int LAST_ROOM_ROW = DUNGEON_HEIGHT - 1;
     /**
      * A direction vector for the columns. <br>
      * Used to traverse in DFS to adjacent cells.
      */
-    private static final int[] DIRECTION_VECTOR_COLUMNS = {-1, 0, 1, 0};
+    private final int[] DIRECTION_VECTOR_COLUMNS = {-1, 0, 1, 0};
     /**
      * A direction vector for the rows. <br>
      * Used to traverse in DFS to adjacent cells.
      */
-    private static final int[] DIRECTION_VECTOR_ROWS = {0, 1, 0, -1};
+    private final int[] DIRECTION_VECTOR_ROWS = {0, 1, 0, -1};
 
     /**
      * Constructs the randomly generated dungeon.
@@ -218,6 +221,11 @@ public class Dungeon implements Serializable {
             Arrays.fill(myDoors[i], -1);
         }
     }
+
+    public void setDoors(int[][] theDoors) {
+        myDoors = theDoors;
+    }
+
 
     /**
      * Helper method used by 'connectRooms' to check if two rooms are connected or not.
@@ -569,7 +577,8 @@ public class Dungeon implements Serializable {
         return myRooms;
     }
 
-    public int[][] getMyDoors() {
+
+    public int[][] getDoors() {
         return myDoors;
     }
 
