@@ -83,6 +83,9 @@ public class GameData implements Serializable {
      */
     private List<Item> myItems;
 
+    private List<FourPillars> myPillars;
+
+    private int myWinCount;
     //Map items
 
 
@@ -237,6 +240,13 @@ public class GameData implements Serializable {
         return myItems;
     }
 
+    public List<FourPillars> getMyPillars() {
+        return myPillars;
+    }
+    public int getMyWinCount() {
+        return myWinCount;
+    }
+
     /**
      * Sets the dungeon to the specified 'Dungeon' object.
      *
@@ -379,6 +389,14 @@ public class GameData implements Serializable {
      */
     public void setMyItems(final List<Item> theItems) {
         myItems = theItems;
+    }
+
+    public void setMyPillars(final List<FourPillars> thePillars) {
+        myPillars = thePillars;
+    }
+
+    public void setMyWinCount(final int theWinCount) {
+        myWinCount = theWinCount;
     }
 }
 

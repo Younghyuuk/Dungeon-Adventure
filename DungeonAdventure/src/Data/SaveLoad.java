@@ -63,12 +63,10 @@ public class SaveLoad {
             gd.setMyDungeon(myGp.getMyDungeon());
 
             // Save the data for my lists
-            List<Monster> monsterList = myGp.getMyMonsterArray();
-            gd.setMyMonsters(monsterList);
-//            gd.setMyMonsters(myGp.getMyMonsterArray());
-//            gd.setMyItems(myGp.getMyItemArray());
-            List<Item> itemList = myGp.getMyItemArray();
-            gd.setMyItems(itemList);
+            gd.setMyMonsters(myGp.getMyMonsterArray());
+            gd.setMyItems(myGp.getMyItemArray());
+            gd.setMyPillars(myGp.getMyPillarArray());
+
             // We want to write the game data to the save file
 
             output.writeObject(gd);
@@ -163,8 +161,18 @@ public class SaveLoad {
             }
             myGp.setItemList(itemList);
 
-            // Load lists
-//            myGp.setMonsterList(gd.getMyMonsters());
+            List<FourPillars> pillarList = new ArrayList<>();
+
+            for(FourPillars pillar : gd.getMyPillars()) {
+                if(!pillar.getFound()) {
+                    FourPillars newPillar = new FourPillars(pillar.getMyWorldXCoordinate(),
+                            pillar.getMyWorldYCoordinate(), pillar.getMyName(), myGp);
+                    newPillar.setImage(newPillar.findImage());
+                    pillarList.add(newPillar);
+                }
+            }
+            myGp.setPillarList(pillarList);
+
 
             // Then close everything
             input.close();
