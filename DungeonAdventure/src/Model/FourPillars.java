@@ -5,6 +5,7 @@ import View.GamePanel;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.Objects;
 
 import static javax.imageio.ImageIO.read;
@@ -12,11 +13,11 @@ import static javax.imageio.ImageIO.read;
 /**
  * This class acts as all the four pillars in each of the corners of the game.
  */
-public class FourPillars extends Item {
+public class FourPillars extends Item implements Serializable {
     /**
      * The images representing each pillar of OO.
      */
-    private BufferedImage myAbstraction, myEncapsulation, myInheritance, myPolymorphism;
+    private transient BufferedImage myAbstraction, myEncapsulation, myInheritance, myPolymorphism;
     /**
      * The name of the specific pillar of OO this 'FourPillars' object is.
      */

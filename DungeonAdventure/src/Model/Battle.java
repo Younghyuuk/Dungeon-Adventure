@@ -1,5 +1,7 @@
 package Model;
 
+import java.io.Serializable;
+
 /**
  * Battle class that returns Strings in an array
  * for GUi class to interact with
@@ -7,7 +9,7 @@ package Model;
  * @author Andrew Chon, Halim Lee, Marrok Young
  * @version July 19, 2023
  */
-public class Battle {
+public class Battle implements Serializable {
 
     /**
      * Hero class so all other types of Heroes can be called.

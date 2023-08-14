@@ -14,49 +14,47 @@ import java.io.Serializable;
  * @version July 2023.
  */
 
-public abstract class DungeonCharacter {
+public abstract class DungeonCharacter implements Serializable {
 
-    private static final long serialversionUID = 12345;
+//    private static final long serialversionUID = 12345L;
+
 
     /**
      * The int myHp that tracks the character health points.
      */
     private int myHp;
-    private int myDefaultHp;
+    private transient int myDefaultHp;
     /**
      * The string name of the character created.
      */
     private String myChName;
-
     /**
      * The attack speed of the character.
      */
     private int myAttackSpeed;
-
     /**
      * The minimum amount of damage a character can do to an enemy.
      */
     private int myMinDamage;
-
     /**
      * The max amount of damage a character can do to an enemy.
      */
     private int myMaxDamage;
-
     /**
      * The chance that the character has to hitting its target a double.
      */
     private double myHitChance;
 
-    public GamePanel myGamePanel;
-    public BufferedImage up1, up2, down1, down2, left1, left2, right1, right2;
+    public transient GamePanel myGamePanel;
+    public transient BufferedImage up1, up2, down1, down2, left1, left2, right1, right2;
     public String myDirection = "down";
     public int mySpeed;
     public boolean myCollision = false;
-    public Rectangle mySolidArea;
 
-    public int mySpriteCounter = 0;
-    public int mySpriteNum = 1;
+    public transient Rectangle mySolidArea;
+
+    public transient int mySpriteCounter = 0;
+    public transient int mySpriteNum = 1;
     public int myWorldXCoordinate;
     public int myWorldYCoordinate;
 
@@ -108,6 +106,7 @@ public abstract class DungeonCharacter {
     public void setMyWorldYCoordinate(int theY) {
         myWorldYCoordinate = theY;
     }
+
     /**
      * Gets the hp that the character has currently.
      *
@@ -135,6 +134,10 @@ public abstract class DungeonCharacter {
         return myChName;
     }
 
+    public void setChName(String theChName) {
+        myChName = theChName;
+    }
+
     /**
      * Gets the minimum amount of damage.
      *
@@ -144,6 +147,9 @@ public abstract class DungeonCharacter {
         return myMinDamage;
     }
 
+    public void setMinDamage(int theMinDamage) {
+        myMinDamage = theMinDamage;
+    }
     /**
      * Gets the max amount of damage.
      *
@@ -153,6 +159,10 @@ public abstract class DungeonCharacter {
         return myMaxDamage;
     }
 
+
+    public void setMaxDamage(int theMaxDamage) {
+        myMaxDamage = theMaxDamage;
+    }
     /**
      * Gets the attack speed.
      *
@@ -162,6 +172,10 @@ public abstract class DungeonCharacter {
         return myAttackSpeed;
     }
 
+
+    public void setAttackSpeed(int theAttackSpeed) {
+        myAttackSpeed = theAttackSpeed;
+    }
     /**
      * Gets the hit chance.
      *
@@ -171,6 +185,9 @@ public abstract class DungeonCharacter {
         return myHitChance;
     }
 
+    public void setHitChance(double theHitChance) {
+        myHitChance = theHitChance;
+    }
     /**
      * This method attacks an opponent based on the characters
      * hit chance and damage range and deals that damage to theOpp.

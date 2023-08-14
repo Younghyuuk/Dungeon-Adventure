@@ -3,17 +3,25 @@ package View;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.Serializable;
 
 public class MenuBar extends JMenuBar {
 
-    /** The command associated with the Quit option. */
-    public static final String QUIT = "Quit";
-    /** The command associated with the Save option. */
-    public static final String SAVE = "Save";
+    /**
+     * The command associated with the Quit option.
+     */
+    public final String QUIT = "Quit";
+    /**
+     * The command associated with the Save option.
+     */
+
+    public final String SAVE = "Save";
+
 
     private final GamePanel myGamePanel;
 
-    public MenuBar (GamePanel theGamePanel, JFrame theFrame) {
+
+    public MenuBar(GamePanel theGamePanel, JFrame theFrame) {
         super();
         myGamePanel = theGamePanel;
         JMenu options = new JMenu("Options");
@@ -24,11 +32,20 @@ public class MenuBar extends JMenuBar {
                 System.exit(0);
             }
         });
+        //new stuff
         JMenuItem save = new JMenuItem("Save");
+        save.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                myGamePanel.saveLoad.save();
+
+            }
+        });
+
         JMenuItem mainMenu = new JMenuItem("Main Menu");
         mainMenu.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e){
+            public void actionPerformed(ActionEvent e) {
                 myGamePanel.setMyGameState(0);
             }
         });
@@ -44,9 +61,9 @@ public class MenuBar extends JMenuBar {
         des.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(myGamePanel.getMyGameState() == 2 && !myGamePanel.getMyAboutState()) {
+                if (myGamePanel.getMyGameState() == 2 && !myGamePanel.getMyAboutState()) {
                     myGamePanel.setMyAboutState(true);
-                }else{
+                } else {
                     myGamePanel.setMyAboutState(false);
                 }
             }

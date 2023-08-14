@@ -2,6 +2,7 @@ package Model;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Random;
 import java.util.Stack;
@@ -9,7 +10,9 @@ import java.util.Stack;
 /**
  * This class represents the randomly generated dungeon.
  */
-public class Dungeon {
+public class Dungeon implements Serializable {
+    private static final long serialversionUID = 12345L;
+
     /**
      * A 2D array of all the rooms in the dungeon.
      */
@@ -18,7 +21,7 @@ public class Dungeon {
      * A 2D array of all the visited rooms in the dungeon. <br>
      * A cell in the array that is true means that we have visited that room.
      */
-    private Boolean[][] myVisited;
+    private boolean[][] myVisited;
     /**
      * A 2D array that contains the doors for each room.
      */
@@ -26,41 +29,41 @@ public class Dungeon {
     /**
      * The file to output the text version of the dungeon to.
      */
-    private static final String TEXT_DUNGEON = "Resources/map/dungeon.txt";
+    private String TEXT_DUNGEON = "Resources/map/dungeon.txt";
     /**
      * The height, in rooms, of the dungeon (the Y).
      */
-    private static final int DUNGEON_HEIGHT = 7;
+    private final int DUNGEON_HEIGHT = 7;
     /**
      * The width, in rooms, of the dungeon (the X).
      */
-    private static final int DUNGEON_WIDTH = 7;
+    private final int DUNGEON_WIDTH = 7;
     /**
      * The index of the first column in the dungeon.
      */
-    private static final int FIRST_ROOM_COL = 0;
+    private final int FIRST_ROOM_COL = 0;
     /**
      * The index of the last column in the dungeon.
      */
-    private static final int LAST_ROOM_COL = DUNGEON_WIDTH - 1;
+    private final int LAST_ROOM_COL = DUNGEON_WIDTH - 1;
     /**
      * The index of the first row in the dungeon.
      */
-    private static final int FIRST_ROOM_ROW = 0;
+    private final int FIRST_ROOM_ROW = 0;
     /**
      * The index of the last row in the dungeon.
      */
-    private static final int LAST_ROOM_ROW = DUNGEON_HEIGHT - 1;
+    private final int LAST_ROOM_ROW = DUNGEON_HEIGHT - 1;
     /**
      * A direction vector for the columns. <br>
      * Used to traverse in DFS to adjacent cells.
      */
-    private static final int[] DIRECTION_VECTOR_COLUMNS = {-1, 0, 1, 0};
+    private final int[] DIRECTION_VECTOR_COLUMNS = {-1, 0, 1, 0};
     /**
      * A direction vector for the rows. <br>
      * Used to traverse in DFS to adjacent cells.
      */
-    private static final int[] DIRECTION_VECTOR_ROWS = {0, 1, 0, -1};
+    private final int[] DIRECTION_VECTOR_ROWS = {0, 1, 0, -1};
 
     /**
      * Constructs the randomly generated dungeon.
@@ -69,7 +72,7 @@ public class Dungeon {
         // Set up the size of the dungeon
         myRooms = new Room[DUNGEON_HEIGHT][DUNGEON_WIDTH];
         // And the array of the visited rooms
-        myVisited = new Boolean[DUNGEON_HEIGHT][DUNGEON_WIDTH];
+        myVisited = new boolean[DUNGEON_HEIGHT][DUNGEON_WIDTH];
         // Then we need to initially populate 'myVisited'
         setMyVisited();
         // Then we need to populate the array of door types for each room
@@ -220,6 +223,13 @@ public class Dungeon {
         }
     }
 
+    public void setDoors(int[][] theDoors) {
+        myDoors = theDoors;
+    }
+
+    public void setTextDungeon(String theTextDungeon) {
+        TEXT_DUNGEON = theTextDungeon;
+    }
     /**
      * Helper method used by 'connectRooms' to check if two rooms are connected or not.
      *
@@ -495,15 +505,6 @@ public class Dungeon {
     }
 
     /**
-     * Get method to get the array that represents the dungeon.
-     *
-     * @return Returns the 'myRooms' 2D Room array.
-     */
-    public Room[][] getRooms(){
-        return myRooms;
-    }
-
-    /**
      * Uses 'toString' to create a text representation of the dungeon
      * and then outputs that to a text file.
      *
@@ -518,17 +519,6 @@ public class Dungeon {
         } catch (IOException e) {
             System.err.println("An error occurred when printing to output file: " + e.getMessage());
         }
-    }
-
-    /**
-     * Get method to check if a given room has already been visited.
-     *
-     * @param theRow The row the room is stored in.
-     * @param theCol The column the room is stored in.
-     * @return Returns whether the room has been visited.
-     */
-    public boolean getIfVisited(final int theRow, final int theCol) {
-        return myVisited[theRow][theCol];
     }
 
     /**
@@ -568,6 +558,43 @@ public class Dungeon {
         }
 
         return sb.toString();
+    }
+
+    /**
+     * Get method to check if a given room has already been visited.
+     *
+     * @param theRow The row the room is stored in.
+     * @param theCol The column the room is stored in.
+     * @return Returns whether the room has been visited.
+     */
+    public boolean getIfVisited(final int theRow, final int theCol) {
+        return myVisited[theRow][theCol];
+    }
+
+    /**
+     * Get method to get the array that represents the dungeon.
+     *
+     * @return The 'myRooms' 2D Room array.
+     */
+    public Room[][] getRooms(){
+        return myRooms;
+    }
+
+    public String getTEXT_DUNGEON() {
+        return TEXT_DUNGEON;
+    }
+
+    public int[][] getDoors() {
+        return myDoors;
+    }
+
+    /**
+     * Get method to get the array that represents all the visited rooms in the dungeon.
+     *
+     * @return The 2D array of visited rooms in the dungeon.
+     */
+    public boolean[][] getVisitedRooms() {
+        return myVisited;
     }
 
     /**

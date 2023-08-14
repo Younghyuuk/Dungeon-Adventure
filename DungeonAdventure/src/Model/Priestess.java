@@ -14,17 +14,19 @@ import static javax.imageio.ImageIO.read;
  * Priestess class which has the ability to heal and
  * extends from the Heroes class.
  */
-public class Priestess extends Heroes implements Serializable {
-    private static final long serialversionUID = 1234567;
+public class Priestess extends Heroes {
+    private static final long serialversionUID = 1234567L;
+
+
     /**
      * Min heal that priestess can heal for.
      */
-    private static final int MIN_HEAL = 35;
+    private static final int MIN_HEAL = 45;
 
     /**
      * the max amount priestess can heal for.
      */
-    private static final int MAX_HEAL = 55;
+    private static final int MAX_HEAL = 65;
 
     /**
      * Hp of priestess.
@@ -171,7 +173,7 @@ public class Priestess extends Heroes implements Serializable {
      * @return range of heal from min to max
      */
     private int genHeal() {
-        return (int) Math.floor(Math.random() * (MAX_HEAL - MIN_HEAL) + MIN_HEAL);
+        return (int) Math.floor(Math.random() * (MAX_HEAL - MIN_HEAL) +MIN_HEAL);
     }
 
 }

@@ -4,7 +4,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class Tile {
-    private BufferedImage myImage;
+    private transient BufferedImage myImage;
     private boolean myCollision = false;
 
     public BufferedImage getMyImage() {

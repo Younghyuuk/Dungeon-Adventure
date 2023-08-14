@@ -5,14 +5,15 @@ import View.GamePanel;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.Serializable;
 import java.util.Random;
 
 /**
  * Monster abstract class that extends DungeonCharacter
  */
 public abstract class Monster extends DungeonCharacter {
-//    private final UUID myId;
 
+//    private final UUID myId;
     private final double myChanceHeal;
     private final int myMinHeal;
     private final int myMaxHeal;

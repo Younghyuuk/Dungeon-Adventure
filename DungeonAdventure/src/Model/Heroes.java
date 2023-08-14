@@ -18,19 +18,21 @@ import java.io.Serializable;
  * we will be creating 3 other subclasses which extends
  * off of Heroes which will be Priestess, Thief, and Warrior.
  */
-public abstract class Heroes extends DungeonCharacter implements Serializable {
+public abstract class Heroes extends DungeonCharacter {
 
-    private static final long serialversionUID = 123456;
+//    private static final long serialversionUID = 123456L;
 
-    private final int myScreensMiddleX;
-    private final int myScreensMiddleY;
-    Keyboard myKeyInputs;
+
+//    private static final long serialVersionUID = 123456789L;
+    private int myScreensMiddleX;
+    private int myScreensMiddleY;
+    transient Keyboard myKeyInputs;
     /**
      * The double that gives the chance that the Hero will block.
      */
     private double myBlockChance;
 
-    BufferedImage hp0,hp1,hp2,hp3,hp4,hp5,hp6,hp7,hp8,hp9,hp10,hp11,hp12,hp13,hp14,hp15,hp16;
+    public transient BufferedImage hp0,hp1,hp2,hp3,hp4,hp5,hp6,hp7,hp8,hp9,hp10,hp11,hp12,hp13,hp14,hp15,hp16;
 
     /**
      * Heroes constructor that initializes the hp, name, attack speed, min damage, max damage,
@@ -46,7 +48,7 @@ public abstract class Heroes extends DungeonCharacter implements Serializable {
      * @param theGamePanel   the gamepanel of the hero.
      * @param theKeyBoard    the keyboard input of the hero.
      */
-    protected Heroes(int theHp, final String theChName, final int theAttackSpeed, final int theMinDamage, final int theMaxDamage,
+    protected Heroes(final int theHp, final String theChName, final int theAttackSpeed, final int theMinDamage, final int theMaxDamage,
                      final double theHitChance, final double theBlockChance, final GamePanel theGamePanel, final Keyboard theKeyBoard) {
 
         super(theHp, theChName, theAttackSpeed, theMinDamage, theMaxDamage, theHitChance, theGamePanel);
@@ -69,8 +71,16 @@ public abstract class Heroes extends DungeonCharacter implements Serializable {
         return myScreensMiddleX;
     }
 
+    public void setMyScreensMiddleX(int theScreensMiddleX) {
+        myScreensMiddleX = theScreensMiddleX;
+    }
+
     public int getMyScreensMiddleY() {
         return myScreensMiddleY;
+    }
+
+    public void setMyScreensMiddleY(int theScreensMiddleY) {
+        myScreensMiddleY = theScreensMiddleY;
     }
 
     public void resetSolidArea() {
@@ -85,13 +95,13 @@ public abstract class Heroes extends DungeonCharacter implements Serializable {
 
     }
 
-    public GameData getHeroData() {
-        GameData heroData = new GameData();
-        heroData.myHeroHp = getHp();
-        heroData.myScreensMiddleX = myScreensMiddleX;
-        heroData.myScreensMiddleY = myScreensMiddleY;
-        return heroData;
-    }
+//    public GameData getHeroData() {
+//        GameData heroData = new GameData();
+//        heroData.myHeroHp = getHp();
+//        heroData.myScreensMiddleX = myScreensMiddleX;
+//        heroData.myScreensMiddleY = myScreensMiddleY;
+//        return heroData;
+//    }
 
     public void update() {
         if (myKeyInputs.up) {
