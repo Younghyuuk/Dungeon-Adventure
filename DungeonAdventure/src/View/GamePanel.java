@@ -507,6 +507,7 @@ public class GamePanel extends JPanel implements Runnable, Serializable {
     }
 
 
+
     @Override
     public void run() {
         // Game Loop. Repainting the screen 60 FPS. Credit given to ryisnow.

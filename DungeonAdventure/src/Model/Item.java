@@ -19,7 +19,7 @@ public abstract class Item implements Serializable {
     /**
      * The game panel to draw the item onto.
      */
-    private transient GamePanel myGamePanel;
+    private GamePanel myGamePanel;
     /**
      * The world-x coordinate of the item.
      */

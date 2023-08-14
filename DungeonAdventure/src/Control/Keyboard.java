@@ -60,6 +60,7 @@ public class Keyboard implements KeyListener {
                     }
                     if(myGamePanel.getMyTitlePage().getMyCommandNum() == 1) {
                         myGamePanel.getSaveLoad().load();
+                        myGamePanel.getGraphics();
                         myGamePanel.setMyGameState(2);
                     }
             }

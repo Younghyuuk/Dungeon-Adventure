@@ -1,8 +1,14 @@
 package Data;
 
+import Model.Dungeon;
+import Model.Item;
+import Model.Monster;
 import View.GamePanel;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * This class saves and loads the game data.
@@ -16,6 +22,7 @@ public class SaveLoad {
      * The game panel containing all the data for the game.
      */
     private GamePanel myGp;
+
 
     /**
      * Sets up the class by getting a game panel object from 'GamePanel'.
@@ -49,13 +56,18 @@ public class SaveLoad {
             gd.setMyScreensMiddleY(myGp.getMyHero().getMyScreensMiddleY());
             gd.setMyWorldX(myGp.getMyHero().getMyWorldXCoordinate());
             gd.setMyWorldY(myGp.getMyHero().getMyWorldYCoordinate());
-            // Save the dungeon data
-            gd.setMyDungeon(myGp.getMyDungeon());
-            // Save the data for my lists
-            gd.setMyMonsters(myGp.getMyMonsterArray());
-            gd.setMyItems(myGp.getMyItemArray());
 
+            // Save the dungeon data
+            Dungeon dungeon = myGp.getMyDungeon();
+            gd.setMyDungeon(myGp.getMyDungeon());
+
+            // Save the data for my lists
+//            gd.setMyMonsters(myGp.getMyMonsterArray());
+//            gd.setMyItems(myGp.getMyItemArray());
+            List<Item> itemList = myGp.getMyItemArray();
+            gd.setMyItems(itemList);
             // We want to write the game data to the save file
+
             output.writeObject(gd);
             // Then we close everything
             output.close();
@@ -65,6 +77,23 @@ public class SaveLoad {
             System.out.println("Save exception " + e.getMessage());
             e.printStackTrace();
         }
+//        // monster saving
+//        try {
+//            FileOutputStream file = new FileOutputStream("Resources/save/monster.save");
+//            ObjectOutputStream output = new ObjectOutputStream(file);
+//
+//            List<Monster> monsters = myGp.getMyMonsterArray();
+//
+//
+////            monsterList.setMyMonsters(myGp.getMyMonsterArray());
+//
+//            output.writeObject(monsters);
+//
+//        } catch (Exception e) {
+//            System.out.println("Save exception " + e.getMessage());
+//            e.printStackTrace();
+//        }
+
     }
 
     /**
@@ -78,9 +107,9 @@ public class SaveLoad {
             GameData gd = (GameData) input.readObject();
             // Then grab the number pertaining to the hero the player had chosen
             int num = 0;
-            if(gd.getMyHero().getChName().equals("Thief")) {
+            if (gd.getMyHero().getChName().equals("Thief")) {
                 num = 1;
-            } else if(gd.getMyHero().getChName().equals("Warrior")) {
+            } else if (gd.getMyHero().getChName().equals("Warrior")) {
                 num = 2;
             } else {
                 num = 3;
@@ -101,10 +130,14 @@ public class SaveLoad {
             myGp.getMyHero().setMyWorldXCoordinate(gd.getMyWorldX());
             myGp.getMyHero().setMyWorldYCoordinate(gd.getMyWorldY());
             // Load in the dungeon data
-            myGp.setMyDungeon(gd.getMyDungeon());
+            Dungeon dungeon = gd.getMyDungeon();
+            myGp.setMyDungeon(dungeon);
+
+            List<Item> itemList = gd.getMyItems();
+            myGp.setItemList(itemList);
+
             // Load lists
 //            myGp.setMonsterList(gd.getMyMonsters());
-//            myGp.setItemList(gd.getMyItems());
 
             // Then close everything
             input.close();
@@ -114,5 +147,8 @@ public class SaveLoad {
             System.out.println("Load exception " + e.getMessage());
             e.printStackTrace();
         }
+
+
+
     }
 }
