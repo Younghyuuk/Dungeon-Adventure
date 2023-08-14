@@ -85,15 +85,6 @@ public class GameData implements Serializable {
 
     //Map items
 
-    public String myItemName;
-
-    public int myItemWorldX;
-
-    public int myItemWorldY;
-
-    public boolean myItemFound;
-
-    public Item myItem;
 
     /**
      * Constructs the game data that will be saved.
@@ -372,20 +363,6 @@ public class GameData implements Serializable {
         myGp = theGP;
     }
 
-    public void setItemName(String theName) {
-        myItemName = theName;
-    }
-
-    public void setItemWorldY(int theWorldY) {
-        myItemWorldY = theWorldY;
-    }
-
-    public void setItemFound(boolean theItemFound) {
-        myItemFound = theItemFound;
-    }
-    public void setItemWorldX(int theWorldX) {
-        myItemWorldX = theWorldX;
-    }
     /**
      * Sets the list containing all the monsters in the dungeon.
      *

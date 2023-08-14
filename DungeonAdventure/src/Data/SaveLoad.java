@@ -121,8 +121,33 @@ public class SaveLoad {
             Dungeon dungeon = gd.getMyDungeon();
             myGp.setMyDungeon(dungeon);
 
-//            List<Monster> monsterList = gd.getMyMonsters();
-//            myGp.setMonsterList(monsterList);
+
+            List<Monster> monsterList = new ArrayList<>();
+
+            for (Monster savedMonster : gd.getMyMonsters()) {
+                MonsterDataBase mon = new MonsterDataBase(myGp);
+                if (savedMonster.isAlive()) {
+                    // Create new monster instances based on saved data and add them to the list
+                    // For example:
+                    if (savedMonster.getChName().equals("Gremlin")) {
+                        Monster test = mon.getMonster("Gremlin");
+                        test.setMyWorldXCoordinate(savedMonster.getMyWorldXCoordinate());
+                        test.setMyWorldYCoordinate(savedMonster.getMyWorldYCoordinate());
+                        monsterList.add(test);
+                    } else if (savedMonster.getChName().equals("Skeleton")) {
+                        Monster test = mon.getMonster("Skeleton");
+                        test.setMyWorldXCoordinate(savedMonster.getMyWorldXCoordinate());
+                        test.setMyWorldYCoordinate(savedMonster.getMyWorldYCoordinate());
+                        monsterList.add(test);
+                    } else {
+                        Monster test = mon.getMonster("Ogre");
+                        test.setMyWorldXCoordinate(savedMonster.getMyWorldXCoordinate());
+                        test.setMyWorldYCoordinate(savedMonster.getMyWorldYCoordinate());
+                        monsterList.add(test);
+                    }
+                }
+            }
+            myGp.setMonsterList(monsterList);
 
             List<Item> itemList = new ArrayList<>();
 

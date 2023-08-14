@@ -316,6 +316,9 @@ public class GamePanel extends JPanel implements Runnable, Serializable {
     public void setItemList(final List<Item> theItemList) {
         myItemArray = theItemList;
     }
+    public void setPillarList(final List<FourPillars> thePillarsList) {
+        myPillarArray = thePillarsList;
+    }
 
     /**
      * Sets the current game state.
