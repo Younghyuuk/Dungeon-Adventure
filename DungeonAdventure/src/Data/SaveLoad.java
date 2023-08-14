@@ -68,6 +68,7 @@ public class SaveLoad {
             gd.setMyPillars(myGp.getMyPillarArray());
 
             // We want to write the game data to the save file
+            gd.setMyWinCount(myGp.getWinCount());
 
             output.writeObject(gd);
             // Then we close everything
@@ -172,7 +173,7 @@ public class SaveLoad {
                 }
             }
             myGp.setPillarList(pillarList);
-
+            myGp.setMyWinCount(gd.getMyWinCount());
 
             // Then close everything
             input.close();

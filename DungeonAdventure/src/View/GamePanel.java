@@ -197,7 +197,7 @@ public class GamePanel extends JPanel implements Runnable, Serializable {
         setFocusable(true);
         myGameState = TITLE_STATE;
         setMyHero(1);
-        System.out.println(myDungeon);
+        System.out.println(winCount);
     }
 
     /**
@@ -509,6 +509,9 @@ public class GamePanel extends JPanel implements Runnable, Serializable {
         }
     }
 
+    public void setMyWinCount(int theWinCount) {
+        winCount = theWinCount;
+    }
 
 
     @Override
