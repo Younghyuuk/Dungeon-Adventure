@@ -1,5 +1,6 @@
 package Model;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Serializable;
@@ -26,10 +27,7 @@ public class Dungeon implements Serializable {
      * A 2D array that contains the doors for each room.
      */
     private int[][] myDoors;
-    /**
-     * The file to output the text version of the dungeon to.
-     */
-    private String TEXT_DUNGEON = "Resources/map/dungeon.txt";
+
     /**
      * The height, in rooms, of the dungeon (the Y).
      */
@@ -68,7 +66,7 @@ public class Dungeon implements Serializable {
     /**
      * Constructs the randomly generated dungeon.
      */
-    public Dungeon() {
+    public Dungeon(final String theFileName) {
         // Set up the size of the dungeon
         myRooms = new Room[DUNGEON_HEIGHT][DUNGEON_WIDTH];
         // And the array of the visited rooms
@@ -82,7 +80,7 @@ public class Dungeon implements Serializable {
         // Next, we need to create every room
         createRooms();
         // Finally, we will output the dungeon to a text file to use with the GUI
-        textDungeon(TEXT_DUNGEON);
+        textDungeon(theFileName);
     }
 
     /**
@@ -214,6 +212,7 @@ public class Dungeon implements Serializable {
         }
     }
 
+
     /**
      * Helper method to initialize 'myDoors'.
      */
@@ -227,9 +226,7 @@ public class Dungeon implements Serializable {
         myDoors = theDoors;
     }
 
-    public void setTextDungeon(String theTextDungeon) {
-        TEXT_DUNGEON = theTextDungeon;
-    }
+
     /**
      * Helper method used by 'connectRooms' to check if two rooms are connected or not.
      *
@@ -510,10 +507,10 @@ public class Dungeon implements Serializable {
      *
      * @param theFileName The name of the file to output to.
      */
-    protected void textDungeon(final String theFileName) {
+    public void textDungeon(final String theFileName) {
         try {
-//            String dungeon = this.toString();
             FileWriter fileWriter = new FileWriter(theFileName);
+            System.out.println("code reaches here");
             fileWriter.write(this.toString());
             fileWriter.close();
         } catch (IOException e) {
@@ -580,9 +577,6 @@ public class Dungeon implements Serializable {
         return myRooms;
     }
 
-    public String getTEXT_DUNGEON() {
-        return TEXT_DUNGEON;
-    }
 
     public int[][] getDoors() {
         return myDoors;

@@ -51,7 +51,9 @@ public class FourPillars extends Item implements Serializable {
             throw new RuntimeException(e);
         }
     }
-
+    public String getMyName() {
+        return myName;
+    }
     /**
      * Finds the specific image associated with the pillar's name to give to 'Item'.
      *

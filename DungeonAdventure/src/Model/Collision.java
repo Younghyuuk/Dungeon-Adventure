@@ -2,6 +2,7 @@ package Model;
 
 import View.GamePanel;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.List;
 
@@ -9,6 +10,11 @@ import java.util.List;
  * This class checks if the player collides with any objects within the dungeon.
  */
 public class Collision implements Serializable {
+    /**
+     * The serial ID associated with this 'GameData' object.
+     */
+    @Serial
+    private static final long serialVersionUID = 123456789L;
     /**
      * The game panel that the character and entities are drawn on.
      */
