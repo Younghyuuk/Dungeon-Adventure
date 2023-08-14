@@ -499,7 +499,7 @@ public class Dungeon implements Serializable {
      *
      * @param theFileName The name of the file to output to.
      */
-    protected void textDungeon(final String theFileName) {
+    public void textDungeon(final String theFileName) {
         try {
             FileWriter fileWriter = new FileWriter(theFileName);
             System.out.println("code reaches here");

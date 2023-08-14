@@ -116,7 +116,12 @@ public class SaveLoad {
             // Load in the dungeon data
             Dungeon dungeon;
             dungeon = gd.getMyDungeon();
-
+            for(int i = 0; i < dungeon.getDungeonWidth(); i++) {
+                for(int j = 0; j < dungeon.getDungeonHeight(); j++) {
+//                    myGp.getMyDungeon().getRooms()
+                }
+            }
+            dungeon.textDungeon("Resources/save/loadMap");
             myGp.setMyDungeon(dungeon);
 
 
