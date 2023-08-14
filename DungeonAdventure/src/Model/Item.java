@@ -4,17 +4,22 @@ import View.GamePanel;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.Serial;
 import java.io.Serializable;
 
 /**
  * An abstract class representing an item that could appear in a room.
  */
 public abstract class Item implements Serializable {
-
+    /**
+     * The serial ID associated with this 'GameData' object.
+     */
+    @Serial
+    private static final long serialVersionUID = 123456789L;
     /**
      * The game panel to draw the item onto.
      */
-    private transient GamePanel myGamePanel;
+    private GamePanel myGamePanel;
     /**
      * The world-x coordinate of the item.
      */
@@ -40,7 +45,6 @@ public abstract class Item implements Serializable {
     /**
      * Constructs an item.
      *
-
      * @param theGP          The 'GamePanel' to draw the item onto.
      * @param theWorldX      The world-x coordinate to draw the item at.
      * @param theWorldY      The world-y coordinate to draw the item at.
@@ -129,10 +133,7 @@ public abstract class Item implements Serializable {
      * @param theImage The image to set 'myItemImage' to.
      */
     public void setImage(final BufferedImage theImage) {
-//        if (theImage.toString().equals("myHealth_1")) {
-            myItemImage = theImage;
-//        }
-
+        myItemImage = theImage;
     }
 
     /**

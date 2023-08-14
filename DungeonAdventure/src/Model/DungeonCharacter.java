@@ -4,6 +4,7 @@ import View.GamePanel;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.Serial;
 import java.io.Serializable;
 
 /**
@@ -15,9 +16,13 @@ import java.io.Serializable;
  */
 
 public abstract class DungeonCharacter implements Serializable {
+    /**
+     * The serial ID associated with this 'GameData' object.
+     */
+    @Serial
+    private static final long serialVersionUID = 123456789L;
 
 //    private static final long serialversionUID = 12345L;
-
 
     /**
      * The int myHp that tracks the character health points.
@@ -47,12 +52,10 @@ public abstract class DungeonCharacter implements Serializable {
 
     public transient GamePanel myGamePanel;
     public transient BufferedImage up1, up2, down1, down2, left1, left2, right1, right2;
-    public String myDirection = "down";
-    public int mySpeed;
+    public transient String myDirection = "down";
+    public transient int mySpeed;
     public boolean myCollision = false;
-
-    public transient Rectangle mySolidArea;
-
+    public Rectangle mySolidArea;
     public transient int mySpriteCounter = 0;
     public transient int mySpriteNum = 1;
     public int myWorldXCoordinate;

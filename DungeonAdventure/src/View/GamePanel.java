@@ -6,12 +6,20 @@ import Model.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.Serial;
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * This class acts as the GUI for the DungeonAdventure game.
  */
-public class GamePanel extends JPanel implements Runnable {
+public class GamePanel extends JPanel implements Runnable, Serializable {
+    /**
+     * The serial ID associated with this 'GameData' object.
+     */
+    @Serial
+    private static final long serialVersionUID = 123456789L;
     /**
      * The actual size of a sprite (16x16).
      */
@@ -23,31 +31,36 @@ public class GamePanel extends JPanel implements Runnable {
     /**
      * The size we want the sprites to be to fit the screen.
      */
-    private transient final int mySpriteSize = ORIGINAL_SPRITE_SIZE * SCALE;
+    private final int mySpriteSize = ORIGINAL_SPRITE_SIZE * SCALE;
     /**
      * The amount of tiles to fit into a row of the screen.
      */
-    private transient final int myMaxScreenRow = 12;
+    private final int myMaxScreenRow = 12;
     /**
      * The amount of tiles to fit into a column of the screen.
      */
-    private transient final int myMaxScreenCol = 16;
+    private final int myMaxScreenCol = 16;
     /**
      * The width of the screen based on the tile size and the max amount of tiles in a column.
      */
-    private transient final int myScreenWidth = myMaxScreenCol * mySpriteSize;
+    private final int myScreenWidth = myMaxScreenCol * mySpriteSize;
     /**
      * The height of the screen based on the tile size and the max amount of tiles in a row.
      */
-    private transient final int myScreenHeight = myMaxScreenRow * mySpriteSize;
+    private final int myScreenHeight = myMaxScreenRow * mySpriteSize;
     /**
      * The amount of frames per second this game will have.
      */
     private final int FPS = 60;
     /**
+     * The file to output the text version of the dungeon to.
+     */
+    private String myDungeonFile = "Resources/map/dungeon.txt";
+    /**
      * The dungeon object that the game panel will use to load the game correctly.
      */
-    private Dungeon myDungeon = new Dungeon();
+    private Dungeon myDungeon = new Dungeon(myDungeonFile);
+
 
     /**
      * The width of the game column-wise. <br>
@@ -66,11 +79,11 @@ public class GamePanel extends JPanel implements Runnable {
     /**
      * The thread to use to run the game.
      */
-    private transient final Thread gameThread = new Thread(this);
+    private final transient Thread gameThread = new Thread(this);
     /**
      * The object that will check for collisions between the player and everything in the dungeon.
      */
-    private transient final Collision myCollision = new Collision(this);
+    private final Collision myCollision = new Collision(this);
     /**
      * The object that will check for player key inputs to move the character.
      */
@@ -111,15 +124,15 @@ public class GamePanel extends JPanel implements Runnable {
     /**
      * The object that initiates all the entities within the dungeon.
      */
-    InitiateEntities myIE = new InitiateEntities(this);
+    private InitiateEntities myIE = new InitiateEntities(this);
     /**
      * The list of all pillars stored within the game.
      */
-    List<FourPillars> myPillarArray = myIE.getMyFourPillarsArray();
+    private List<FourPillars> myPillarArray = myIE.getMyFourPillarsArray();
     /**
      * The list of all the monsters stored within the game.
      */
-    List<Monster> myMonsterArray = myIE.getMyMonsterArray();
+    private List<Monster> myMonsterArray = myIE.getMyMonsterArray();
     /**
      * A list of every item contained within the dungeon.
      */
@@ -169,11 +182,11 @@ public class GamePanel extends JPanel implements Runnable {
     /**
      * Boolean representing whether the player is looking at the about section of the game.
      */
-
-
-    public transient SaveLoad saveLoad = new SaveLoad(this);
-
-    private transient boolean myAboutState = false;
+    private boolean myAboutState = false;
+    /**
+     * We use this to properly save and load the game.
+     */
+    private final transient SaveLoad mySaveLoad = new SaveLoad(this);
 
     /**
      * Creates and sets up the game panel.
@@ -186,6 +199,7 @@ public class GamePanel extends JPanel implements Runnable {
         setFocusable(true);
         myGameState = TITLE_STATE;
         setMyHero(1);
+        System.out.println(winCount);
     }
 
     /**
@@ -287,6 +301,27 @@ public class GamePanel extends JPanel implements Runnable {
         myDungeon = theDungeon;
     }
 
+
+    /**
+     * Sets the monster list to a new monster list.
+     *
+     * @param theMonsterList The input monster list that will be used in the game.
+     */
+    public void setMonsterList(final List<Monster> theMonsterList) {
+        myMonsterArray = theMonsterList;
+    }
+
+    /**
+     * Sets the item list to a new item list.
+     *
+     * @param theItemList The input item list that will be used in the game.
+     */
+    public void setItemList(final List<Item> theItemList) {
+        myItemArray = theItemList;
+    }
+    public void setPillarList(final List<FourPillars> thePillarsList) {
+        myPillarArray = thePillarsList;
+    }
 
     /**
      * Sets the current game state.
@@ -422,6 +457,14 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     /**
+     * Gets the object used to save and load the game.
+     *
+     * @return The 'SaveLoad' object to save and load the game.
+     */
+    public SaveLoad getSaveLoad() {
+        return mySaveLoad;
+    }
+    /**
      * Increases the amount of pillars that the player has obtained by 1.
      */
     public void incWinCount() {
@@ -446,8 +489,6 @@ public class GamePanel extends JPanel implements Runnable {
         return myAboutState;
     }
 
-    // For now, 1 is thief, 2 is Priestess, and 3 is Warrior.
-
     /**
      * Sets the hero that the player is using. <br>
      * 1 - Thief <br>
@@ -469,6 +510,10 @@ public class GamePanel extends JPanel implements Runnable {
             myHero = new Priestess(this, myKeyInputs);
             myHeroNum = 3;
         }
+    }
+
+    public void setMyWinCount(int theWinCount) {
+        winCount = theWinCount;
     }
 
 
