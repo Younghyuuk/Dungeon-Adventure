@@ -55,11 +55,11 @@ public class GamePanel extends JPanel implements Runnable, Serializable {
     /**
      * The file to output the text version of the dungeon to.
      */
-    private final static String DUNGEON_FILE = "Resources/map/dungeon.txt";
+    private String myDungeonFile = "Resources/map/dungeon.txt";
     /**
      * The dungeon object that the game panel will use to load the game correctly.
      */
-    private Dungeon myDungeon = new Dungeon(DUNGEON_FILE);
+    private Dungeon myDungeon = new Dungeon(myDungeonFile);
     /**
      * The width of the game column-wise. <br>
      * Determined by the dungeon width (the amount of rooms in each column) * the width of a room.

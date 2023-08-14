@@ -209,6 +209,7 @@ public class Dungeon implements Serializable {
         }
     }
 
+
     /**
      * Helper method to initialize 'myDoors'.
      */
@@ -566,6 +567,10 @@ public class Dungeon implements Serializable {
      */
     public Room[][] getRooms(){
         return myRooms;
+    }
+
+    public int[][] getMyDoors() {
+        return myDoors;
     }
 
     /**

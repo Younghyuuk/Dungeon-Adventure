@@ -42,8 +42,7 @@ public class SaveLoad {
             FileOutputStream file = new FileOutputStream(FILENAME);
             ObjectOutputStream output = new ObjectOutputStream(file);
             GameData gd = new GameData();
-            // Save the game panel
-//            gd.setMyGp(myGp);
+
             // Save the hero data
             gd.setMyHero(myGp.getMyHero());
             gd.setMyHeroHp(myGp.getMyHero().getHp());
@@ -101,9 +100,7 @@ public class SaveLoad {
             } else {
                 num = 3;
             }
-            // Load in the game panel
-//            myGp = gd.getMyGp();
-            // Load in the hero data
+
             myGp.setMyHero(num);
             myGp.getMyHero().setHp(gd.getMyHeroHp());
             myGp.getMyHero().setChName(gd.getMyHeroName());
@@ -117,7 +114,9 @@ public class SaveLoad {
             myGp.getMyHero().setMyWorldXCoordinate(gd.getMyWorldX());
             myGp.getMyHero().setMyWorldYCoordinate(gd.getMyWorldY());
             // Load in the dungeon data
-            Dungeon dungeon = gd.getMyDungeon();
+            Dungeon dungeon;
+            dungeon = gd.getMyDungeon();
+
             myGp.setMyDungeon(dungeon);
 
 
