@@ -8,7 +8,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.Serial;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -60,7 +59,6 @@ public class GamePanel extends JPanel implements Runnable, Serializable {
      * The dungeon object that the game panel will use to load the game correctly.
      */
     private Dungeon myDungeon = new Dungeon(myDungeonFile);
-
 
     /**
      * The width of the game column-wise. <br>
@@ -512,11 +510,17 @@ public class GamePanel extends JPanel implements Runnable, Serializable {
         }
     }
 
+    /**
+     * Sets the win count for the game.
+     * @param theWinCount the number of pillars found.
+     */
     public void setMyWinCount(int theWinCount) {
         winCount = theWinCount;
     }
 
-
+    /**
+     * The game loop.
+     */
     @Override
     public void run() {
         // Game Loop. Repainting the screen 60 FPS. Credit given to ryisnow.
@@ -552,10 +556,12 @@ public class GamePanel extends JPanel implements Runnable, Serializable {
         if (winCount == 4) {
             setMyGameState(5);
         }
-//        System.out.println(myHero.getHp());
     }
 
-    // This method updates our view.
+    /**
+     * Paints the panel dependent on its state.
+     * @param theGraphics the pen used to draw the panel.
+     */
     @Override
     public void paintComponent(Graphics theGraphics) {
         super.paintComponent(theGraphics);

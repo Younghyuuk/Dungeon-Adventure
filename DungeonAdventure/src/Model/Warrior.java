@@ -5,7 +5,6 @@ import View.GamePanel;
 
 import java.awt.*;
 import java.io.IOException;
-import java.io.Serializable;
 import java.util.Objects;
 
 import static javax.imageio.ImageIO.read;
@@ -112,47 +111,53 @@ public class Warrior extends Heroes {
         }
         return special.toString();
     }
-
+    /**
+     * Method that draws the hp bar.
+     * @param theGraphics the pen that is used to draw.
+     */
     @Override
     public void drawHpBar(Graphics2D theGraphics) {
         int hp = this.getHp();
         if (hp >= 150) {
-            theGraphics.drawImage(hp0, getMyScreenMiddleX(), getMyScreensMiddleY() - myGamePanel.getSpriteSize(), myGamePanel.getSpriteSize(), myGamePanel.getSpriteSize(), null);
+            theGraphics.drawImage(hp0, getMyScreensMiddleX(), getMyScreensMiddleY() - myGamePanel.getSpriteSize(), myGamePanel.getSpriteSize(), myGamePanel.getSpriteSize(), null);
         } else if (hp >= 140) {
-            theGraphics.drawImage(hp1, getMyScreenMiddleX(), getMyScreensMiddleY() - myGamePanel.getSpriteSize(), myGamePanel.getSpriteSize(), myGamePanel.getSpriteSize(), null);
+            theGraphics.drawImage(hp1, getMyScreensMiddleX(), getMyScreensMiddleY() - myGamePanel.getSpriteSize(), myGamePanel.getSpriteSize(), myGamePanel.getSpriteSize(), null);
         } else if (hp >= 130) {
-            theGraphics.drawImage(hp2, getMyScreenMiddleX(), getMyScreensMiddleY() - myGamePanel.getSpriteSize(), myGamePanel.getSpriteSize(), myGamePanel.getSpriteSize(), null);
+            theGraphics.drawImage(hp2, getMyScreensMiddleX(), getMyScreensMiddleY() - myGamePanel.getSpriteSize(), myGamePanel.getSpriteSize(), myGamePanel.getSpriteSize(), null);
         } else if (hp >= 120) {
-            theGraphics.drawImage(hp3, getMyScreenMiddleX(), getMyScreensMiddleY() - myGamePanel.getSpriteSize(), myGamePanel.getSpriteSize(), myGamePanel.getSpriteSize(), null);
+            theGraphics.drawImage(hp3, getMyScreensMiddleX(), getMyScreensMiddleY() - myGamePanel.getSpriteSize(), myGamePanel.getSpriteSize(), myGamePanel.getSpriteSize(), null);
         } else if (hp >= 110) {
-            theGraphics.drawImage(hp4, getMyScreenMiddleX(), getMyScreensMiddleY() - myGamePanel.getSpriteSize(), myGamePanel.getSpriteSize(), myGamePanel.getSpriteSize(), null);
+            theGraphics.drawImage(hp4, getMyScreensMiddleX(), getMyScreensMiddleY() - myGamePanel.getSpriteSize(), myGamePanel.getSpriteSize(), myGamePanel.getSpriteSize(), null);
         } else if (hp >= 100) {
-            theGraphics.drawImage(hp5, getMyScreenMiddleX(), getMyScreensMiddleY() - myGamePanel.getSpriteSize(), myGamePanel.getSpriteSize(), myGamePanel.getSpriteSize(), null);
+            theGraphics.drawImage(hp5, getMyScreensMiddleX(), getMyScreensMiddleY() - myGamePanel.getSpriteSize(), myGamePanel.getSpriteSize(), myGamePanel.getSpriteSize(), null);
         } else if (hp >= 90) {
-            theGraphics.drawImage(hp6, getMyScreenMiddleX(), getMyScreensMiddleY() - myGamePanel.getSpriteSize(), myGamePanel.getSpriteSize(), myGamePanel.getSpriteSize(), null);
+            theGraphics.drawImage(hp6, getMyScreensMiddleX(), getMyScreensMiddleY() - myGamePanel.getSpriteSize(), myGamePanel.getSpriteSize(), myGamePanel.getSpriteSize(), null);
         } else if (hp >= 80) {
-            theGraphics.drawImage(hp7, getMyScreenMiddleX(), getMyScreensMiddleY() - myGamePanel.getSpriteSize(), myGamePanel.getSpriteSize(), myGamePanel.getSpriteSize(), null);
+            theGraphics.drawImage(hp7, getMyScreensMiddleX(), getMyScreensMiddleY() - myGamePanel.getSpriteSize(), myGamePanel.getSpriteSize(), myGamePanel.getSpriteSize(), null);
         } else if (hp >= 70) {
-            theGraphics.drawImage(hp8, getMyScreenMiddleX(), getMyScreensMiddleY() - myGamePanel.getSpriteSize(), myGamePanel.getSpriteSize(), myGamePanel.getSpriteSize(), null);
+            theGraphics.drawImage(hp8, getMyScreensMiddleX(), getMyScreensMiddleY() - myGamePanel.getSpriteSize(), myGamePanel.getSpriteSize(), myGamePanel.getSpriteSize(), null);
         } else if (hp >= 60) {
-            theGraphics.drawImage(hp9, getMyScreenMiddleX(), getMyScreensMiddleY() - myGamePanel.getSpriteSize(), myGamePanel.getSpriteSize(), myGamePanel.getSpriteSize(), null);
+            theGraphics.drawImage(hp9, getMyScreensMiddleX(), getMyScreensMiddleY() - myGamePanel.getSpriteSize(), myGamePanel.getSpriteSize(), myGamePanel.getSpriteSize(), null);
         } else if (hp >= 50) {
-            theGraphics.drawImage(hp10, getMyScreenMiddleX(), getMyScreensMiddleY() - myGamePanel.getSpriteSize(), myGamePanel.getSpriteSize(), myGamePanel.getSpriteSize(), null);
+            theGraphics.drawImage(hp10, getMyScreensMiddleX(), getMyScreensMiddleY() - myGamePanel.getSpriteSize(), myGamePanel.getSpriteSize(), myGamePanel.getSpriteSize(), null);
         } else if (hp >= 40) {
-            theGraphics.drawImage(hp11, getMyScreenMiddleX(), getMyScreensMiddleY() - myGamePanel.getSpriteSize(), myGamePanel.getSpriteSize(), myGamePanel.getSpriteSize(), null);
+            theGraphics.drawImage(hp11, getMyScreensMiddleX(), getMyScreensMiddleY() - myGamePanel.getSpriteSize(), myGamePanel.getSpriteSize(), myGamePanel.getSpriteSize(), null);
         } else if (hp >= 30) {
-            theGraphics.drawImage(hp12, getMyScreenMiddleX(), getMyScreensMiddleY() - myGamePanel.getSpriteSize(), myGamePanel.getSpriteSize(), myGamePanel.getSpriteSize(), null);
+            theGraphics.drawImage(hp12, getMyScreensMiddleX(), getMyScreensMiddleY() - myGamePanel.getSpriteSize(), myGamePanel.getSpriteSize(), myGamePanel.getSpriteSize(), null);
         } else if (hp >= 20) {
-            theGraphics.drawImage(hp13, getMyScreenMiddleX(), getMyScreensMiddleY() - myGamePanel.getSpriteSize(), myGamePanel.getSpriteSize(), myGamePanel.getSpriteSize(), null);
+            theGraphics.drawImage(hp13, getMyScreensMiddleX(), getMyScreensMiddleY() - myGamePanel.getSpriteSize(), myGamePanel.getSpriteSize(), myGamePanel.getSpriteSize(), null);
         } else if (hp >= 10) {
-            theGraphics.drawImage(hp14, getMyScreenMiddleX(), getMyScreensMiddleY() - myGamePanel.getSpriteSize(), myGamePanel.getSpriteSize(), myGamePanel.getSpriteSize(), null);
+            theGraphics.drawImage(hp14, getMyScreensMiddleX(), getMyScreensMiddleY() - myGamePanel.getSpriteSize(), myGamePanel.getSpriteSize(), myGamePanel.getSpriteSize(), null);
         } else if (hp >= 5) {
-            theGraphics.drawImage(hp15, getMyScreenMiddleX(), getMyScreensMiddleY() - myGamePanel.getSpriteSize(), myGamePanel.getSpriteSize(), myGamePanel.getSpriteSize(), null);
+            theGraphics.drawImage(hp15, getMyScreensMiddleX(), getMyScreensMiddleY() - myGamePanel.getSpriteSize(), myGamePanel.getSpriteSize(), myGamePanel.getSpriteSize(), null);
         } else {
-            theGraphics.drawImage(hp16, getMyScreenMiddleX(), getMyScreensMiddleY() - myGamePanel.getSpriteSize(), myGamePanel.getSpriteSize(), myGamePanel.getSpriteSize(), null);
+            theGraphics.drawImage(hp16, getMyScreensMiddleX(), getMyScreensMiddleY() - myGamePanel.getSpriteSize(), myGamePanel.getSpriteSize(), myGamePanel.getSpriteSize(), null);
         }
     }
 
+    /**
+     * Returns the heroes image.
+     */
     @Override
     public void getHeroesImage() {
         try {
@@ -164,10 +169,8 @@ public class Warrior extends Heroes {
             left2 = read(Objects.requireNonNull(getClass().getResourceAsStream("/warrior/warrior_left2.png")));
             right1 = read(Objects.requireNonNull(getClass().getResourceAsStream("/warrior/warrior_right1.png")));
             right2 = read(Objects.requireNonNull(getClass().getResourceAsStream("/warrior/warrior_right2.png")));
-
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
-
 }

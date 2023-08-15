@@ -5,7 +5,6 @@ import View.GamePanel;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.Serializable;
 import java.util.Random;
 
 /**
@@ -44,9 +43,17 @@ public abstract class Monster extends DungeonCharacter {
         mySpeed = 2;
     }
 
+    /**
+     * Returns the solid area of the monster.
+     * @return the solid area of the monster.
+     */
     public Rectangle getMySolidArea() {
         return mySolidArea;
     }
+
+    /**
+     * Resets the monsters solid area.
+     */
     public void resetSolidArea(){
         mySolidArea.x = 0;
         mySolidArea.y = 0;
@@ -54,11 +61,9 @@ public abstract class Monster extends DungeonCharacter {
 
     /**
      * Monster attack.
-     *
      * @param theOpp which the monster will target
      */
     public abstract String regularAttack(final DungeonCharacter theOpp);
-
     /**
      * Abstract method for monster child classes to heal.
      */
@@ -76,6 +81,10 @@ public abstract class Monster extends DungeonCharacter {
         }
         return healLog.toString();
     }
+
+    /**
+     * Updates the monster's data.
+     */
     public void update() {
         setAction();
         myCollision = false;
@@ -96,6 +105,9 @@ public abstract class Monster extends DungeonCharacter {
         }
     }
 
+    /**
+     * Sets the monsters movement direction with "randomness".
+     */
     public void setAction() {
         actionLockCounter++;
         if (actionLockCounter == 30) {
@@ -126,6 +138,11 @@ public abstract class Monster extends DungeonCharacter {
             actionLockCounter = 0;
         }
     }
+
+    /**
+     * Draws the monster on the GUI.
+     * @param theGraphics the pen used to draw the monster.
+     */
     public void draw(final Graphics2D theGraphics) {
 
         int screenX = myWorldXCoordinate - myGamePanel.getMyHero().getMyWorldXCoordinate() + myGamePanel.getMyHero().getMyScreensMiddleX();
@@ -171,16 +188,31 @@ public abstract class Monster extends DungeonCharacter {
         }
     }
 
+    /**
+     * Returns the monster image.
+     */
     public abstract void getMonsterImage();
 
+    /**
+     * Returns the chance to heal.
+     * @return the chance to heal.
+     */
     public double getChanceHeal() {
         return myChanceHeal;
     }
 
+    /**
+     * Return the lowest amount to heal.
+     * @return the lowest amount to heal.
+     */
     public int getMinHeal() {
         return myMinHeal;
     }
 
+    /**
+     * Return the max amount to heal.
+     * @return the max amount to heal.
+     */
     public int getMaxHeal() {
         return myMaxHeal;
     }

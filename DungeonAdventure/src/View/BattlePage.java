@@ -1,25 +1,40 @@
 package View;
 
-import Model.Battle;
-
 import java.awt.*;
 import java.awt.font.LineBreakMeasurer;
 import java.awt.font.TextLayout;
 import java.text.AttributedString;
 
 public class BattlePage {
-    Battle myBattle;
+    /**
+     * A game panel object.
+     */
     private final GamePanel myGamePanel;
+    /**
+     * A array that holds the battle log strings.
+     */
     private String[] myBattleLog;
 
+    /**
+     * A Constructor that creats a Battle Page Object.
+     * @param theGamePanel the main gamePanel.
+     */
     public BattlePage(final GamePanel theGamePanel) {
         myGamePanel = theGamePanel;
     }
 
+    /**
+     * A mehtod that sets the battle log.
+     * @param theBattle a battle log that was created during monster/player collision.
+     */
     public void setMyBattleLog(String[] theBattle) {
         myBattleLog = theBattle;
     }
 
+    /**
+     * The method that draws the battle page.
+     * @param theGraphics the pen used to draw the battle page.
+     */
     public void draw(Graphics2D theGraphics) {
         Graphics2D myPen = theGraphics;
         myPen.setColor(Color.black);

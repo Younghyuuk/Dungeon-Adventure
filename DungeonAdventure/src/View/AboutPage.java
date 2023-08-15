@@ -1,16 +1,25 @@
 package View;
 
 import java.awt.*;
-import java.util.Locale;
 
 public class AboutPage {
-
+    /**
+     * A GamePanel object.
+     */
     private final GamePanel myGamePanel;
 
+    /**
+     * Constructor that creates the AboutPage object and sets its GamePanel.
+     * @param theGamePanel the main game panel.
+     */
     public AboutPage(final GamePanel theGamePanel){
         myGamePanel = theGamePanel;
     }
 
+    /**
+     * A method that draws the about page.
+     * @param theGraphics the pen used to draw.
+     */
     public void draw (Graphics2D theGraphics){
         Graphics2D myPen = theGraphics;
         myPen.setColor(Color.black);
