@@ -8,11 +8,23 @@ import java.util.Objects;
 import java.util.Scanner;
 
 public class TileManager {
-
+    /**
+     * The main game panel.
+     */
     private final GamePanel myGamePanel;
+    /**
+     * A array of tiles that holds differnt types of tiles.
+     */
     private final Tile[] myTile;
+    /**
+     * A 2d array made from a text file.
+     */
     private final int myMapArr[][];
 
+    /**
+     * Constructor that creates the TileManage object.
+     * @param theGamePanel the main game panel.
+     */
     public TileManager(final GamePanel theGamePanel) {
         myGamePanel = theGamePanel;
         myTile = new Tile[10];
@@ -21,8 +33,10 @@ public class TileManager {
         loadMap("/map/dungeon.txt");
     }
 
+    /**
+     * Set the tile's to their images.
+     */
     public void getTileImage() {
-
         try {
             myTile[0] = new Tile();
             myTile[0].setMyImage(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Tiles/stoneFloor0.png"))));
@@ -37,14 +51,27 @@ public class TileManager {
             throw new RuntimeException(e);
         }
     }
+
+    /**
+     * Returns the map array.
+     * @return a 2d array that represents the dungeon map.
+     */
     public int[][] getMyMapArray() {
         return myMapArr;
     }
+
+    /**
+     * Returns the tile array.
+     * @return the tile array.
+     */
     public Tile[] getMyTile() {
         return myTile;
     }
 
-    // This method reads a txt file.
+    /**
+     * Loads the dungeon.txt file and converts it to a 2d array.
+     * @param theMap the dungeon.txt file.
+     */
     public void loadMap(final String theMap) {
         int col = 0;
         int row = 0;
@@ -65,6 +92,10 @@ public class TileManager {
         }
     }
 
+    /**
+     * Draws the world map.
+     * @param theGraphics the pen used to draw.
+     */
     public void draw(final Graphics2D theGraphics) {
 
         int worldRow = 0;

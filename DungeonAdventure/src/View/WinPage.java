@@ -9,18 +9,44 @@ import static javax.imageio.ImageIO.read;
 
 public class WinPage {
 
-    private GamePanel myGamePanel;
+    /**
+     * The main game panel.
+     */
+    GamePanel myGamePanel;
+    /**
+     * The pen used to draw.
+     */
     private Graphics2D myPen;
+    /**
+     * Integer that represents the command we want.
+     */
     private int myCommandNum = 0;
+    /**
+     * An image of a thief.
+     */
     private transient BufferedImage myThiefImage;
+    /**
+     * An image of a warrior.
+     */
     private transient BufferedImage myWarriorImage;
+    /**
+     * An image of a priest.
+     */
     private transient BufferedImage myPriestImage;
 
+    /**
+     * Constructor that creates a TitlePage object.
+     * @param theGamePanel the main game panel.
+     */
     public WinPage(GamePanel theGamePanel){
         myGamePanel = theGamePanel;
         setMyImages();
     }
 
+    /**
+     * A method that draws the Win Page.
+     * @param theGraphics the pen used to draw.
+     */
     public void draw(Graphics2D theGraphics){
 
         myPen = theGraphics;
@@ -65,6 +91,10 @@ public class WinPage {
             myPen.drawString(">", x - myGamePanel.getSpriteSize(), y + myGamePanel.getSpriteSize()*6);
         }
     }
+
+    /**
+     * Sets the images of the thief, warrior and priest.
+     */
     public void setMyImages() {
         try {
             myThiefImage = read(Objects.requireNonNull(getClass().getResourceAsStream("/WinPage/win0.png")));
@@ -74,17 +104,33 @@ public class WinPage {
             throw new RuntimeException(e);
         }
     }
+
+    /**
+     * Method used to center a string.
+     * @param theText the string to center.
+     * @return the x coordinate that centers the string.
+     */
     public int getXToCenterString(String theText){
         int length = (int) myPen.getFontMetrics().getStringBounds(theText,myPen).getWidth();
         int x = myGamePanel.getMyScreenWidth()/2 - length/2;
         return x;
     }
+    /**
+     * Sets the command number to one.
+     */
     public void setCommandToLoadGame() {
         myCommandNum = 1;
     }
+    /**
+     * Sets the command number to zero.
+     */
     public void setCommandToNewGame() {
         myCommandNum = 0;
     }
+    /**
+     * Gets the command number.
+     * @return the command number.
+     */
     public int getMyCommandNum() {return myCommandNum;
     }
 }

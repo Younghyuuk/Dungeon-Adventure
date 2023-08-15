@@ -5,12 +5,10 @@ import View.GamePanel;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-
 import java.io.IOException;
 import java.util.Objects;
 
 import static javax.imageio.ImageIO.read;
-import java.io.Serializable;
 
 
 /**
@@ -21,17 +19,26 @@ import java.io.Serializable;
 public abstract class Heroes extends DungeonCharacter {
 
 //    private static final long serialversionUID = 123456L;
-
-
 //    private static final long serialVersionUID = 123456789L;
+    /**
+     * The x coordinate that is in the middle of screen.
+     */
     private int myScreensMiddleX;
+    /**
+     * The y coordinate that is in the middle of screen.
+     */
     private int myScreensMiddleY;
+    /**
+     * A Keyboard object.
+     */
     transient Keyboard myKeyInputs;
     /**
      * The double that gives the chance that the Hero will block.
      */
     private double myBlockChance;
-
+    /**
+     * A series of images that represent the heroes health.
+     */
     public transient BufferedImage hp0,hp1,hp2,hp3,hp4,hp5,hp6,hp7,hp8,hp9,hp10,hp11,hp12,hp13,hp14,hp15,hp16;
 
     /**
@@ -67,32 +74,43 @@ public abstract class Heroes extends DungeonCharacter {
         setHPBar();
     }
 
+    /**
+     * A method that return the screen's middle x coordinate.
+     * @return the x coordinate that is in the middle of the screen.
+     */
     public int getMyScreensMiddleX() {
         return myScreensMiddleX;
     }
 
+    /**
+     * Sets the heroes screens middle x coordinate.
+     * @param theScreensMiddleX the screens middle x coordinate.
+     */
     public void setMyScreensMiddleX(int theScreensMiddleX) {
         myScreensMiddleX = theScreensMiddleX;
     }
 
+    /**
+     * A method that return the screen's middle y coordinate.
+     * @return the y coordinate that is in the middle of the screen.
+     */
     public int getMyScreensMiddleY() {
         return myScreensMiddleY;
     }
-
+    /**
+     * Sets the heroes screens middle y coordinate.
+     * @param theScreensMiddleY the screens middle y coordinate.
+     */
     public void setMyScreensMiddleY(int theScreensMiddleY) {
         myScreensMiddleY = theScreensMiddleY;
     }
 
+    /**
+     * A Method that reset's the solid area of the hero.
+     */
     public void resetSolidArea() {
         mySolidArea.x = 12;
         mySolidArea.y = 12;
-    }
-
-    public void interactMonster(int i) {
-        if (i != 999) {
-            System.out.println("You hit the monster");
-        }
-
     }
 
 //    public GameData getHeroData() {
@@ -103,6 +121,9 @@ public abstract class Heroes extends DungeonCharacter {
 //        return heroData;
 //    }
 
+    /**
+     * A method that updates the heroes movement and direction.
+     */
     public void update() {
         if (myKeyInputs.up) {
             myDirection = "up";
@@ -119,7 +140,6 @@ public abstract class Heroes extends DungeonCharacter {
         myGamePanel.getMyCollision().checkTile(this);
         //Check Collision with Monsters
         int monster = myGamePanel.getMyCollision().checkEntity(this, myGamePanel.getMyMonsterArray());
-        interactMonster(monster);
         //Check Collision with Four Pillars
         int pillar = myGamePanel.getMyCollision().checkPillar(this, myGamePanel.getMyPillarArray());
         // Check collision with the items
@@ -143,6 +163,10 @@ public abstract class Heroes extends DungeonCharacter {
 
     }
 
+    /**
+     * Draw the hero.
+     * @param theGraphics the pen used to draw.
+     */
     public void draw(final Graphics2D theGraphics) {
         BufferedImage image = null;
 
@@ -180,13 +204,16 @@ public abstract class Heroes extends DungeonCharacter {
         theGraphics.drawImage(image, myScreensMiddleX, myScreensMiddleY, myGamePanel.getSpriteSize(), myGamePanel.getSpriteSize(), null);
         drawHpBar(theGraphics);
     }
+
+    /**
+     * Draws the hp bar.
+     * @param theGraphics the pen that is used to draw.
+     */
     abstract public void drawHpBar(Graphics2D theGraphics);
-    public int getMyScreenMiddleX(){
-        return myScreensMiddleX;
-    }
-    public int getMyScreenMiddleY(){
-        return myScreensMiddleY;
-    }
+
+    /**
+     * Sets the Hp Bar.
+     */
     public void setHPBar(){
         try {
             hp0 = read(Objects.requireNonNull(getClass().getResourceAsStream("/healthBar/healthBar00.png")));
@@ -211,6 +238,10 @@ public abstract class Heroes extends DungeonCharacter {
             throw new RuntimeException(e);
         }
     }
+
+    /**
+     * Abstract method that returns the heroes image.
+     */
     public abstract void getHeroesImage();
 
     /**

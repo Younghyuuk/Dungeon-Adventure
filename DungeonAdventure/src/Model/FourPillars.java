@@ -2,14 +2,12 @@ package Model;
 
 import View.GamePanel;
 
-import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.Objects;
 
 import static javax.imageio.ImageIO.read;
-
 /**
  * This class acts as all the four pillars in each of the corners of the game.
  */

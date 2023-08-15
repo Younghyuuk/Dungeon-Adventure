@@ -1,9 +1,6 @@
 package View;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.Serializable;
 
 /**
  * This class creates and serves as the menu bar at the top of the game screen.
@@ -12,14 +9,6 @@ public class MenuBar extends JMenuBar {
     /**
      * The game panel that will be used to draw the menu bar onto.
      */
-    public final String QUIT = "Quit";
-    /**
-     * The command associated with the Save option.
-     */
-
-    public final String SAVE = "Save";
-
-
     private final GamePanel myGamePanel;
 
     /**

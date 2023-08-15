@@ -42,6 +42,10 @@ public class Keyboard implements KeyListener {
     @Override
     public void keyTyped(final KeyEvent e) {}
 
+    /**
+     * Method that occurs when a key on the keyboard is pressed.
+     * @param e the event to be processed
+     */
     @Override
     public void keyPressed(final KeyEvent e) {
         if (myGamePanel.getMyGameState() == 0) {
@@ -158,6 +162,10 @@ public class Keyboard implements KeyListener {
         }
     }
 
+    /**
+     * Method that occurs when a key on the keyboard is released.
+     * @param e the event to be processed
+     */
     @Override
     public void keyReleased(final KeyEvent e) {
             int code = e.getKeyCode();

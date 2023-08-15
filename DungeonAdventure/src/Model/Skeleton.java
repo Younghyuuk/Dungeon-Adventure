@@ -34,6 +34,9 @@ public class Skeleton extends Monster {
         return attackBehavior(theOpp);
     }
 
+    /**
+     * Returns the monsters image.
+     */
     @Override
     public void getMonsterImage() {
         try {
@@ -50,5 +53,4 @@ public class Skeleton extends Monster {
             throw new RuntimeException(e);
         }
     }
-
 }
