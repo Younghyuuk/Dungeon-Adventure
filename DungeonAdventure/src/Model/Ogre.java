@@ -30,7 +30,9 @@ public class Ogre extends Monster {
         return attackBehavior(theOpp);
     }
 
-
+    /**
+     * Override method that returns the monsters image.
+     */
     @Override
     public void getMonsterImage() {
         try {

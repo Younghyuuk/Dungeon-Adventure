@@ -28,7 +28,10 @@ public abstract class DungeonCharacter implements Serializable {
      * The int myHp that tracks the character health points.
      */
     private int myHp;
-    private transient int myDefaultHp;
+    /**
+     * The hp the character initially starts with.
+     */
+    private final transient int myDefaultHp;
     /**
      * The string name of the character created.
      */
@@ -49,16 +52,45 @@ public abstract class DungeonCharacter implements Serializable {
      * The chance that the character has to hitting its target a double.
      */
     private double myHitChance;
-
+    /**
+     * The main game panel.
+     */
     public transient GamePanel myGamePanel;
+    /**
+     * The characters direction images.
+     */
     public transient BufferedImage up1, up2, down1, down2, left1, left2, right1, right2;
+    /**
+     * A String that dictates the characters directions.
+     */
     public transient String myDirection = "down";
+    /**
+     * The speed of the character.
+     */
     public transient int mySpeed;
+    /**
+     * The characters collision boolean.
+     */
     public boolean myCollision = false;
+    /**
+     * A rectangle that dictates the characters collision area.
+     */
     public Rectangle mySolidArea;
+    /**
+     * A counter for sprite animation.
+     */
     public transient int mySpriteCounter = 0;
+    /**
+     * A number for sprite animation logic.
+     */
     public transient int mySpriteNum = 1;
+    /**
+     * The characters x coordinate.
+     */
     public int myWorldXCoordinate;
+    /**
+     * The characters y coordinate.
+     */
     public int myWorldYCoordinate;
 
     /**
@@ -84,28 +116,67 @@ public abstract class DungeonCharacter implements Serializable {
         myGamePanel = theGamePanel;
         myDefaultHp = theHp;
     }
+
+    /**
+     * Sets the collision state of the character.
+     * @param theBool the collision state.
+     */
     public void setMyCollision(final boolean theBool) {
         myCollision = theBool;
     }
+
+    /**
+     * Returns the character's direction.
+     * @return a String that indicates the direction.
+     */
     public String getMyDirection() {
         return myDirection;
     }
+
+    /**
+     * Returns the collision area.
+     * @return a rectangle.
+     */
     public Rectangle getMySolidArea() {
         return mySolidArea;
     }
+
+    /**
+     * Returns the player's speed.
+     * @return a integer representing the players speed.
+     */
     public int getMySpeed(){
         return mySpeed;
     }
+
+    /**
+     * Returns the character's X coordinate.
+     * @return the x coordinate.
+     */
     public int getMyWorldXCoordinate() {
         return myWorldXCoordinate;
     }
 
+    /**
+     * Returns the character's y coordinate.
+     * @return the y coordinate.
+     */
     public int getMyWorldYCoordinate() {
         return myWorldYCoordinate;
     }
+
+    /**
+     * Sets the characters x coordinate.
+     * @param theX the wanted x coordinate.
+     */
     public void setMyWorldXCoordinate(int theX) {
         myWorldXCoordinate = theX;
     }
+
+    /**
+     * Sets the character's y coordinate.
+     * @param theY the wanted y coordinate.
+     */
     public void setMyWorldYCoordinate(int theY) {
         myWorldYCoordinate = theY;
     }

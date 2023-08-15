@@ -3,15 +3,31 @@ package View;
 import java.awt.*;
 
 public class GameOver {
-
-    private GamePanel myGamePanel;
+    /**
+     * The Main Game Panel.
+     */
+    private final GamePanel myGamePanel;
+    /**
+     * The pen used to draw.
+     */
     private Graphics2D myPen;
+    /**
+     * An integer that represents what command we are on.
+     */
     private int myCommandNum = 0;
 
+    /**
+     * A constructor that creates the Game Over object.
+     * @param theGamePanel the main Game Panel.
+     */
     public GameOver(GamePanel theGamePanel){
         myGamePanel = theGamePanel;
     }
 
+    /**
+     * A method tha draws the Game over panel.
+     * @param theGraphics the pen used to draw.
+     */
     public void draw(Graphics2D theGraphics){
         myPen = theGraphics;
         int x;
@@ -66,17 +82,34 @@ public class GameOver {
         }
     }
 
+    /**
+     * Method that centers the string.
+     * @param theText the String that needs to be centered.
+     * @return the x coordinate that centeres the string.
+     */
     public int getXToCenterString(String theText){
         int length = (int) myPen.getFontMetrics().getStringBounds(theText,myPen).getWidth();
         int x = myGamePanel.getMyScreenWidth()/2 - length/2;
         return x;
     }
+
+    /**
+     * Sets the command number to one.
+     */
     public void setCommandToLoadGame() {
         myCommandNum = 1;
     }
+
+    /**
+     * Sets the command number to zero.
+     */
     public void setCommandToNewGame() {
         myCommandNum = 0;
     }
+
+    /**
+     * @return the command number.
+     */
     public int getMyCommandNum() {return myCommandNum;
     }
 }

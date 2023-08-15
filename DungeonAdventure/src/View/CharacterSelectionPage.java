@@ -8,24 +8,53 @@ import java.util.Objects;
 import static javax.imageio.ImageIO.read;
 
 public class CharacterSelectionPage {
-
-    GamePanel myGamePanel;
+    /**
+     * The main game panel.
+     */
+    private final GamePanel myGamePanel;
+    /**
+     * An image of a thief.
+     */
     private transient BufferedImage myThiefImage;
+    /**
+     * An image of a warrior.
+     */
     private transient BufferedImage myWarriorImage;
+    /**
+     * An image of a priest.
+     */
     private transient BufferedImage myPriestImage;
+    /**
+     * The pen that is used to draw.
+     */
     private Graphics2D myPen;
+    /**
+     * Integer that represents what command we are on.
+     */
     private int myCommandNum = 0;
 
+    /**
+     * A constructor that creates a Character selection page object.
+     * @param theGamePanel hte main game panel.
+     */
     public CharacterSelectionPage(GamePanel theGamePanel){
         myGamePanel = theGamePanel;
 
     }
 
+    /**
+     * A method that draws the character selector page.
+     * @param theGraphics the pen that is used to draw.
+     */
     public void draw(Graphics2D theGraphics){
         myPen = theGraphics;
         setMyImages();
         selectCharacter();
     }
+
+    /**
+     * Method that draws the select character page.
+     */
     public void selectCharacter(){
         int x;
         int y = myGamePanel.getSpriteSize() * 3;
@@ -58,11 +87,20 @@ public class CharacterSelectionPage {
         }
     }
 
+    /**
+     * A method that helps center a string on a panel.
+     * @param theText The string that needs to be centered.
+     * @return A x coordinate that centers the string on a panel.
+     */
     public int getXToCenterString(String theText){
         int length = (int) myPen.getFontMetrics().getStringBounds(theText,myPen).getWidth();
         int x = myGamePanel.getMyScreenWidth()/2 - length/2;
         return x;
     }
+
+    /**
+     * A method that sets the images.
+     */
     public void setMyImages() {
         try {
             myThiefImage = read(Objects.requireNonNull(getClass().getResourceAsStream("/thief/thief_down1.png")));
@@ -72,15 +110,33 @@ public class CharacterSelectionPage {
             throw new RuntimeException(e);
         }
     }
+
+    /**
+     * A method that increments command field.
+     */
     public void incMyCommandNum() {
         myCommandNum++;
     }
+
+    /**
+     * A method that decrements the command field.
+     */
     public void decMyCommandNum() {
         myCommandNum--;
     }
+
+    /**
+     * Sets the command number to a number.
+     * @param theNumber the number to set the command number to.
+     */
     public void setMyCommandNum(int theNumber){
         myCommandNum = theNumber;
     }
+
+    /**
+     * A method that returns the command number.
+     * @return the command number.
+     */
     public int getMyCommandNum() {
         return myCommandNum;
     }
