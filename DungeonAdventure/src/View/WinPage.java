@@ -115,17 +115,18 @@ public class WinPage {
         int x = myGamePanel.getMyScreenWidth()/2 - length/2;
         return x;
     }
-    /**
-     * Sets the command number to one.
-     */
-    public void setCommandToLoadGame() {
-        myCommandNum = 1;
-    }
+
     /**
      * Sets the command number to zero.
      */
     public void setCommandToNewGame() {
         myCommandNum = 0;
+    }
+    /**
+     * Sets the command number to one.
+     */
+    public void setCommandToQuitGame() {
+        myCommandNum = 1;
     }
     /**
      * Gets the command number.

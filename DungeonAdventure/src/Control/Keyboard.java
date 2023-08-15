@@ -148,10 +148,10 @@ public class Keyboard implements KeyListener {
                     myGamePanel.getMyWinPage().setCommandToNewGame();
                     break;
                 case KeyEvent.VK_S:
-                    myGamePanel.getMyWinPage().setCommandToLoadGame();
+                    myGamePanel.getMyWinPage().setCommandToQuitGame();
                     break;
                 case KeyEvent.VK_ENTER:
-                    if (myGamePanel.getMyGameOver().getMyCommandNum() == 0) {
+                    if (myGamePanel.getMyWinPage().getMyCommandNum() == 0) {
                         myGamePanel.resetGame();
                         myGamePanel.setMyGameState(2);
                     } else {
