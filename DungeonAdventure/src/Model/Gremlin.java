@@ -28,6 +28,10 @@ public class Gremlin extends Monster {
 
         return attackBehavior(theOpp);
     }
+
+    /**
+     * Override method that return the gremlins image.
+     */
     @Override
     public void getMonsterImage() {
         try {

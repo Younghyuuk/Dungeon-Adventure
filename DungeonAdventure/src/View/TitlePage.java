@@ -11,7 +11,7 @@ public class TitlePage {
     /**
      * The main game panel.
      */
-    GamePanel myGamePanel;
+    private final GamePanel myGamePanel;
     /**
      * The pen used to draw.
      */

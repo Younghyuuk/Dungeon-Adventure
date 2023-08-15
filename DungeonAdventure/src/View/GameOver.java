@@ -6,7 +6,7 @@ public class GameOver {
     /**
      * The Main Game Panel.
      */
-    private GamePanel myGamePanel;
+    private final GamePanel myGamePanel;
     /**
      * The pen used to draw.
      */

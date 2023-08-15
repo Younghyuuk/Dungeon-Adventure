@@ -11,7 +11,7 @@ public class CharacterSelectionPage {
     /**
      * The main game panel.
      */
-    GamePanel myGamePanel;
+    private final GamePanel myGamePanel;
     /**
      * An image of a thief.
      */

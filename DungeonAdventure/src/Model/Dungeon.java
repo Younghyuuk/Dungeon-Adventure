@@ -1,6 +1,5 @@
 package Model;
 
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Serializable;
@@ -17,12 +16,12 @@ public class Dungeon implements Serializable {
     /**
      * A 2D array of all the rooms in the dungeon.
      */
-    private Room[][] myRooms;
+    private final Room[][] myRooms;
     /**
      * A 2D array of all the visited rooms in the dungeon. <br>
      * A cell in the array that is true means that we have visited that room.
      */
-    private boolean[][] myVisited;
+    private final boolean[][] myVisited;
     /**
      * A 2D array that contains the doors for each room.
      */

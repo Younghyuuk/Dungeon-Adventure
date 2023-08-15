@@ -13,7 +13,7 @@ public class TileManager {
      */
     private final GamePanel myGamePanel;
     /**
-     * A array of tiles that holds differnt types of tiles.
+     * An array of tiles that holds differnt types of tiles.
      */
     private final Tile[] myTile;
     /**
