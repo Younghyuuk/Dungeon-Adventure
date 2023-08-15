@@ -91,9 +91,6 @@ public class Dungeon implements Serializable {
     protected void createRooms() {
         // We want to create the random generator
         Random random = new Random();
-        // Then we pass in the random generator to our 'getRandomItem' method
-        // to get a random item
-        RoomItem randomItem = getRandomItem(random);
         // We start off by creating the first room
         int firstCol = random.nextInt(LAST_ROOM_COL - FIRST_ROOM_COL + 1) + FIRST_ROOM_COL;
         int firstRow = random.nextInt(LAST_ROOM_ROW - FIRST_ROOM_ROW + 1) + FIRST_ROOM_ROW;
@@ -118,7 +115,7 @@ public class Dungeon implements Serializable {
             myVisited[row][col] = true;
             // Next, we need to figure out what doors the first room will have
             int doorType = getRandomDoor(row, col);
-            Room newRoom = new Room(randomItem, row, col, doorType);
+            Room newRoom = new Room(row, col, doorType);
             // Then we add that to 'myRooms'
             myRooms[row][col] = newRoom;
             // Finally, we will push all the adjacent cells into the stack
@@ -220,6 +217,12 @@ public class Dungeon implements Serializable {
     private void setMyDoors() {
         for (int i = 0; i < DUNGEON_HEIGHT; i++) {
             Arrays.fill(myDoors[i], -1);
+        }
+    }
+
+    private void setMyRooms() {
+        for (int i = 0; i < DUNGEON_HEIGHT; i++) {
+            Arrays.fill(myRooms[i], null);
         }
     }
 
@@ -490,16 +493,6 @@ public class Dungeon implements Serializable {
         myDoors[theRow][theCol] = randomDoor;
         // Finally, we return the door type.
         return randomDoor;
-    }
-
-    /**
-     * Helper method to generate the random item(s) that a room will contain.
-     *
-     * @param theRandom The random object to use to get a random item.
-     * @return Returns the generated random 'RoomItem'.
-     */
-    private RoomItem getRandomItem(final Random theRandom) {
-        return null;
     }
 
     /**

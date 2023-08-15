@@ -30,21 +30,15 @@ public class Room implements Serializable {
      * Constructs a randomly generated room. <br>
      * Takes in what will be in the room.
      *
-     * @param theRandomItem The random item(s) that the room will contain.
      * @param theRow        The row this room is being added to in 'myRooms' in 'Dungeon'.
      * @param theCol        The column this room is being added to in 'myRooms' in 'Dungeon'.
      * @param theDoorType   The door(s) that the room will contain.
      */
-    public Room(final RoomItem theRandomItem, final int theRow, final int theCol, final int theDoorType) {
+    public Room(final int theRow, final int theCol, final int theDoorType) {
         // Set up the size of the room
         myRoom = new String[ROOM_HEIGHT][ROOM_WIDTH];
         // Next, we will pass in the random item generated from 'Dungeon'
         createRoom(theRow, theCol, theDoorType);
-        // We also want to generate the health obtainable from this room's health potion
-//        if (theRandomItem.getValue().equals("H")) {
-//            Random random = new Random();
-//            myHealth = random.nextInt(HEALTH_MAX - HEALTH_MIN + 1) + HEALTH_MIN;
-//        }
     }
 
     /**
@@ -136,17 +130,6 @@ public class Room implements Serializable {
         } else if (theDirection == 3) { // North
             myRoom[0][ROOM_WIDTH / 2] = "3";
         }
-    }
-
-    /**
-     * Get method to get the door types of a certain room in the dungeon.
-     *
-     * @param theRow The row of this room in 'Dungeon'.
-     * @param theCol The column of this room in 'Dungeon'.
-     * @return The door type associated with the specified room in 'Dungeon'.
-     */
-    public int getDoors(final int theRow, final int theCol) {
-        return doors[theRow][theCol];
     }
 
     /**

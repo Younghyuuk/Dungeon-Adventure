@@ -12,7 +12,11 @@ import static javax.imageio.ImageIO.read;
 /**
  * This class represents a vision potion that is able to be picked up within the dungeon.
  */
-public class VisionPotion extends Item {
+public class SpeedPotion extends Item {
+    /**
+     * The speed able to be given by the speed potion.
+     */
+    private static final int SPEED_BOOST = 1;
     /**
      * The images associated with a 'HealthPotion'.
      */
@@ -25,19 +29,27 @@ public class VisionPotion extends Item {
      * @param theWorldY The world-y coordinate to draw the item at.
      * @param theGP     The GamePanel to draw the item onto.
      */
-    public VisionPotion(final int theWorldX, final int theWorldY, final GamePanel theGP) {
+    public SpeedPotion(final int theWorldX, final int theWorldY, final GamePanel theGP) {
         super(theGP, theWorldX, theWorldY);
         getItemImage();
         super.setImage(myVision);
     }
 
     /**
+     * Gets the amount of speed the speed potion will give to the player.
+     *
+     * @return The speed boost to give.
+     */
+    public int getSpeedBoost() {
+        return SPEED_BOOST;
+    }
+    /**
      * Gets the images associated with the 'VisionPotion'.
      */
     @Override
     public void getItemImage() {
         try {
-            myVision = read(Objects.requireNonNull(getClass().getResourceAsStream("/vision/visionPotion.png")));
+            myVision = read(Objects.requireNonNull(getClass().getResourceAsStream("/speed/speedPotion.png")));
 //            myVision2 = read(Objects.requireNonNull(getClass().getResourceAsStream("/Vision/Vision_2.png")));
 //            myVision3 = read(Objects.requireNonNull(getClass().getResourceAsStream("/Vision/Vision_3.png")));
         } catch (IOException e) {
