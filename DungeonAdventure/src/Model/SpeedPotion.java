@@ -5,7 +5,6 @@ import View.GamePanel;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Objects;
-import java.util.Random;
 
 import static javax.imageio.ImageIO.read;
 
@@ -20,7 +19,7 @@ public class SpeedPotion extends Item {
     /**
      * The images associated with a 'HealthPotion'.
      */
-    private transient BufferedImage myVision;
+    private transient BufferedImage mySpeedBoost;
 
     /**
      * Constructs a basic 'HealthPotion' object.
@@ -32,7 +31,7 @@ public class SpeedPotion extends Item {
     public SpeedPotion(final int theWorldX, final int theWorldY, final GamePanel theGP) {
         super(theGP, theWorldX, theWorldY);
         getItemImage();
-        super.setImage(myVision);
+        super.setImage(mySpeedBoost);
     }
 
     /**
@@ -49,9 +48,7 @@ public class SpeedPotion extends Item {
     @Override
     public void getItemImage() {
         try {
-            myVision = read(Objects.requireNonNull(getClass().getResourceAsStream("/speed/speedPotion.png")));
-//            myVision2 = read(Objects.requireNonNull(getClass().getResourceAsStream("/Vision/Vision_2.png")));
-//            myVision3 = read(Objects.requireNonNull(getClass().getResourceAsStream("/Vision/Vision_3.png")));
+            mySpeedBoost = read(Objects.requireNonNull(getClass().getResourceAsStream("/speed/speedPotion.png")));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
