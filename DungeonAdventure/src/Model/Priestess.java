@@ -164,7 +164,8 @@ public class Priestess extends Heroes {
         if (getHp() < 200) {
             int healPoints = genHeal();
             setHp(getHp() + healPoints);
-            special.append(getChName()).append(" heals itself for ").append(healPoints).append("! \n");
+            special.append(getChName()).append(" heals itself for ").append(healPoints).append(" now is ").append(getHp())
+                    .append("! \n");
         }
         return special.toString();
     }
