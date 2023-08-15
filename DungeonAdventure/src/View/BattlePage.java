@@ -16,7 +16,7 @@ public class BattlePage {
     private String[] myBattleLog;
 
     /**
-     * A Constructor that creats a Battle Page Object.
+     * A Constructor that creates a Battle Page Object.
      * @param theGamePanel the main gamePanel.
      */
     public BattlePage(final GamePanel theGamePanel) {
