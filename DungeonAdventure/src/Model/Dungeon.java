@@ -61,6 +61,7 @@ public class Dungeon implements Serializable {
      * Used to traverse in DFS to adjacent cells.
      */
     private final int[] DIRECTION_VECTOR_ROWS = {0, 1, 0, -1};
+    private String myTextFile;
 
     /**
      * Constructs the randomly generated dungeon.
@@ -76,6 +77,7 @@ public class Dungeon implements Serializable {
         myDoors = new int[DUNGEON_HEIGHT][DUNGEON_WIDTH];
         // And we need to populate it with a value that can't be a door type
         setMyDoors();
+        myTextFile = "";
         // Next, we need to create every room
         createRooms();
         // Finally, we will output the dungeon to a text file to use with the GUI
@@ -89,9 +91,6 @@ public class Dungeon implements Serializable {
     protected void createRooms() {
         // We want to create the random generator
         Random random = new Random();
-        // Then we pass in the random generator to our 'getRandomItem' method
-        // to get a random item
-        RoomItem randomItem = getRandomItem(random);
         // We start off by creating the first room
         int firstCol = random.nextInt(LAST_ROOM_COL - FIRST_ROOM_COL + 1) + FIRST_ROOM_COL;
         int firstRow = random.nextInt(LAST_ROOM_ROW - FIRST_ROOM_ROW + 1) + FIRST_ROOM_ROW;
@@ -116,7 +115,7 @@ public class Dungeon implements Serializable {
             myVisited[row][col] = true;
             // Next, we need to figure out what doors the first room will have
             int doorType = getRandomDoor(row, col);
-            Room newRoom = new Room(randomItem, row, col, doorType);
+            Room newRoom = new Room(row, col, doorType);
             // Then we add that to 'myRooms'
             myRooms[row][col] = newRoom;
             // Finally, we will push all the adjacent cells into the stack
@@ -218,6 +217,12 @@ public class Dungeon implements Serializable {
     private void setMyDoors() {
         for (int i = 0; i < DUNGEON_HEIGHT; i++) {
             Arrays.fill(myDoors[i], -1);
+        }
+    }
+
+    private void setMyRooms() {
+        for (int i = 0; i < DUNGEON_HEIGHT; i++) {
+            Arrays.fill(myRooms[i], null);
         }
     }
 
@@ -491,16 +496,6 @@ public class Dungeon implements Serializable {
     }
 
     /**
-     * Helper method to generate the random item(s) that a room will contain.
-     *
-     * @param theRandom The random object to use to get a random item.
-     * @return Returns the generated random 'RoomItem'.
-     */
-    private RoomItem getRandomItem(final Random theRandom) {
-        return null;
-    }
-
-    /**
      * Uses 'toString' to create a text representation of the dungeon
      * and then outputs that to a text file.
      *
@@ -510,7 +505,8 @@ public class Dungeon implements Serializable {
         try {
             FileWriter fileWriter = new FileWriter(theFileName);
             System.out.println("code reaches here");
-            fileWriter.write(this.toString());
+            myTextFile = toString();
+            fileWriter.write(myTextFile);
             fileWriter.close();
         } catch (IOException e) {
             System.err.println("An error occurred when printing to output file: " + e.getMessage());
@@ -606,6 +602,24 @@ public class Dungeon implements Serializable {
      */
     public int getDungeonWidth() {
         return DUNGEON_WIDTH;
+    }
+
+    /**
+     * Get the text file (String) associated with the dungeon.
+     *
+     * @return The text file as a String.
+     */
+    public String getTextFile() {
+        return myTextFile;
+    }
+
+    /**
+     * Sets the text file to the input text file.
+     *
+     * @param theTextFile The input text file.
+     */
+    public void setTextFile(final String theTextFile) {
+        myTextFile = theTextFile;
     }
     /**
      * Inner class to represent a row-column pair to be used in a stack for DFS.
