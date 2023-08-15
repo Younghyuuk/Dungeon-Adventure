@@ -24,7 +24,7 @@ public class SaveLoad {
     /**
      * The filename of the save file.
      */
-    private static final String FILENAME = "Resources/save/game.save";
+    private static final String FILENAME = "/Resources/save/game.save";
     /**
      * The game panel containing all the data for the game.
      */
@@ -68,6 +68,7 @@ public class SaveLoad {
             // Save the dungeon data
             Dungeon dungeon = myGp.getMyDungeon();
             gd.setMyDungeon(myGp.getMyDungeon());
+            gd.setMyTextDungeon(myGp.getMyDungeon().getTextFile());
 
             // Save the data for my lists
             gd.setMyMonsters(myGp.getMyMonsterArray());
@@ -131,8 +132,15 @@ public class SaveLoad {
 //            }
 //            dungeon.textDungeon("Resources/save/loadMap");
             myGp.setMyDungeon(dungeon);
-//            myGp.getMyDungeon().setDoors(gd.getDoors());
-//            myGp.setMyDungeon(gd.getMyDungeon());
+            myGp.getMyDungeon().setTextFile(gd.getTextDungeon());
+            try {
+                FileWriter fileWriter = new FileWriter("/Resources/map/dungeon.txt");
+//                System.out.println("code reaches here");
+                fileWriter.write(gd.getTextDungeon());
+                fileWriter.close();
+            } catch (IOException e) {
+                System.err.println("An error occurred when printing to output file: " + e.getMessage());
+            }
 
 
 

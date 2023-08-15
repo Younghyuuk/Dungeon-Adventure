@@ -61,6 +61,7 @@ public class Dungeon implements Serializable {
      * Used to traverse in DFS to adjacent cells.
      */
     private final int[] DIRECTION_VECTOR_ROWS = {0, 1, 0, -1};
+    private String myTextFile;
 
     /**
      * Constructs the randomly generated dungeon.
@@ -76,6 +77,7 @@ public class Dungeon implements Serializable {
         myDoors = new int[DUNGEON_HEIGHT][DUNGEON_WIDTH];
         // And we need to populate it with a value that can't be a door type
         setMyDoors();
+        myTextFile = "";
         // Next, we need to create every room
         createRooms();
         // Finally, we will output the dungeon to a text file to use with the GUI
@@ -510,7 +512,8 @@ public class Dungeon implements Serializable {
         try {
             FileWriter fileWriter = new FileWriter(theFileName);
             System.out.println("code reaches here");
-            fileWriter.write(this.toString());
+            myTextFile = toString();
+            fileWriter.write(myTextFile);
             fileWriter.close();
         } catch (IOException e) {
             System.err.println("An error occurred when printing to output file: " + e.getMessage());
@@ -606,6 +609,24 @@ public class Dungeon implements Serializable {
      */
     public int getDungeonWidth() {
         return DUNGEON_WIDTH;
+    }
+
+    /**
+     * Get the text file (String) associated with the dungeon.
+     *
+     * @return The text file as a String.
+     */
+    public String getTextFile() {
+        return myTextFile;
+    }
+
+    /**
+     * Sets the text file to the input text file.
+     *
+     * @param theTextFile The input text file.
+     */
+    public void setTextFile(final String theTextFile) {
+        myTextFile = theTextFile;
     }
     /**
      * Inner class to represent a row-column pair to be used in a stack for DFS.
