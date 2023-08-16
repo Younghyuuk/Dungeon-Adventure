@@ -94,6 +94,9 @@ public class GameData implements Serializable {
     private int myDungeonH;
     private int myDungeonW;
 
+    /**
+     * The text file, as a String, of the dungeon.
+     */
     private String myTextDungeon;
 
 //    /**
@@ -129,6 +132,15 @@ public class GameData implements Serializable {
      */
     public Dungeon getMyDungeon() {
         return myDungeon;
+    }
+
+    /**
+     * Gets the text file of the dungeon.
+     *
+     * @return The text file of the dungeon.
+     */
+    public String getTextDungeon() {
+        return myTextDungeon;
     }
 
     public Room[][] getMyRooms() {
@@ -289,9 +301,6 @@ public class GameData implements Serializable {
         return myDoors;
     }
 
-    public String getTextDungeon() {
-        return myTextDungeon;
-    }
     public int getMyDungeonH() {
         return myDungeonH;
     }
@@ -320,6 +329,15 @@ public class GameData implements Serializable {
      */
     public void setMyDungeon(final Dungeon theDungeon) {
         myDungeon = theDungeon;
+    }
+
+    /**
+     * Sets the dungeon's text file to the specified text.
+     *
+     * @param theText The text file as a string to set the dungeons text to.
+     */
+    public void setMyTextDungeon(final String theText) {
+        myTextDungeon = theText;
     }
 
     public void setDoors(int[][] theDoors) {

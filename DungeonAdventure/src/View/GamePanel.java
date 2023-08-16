@@ -203,9 +203,6 @@ public class GamePanel extends JPanel implements Runnable, Serializable {
      * Sets up a brand-new game!
      */
     public void setNewGame() {
-        myDungeon = new Dungeon("Resources/map/dungeon.txt");
-        myTileM = new TileManager(this);
-
         if (!myMonsterArray.isEmpty()) {
             myMonsterArray.clear();
         }

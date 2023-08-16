@@ -59,6 +59,7 @@ public class SaveLoad {
             // Save the dungeon data
             Dungeon dungeon = myGp.getMyDungeon();
             gd.setMyDungeon(myGp.getMyDungeon());
+            gd.setMyTextDungeon(myGp.getMyDungeon().getTextFile());
 
             // Save the data for my lists
             gd.setMyMonsters(myGp.getMyMonsterArray());
@@ -113,15 +114,17 @@ public class SaveLoad {
             // Load in the dungeon data
             Dungeon dungeon;
             dungeon = gd.getMyDungeon();
-//            for(int i = 0; i < dungeon.getDungeonWidth(); i++) {
-//                for(int j = 0; j < dungeon.getDungeonHeight(); j++) {
-////                    myGp.getMyDungeon().getRooms()
-//                }
-//            }
-//            dungeon.textDungeon("Resources/save/loadMap");
             myGp.setMyDungeon(dungeon);
-//            myGp.getMyDungeon().setDoors(gd.getDoors());
-//            myGp.setMyDungeon(gd.getMyDungeon());
+            myGp.getMyDungeon().setTextFile(gd.getTextDungeon());
+
+            try {
+                FileWriter fileWriter = new FileWriter("Resources/map/dungeon.txt");
+//                System.out.println("code reaches here");
+                fileWriter.write(gd.getTextDungeon());
+                fileWriter.close();
+            } catch (IOException e) {
+                System.err.println("An error occurred when printing to output file: " + e.getMessage());
+            }
 
             List<Monster> monsterList = new ArrayList<>();
             myGp.getMyMonsterArray().clear();
@@ -155,8 +158,8 @@ public class SaveLoad {
             for(Item items : gd.getMyItems()) {
                 if(items instanceof HealthPotion && !items.getFound()) {
                     items = new HealthPotion(items.getMyWorldXCoordinate(), items.getMyWorldYCoordinate(), myGp);
-                } else if(items instanceof VisionPotion && !items.getFound()) {
-                    items = new VisionPotion(items.getMyWorldXCoordinate(), items.getMyWorldYCoordinate(), myGp);
+                } else if(items instanceof SpeedPotion && !items.getFound()) {
+                    items = new SpeedPotion(items.getMyWorldXCoordinate(), items.getMyWorldYCoordinate(), myGp);
                 } else if(items instanceof Pit && !items.getFound()){
                     items = new Pit(items.getMyWorldXCoordinate(), items.getMyWorldYCoordinate(), myGp);
                 }

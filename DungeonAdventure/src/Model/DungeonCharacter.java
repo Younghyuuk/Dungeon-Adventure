@@ -59,7 +59,7 @@ public abstract class DungeonCharacter implements Serializable {
     /**
      * The characters direction images.
      */
-    public BufferedImage up1, up2, down1, down2, left1, left2, right1, right2;
+    public transient BufferedImage up1, up2, down1, down2, left1, left2, right1, right2;
     /**
      * A String that dictates the characters directions.
      */
@@ -149,6 +149,10 @@ public void setGamePanel(GamePanel theGamePanel){
      */
     public int getMySpeed(){
         return mySpeed;
+    }
+
+    public void setMySpeed(final int theSpeed) {
+        mySpeed = theSpeed;
     }
 
     /**

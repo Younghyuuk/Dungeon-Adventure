@@ -34,7 +34,7 @@ public class ItemGenerator implements Serializable {
             case 1 -> // Pit
                     new Pit(theInitialXY, theInitialXY, theGP);
             case 2 -> // Vision Potion
-                    new VisionPotion(theInitialXY, theInitialXY, theGP);
+                    new SpeedPotion(theInitialXY, theInitialXY, theGP);
             default -> // There was an unexpected randomItem value outside the specified range
                     throw new IllegalArgumentException("Item type is outside the range (0 - 2).");
         };
