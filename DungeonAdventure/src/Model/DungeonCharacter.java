@@ -59,7 +59,7 @@ public abstract class DungeonCharacter implements Serializable {
     /**
      * The characters direction images.
      */
-    public transient BufferedImage up1, up2, down1, down2, left1, left2, right1, right2;
+    public BufferedImage up1, up2, down1, down2, left1, left2, right1, right2;
     /**
      * A String that dictates the characters directions.
      */
@@ -116,7 +116,9 @@ public abstract class DungeonCharacter implements Serializable {
         myGamePanel = theGamePanel;
         myDefaultHp = theHp;
     }
-
+public void setGamePanel(GamePanel theGamePanel){
+        myGamePanel = theGamePanel;
+}
     /**
      * Sets the collision state of the character.
      * @param theBool the collision state.

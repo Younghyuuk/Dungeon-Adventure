@@ -221,7 +221,7 @@ public class GamePanel extends JPanel implements Runnable, Serializable {
     }
 
     /**
-     * Resets everything in the game.
+     * Resets everything in the game, this is for the "try again" button during GameOver page.
      */
     public void resetGame() {
         setMyHero(myHeroNum);

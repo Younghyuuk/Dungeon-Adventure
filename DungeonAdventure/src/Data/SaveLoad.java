@@ -4,17 +4,10 @@ import Model.*;
 import View.GamePanel;
 
 import javax.imageio.ImageIO;
-import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
-
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-
-import java.util.Objects;
-
-import static javax.imageio.ImageIO.read;
 
 
 /**
@@ -29,7 +22,6 @@ public class SaveLoad {
      * The game panel containing all the data for the game.
      */
     private GamePanel myGp;
-
 
     /**
      * Sets up the class by getting a game panel object from 'GamePanel'.
@@ -64,7 +56,6 @@ public class SaveLoad {
             gd.setMyWorldX(myGp.getMyHero().getMyWorldXCoordinate());
             gd.setMyWorldY(myGp.getMyHero().getMyWorldYCoordinate());
 
-
             // Save the dungeon data
             Dungeon dungeon = myGp.getMyDungeon();
             gd.setMyDungeon(myGp.getMyDungeon());
@@ -87,7 +78,6 @@ public class SaveLoad {
             e.printStackTrace();
         }
 
-
     }
 
     /**
@@ -108,7 +98,6 @@ public class SaveLoad {
             } else {
                 num = 3;
             }
-
             myGp.setMyHero(num);
             myGp.getMyHero().setHp(gd.getMyHeroHp());
             myGp.getMyHero().setChName(gd.getMyHeroName());
@@ -134,10 +123,8 @@ public class SaveLoad {
 //            myGp.getMyDungeon().setDoors(gd.getDoors());
 //            myGp.setMyDungeon(gd.getMyDungeon());
 
-
-
             List<Monster> monsterList = new ArrayList<>();
-
+            myGp.getMyMonsterArray().clear();
             for (Monster savedMonster : gd.getMyMonsters()) {
                 MonsterDataBase mon = new MonsterDataBase(myGp);
                 if (savedMonster.isAlive()) {
@@ -198,10 +185,6 @@ public class SaveLoad {
             System.out.println("Load exception " + e.getMessage());
             e.printStackTrace();
         }
-
-
-
-
     }
     private BufferedImage loadImage(String imagePath) {
         try {
