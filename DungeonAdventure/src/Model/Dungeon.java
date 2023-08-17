@@ -12,21 +12,6 @@ import java.util.Stack;
  */
 public class Dungeon implements Serializable {
     private static final long serialversionUID = 12345L;
-
-    /**
-     * A 2D array of all the rooms in the dungeon.
-     */
-    private final Room[][] myRooms;
-    /**
-     * A 2D array of all the visited rooms in the dungeon. <br>
-     * A cell in the array that is true means that we have visited that room.
-     */
-    private final boolean[][] myVisited;
-    /**
-     * A 2D array that contains the doors for each room.
-     */
-    private int[][] myDoors;
-
     /**
      * The height, in rooms, of the dungeon (the Y).
      */
@@ -61,6 +46,98 @@ public class Dungeon implements Serializable {
      * Used to traverse in DFS to adjacent cells.
      */
     private final int[] DIRECTION_VECTOR_ROWS = {0, 1, 0, -1};
+    /**
+     * Integer value representing the direction we have come from (west) in the DFS.
+     */
+    private static final int WEST = 0;
+    /**
+     * Integer value representing the direction we have come from (south) in the DFS.
+     */
+    private static final int SOUTH = 1;
+    /**
+     * Integer value representing the direction we have come from (east) in the DFS.
+     */
+    private static final int EAST = 2;
+    /**
+     * Integer value representing the direction we have come from (north) in the DFS.
+     */
+    private static final int NORTH = 3;
+    /**
+     * Integer value indicating doors in all 4 directions.
+     */
+    private static final int NESW = 0;
+    /**
+     * Integer value indicating doors in the north direction.
+     */
+    private static final int N = 1;
+    /**
+     * Integer value indicating doors in the east direction.
+     */
+    private static final int E = 2;
+    /**
+     * Integer value indicating doors in the south direction.
+     */
+    private static final int S = 3;
+    /**
+     * Integer value indicating doors in the west direction.
+     */
+    private static final int W = 4;
+    /**
+     * Integer value indicating doors in the north & south.
+     */
+    private static final int NS = 5;
+    /**
+     * Integer value indicating doors in the north & east.
+     */
+    private static final int NE = 6;
+    /**
+     * Integer value indicating doors in the north & west.
+     */
+    private static final int NW = 7;
+    /**
+     * Integer value indicating doors in the south & east.
+     */
+    private static final int SE = 8;
+    /**
+     * Integer value indicating doors in the east & west.
+     */
+    private static final int EW = 9;
+    /**
+     * Integer value indicating doors in the south & west.
+     */
+    private static final int SW = 10;
+    /**
+     * Integer value indicating doors in the north, south, and east.
+     */
+    private static final int NSE = 11;
+    /**
+     * Integer value indicating doors in the north, south, and west.
+     */
+    private static final int NSW = 12;
+    /**
+     * Integer value indicating doors in the north, east, and west.
+     */
+    private static final int NEW = 13;
+    /**
+     * Integer value indicating doors in the south, east, and west.
+     */
+    private static final int SEW = 14;
+    /**
+     * A 2D array that contains the doors for each room.
+     */
+    private int[][] myDoors;
+    /**
+     * A 2D array of all the rooms in the dungeon.
+     */
+    private final Room[][] myRooms;
+    /**
+     * A 2D array of all the visited rooms in the dungeon. <br>
+     * A cell in the array that is true means that we have visited that room.
+     */
+    private final boolean[][] myVisited;
+    /**
+     * The text file to save for the dungeon.
+     */
     private String myTextFile;
 
     /**
@@ -115,7 +192,7 @@ public class Dungeon implements Serializable {
             myVisited[row][col] = true;
             // Next, we need to figure out what doors the first room will have
             int doorType = getRandomDoor(row, col);
-            Room newRoom = new Room(row, col, doorType);
+            Room newRoom = new Room(doorType);
             // Then we add that to 'myRooms'
             myRooms[row][col] = newRoom;
             // Finally, we will push all the adjacent cells into the stack
@@ -139,7 +216,7 @@ public class Dungeon implements Serializable {
      * @param theCol The column of the room we are checking
      * @return True if the room is valid. False if the room isn't.
      */
-    private boolean isValid(final int theRow, final int theCol) {
+    protected boolean isValid(final int theRow, final int theCol) {
         // Base Case: the room is out of bounds
         if (theRow < 0 || theRow >= DUNGEON_HEIGHT || theCol < 0 || theCol >= DUNGEON_WIDTH) {
             return false;
@@ -204,7 +281,7 @@ public class Dungeon implements Serializable {
     /**
      * Helper method to initialize (or reset) 'myVisited'.
      */
-    private void setMyVisited() {
+    protected void setMyVisited() {
         for (int i = 0; i < DUNGEON_HEIGHT; i++) {
             Arrays.fill(myVisited[i], false);
         }
@@ -216,7 +293,7 @@ public class Dungeon implements Serializable {
      */
     private void setMyDoors() {
         for (int i = 0; i < DUNGEON_HEIGHT; i++) {
-            Arrays.fill(myDoors[i], -1);
+            Arrays.fill(myDoors[i], -N);
         }
     }
 
@@ -240,36 +317,33 @@ public class Dungeon implements Serializable {
      * @return Returns true if they are connected, false otherwise.
      */
     private boolean isConnected(final int theDoorType, final int theAdjDoorType, final int theDirection) {
-        // All 4 - 0, North - 1, East - 2, South - 3, West - 4, NS - 5, NE - 6, NW - 7, ES - 8, EW - 9,
-        // SW - 10, NSE - 11, NSW - 12, NEW - 13, SEW - 14
-        // theDirection: 0 - W, 1 - S, 2 - E, 3 - N
         boolean connected = false;
         // We have the door types for both rooms, so we can simply check them against each other
-        if (theDirection == 0 && (theDoorType == 4 || theDoorType == 7 || theDoorType == 9 || theDoorType == 0 ||
-                theDoorType == 10 || theDoorType == 12 || theDoorType == 13 || theDoorType == 14)
-                || (theAdjDoorType == 2 || theAdjDoorType == 6 || theAdjDoorType == 8 || theAdjDoorType == 9 ||
-                theAdjDoorType == 11 || theAdjDoorType == 13 || theAdjDoorType == 14)) {
+        if (theDirection == WEST && (theDoorType == W || theDoorType == NW || theDoorType == EW || theDoorType == NESW ||
+                theDoorType == SW || theDoorType == NSW || theDoorType == NEW || theDoorType == SEW)
+                || (theAdjDoorType == E || theAdjDoorType == NE || theAdjDoorType == SE || theAdjDoorType == EW ||
+                theAdjDoorType == NSE || theAdjDoorType == NEW || theAdjDoorType == SEW)) {
             // If we went WEST from the main room, we need to check if the main room
             // contains any WEST doors and/or if the adjacent room contains any EAST ones
             connected = true;
-        } else if (theDirection == 1 && (theDoorType == 3 || theDoorType == 5 || theDoorType == 8 ||
-                theDoorType == 0 || theDoorType == 10 || theDoorType == 11 || theDoorType == 12 || theDoorType == 14)
-                || (theAdjDoorType == 1 || theAdjDoorType == 5 || theAdjDoorType == 6 || theAdjDoorType == 7 ||
-                theAdjDoorType == 11 || theAdjDoorType == 12 || theAdjDoorType == 13)) {
+        } else if (theDirection == SOUTH && (theDoorType == S || theDoorType == NS || theDoorType == SE ||
+                theDoorType == NESW || theDoorType == SW || theDoorType == NSE || theDoorType == NSW || theDoorType == SEW)
+                || (theAdjDoorType == N || theAdjDoorType == NS || theAdjDoorType == NE || theAdjDoorType == NW ||
+                theAdjDoorType == NSE || theAdjDoorType == NSW || theAdjDoorType == NEW)) {
             // If we went SOUTH from the main room, we need to check if the main room
             // contains any SOUTH doors and/or if the adjacent room contains any NORTH ones
             connected = true;
-        } else if (theDirection == 2 && (theDoorType == 2 || theDoorType == 6 || theDoorType == 8 ||
-                theDoorType == 0 || theDoorType == 9 || theDoorType == 11 || theDoorType == 13 || theDoorType == 14)
-                || (theAdjDoorType == 4 || theAdjDoorType == 7 || theAdjDoorType == 9 || theAdjDoorType == 10 ||
-                theAdjDoorType == 12 || theAdjDoorType == 13 || theAdjDoorType == 14)) {
+        } else if (theDirection == EAST && (theDoorType == E || theDoorType == NE || theDoorType == SE ||
+                theDoorType == NESW || theDoorType == EW || theDoorType == NSE || theDoorType == NEW || theDoorType == SEW)
+                || (theAdjDoorType == W || theAdjDoorType == NW || theAdjDoorType == EW || theAdjDoorType == SW ||
+                theAdjDoorType == NSW || theAdjDoorType == NEW || theAdjDoorType == SEW)) {
             // If we went EAST from the main room, we need to check if the main room
             // contains any EAST doors and/or if the adjacent room contains any WEST ones
             connected = true;
-        } else if (theDirection == 3 && (theDoorType == 1 || theDoorType == 5 || theDoorType == 6 ||
-                theDoorType == 0 || theDoorType == 7 || theDoorType == 11 || theDoorType == 12 || theDoorType == 13)
-                || (theAdjDoorType == 3 || theAdjDoorType == 5 || theAdjDoorType == 8 || theAdjDoorType == 10 ||
-                theAdjDoorType == 11 || theAdjDoorType == 12 || theAdjDoorType == 14)) {
+        } else if (theDirection == NORTH && (theDoorType == N || theDoorType == NS || theDoorType == NE ||
+                theDoorType == NESW || theDoorType == NW || theDoorType == NSE || theDoorType == NSW || theDoorType == NEW)
+                || (theAdjDoorType == S || theAdjDoorType == NS || theAdjDoorType == SE || theAdjDoorType == SW ||
+                theAdjDoorType == NSE || theAdjDoorType == NSW || theAdjDoorType == SEW)) {
             // If we went NORTH from the main room, we need to check if the main room
             // contains any NORTH doors and/or if the adjacent room contains any SOUTH ones
             connected = true;
@@ -291,7 +365,7 @@ public class Dungeon implements Serializable {
     }
 
     /**
-     * Helper method used by 'connectRooms' to change the given door type of a room.
+     * Helper method used by 'connectRooms' to change the given door type of room.
      *
      * @param theRow        The row the room is in.
      * @param theCol        The column the room is in.
@@ -299,113 +373,109 @@ public class Dungeon implements Serializable {
      * @param theDoorType   The door type the room currently has.
      */
     private void changeDoorType(final int theRow, final int theCol, final int theDirection, final int theDoorType) {
-        // All 4 - 0, North - 1, East - 2, South - 3, West - 4, NS - 5, NE - 6, NW - 7, SE - 8, EW - 9,
-        // SW - 10, NSE - 11, NSW - 12, NEW - 13, SEW - 14
-        // theDirection: 0 - W, 1 - S, 2 - E, 3 - N
-
         // We need to figure out what door type to change a room to
-        if (theDirection == 0) { // West
+        if (theDirection == WEST) { // West
             switch(theDoorType) {
-                case 0, 4, 7, 9, 10, 12, 13, 14:
+                case NESW, W, NW, EW, SW, NSW, NEW, SEW:
                     break;
-                case 1:
-                    myDoors[theRow][theCol] = 7;
+                case N:
+                    myDoors[theRow][theCol] = NW;
                     break;
-                case 2:
-                    myDoors[theRow][theCol] = 9;
+                case E:
+                    myDoors[theRow][theCol] = EW;
                     break;
-                case 3:
-                    myDoors[theRow][theCol] = 10;
+                case S:
+                    myDoors[theRow][theCol] = SW;
                     break;
-                case 5:
-                    myDoors[theRow][theCol] = 12;
+                case NS:
+                    myDoors[theRow][theCol] = NSW;
                     break;
-                case 6:
-                    myDoors[theRow][theCol] = 13;
+                case NE:
+                    myDoors[theRow][theCol] = NEW;
                     break;
-                case 8:
-                    myDoors[theRow][theCol] = 14;
+                case SE:
+                    myDoors[theRow][theCol] = SEW;
                     break;
-                case 11:
-                    myDoors[theRow][theCol] = 0;
-                    break;
-            }
-        } else if (theDirection == 1) { // South
-            switch (theDoorType) {
-                case 0, 3, 5, 8, 10, 11, 12, 14:
-                    break;
-                case 1:
-                    myDoors[theRow][theCol] = 5;
-                    break;
-                case 2:
-                    myDoors[theRow][theCol] = 8;
-                    break;
-                case 4:
-                    myDoors[theRow][theCol] = 10;
-                    break;
-                case 6:
-                    myDoors[theRow][theCol] = 11;
-                    break;
-                case 7:
-                    myDoors[theRow][theCol] = 12;
-                    break;
-                case 9:
-                    myDoors[theRow][theCol] = 14;
-                    break;
-                case 13:
-                    myDoors[theRow][theCol] = 0;
+                case NSE:
+                    myDoors[theRow][theCol] = NESW;
                     break;
             }
-        } else if (theDirection == 2) { // East
+        } else if (theDirection == SOUTH) { // South
             switch (theDoorType) {
-                case 0, 2, 6, 8, 9, 11, 13, 14:
+                case NESW, S, NS, SE, SW, NSE, NSW, SEW:
                     break;
-                case 1:
-                    myDoors[theRow][theCol] = 6;
+                case N:
+                    myDoors[theRow][theCol] = NS;
                     break;
-                case 3:
-                    myDoors[theRow][theCol] = 8;
+                case E:
+                    myDoors[theRow][theCol] = SE;
                     break;
-                case 4:
-                    myDoors[theRow][theCol] = 9;
+                case W:
+                    myDoors[theRow][theCol] = SW;
                     break;
-                case 5:
-                    myDoors[theRow][theCol] = 11;
+                case NE:
+                    myDoors[theRow][theCol] = NSE;
                     break;
-                case 7:
-                    myDoors[theRow][theCol] = 13;
+                case NW:
+                    myDoors[theRow][theCol] = NSW;
                     break;
-                case 10:
-                    myDoors[theRow][theCol] = 14;
+                case EW:
+                    myDoors[theRow][theCol] = SEW;
                     break;
-                case 12:
-                    myDoors[theRow][theCol] = 0;
+                case NEW:
+                    myDoors[theRow][theCol] = NESW;
                     break;
             }
-        } else if (theDirection == 3) { // North
+        } else if (theDirection == EAST) { // East
             switch (theDoorType) {
-                case 0, 1, 5, 6, 7, 11, 12, 13:
+                case NESW, E, NE, SE, EW, NSE, NEW, SEW:
                     break;
-                case 2:
-                    myDoors[theRow][theCol] = 6;
+                case N:
+                    myDoors[theRow][theCol] = NE;
                     break;
-                case 3:
-                    myDoors[theRow][theCol] = 5;
+                case S:
+                    myDoors[theRow][theCol] = SE;
                     break;
-                case 4:
-                    myDoors[theRow][theCol] = 7;
+                case W:
+                    myDoors[theRow][theCol] = EW;
                     break;
-                case 8:
-                    myDoors[theRow][theCol] = 11;
+                case NS:
+                    myDoors[theRow][theCol] = NSE;
                     break;
-                case 9:
-                    myDoors[theRow][theCol] = 13;
+                case NW:
+                    myDoors[theRow][theCol] = NEW;
                     break;
-                case 10:
-                    myDoors[theRow][theCol] = 12;
+                case SW:
+                    myDoors[theRow][theCol] = SEW;
                     break;
-                case 14:
-                    myDoors[theRow][theCol] = 0;
+                case NSW:
+                    myDoors[theRow][theCol] = NESW;
+                    break;
+            }
+        } else if (theDirection == NORTH) { // North
+            switch (theDoorType) {
+                case NESW, N, NS, NE, NW, NSE, NSW, NEW:
+                    break;
+                case E:
+                    myDoors[theRow][theCol] = NE;
+                    break;
+                case S:
+                    myDoors[theRow][theCol] = NS;
+                    break;
+                case W:
+                    myDoors[theRow][theCol] = NW;
+                    break;
+                case SE:
+                    myDoors[theRow][theCol] = NSE;
+                    break;
+                case EW:
+                    myDoors[theRow][theCol] = NEW;
+                    break;
+                case SW:
+                    myDoors[theRow][theCol] = NSW;
+                    break;
+                case SEW:
+                    myDoors[theRow][theCol] = NESW;
                     break;
             }
         }
@@ -422,68 +492,66 @@ public class Dungeon implements Serializable {
         // Create the random object
         Random random = new Random();
         int randomDoor;
-        // All 4 - 0, North - 1, East - 2, South - 3, West - 4, NS - 5, NE - 6, NW - 7, ES - 8, EW - 9,
-        // SW - 10, NSE - 11, NSW - 12, NEW - 13, SEW - 14
         // We need to check if the room is in a corner or on a wall of the dungeon
-        if (theRow == 0 && theCol == 0) { // Upper left corner
+        if (theRow == FIRST_ROOM_ROW && theCol == FIRST_ROOM_COL) { // Upper left corner
             // Since we are boxed in by two walls, we can only choose from
             // an east or south door or both
-            int[] directions = {2, 3, 8};
+            int[] directions = {E, S, SE};
             // Next, we get a random index from the array
             int randomIndex = random.nextInt(directions.length);
             // Finally, we store the value for what doors there will be
             randomDoor = directions[randomIndex];
-        } else if (theRow == 0 && theCol == LAST_ROOM_COL) { // Upper right corner
+        } else if (theRow == FIRST_ROOM_ROW && theCol == LAST_ROOM_COL) { // Upper right corner
             // We can only have S, W, SW
-            int[] directions = {3, 4, 10};
+            int[] directions = {S, W, SW};
             // Next, we get a random index from the array
             int randomIndex = random.nextInt(directions.length);
             // Finally, we store the value for what doors there will be
             randomDoor = directions[randomIndex];
-        } else if (theRow == LAST_ROOM_ROW && theCol == 0) { // Lower left corner
+        } else if (theRow == LAST_ROOM_ROW && theCol == FIRST_ROOM_COL) { // Lower left corner
             // We can only have North or East or both
-            int[] directions = {1, 2, 6};
+            int[] directions = {N, E, NE};
             // Next, we get a random index from the array
             int randomIndex = random.nextInt(directions.length);
             // Finally, we store the value for what doors there will be
             randomDoor = directions[randomIndex];
         } else if (theRow == LAST_ROOM_ROW && theCol == LAST_ROOM_COL) { // Lower right corner
             // We can only have North or West or both
-            int[] directions = {1, 4, 7};
+            int[] directions = {N, W, NW};
             // Next, we get a random index from the array
             int randomIndex = random.nextInt(directions.length);
             // Finally, we store the value for what doors there will be
             randomDoor = directions[randomIndex];
-        } else if ((0 < theRow && theRow < LAST_ROOM_ROW) && theCol == 0) { // Left wall
+        } else if ((FIRST_ROOM_ROW < theRow && theRow < LAST_ROOM_ROW) && theCol == FIRST_ROOM_COL) { // Left wall
             // We can only have N, E, S, NE, NS, SE, or NSE
-            int[] directions = {1, 2, 3, 5, 6, 8, 11};
+            int[] directions = {N, E, S, NS, NE, SE, NSE};
             // Next, we get a random index from the array
             int randomIndex = random.nextInt(directions.length);
             // Finally, we store the value for what doors there will be
             randomDoor = directions[randomIndex];
-        } else if ((0 < theRow && theRow < LAST_ROOM_ROW) && theCol == LAST_ROOM_COL) { // Right wall
+        } else if ((FIRST_ROOM_ROW < theRow && theRow < LAST_ROOM_ROW) && theCol == LAST_ROOM_COL) { // Right wall
             // We can only have N, S, W, NS, NW, SW, NSW
-            int[] directions = {1, 3, 4, 5, 7, 10, 12};
+            int[] directions = {N, S, W, NS, NW, SW, NSW};
             // Next, we get a random index from the array
             int randomIndex = random.nextInt(directions.length);
             // Finally, we store the value for what doors there will be
             randomDoor = directions[randomIndex];
-        } else if (theRow == 0 && (0 < theCol && theCol < LAST_ROOM_COL)) { // Top wall
+        } else if (theRow == FIRST_ROOM_ROW && (FIRST_ROOM_COL < theCol && theCol < LAST_ROOM_COL)) { // Top wall
             // We can only have E, S, W, SE, EW, SW, SEW
-            int[] directions = {2, 3, 4, 8, 9, 10, 14};
+            int[] directions = {E, S, W, SE, EW, SW, SEW};
             // Next, we get a random index from the array
             int randomIndex = random.nextInt(directions.length);
             // Finally, we store the value for what doors there will be
             randomDoor = directions[randomIndex];
-        } else if (theRow == LAST_ROOM_ROW && (0 < theCol && theCol < LAST_ROOM_COL)) { // Bottom wall
+        } else if (theRow == LAST_ROOM_ROW && (FIRST_ROOM_COL < theCol && theCol < LAST_ROOM_COL)) { // Bottom wall
             // We can only have N, W, E, NE, NW, EW, NEW
-            int[] directions = {1, 4, 2, 6, 7, 9, 13};
+            int[] directions = {N, W, E, NE, NW, EW, NEW};
             // Next, we get a random index from the array
             int randomIndex = random.nextInt(directions.length);
             // Finally, we store the value for what doors there will be
             randomDoor = directions[randomIndex];
         } else { // Finally, if the room is not in a corner or a wall we go here
-            int[] directions = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14};
+            int[] directions = {NESW, N, E, S, W, NS, NE, NW, SE, EW, SW, NSE, NSW, NEW, SEW};
             // Next, we get a random index from the array
             int randomIndex = random.nextInt(directions.length);
             // Finally, we store the value for what doors there will be
@@ -572,7 +640,11 @@ public class Dungeon implements Serializable {
         return myRooms;
     }
 
-
+    /**
+     * Gets the array of doors that indicate how many doors each room has.
+     *
+     * @return The 2D integer array of door types.
+     */
     public int[][] getDoors() {
         return myDoors;
     }

@@ -6,17 +6,11 @@ import java.io.Serializable;
  * This class represents a single, randomly generated, room.
  */
 public class Room implements Serializable {
-
     private static final long serialversionUID = 12345L;
-
     /**
      * A 2D array of Strings that will represent the room.
      */
     private String[][] myRoom;
-    /**
-     * A 2D array of integers that stores the door types of every room that is added to the dungeon. <br>
-     */
-    private int[][] doors;
     /**
      * The height of a room.
      */
@@ -30,25 +24,21 @@ public class Room implements Serializable {
      * Constructs a randomly generated room. <br>
      * Takes in what will be in the room.
      *
-     * @param theRow        The row this room is being added to in 'myRooms' in 'Dungeon'.
-     * @param theCol        The column this room is being added to in 'myRooms' in 'Dungeon'.
      * @param theDoorType   The door(s) that the room will contain.
      */
-    public Room(final int theRow, final int theCol, final int theDoorType) {
+    public Room(final int theDoorType) {
         // Set up the size of the room
         myRoom = new String[ROOM_HEIGHT][ROOM_WIDTH];
         // Next, we will pass in the random item generated from 'Dungeon'
-        createRoom(theRow, theCol, theDoorType);
+        createRoom(theDoorType);
     }
 
     /**
      * Creates a randomly generated room that will contain a random item (or items).
      *
-     * @param theRow        The row in the dungeon this room is being added to.
-     * @param theCol        The column in the dungeon this room is being added to.
      * @param theDoorType   The door(s) that are being added to this room.
      */
-    protected void createRoom(final int theRow, final int theCol, final int theDoorType) {
+    protected void createRoom(final int theDoorType) {
         // All 4 - 0, North - 1, East - 2, South - 3, West - 4, NS - 5, NE - 6, NW - 7, ES - 8, EW - 9,
         // SW - 10, NSE - 11, NSW - 12, NEW - 13, SEW - 14
 
@@ -148,6 +138,15 @@ public class Room implements Serializable {
      */
     public int getRoomWidth() {
         return ROOM_WIDTH;
+    }
+
+    /**
+     * Gets the contents of the room.
+     *
+     * @return The contents of the room in a 2D string array.
+     */
+    public String[][] getRoom() {
+        return myRoom;
     }
 
     /**
