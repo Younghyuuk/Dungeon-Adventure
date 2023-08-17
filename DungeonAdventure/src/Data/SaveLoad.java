@@ -134,7 +134,7 @@ public class SaveLoad {
             }
 
             List<Monster> monsterList = new ArrayList<>();
-
+            myGp.getMyMonsterArray().clear();
             for (Monster savedMonster : gd.getMyMonsters()) {
                 MonsterDataBase mon = new MonsterDataBase(myGp);
                 if (savedMonster.isAlive()) {
@@ -200,12 +200,5 @@ public class SaveLoad {
 
 
     }
-    private BufferedImage loadImage(String imagePath) {
-        try {
-            return ImageIO.read(new File(imagePath));
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
+
 }

@@ -7,8 +7,12 @@ import java.awt.image.BufferedImage;
 import java.io.Serial;
 import java.io.Serializable;
 
+
 /**
  * An abstract class representing an item that could appear in a room.
+ *
+ * @author Halim Lee, Marrok Young, Andrew Chon.
+ * @version July 2023.
  */
 public abstract class Item implements Serializable {
     /**

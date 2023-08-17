@@ -11,6 +11,9 @@ import static javax.imageio.ImageIO.read;
 
 /**
  * Represents a basic 'Pit' object that can spawn in any room of a dungeon.
+ *
+ * @author Halim Lee, Marrok Young, Andrew Chon.
+ * @version July 2023.
  */
 public class Pit extends Item {
     /**

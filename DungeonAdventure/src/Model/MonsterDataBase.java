@@ -7,7 +7,13 @@ import org.sqlite.SQLiteDataSource;
 import java.io.Serial;
 import java.io.Serializable;
 import java.sql.*;
-
+/**
+ * MonsterDataBase class that pulls the monsters
+ * stats from a sqlite database.
+ *
+ * @author Halim Lee, Marrok Young, Andrew Chon.
+ * @version August 2023.
+ */
 public class MonsterDataBase implements Serializable {
     /**
      * The serial ID associated with this 'GameData' object.

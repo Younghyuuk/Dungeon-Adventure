@@ -11,6 +11,9 @@ import static javax.imageio.ImageIO.read;
 
 /**
  * Warrior class that extends Heroes.
+ *
+ * @author Halim Lee, Marrok Young, Andrew Chon.
+ * @version July 2023.
  */
 public class Warrior extends Heroes {
 

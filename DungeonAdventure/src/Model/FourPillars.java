@@ -8,8 +8,12 @@ import java.io.Serializable;
 import java.util.Objects;
 
 import static javax.imageio.ImageIO.read;
+
 /**
  * This class acts as all the four pillars in each of the corners of the game.
+ *
+ * @author Halim Lee, Marrok Young, Andrew Chon.
+ * @version July 2023.
  */
 public class FourPillars extends Item implements Serializable {
     /**

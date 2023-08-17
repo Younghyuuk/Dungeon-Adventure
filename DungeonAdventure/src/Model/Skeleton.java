@@ -10,6 +10,9 @@ import static javax.imageio.ImageIO.read;
 /**
  * Skeleton class that extends monster one of the mobs
  * for the game.
+ *
+ * @author Halim Lee, Marrok Young, Andrew Chon.
+ * @version July 2023.
  */
 public class Skeleton extends Monster {
 

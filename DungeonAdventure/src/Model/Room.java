@@ -2,8 +2,12 @@ package Model;
 
 import java.io.Serializable;
 
+
 /**
  * This class represents a single, randomly generated, room.
+ *
+ * @author Halim Lee, Marrok Young, Andrew Chon.
+ * @version July 2023.
  */
 public class Room implements Serializable {
     private static final long serialversionUID = 12345L;
