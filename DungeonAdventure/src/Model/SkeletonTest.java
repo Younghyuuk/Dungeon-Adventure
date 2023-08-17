@@ -10,41 +10,33 @@ import java.awt.image.BufferedImage;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class GremlinTest {
-
-    private Monster myGremlin;
-    private MonsterDataBase myMD;
-    private Heroes myHero;
+public class SkeletonTest {
     private GamePanel myGp;
     private Keyboard myKey;
+    private MonsterDataBase myMon;
+    private Monster mySkeleton;
+    private Heroes myHero;
 
     @BeforeEach
     public void setup() {
         myGp = new GamePanel();
         myKey = new Keyboard(myGp);
-        myMD = new MonsterDataBase(myGp);
-        myGremlin = myMD.getMonster("Gremlin");
-        myHero = new Priestess(myGp, myKey);
+        myMon = new MonsterDataBase(myGp);
+        mySkeleton = myMon.getMonster("Skeleton");
+        myHero = new Warrior(myGp, myKey);
     }
-
 
     @Test
     public void testRegularAttack() {
-        String result = myGremlin.regularAttack(myHero);
+        String result = mySkeleton.regularAttack(myHero);
         assertNotNull(result); // Ensure that the result is not null
-    }
-
-    @Test
-    public void testHeal() {
-        String healLog = myGremlin.heal();
-        assertNotNull(healLog); // Ensure that the result is not null
     }
 
     @Test
     public void testGetMonsterImage() {
         assertDoesNotThrow(() -> {
             Graphics2D graphics = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB).createGraphics();
-            myGremlin.getMonsterImage();
+            mySkeleton.getMonsterImage();
             // Ensure that the images are loaded without throwing exceptions
         });
     }
