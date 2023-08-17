@@ -607,8 +607,10 @@ public class GamePanel extends JPanel implements Runnable, Serializable {
             myBattlePage.draw(pen);
             pen.dispose();
         } else if (myGameState == GAME_OVER_STATE) {
+            stopMusic();
             myGameOverPage.draw(pen);
         } else {
+            stopMusic();
             myWinPage.draw(pen);
         }
     }
@@ -619,7 +621,11 @@ public class GamePanel extends JPanel implements Runnable, Serializable {
      * @param theIndex The index of the specific sound file we want to play.
      */
     public void playMusic(final int theIndex) {
+        // Here we specify the index we want to get the sound file from
         mySound.setFile(theIndex);
+        // Then we set the sound volume to around half
+        mySound.setVolume(-20.0f);
+        // Then we play and continually loop the music
         mySound.play();
         mySound.loop();
     }
