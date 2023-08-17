@@ -5,11 +5,20 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 import Control.Keyboard;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.awt.*;
 import View.GamePanel;
 public class HeroesTest {
+    private Heroes hero;
+
+    @BeforeEach
+    public void setup() {
+        GamePanel gamePanel = new GamePanel();
+        Keyboard keyboard = new Keyboard(gamePanel);
+        hero = new TestHeroes(gamePanel, keyboard);
+    }
 
     private static class TestHeroes extends Heroes {
         public TestHeroes(GamePanel gamePanel, Keyboard keyboard) {
@@ -40,17 +49,20 @@ public class HeroesTest {
     }
 
     @Test
-    public void testBlockChance() {
-        GamePanel gamePanel = new GamePanel();
-        Keyboard keyboard = new Keyboard(gamePanel);
-        Heroes hero = new TestHeroes(gamePanel, keyboard);
-
+    public void testGetBlockChance() {
         double expectedBlockChance = 0.2;
         double actualBlockChance = hero.getBlockChance();
 
         assertEquals(expectedBlockChance, actualBlockChance, 0.001);
     }
 
+    @Test
+    public void testSetBlockChance() {
+        double newBlockChance = 0.3;
+        hero.setBlockChance(newBlockChance);
+
+        assertEquals(newBlockChance, hero.getBlockChance(), 0.001);
+    }
     @Test
     public void testToString() {
         GamePanel gamePanel = new GamePanel();
