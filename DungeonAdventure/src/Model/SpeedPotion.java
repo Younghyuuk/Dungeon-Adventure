@@ -8,8 +8,12 @@ import java.util.Objects;
 
 import static javax.imageio.ImageIO.read;
 
+
 /**
  * This class represents a vision potion that is able to be picked up within the dungeon.
+ *
+ * @author Halim Lee, Marrok Young, Andrew Chon.
+ * @version July 2023.
  */
 public class SpeedPotion extends Item {
     /**

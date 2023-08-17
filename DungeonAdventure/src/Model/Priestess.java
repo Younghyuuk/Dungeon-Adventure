@@ -9,10 +9,15 @@ import java.util.Objects;
 
 import static javax.imageio.ImageIO.read;
 
+
 /**
  * Priestess class which has the ability to heal and
  * extends from the Heroes class.
+ *
+ * @author Halim Lee, Marrok Young, Andrew Chon.
+ * @version July 2023.
  */
+
 public class Priestess extends Heroes {
     private static final long serialversionUID = 1234567L;
     /**

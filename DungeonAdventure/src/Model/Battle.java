@@ -156,6 +156,11 @@ public class Battle implements Serializable {
         return attackLog.toString();
     }
 
+    /**
+     * Gets the battleLog.
+     *
+     * @return string[] batteLog
+     */
     public String[] getMyBattleLog() {
         return myBattleLog;
     }
