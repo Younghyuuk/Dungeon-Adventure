@@ -54,7 +54,7 @@ public class GamePanel extends JPanel implements Runnable, Serializable {
     /**
      * The file to output the text version of the dungeon to.
      */
-    private String myDungeonFile = "Resources/map/dungeon.txt";
+    private final String myDungeonFile = "Resources/map/dungeon.txt";
     /**
      * The dungeon object that the game panel will use to load the game correctly.
      */
@@ -197,13 +197,15 @@ public class GamePanel extends JPanel implements Runnable, Serializable {
         setFocusable(true);
         myGameState = TITLE_STATE;
         setMyHero(1);
-        System.out.println(winCount);
     }
 
     /**
      * Sets up a brand-new game!
      */
     public void setNewGame() {
+        myDungeon = new Dungeon("Resources/map/dungeon.txt");
+        myTileM = new TileManager(this);
+
         if (!myMonsterArray.isEmpty()) {
             myMonsterArray.clear();
         }

@@ -5,18 +5,21 @@ import View.GamePanel;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Objects;
-import java.util.Random;
 
 import static javax.imageio.ImageIO.read;
 
 /**
  * This class represents a vision potion that is able to be picked up within the dungeon.
  */
-public class VisionPotion extends Item {
+public class SpeedPotion extends Item {
+    /**
+     * The speed able to be given by the speed potion.
+     */
+    private static final int SPEED_BOOST = 1;
     /**
      * The images associated with a 'HealthPotion'.
      */
-    private transient BufferedImage myVision;
+    private transient BufferedImage mySpeedBoost;
 
     /**
      * Constructs a basic 'HealthPotion' object.
@@ -25,10 +28,28 @@ public class VisionPotion extends Item {
      * @param theWorldY The world-y coordinate to draw the item at.
      * @param theGP     The GamePanel to draw the item onto.
      */
-    public VisionPotion(final int theWorldX, final int theWorldY, final GamePanel theGP) {
+    public SpeedPotion(final int theWorldX, final int theWorldY, final GamePanel theGP) {
         super(theGP, theWorldX, theWorldY);
         getItemImage();
-        super.setImage(myVision);
+        super.setImage(mySpeedBoost);
+    }
+
+    /**
+     * Gets the amount of speed the speed potion will give to the player.
+     *
+     * @return The speed boost to give.
+     */
+    public int getSpeedBoost() {
+        return SPEED_BOOST;
+    }
+
+    /**
+     * Gets the buffered image associated with a speed potion.
+     *
+     * @return The image to use for a speed potion.
+     */
+    public BufferedImage getSpeedPotionImage() {
+        return mySpeedBoost;
     }
 
     /**
@@ -37,9 +58,7 @@ public class VisionPotion extends Item {
     @Override
     public void getItemImage() {
         try {
-            myVision = read(Objects.requireNonNull(getClass().getResourceAsStream("/vision/visionPotion.png")));
-//            myVision2 = read(Objects.requireNonNull(getClass().getResourceAsStream("/Vision/Vision_2.png")));
-//            myVision3 = read(Objects.requireNonNull(getClass().getResourceAsStream("/Vision/Vision_3.png")));
+            mySpeedBoost = read(Objects.requireNonNull(getClass().getResourceAsStream("/speed/speedPotion.png")));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

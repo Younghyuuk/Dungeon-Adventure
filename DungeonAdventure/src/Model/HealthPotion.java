@@ -63,6 +63,33 @@ public class HealthPotion extends Item implements Serializable {
     }
 
     /**
+     * Gets the value of the min health obtainable from the health potion.
+     *
+     * @return The minimum amount of health.
+     */
+    public int getMinHealth() {
+        return MIN_HEALTH;
+    }
+
+    /**
+     * Gets the value of the max health obtainable from the health potion.
+     *
+     * @return The maximum amount of health.
+     */
+    public int getMaxHealth() {
+        return MAX_HEALTH;
+    }
+
+    /**
+     * Gets the buffered image associated with a health potion.
+     *
+     * @return The image to use for a health potion.
+     */
+    public BufferedImage getHealthPotionImage() {
+        return myHealth;
+    }
+
+    /**
      * Gets the images associated with the 'HealthPotion'.
      */
     @Override

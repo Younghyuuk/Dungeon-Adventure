@@ -149,6 +149,10 @@ public abstract class DungeonCharacter implements Serializable {
         return mySpeed;
     }
 
+    public void setMySpeed(final int theSpeed) {
+        mySpeed = theSpeed;
+    }
+
     /**
      * Returns the character's X coordinate.
      * @return the x coordinate.

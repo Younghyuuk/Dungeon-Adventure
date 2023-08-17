@@ -2,9 +2,12 @@ package Model;
 
 import View.GamePanel;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Timer;
 
 /**
  * This class checks if the player collides with any objects within the dungeon.
@@ -247,6 +250,8 @@ public class Collision implements Serializable {
                                 theHero.setHp(theHero.getHp() + ((HealthPotion) item).getHealthBack());
                             } else if (item instanceof Pit) { // Or if we hit a pit
                                 theHero.setHp(theHero.getHp() - ((Pit) item).getPitDamage());
+                            } else if (item instanceof SpeedPotion) {
+                                theHero.setMySpeed(theHero.getMySpeed() + ((SpeedPotion) item).getSpeedBoost());
                             }
                         }
                     }
@@ -261,6 +266,8 @@ public class Collision implements Serializable {
                                 theHero.setHp(theHero.getHp() + ((HealthPotion) item).getHealthBack());
                             } else if (item instanceof Pit) { // Or if we hit a pit
                                 theHero.setHp(theHero.getHp() - ((Pit) item).getPitDamage());
+                            } else if (item instanceof SpeedPotion) {
+                                theHero.setMySpeed(theHero.getMySpeed() + ((SpeedPotion) item).getSpeedBoost());
                             }
                         }
                     }
@@ -275,6 +282,8 @@ public class Collision implements Serializable {
                                 theHero.setHp(theHero.getHp() + ((HealthPotion) item).getHealthBack());
                             } else if (item instanceof Pit) { // Or if we hit a pit
                                 theHero.setHp(theHero.getHp() - ((Pit) item).getPitDamage());
+                            } else if (item instanceof SpeedPotion) {
+                                theHero.setMySpeed(theHero.getMySpeed() + ((SpeedPotion) item).getSpeedBoost());
                             }
                         }
                     }
@@ -289,6 +298,8 @@ public class Collision implements Serializable {
                                 theHero.setHp(theHero.getHp() + ((HealthPotion) item).getHealthBack());
                             } else if (item instanceof Pit) { // Or if we hit a pit
                                 theHero.setHp(theHero.getHp() - ((Pit) item).getPitDamage());
+                            } else if (item instanceof SpeedPotion) {
+                                theHero.setMySpeed(theHero.getMySpeed() + ((SpeedPotion) item).getSpeedBoost());
                             }
                         }
                     }
