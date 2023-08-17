@@ -11,6 +11,9 @@ import static javax.imageio.ImageIO.read;
 
 /**
  * Thief class which extends from Heroes.
+ *
+ * @author Halim Lee, Marrok Young, Andrew Chon.
+ * @version July 2023.
  */
 public class Thief extends Heroes {
 

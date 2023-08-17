@@ -8,7 +8,10 @@ import java.util.Random;
 import java.util.Stack;
 
 /**
- * This class represents the randomly generated dungeon.
+ * This class creates the randomly generated Dungeon.
+ *
+ * @author Halim Lee, Marrok Young, Andrew Chon.
+ * @version July 2023.
  */
 public class Dungeon implements Serializable {
     private static final long serialversionUID = 12345L;

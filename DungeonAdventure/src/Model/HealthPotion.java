@@ -11,7 +11,10 @@ import java.util.Random;
 import static javax.imageio.ImageIO.read;
 
 /**
- * Represents a basic Health Potion object.
+ * Represents the basic health potion item.
+ *
+ * @author Halim Lee, Marrok Young, Andrew Chon.
+ * @version July 2023.
  */
 public class HealthPotion extends Item implements Serializable {
     /**

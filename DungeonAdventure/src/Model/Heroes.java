@@ -15,6 +15,9 @@ import static javax.imageio.ImageIO.read;
  * Heroes class which extends from DungeonCharacter
  * we will be creating 3 other subclasses which extends
  * off of Heroes which will be Priestess, Thief, and Warrior.
+ *
+ * @author Halim Lee, Marrok Young, Andrew Chon.
+ * @version July 2023.
  */
 public abstract class Heroes extends DungeonCharacter {
 
@@ -112,14 +115,6 @@ public abstract class Heroes extends DungeonCharacter {
         mySolidArea.x = 12;
         mySolidArea.y = 12;
     }
-
-//    public GameData getHeroData() {
-//        GameData heroData = new GameData();
-//        heroData.myHeroHp = getHp();
-//        heroData.myScreensMiddleX = myScreensMiddleX;
-//        heroData.myScreensMiddleY = myScreensMiddleY;
-//        return heroData;
-//    }
 
     /**
      * A method that updates the heroes movement and direction.
