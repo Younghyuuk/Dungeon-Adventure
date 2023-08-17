@@ -62,6 +62,33 @@ public class Pit extends Item {
     }
 
     /**
+     * Gets the minimum amount of damage a pit can cause to the player.
+     *
+     * @return The minimum damage the player can take from the pit.
+     */
+    public int getMinDamage() {
+        return MIN_DAMAGE;
+    }
+
+    /**
+     * Gets the maximum amount of damage a pit can cause to the player.
+     *
+     * @return The maximum damage the player can take from the pit.
+     */
+    public int getMaxDamage() {
+        return MAX_DAMAGE;
+    }
+
+    /**
+     * Gets the buffered image associated with a pit.
+     *
+     * @return The image to use for a pit.
+     */
+    public BufferedImage getPitImage() {
+        return myPit;
+    }
+
+    /**
      * Gets the images associated with the 'Pit'.
      */
     @Override

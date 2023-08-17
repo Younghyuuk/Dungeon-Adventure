@@ -17,13 +17,13 @@ class HealthPotionTest {
     }
 
     @Test
-    void getHealthBack() {
+    public final void getHealthBack() {
         int healthBack = myHealthPot.getHealthBack();
         assertTrue(healthBack >= myHealthPot.getMinHealth() && healthBack <= myHealthPot.getMaxHealth());
     }
 
     @Test
-    void getItemImage() {
+    public final void getItemImage() {
         BufferedImage itemImage = myHealthPot.getHealthPotionImage();
         assertNotNull(itemImage);
     }
