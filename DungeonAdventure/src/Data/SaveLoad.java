@@ -125,7 +125,7 @@ public class SaveLoad {
             myGp.getMyDungeon().setTextFile(gd.getTextDungeon());
 
             try {
-                FileWriter fileWriter = new FileWriter("/Resources/map/dungeon.txt");
+                FileWriter fileWriter = new FileWriter("Resources/map/dungeon.txt");
 //                System.out.println("code reaches here");
                 fileWriter.write(gd.getTextDungeon());
                 fileWriter.close();

@@ -313,9 +313,19 @@ public abstract class DungeonCharacter implements Serializable {
         return (int) Math.floor(Math.random() * (theMax-theMin) + theMin);
     }
 
+    /**
+     * Checks whether or not the character is alive or not for both
+     * Heroes and Monsters.
+     *
+     * @return Hp greater than 0
+     */
     public boolean isAlive() {
         return getHp() > 0;
     }
+
+    /**
+     * Resets the hp of the character back to its default.
+     */
     public void resetHP(){
         myHp = myDefaultHp;
     }

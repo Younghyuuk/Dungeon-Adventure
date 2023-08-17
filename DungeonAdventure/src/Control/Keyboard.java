@@ -63,6 +63,7 @@ public class Keyboard implements KeyListener {
                         myGamePanel.setMyGameState(1);
                     }
                     if(myGamePanel.getMyTitlePage().getMyCommandNum() == 1) {
+                        myGamePanel.setNewGame();
                         myGamePanel.getSaveLoad().load();
                         System.out.println(myGamePanel.getWinCount());
                         myGamePanel.setMyGameState(2);
