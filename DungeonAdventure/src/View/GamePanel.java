@@ -623,7 +623,7 @@ public class GamePanel extends JPanel implements Runnable, Serializable {
     public void playMusic(final int theIndex) {
         // Here we specify the index we want to get the sound file from
         mySound.setFile(theIndex);
-        // Then we set the sound volume to around half
+        // Then we set the sound volume to around half (0.0 is regular volume I think)
         mySound.setVolume(-20.0f);
         // Then we play and continually loop the music
         mySound.play();
