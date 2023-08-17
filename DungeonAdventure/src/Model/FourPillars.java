@@ -49,8 +49,50 @@ public class FourPillars extends Item implements Serializable {
             throw new RuntimeException(e);
         }
     }
+
+    /**
+     * Gets the name of the specific four pillars object.
+     *
+     * @return The name of the four pillars object.
+     */
     public String getMyName() {
         return myName;
+    }
+
+    /**
+     * Gets the image associated with the pillar of abstraction.
+     *
+     * @return The abstraction pillar image.
+     */
+    public BufferedImage getMyAbstraction() {
+        return myAbstraction;
+    }
+
+    /**
+     * Gets the image associated with the pillar of encapsulation.
+     *
+     * @return The encapsulation pillar image.
+     */
+    public BufferedImage getMyEncapsulation() {
+        return myEncapsulation;
+    }
+
+    /**
+     * Gets the image associated with the pillar of inheritance.
+     *
+     * @return The inheritance pillar image.
+     */
+    public BufferedImage getMyInheritance() {
+        return myInheritance;
+    }
+
+    /**
+     * Gets the image associated with the pillar of polymorphism.
+     *
+     * @return The polymorphism pillar image.
+     */
+    public BufferedImage getMyPolymorphism() {
+        return myPolymorphism;
     }
     /**
      * Finds the specific image associated with the pillar's name to give to 'Item'.

@@ -67,7 +67,8 @@ class SkeletonTest {
     }
 
     @Test
-    public void testRegularAttack(){
-
+    public void testRegularAttack() {
+        String result = skeleton.regularAttack(myHero);
+        assertNotNull(result); // Ensure that the result is not null
     }
 }

@@ -51,14 +51,6 @@ public class InitiateEntities implements Serializable {
      * The width of every room.
      */
     private int myRoomW;
-    /**
-     * The random X value assigned to an item.
-     */
-    private int myRandomX;
-    /**
-     * The random Y value assigned to an item.
-     */
-    private int myRandomY;
 
     /**
      * Sets up all the entities that will be contained within the dungeon.
@@ -78,27 +70,7 @@ public class InitiateEntities implements Serializable {
         myFourPillarsArray = new ArrayList<>();
         // This creates both the items and pillars in the game
         createItems();
-//        createFourPillars();
     }
-
-//    /**
-//     * Creates and draws in all the Four Pillars of OO into the dungeon.
-//     */
-//    public void createFourPillars() {
-//        FourPillars abstraction = new FourPillars(((myRoomW) - ((myRoomW / 2) + 1)) * myGamePanel.getSpriteSize(),
-//                ((myRoomH) - ((myRoomH / 2) + 1)) * myGamePanel.getSpriteSize(),"a", myGamePanel);
-//        FourPillars encapsulation = new FourPillars(((myRoomW * myDungeonW) - ((myRoomW / 2) + 1)) * myGamePanel.getSpriteSize(),
-//                ((myRoomH) - ((myRoomH / 2) + 1)) * myGamePanel.getSpriteSize(),"e", myGamePanel);
-//        FourPillars inheritance = new FourPillars(((myRoomW) - ((myRoomW / 2) + 1)) * myGamePanel.getSpriteSize(),
-//                ((myRoomH * myDungeonH) - ((myRoomH / 2) + 1)) * myGamePanel.getSpriteSize(),"i", myGamePanel);
-//        FourPillars polymorphism = new FourPillars(((myRoomW * myDungeonW) - ((myRoomW / 2) + 1)) * myGamePanel.getSpriteSize(),
-//                ((myRoomH * myDungeonH) - ((myRoomH / 2) + 1)) * myGamePanel.getSpriteSize(),"p", myGamePanel);
-//
-//        myFourPillarsArray.add(abstraction);
-//        myFourPillarsArray.add(encapsulation);
-//        myFourPillarsArray.add(inheritance);
-//        myFourPillarsArray.add(polymorphism);
-//    }
 
     /**
      * Creates and draws in all the monsters into the dungeon.

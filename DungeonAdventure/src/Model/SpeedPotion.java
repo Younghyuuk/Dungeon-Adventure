@@ -42,6 +42,16 @@ public class SpeedPotion extends Item {
     public int getSpeedBoost() {
         return SPEED_BOOST;
     }
+
+    /**
+     * Gets the buffered image associated with a speed potion.
+     *
+     * @return The image to use for a speed potion.
+     */
+    public BufferedImage getSpeedPotionImage() {
+        return mySpeedBoost;
+    }
+
     /**
      * Gets the images associated with the 'VisionPotion'.
      */

@@ -26,7 +26,6 @@ public class Skeleton extends Monster {
 
     /**
      * Skeletons normal attack.
-     *
      * @param theOpp which the monster will target
      */
     @Override

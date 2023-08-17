@@ -122,7 +122,7 @@ public class Battle implements Serializable {
      *
      * @return String of hero attack log
      */
-    private String heroAttack() {
+    String heroAttack() {
         StringBuilder attackLog = new StringBuilder();
         if (Math.random() <= 0.7) {
 
@@ -149,7 +149,7 @@ public class Battle implements Serializable {
      *
      * @return String of monster attacks
      */
-    private String monsterAttack() {
+    String monsterAttack() {
         StringBuilder attackLog = new StringBuilder();
         attackLog.append(myMonster.regularAttack(myHero));
         attackLog.append(myMonster.heal());
@@ -165,7 +165,7 @@ public class Battle implements Serializable {
      *
      * @param theMessage to add String into battle log
      */
-    private void addToLog(String theMessage) {
+    void addToLog(String theMessage) {
         myBattleLog[myIndex++] = theMessage;
     }
 
