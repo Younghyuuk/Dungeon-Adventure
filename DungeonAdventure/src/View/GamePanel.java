@@ -59,7 +59,10 @@ public class GamePanel extends JPanel implements Runnable, Serializable {
      * The dungeon object that the game panel will use to load the game correctly.
      */
     private Dungeon myDungeon = new Dungeon(myDungeonFile);
-
+    /**
+     * The sound object that will control the sound playing in the game.
+     */
+    private Sound mySound;
     /**
      * The width of the game column-wise. <br>
      * Determined by the dungeon width (the amount of rooms in each column) * the width of a room.
@@ -197,6 +200,8 @@ public class GamePanel extends JPanel implements Runnable, Serializable {
         setFocusable(true);
         myGameState = TITLE_STATE;
         setMyHero(1);
+        mySound = new Sound();
+        playMusic(0);
     }
 
     /**
@@ -606,5 +611,23 @@ public class GamePanel extends JPanel implements Runnable, Serializable {
         } else {
             myWinPage.draw(pen);
         }
+    }
+
+    /**
+     * Plays the music and continues looping it.
+     *
+     * @param theIndex The index of the specific sound file we want to play.
+     */
+    public void playMusic(final int theIndex) {
+        mySound.setFile(theIndex);
+        mySound.play();
+        mySound.loop();
+    }
+
+    /**
+     * Stops the music that is playing.
+     */
+    public void stopMusic() {
+        mySound.stop();
     }
 }
