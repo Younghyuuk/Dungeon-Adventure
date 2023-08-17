@@ -83,31 +83,22 @@ public class GameData implements Serializable {
      */
     private List<Item> myItems;
 
+    /**
+     * List of the 4 pillars.
+     */
     private List<FourPillars> myPillars;
 
+    /**
+     * Win count that the player has aka how many pillars
+     * they have.
+     */
     private int myWinCount;
     //Map items
-
-    private Room[][] myRooms;
-    private int[][] myDoors;
-
-    private int myDungeonH;
-    private int myDungeonW;
 
     /**
      * The text file, as a String, of the dungeon.
      */
     private String myTextDungeon;
-
-//    /**
-//     * The 2D array of rooms that makes up the dungeon.
-//     */
-//    private Room[][] myDungeonRooms;
-//    /**
-//     * The 2D boolean array that represents all the visited rooms in the dungeon.
-//     */
-//    private boolean[][] myVisitedRooms;
-
 
     /**
      * Constructs the game data that will be saved.
@@ -143,9 +134,7 @@ public class GameData implements Serializable {
         return myTextDungeon;
     }
 
-    public Room[][] getMyRooms() {
-        return myRooms;
-    }
+
 
     /**
      * Gets 'myHero'.
@@ -273,48 +262,16 @@ public class GameData implements Serializable {
         return myItems;
     }
 
+    /**
+     * Returns the list of pillars.
+     *
+     * @return ArrayList of pillars
+     */
     public List<FourPillars> getMyPillars() {
         return myPillars;
     }
     public int getMyWinCount() {
         return myWinCount;
-    }
-//    /**
-//     * Gets the 2D room array that represents the dungeon.
-//     *
-//     * @return The 2D array of 'Room' objects.
-//     */
-//    public Room[][] getMyDungeonRooms() {
-//        return myDungeonRooms;
-//    }
-//
-//    /**
-//     * Gets the 2D boolean array that represents all the visited rooms in the dungeon.
-//     *
-//     * @return The 2D array of visited rooms.
-//     */
-//    public boolean[][] getMyVisitedRooms() {
-//        return myVisitedRooms;
-//    }
-
-    public int[][] getDoors() {
-        return myDoors;
-    }
-
-    public int getMyDungeonH() {
-        return myDungeonH;
-    }
-
-    public int getMyDungeonW() {
-        return myDungeonW;
-    }
-
-    public void setDungeonH(int theDungeonH) {
-        myDungeonH = theDungeonH;
-    }
-
-    public void setDungeonW(int theDungeonW) {
-        myDungeonW = theDungeonW;
     }
 
 
@@ -340,12 +297,6 @@ public class GameData implements Serializable {
         myTextDungeon = theText;
     }
 
-    public void setDoors(int[][] theDoors) {
-        myDoors = theDoors;
-    }
-    public void setRooms(Room[][] theRooms) {
-        myRooms = theRooms;
-    }
 
     /**
      * Sets the hero to the specified 'Heroes' object.
@@ -482,11 +433,20 @@ public class GameData implements Serializable {
         myItems = theItems;
     }
 
-
+    /**
+     * Sets the saved amount of pillars to be later set into load.
+     *
+     * @param thePillars how many are on the map
+     */
     public void setMyPillars(final List<FourPillars> thePillars) {
         myPillars = thePillars;
     }
 
+    /**
+     * Sets the wincount for the new loaded game.
+     *
+     * @param theWinCount of the player and how many pillars they had
+     */
     public void setMyWinCount(final int theWinCount) {
         myWinCount = theWinCount;
     }

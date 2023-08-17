@@ -189,12 +189,5 @@ public class SaveLoad {
             e.printStackTrace();
         }
     }
-    private BufferedImage loadImage(String imagePath) {
-        try {
-            return ImageIO.read(new File(imagePath));
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
+
 }

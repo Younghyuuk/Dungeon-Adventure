@@ -7,6 +7,12 @@ import java.util.Objects;
 
 import static javax.imageio.ImageIO.read;
 
+/**
+ * This class creates the Gremlin monster object.
+ *
+ * @author Halim Lee, Marrok Young, Andrew Chon.
+ * @version July 2023.
+ */
 public class Gremlin extends Monster {
     /**
      * The constructor of Monster that initializes the hp, name, attack speed,

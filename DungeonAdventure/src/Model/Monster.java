@@ -8,7 +8,10 @@ import java.awt.image.BufferedImage;
 import java.util.Random;
 
 /**
- * Monster abstract class that extends DungeonCharacter
+ * A abstract monster class that extends from DungeonCharacter.
+ *
+ * @author Halim Lee, Marrok Young, Andrew Chon.
+ * @version July 2023.
  */
 public abstract class Monster extends DungeonCharacter {
 

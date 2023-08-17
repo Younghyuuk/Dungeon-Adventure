@@ -5,9 +5,13 @@ import View.GamePanel;
 import java.io.Serializable;
 import java.util.Random;
 
+
 /**
  * This class is designed specifically to generate a random item
  * that can be added into the dungeon.
+ *
+ * @author Halim Lee, Marrok Young, Andrew Chon.
+ * @version July 2023.
  */
 public class ItemGenerator implements Serializable {
 
