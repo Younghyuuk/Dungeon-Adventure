@@ -36,11 +36,4 @@ class InitiateEntitiesTest {
         List<Item> itemList = myIE.getMyItemArray();
         assertNotNull(itemList);
     }
-    @Test
-    void createMonster() {
-    }
-
-    @Test
-    void createItems() {
-    }
 }
