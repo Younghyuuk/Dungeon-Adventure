@@ -20,11 +20,11 @@ public class HealthPotion extends Item implements Serializable {
     /**
      * The minimum amount of health that can be received.
      */
-    private static final int MIN_HEALTH = 100;
+    private static final int MIN_HEALTH = 25;
     /**
      * The maximum amount of health that can be received.
      */
-    private static final int MAX_HEALTH = 100;
+    private static final int MAX_HEALTH = 40;
     /**
      * The image associated with a 'HealthPotion'.
      */

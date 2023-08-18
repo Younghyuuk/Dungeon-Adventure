@@ -33,7 +33,7 @@ public class Priestess extends Heroes {
     /**
      * Hp of priestess.
      */
-    private static final int HP = 100;
+    private static final int HP = 120;
 
     /**
      * Setting Priestess name.
