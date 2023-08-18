@@ -219,6 +219,7 @@ public class GamePanel extends JPanel implements Runnable, Serializable {
         for (Item item : myItemArray) {
             item.setFound(false);
         }
+
         winCount = 0;
     }
 
@@ -237,6 +238,7 @@ public class GamePanel extends JPanel implements Runnable, Serializable {
             item.setFound(false);
         }
         winCount = 0;
+        playMusic(0);
     }
 
     /**
