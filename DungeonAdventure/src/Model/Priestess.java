@@ -23,12 +23,12 @@ public class Priestess extends Heroes {
     /**
      * Min heal that priestess can heal for.
      */
-    private static final int MIN_HEAL = 45;
+    private static final int MIN_HEAL = 60;
 
     /**
      * the max amount priestess can heal for.
      */
-    private static final int MAX_HEAL = 65;
+    private static final int MAX_HEAL = 75;
 
     /**
      * Hp of priestess.
@@ -53,7 +53,7 @@ public class Priestess extends Heroes {
     /**
      * Maximum damage of priestess.
      */
-    private static final int MAX_DAMAGE = 45;
+    private static final int MAX_DAMAGE = 50;
 
     /**
      * Hit chance of priestess.
@@ -63,7 +63,7 @@ public class Priestess extends Heroes {
     /**
      * Block chance of priestess.
      */
-    private static final double BLOCK_CHANCE = 0.3;
+    private static final double BLOCK_CHANCE = 0.4;
 
     /**
      * Priestess constructor which sets up all her stats
