@@ -62,7 +62,7 @@ public class GamePanel extends JPanel implements Runnable, Serializable {
     /**
      * The sound object that will control the sound playing in the game.
      */
-    private Sound mySound;
+    private transient Sound mySound;
     /**
      * The width of the game column-wise. <br>
      * Determined by the dungeon width (the amount of rooms in each column) * the width of a room.
